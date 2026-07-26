@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PesaGuard Developer Platform | Secure Financial APIs</title>
-    <!-- Tailwind CSS CDN -->
+    <title>PesaGuard Developers | AI-Powered Financial Operations Platform</title>
+    <!-- Tailwind CSS v3 CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,366 +12,1413 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#eef2ff',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                            900: '#312e81',
-                            950: '#1e1b4b',
+                        fintech: {
+                            900: '#071A14',
+                            800: '#0B2E24',
+                            700: '#0A1F2E',
+                            card: '#0f2922',
+                            cardHover: '#13382d',
+                            border: '#1b4a3c',
+                            primary: '#2ECC87',
+                            secondary: '#00E5A8',
+                            accent: '#34D399'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'aurora': 'aurora 15s ease infinite alternate',
+                        'heartbeat': 'heartbeat 2s linear infinite',
+                        'scanline': 'scanline 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
                         },
-                        darker: '#090d16',
-                        cardDark: '#111827',
-                        borderDark: '#1f2937'
+                        aurora: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        heartbeat: {
+                            '0%': { transform: 'scaleX(0)', opacity: '0' },
+                            '50%': { transform: 'scaleX(1)', opacity: '1' },
+                            '100%': { transform: 'scaleX(0)', opacity: '0' },
+                        }
                     }
                 }
             }
         }
     </script>
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Icons & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        code, pre { font-family: 'JetBrains Mono', monospace; }
+        body { font-family: 'Inter', sans-serif; background-color: #071A14; color: #f8fafc; overflow-x: hidden; }
         .glass-panel {
-            background: rgba(17, 24, 39, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(11, 46, 36, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(46, 204, 135, 0.15);
         }
-        .glow-effect {
-            box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.25);
+        .glass-panel:hover {
+            border-color: rgba(46, 204, 135, 0.35);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #2ECC87 0%, #00E5A8 50%, #34D399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .aurora-bg {
+            background: radial-gradient(circle at 50% 0%, rgba(11, 46, 36, 0.8) 0%, rgba(7, 26, 20, 0.95) 50%, #071A14 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(7, 26, 20, 0.8); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(46, 204, 135, 0.3); border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(46, 204, 135, 0.6); }
+        .glow-box {
+            box-shadow: 0 0 50px -10px rgba(46, 204, 135, 0.15);
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .shimmer-effect::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2.5s infinite;
         }
     </style>
 </head>
-<body class="bg-darker text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+<body class="bg-fintech-900 text-slate-100 min-h-screen flex flex-col selection:bg-fintech-primary selection:text-fintech-900">
 
-    <!-- Top Navigation Bar -->
-    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- TOP HEARTBEAT BAR -->
+    <div class="relative bg-fintech-800 border-b border-fintech-border text-xs py-2 px-4 z-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto flex items-center justify-between relative z-10">
+            <div class="flex items-center space-x-3">
+                <span class="flex h-2 w-2 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-fintech-primary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-fintech-primary"></span>
+                </span>
+                <span class="font-medium text-slate-200">API Status: <strong class="text-fintech-primary">Operational</strong> (99.998% Uptime)</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6 text-slate-400 font-mono text-[11px]">
+                <span>LATENCY: <strong>114ms</strong></span>
+                <span>ENGINE: <strong>AI-RECON v4.2</strong></span>
+                <span>GLOBAL NODES: <strong>48 Active</strong></span>
+            </div>
+        </div>
+        <!-- Animated Heartbeat Line -->
+        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-fintech-primary to-transparent opacity-80 animate-pulse"></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-fintech-border transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-8">
                 <!-- Logo -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('overview')">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center glow-effect">
-                        <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fintech-primary to-fintech-secondary flex items-center justify-center glow-box group-hover:scale-105 transition-transform duration-300">
+                        <i class="fa-solid fa-shield-halved text-fintech-900 text-lg font-bold"></i>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-white">PesaGuard <span class="text-indigo-400 font-medium text-xs px-2 py-0.5 rounded-full bg-indigo-950 border border-indigo-800 ml-1">Docs</span></span>
-                </div>
+                    <div>
+                        <span class="text-lg font-extrabold tracking-tight text-white block leading-none">PesaGuard</span>
+                        <span class="text-[10px] uppercase font-mono tracking-widest text-fintech-primary block mt-1">Developers</span>
+                    </div>
+                </a>
                 <!-- Nav Links -->
-                <nav class="hidden md:flex space-x-1">
-                    <button onclick="switchTab('overview')" id="nav-overview" class="px-3 py-2 rounded-lg text-sm font-medium text-indigo-400 bg-indigo-950/50 transition-colors">Overview</button>
-                    <button onclick="switchTab('reference')" id="nav-reference" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors">API Reference</button>
-                    <button onclick="switchTab('sandbox')" id="nav-sandbox" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors">Explorer Sandbox</button>
-                    <button onclick="switchTab('webhooks')" id="nav-webhooks" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors">Webhooks</button>
+                <nav class="hidden lg:flex space-x-1 font-medium text-sm">
+                    <a href="#overview" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-fintech-card transition-colors">Home</a>
+                    <a href="#products" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-fintech-card transition-colors">APIs</a>
+                    <a href="#sdks" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-fintech-card transition-colors">SDKs</a>
+                    <a href="#docs" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-fintech-card transition-colors">Documentation</a>
+                    <a href="#playground" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-fintech-card transition-colors">Playground</a>
+                    <a href="#pricing" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-fintech-card transition-colors">Pricing</a>
+                    <a href="#community" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-fintech-card transition-colors">Community</a>
+                    <a href="#changelog" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-fintech-card transition-colors">Changelog</a>
                 </nav>
             </div>
-            <!-- Actions -->
+            <!-- Right Actions -->
             <div class="flex items-center space-x-4">
-                <div class="hidden lg:flex items-center space-x-2 text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-900/50 px-3 py-1.5 rounded-full">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>All Systems Operational</span>
-                </div>
-                <button onclick="switchTab('sandbox')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-xl transition-all shadow-lg shadow-indigo-600/20">
-                    Get API Keys
+                <button onclick="openModal('loginModal')" class="hidden sm:inline-flex text-sm font-medium text-slate-300 hover:text-white px-3 py-2 transition-colors">
+                    Login
+                </button>
+                <button onclick="openModal('apiKeyModal')" class="bg-gradient-to-r from-fintech-primary to-fintech-secondary text-fintech-900 font-bold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-fintech-primary/20 hover:opacity-95 transform hover:-translate-y-0.5 transition-all">
+                    Get API Key
+                </button>
+                <button id="mobileMenuBtn" class="lg:hidden text-slate-300 hover:text-white p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden glass-panel border-t border-fintech-border px-4 pt-2 pb-6 space-y-2">
+            <a href="#overview" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-fintech-card">Home</a>
+            <a href="#products" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-fintech-card">APIs</a>
+            <a href="#sdks" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-fintech-card">SDKs</a>
+            <a href="#docs" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-fintech-card">Documentation</a>
+            <a href="#playground" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-fintech-card">Playground</a>
+            <a href="#pricing" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-fintech-card">Pricing</a>
+            <a href="#community" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-fintech-card">Community</a>
+            <a href="#changelog" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-fintech-card">Changelog</a>
+        </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- HERO SECTION -->
+    <section id="overview" class="relative pt-16 pb-24 lg:pt-24 lg:pb-32 aurora-bg overflow-hidden">
+        <!-- Floating Aurora & Background Elements -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-fintech-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-[400px] h-[400px] bg-fintech-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-        <!-- TAB 1: OVERVIEW -->
-        <section id="tab-overview" class="space-y-12">
-            <!-- Hero Banner -->
-            <div class="relative overflow-hidden rounded-3xl glass-panel p-8 sm:p-12 border border-slate-800">
-                <div class="absolute -right-20 -top-20 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="max-w-2xl relative z-10 space-y-6">
-                    <div class="inline-flex items-center space-x-2 bg-indigo-950 border border-indigo-800/60 rounded-full px-3 py-1 text-xs text-indigo-300 font-medium">
-                        <i class="fa-solid fa-bolt text-indigo-400"></i>
-                        <span>PesaGuard Core v2.4 Released</span>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center space-x-2 bg-fintech-card border border-fintech-border px-3.5 py-1.5 rounded-full text-xs font-medium text-fintech-primary shadow-sm">
+                        <i class="fa-solid fa-sparkles text-fintech-secondary"></i>
+                        <span>Next-Gen AI Financial Operations v4.0</span>
                     </div>
-                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                        Enterprise Financial Security & Compliance APIs
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
+                        Build Financial Infrastructure with <span class="gradient-text">PesaGuard APIs</span>
                     </h1>
-                    <p class="text-slate-400 text-base sm:text-lg">
-                        Integrate enterprise-grade transaction fraud scoring, automated AML screening, and secure escrow settlement workflows directly into your platform with clean, robust REST endpoints.
+                    <p class="text-lg text-slate-300 leading-relaxed font-normal max-w-2xl">
+                        Integrate powerful APIs for payment reconciliation, fraud detection, settlement tracking, transaction intelligence, analytics, financial monitoring, and real-time payment infrastructure.
                     </p>
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <button onclick="switchTab('sandbox')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-6 py-3 rounded-xl transition-all flex items-center space-x-2 shadow-lg shadow-indigo-600/25">
-                            <span>Try API Sandbox</span>
-                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <button onclick="openModal('apiKeyModal')" class="bg-gradient-to-r from-fintech-primary to-fintech-secondary text-fintech-900 font-bold px-8 py-4 rounded-xl shadow-xl shadow-fintech-primary/25 hover:opacity-95 transform hover:-translate-y-0.5 transition-all flex items-center space-x-3">
+                            <span>Get API Key</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
                         </button>
-                        <button onclick="switchTab('reference')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium px-6 py-3 rounded-xl transition-all border border-slate-700">
-                            Explore Documentation
-                        </button>
+                        <a href="#docs" class="glass-panel hover:bg-fintech-cardHover text-slate-200 font-semibold px-8 py-4 rounded-xl transition-all border border-fintech-border">
+                            Read Documentation
+                        </a>
+                    </div>
+                    <!-- Mini Trust Badges -->
+                    <div class="pt-6 border-t border-fintech-border/60 flex items-center space-x-8 text-xs text-slate-400">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-shield-check text-fintech-primary text-base"></i>
+                            <span>SOC2 Type II Certified</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-bolt text-fintech-primary text-base"></i>
+                            <span>&lt;120ms Latency</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-lock text-fintech-primary text-base"></i>
+                            <span>256-Bit TLS Encryption</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Code Editor Graphic -->
+                <div class="lg:col-span-5">
+                    <div class="glass-panel rounded-2xl shadow-2xl overflow-hidden border border-fintech-border relative animate-float">
+                        <!-- Window Titlebar -->
+                        <div class="bg-fintech-800/90 px-4 py-3 border-b border-fintech-border flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                            </div>
+                            <div class="text-xs font-mono text-slate-400">POST /v1/reconciliation</div>
+                            <div class="text-[10px] font-mono text-fintech-primary bg-fintech-card px-2 py-0.5 rounded border border-fintech-border">Live Test</div>
+                        </div>
+                        <!-- Code Body with interactive simulation -->
+                        <div class="p-6 font-mono text-xs sm:text-sm bg-fintech-900/90 overflow-x-auto custom-scrollbar">
+                            <div id="heroCodeSnippet" class="text-slate-300 space-y-1">
+                                <p><span class="text-purple-400">POST</span> <span class="text-emerald-400">https://api.pesaguard.com/v1/reconciliation</span></p>
+                                <p class="text-slate-500">Headers: Authorization: Bearer pg_live_***</p>
+                                <br>
+                                <p class="text-slate-400">{</p>
+                                <p class="pl-4"><span class="text-blue-300">"transaction_id"</span>: <span class="text-amber-300">"PG123456"</span>,</p>
+                                <p class="pl-4"><span class="text-blue-300">"amount"</span>: <span class="text-purple-300">2500</span>,</p>
+                                <p class="pl-4"><span class="text-blue-300">"currency"</span>: <span class="text-amber-300">"KES"</span></p>
+                                <p class="text-slate-400">}</p>
+                                <div class="my-3 border-t border-fintech-border/60"></div>
+                                <div id="heroCodeResponse" class="text-emerald-400 transition-all duration-500">
+                                    <p class="text-slate-500">// Response [200 OK - 124ms]</p>
+                                    <p class="text-slate-300">{</p>
+                                    <p class="pl-4"><span class="text-blue-300">"status"</span>: <span class="text-emerald-300">"matched"</span>,</p>
+                                    <p class="pl-4"><span class="text-blue-300">"confidence"</span>: <span class="text-purple-300">99.8</span>,</p>
+                                    <p class="pl-4"><span class="text-blue-300">"risk"</span>: <span class="text-emerald-300">"low"</span>,</p>
+                                    <p class="pl-4"><span class="text-blue-300">"processing_time"</span>: <span class="text-amber-300">"124ms"</span></p>
+                                    <p class="text-slate-300">}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Bottom status bar -->
+                        <div class="bg-fintech-800/50 px-4 py-2 border-t border-fintech-border/50 flex items-center justify-between text-[11px] text-slate-400">
+                            <span>Status: <strong class="text-emerald-400">200 OK</strong></span>
+                            <button onclick="replayHeroSimulation()" class="text-fintech-primary hover:underline flex items-center space-x-1">
+                                <i class="fa-solid fa-rotate-right text-[10px]"></i>
+                                <span>Replay Request</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Feature Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800/80 hover:border-indigo-500/50 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-indigo-950 border border-indigo-800/80 flex items-center justify-center text-indigo-400 text-xl mb-4">
+    <!-- TRUST SECTION / STATS -->
+    <section class="py-12 border-y border-fintech-border bg-fintech-card/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+                <div class="space-y-1">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono" data-counter="99.99">99.99%</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-medium">API Uptime</div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-fintech-primary font-mono">&lt;120ms</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-medium">Average Response</div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono">10M+</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-medium">Transactions Processed</div>
+                </div>
+                <div class="space-y-1">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-fintech-primary font-mono">SOC2</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-medium">Enterprise Security</div>
+                </div>
+                <div class="space-y-1 col-span-2 md:col-span-1">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono">24/7</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-medium">Active Monitoring</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API PRODUCTS -->
+    <section id="products" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Modular Financial Stack</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Enterprise API Products</h3>
+                <p class="text-slate-400 text-base">Comprehensive, high-performance APIs designed to power modern fintechs, banks, and enterprise applications.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="glass-panel p-8 rounded-2xl relative group hover:border-fintech-primary/50 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">1. Payments API</h4>
+                    <p class="text-slate-400 text-sm mb-6">Seamless inbound and outbound fund collection with intelligent routing and instant settlement confirmation.</p>
+                    <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Receive Payments</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Verify Payments</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Payment Status</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Transaction Lookup</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Payment History</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Refunds & Reversals</span></li>
+                    </ul>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="glass-panel p-8 rounded-2xl relative group hover:border-fintech-primary/50 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">2. Reconciliation API</h4>
+                    <p class="text-slate-400 text-sm mb-6">Automated ledger matching powered by probabilistic AI algorithms to eliminate manual bookkeeping discrepancies.</p>
+                    <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Automatic Matching</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>AI Matching Engine</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Batch Reconciliation</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Invoice Matching</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Duplicate Detection</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Real-Time Reconciliation</span></li>
+                    </ul>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="glass-panel p-8 rounded-2xl relative group hover:border-fintech-primary/50 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary text-xl mb-6 group-hover:scale-110 transition-transform">
                         <i class="fa-solid fa-shield-virus"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-white mb-2">Fraud Prevention Engine</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Real-time risk assessment scoring powered by machine learning heuristics to flag abnormal transaction behaviors instantly.
+                    <h4 class="text-xl font-bold text-white mb-3">3. Fraud Detection API</h4>
+                    <p class="text-slate-400 text-sm mb-6">Real-time risk scoring and anomaly detection models trained on billions of global transactions.</p>
+                    <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>AI Risk Score</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Fraud Detection</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Duplicate Payments</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Suspicious Behaviour</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Transaction Intelligence</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Risk Alerts & Webhooks</span></li>
+                    </ul>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="glass-panel p-8 rounded-2xl relative group hover:border-fintech-primary/50 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">4. Settlement API</h4>
+                    <p class="text-slate-400 text-sm mb-6">Track payouts, multi-party splits, and automated bank disbursement schedules with complete visibility.</p>
+                    <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Settlement Tracking</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Settlement Reports</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Delayed Settlement Detection</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Settlement Notifications</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Multi-Currency Payouts</span></li>
+                    </ul>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="glass-panel p-8 rounded-2xl relative group hover:border-fintech-primary/50 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">5. Analytics API</h4>
+                    <p class="text-slate-400 text-sm mb-6">Deep financial intelligence and business metrics aggregated programmatically for executive dashboards.</p>
+                    <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Revenue Dashboard</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Cash Flow Forecasting</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Financial Intelligence</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Business Insights</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Performance Metrics</span></li>
+                    </ul>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="glass-panel p-8 rounded-2xl relative group hover:border-fintech-primary/50 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">6. Notification API</h4>
+                    <p class="text-slate-400 text-sm mb-6">Omnichannel event alerts dispatching instant notifications across all customer and internal touchpoints.</p>
+                    <ul class="space-y-2.5 text-xs text-slate-300 font-medium">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Email Gateways</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>SMS Gateways</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Webhooks with Retries</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Push Notifications</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Slack & MS Teams Integration</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SDK SECTION & QUICK START -->
+    <section id="sdks" class="py-24 bg-fintech-card/20 border-y border-fintech-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Developer Experience</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Native SDKs & Quick Start</h3>
+                <p class="text-slate-400 text-base">Integrate in minutes with production-ready libraries for your favorite programming languages.</p>
+            </div>
+
+            <!-- SDK Language Tabs -->
+            <div class="glass-panel p-8 rounded-2xl max-w-4xl mx-auto space-y-6">
+                <div class="flex flex-wrap items-center justify-center gap-2 border-b border-fintech-border pb-6" id="sdkTabs">
+                    <button onclick="switchSdk('python')" class="sdk-tab px-4 py-2 rounded-xl text-sm font-medium bg-fintech-primary text-fintech-900 font-bold transition-all">Python</button>
+                    <button onclick="switchSdk('node')" class="sdk-tab px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-fintech-card transition-all">Node.js</button>
+                    <button onclick="switchSdk('php')" class="sdk-tab px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-fintech-card transition-all">PHP</button>
+                    <button onclick="switchSdk('go')" class="sdk-tab px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-fintech-card transition-all">Go</button>
+                    <button onclick="switchSdk('java')" class="sdk-tab px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-fintech-card transition-all">Java</button>
+                    <button onclick="switchSdk('ruby')" class="sdk-tab px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-fintech-card transition-all">Ruby</button>
+                    <button onclick="switchSdk('dotnet')" class="sdk-tab px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-fintech-card transition-all">.NET</button>
+                </div>
+
+                <!-- Quick Start Install Command -->
+                <div class="flex flex-col sm:flex-row items-center justify-between bg-fintech-900 border border-fintech-border rounded-xl p-4 font-mono text-xs sm:text-sm">
+                    <span id="installCmd" class="text-emerald-400">pip install pesaguard</span>
+                    <button onclick="copyInstallCmd()" class="mt-2 sm:mt-0 text-xs bg-fintech-card hover:bg-fintech-border text-slate-200 px-3 py-1.5 rounded-lg transition-colors flex items-center space-x-1">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>Copy Install</span>
+                    </button>
+                </div>
+
+                <!-- Code Snippet Display -->
+                <div class="bg-fintech-900 border border-fintech-border rounded-xl p-6 font-mono text-xs sm:text-sm relative overflow-x-auto">
+                    <button onclick="copySdkCode()" class="absolute top-4 right-4 text-xs bg-fintech-card hover:bg-fintech-border text-slate-300 px-3 py-1.5 rounded-lg transition-colors flex items-center space-x-1">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>Copy Code</span>
+                    </button>
+                    <pre id="sdkCodeDisplay" class="text-slate-300 leading-relaxed">
+<span class="text-purple-400">import</span> pesaguard
+
+client = pesaguard.<span class="text-yellow-300">Client</span>(api_key=<span class="text-emerald-300">"pg_live_..."</span>)
+
+response = client.reconciliation.<span class="text-yellow-300">verify</span>(
+    transaction_id=<span class="text-emerald-300">"PG123456"</span>,
+    amount=<span class="text-purple-300">2500.00</span>,
+    currency=<span class="text-emerald-300">"KES"</span>
+)
+
+print(response.status) <span class="text-slate-500"># 'matched'</span></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTHENTICATION SECTION -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-fintech-card border border-fintech-border px-3 py-1 rounded-full text-xs font-medium text-fintech-primary">
+                        <i class="fa-solid fa-key"></i>
+                        <span>Secure Authentication</span>
+                    </div>
+                    <h3 class="text-3xl font-extrabold text-white">Bearer Token Authorization</h3>
+                    <p class="text-slate-400 text-base leading-relaxed">
+                        All requests to PesaGuard APIs must be authenticated using your API keys passed through the Authorization HTTP header. Generate sandbox keys for testing or production keys for live operations.
                     </p>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800/80 hover:border-indigo-500/50 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-indigo-950 border border-indigo-800/80 flex items-center justify-center text-indigo-400 text-xl mb-4">
-                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <div class="bg-fintech-card border border-fintech-border p-4 rounded-xl font-mono text-xs text-slate-300">
+                        Authorization: Bearer <span class="text-fintech-primary">YOUR_API_KEY</span>
                     </div>
-                    <h3 class="text-lg font-semibold text-white mb-2">Automated Compliance</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Seamless KYC verification, PEP list checking, and automated AML ledger logging conforming to global regulatory metrics.
-                    </p>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800/80 hover:border-indigo-500/50 transition-all">
-                    <div class="w-12 h-12 rounded-xl bg-indigo-950 border border-indigo-800/80 flex items-center justify-center text-indigo-400 text-xl mb-4">
-                        <i class="fa-solid fa-bolt-lightning"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white mb-2">Instant Webhook Dispatch</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Event-driven payload triggers with cryptographic signature verification so your servers stay instantly synced with risk updates.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Quick Start Code Preview Block -->
-            <div class="glass-panel rounded-2xl border border-slate-800 p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Quickstart Example (Node.js)</h3>
-                    <span class="text-xs text-slate-500 font-mono">POST /v1/transactions/verify</span>
-                </div>
-                <div class="bg-darker rounded-xl p-4 border border-slate-800 overflow-x-auto">
-                    <pre class="text-xs text-indigo-200"><code><span class="text-purple-400">const</span> PesaGuard = <span class="text-yellow-300">require</span>(<span class="text-emerald-300">'pesaguard'</span>);
-<span class="text-purple-400">const</span> pguard = <span class="text-purple-400">new</span> <span class="text-yellow-300">PesaGuard</span>({ apiKey: <span class="text-emerald-300">'pg_live_98f7d6c5a4b3...'</span> });
-
-<span class="text-purple-400">async</span> <span class="text-blue-400">function</span> <span class="text-yellow-300">verifyTx</span>() {
-  <span class="text-purple-400">const</span> assessment = <span class="text-purple-400">await</span> pguard.transactions.<span class="text-yellow-300">verify</span>({
-    amount: <span class="text-orange-400">45000.00</span>,
-    currency: <span class="text-emerald-300">'KES'</span>,
-    source_account: <span class="text-emerald-300">'ACC-8839201'</span>,
-    destination_account: <span class="text-emerald-300">'ACC-9921034'</span>
-  });
-  console.<span class="text-yellow-300">log</span>(assessment.status); <span class="text-slate-500">// 'APPROVED' | 'FLAGGED'</span>
-}
-<span class="text-yellow-300">verifyTx</span>();</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 2: API REFERENCE -->
-        <section id="tab-reference" class="hidden space-y-8">
-            <div class="border-b border-slate-800 pb-4">
-                <h2 class="text-2xl font-bold text-white tracking-tight">API Reference Directory</h2>
-                <p class="text-slate-400 text-sm mt-1">Complete specifications for request headers, authorization tokens, and payload definitions.</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                <!-- Sidebar Directory Index -->
-                <div class="space-y-1 text-sm">
-                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 mb-2">Core Endpoints</div>
-                    <a href="#ref-verify" class="block px-3 py-2 rounded-lg bg-indigo-950/40 text-indigo-400 font-medium border border-indigo-900/50">POST /v1/verify</a>
-                    <a href="#ref-ledger" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors">GET /v1/ledger/{id}</a>
-                    <a href="#ref-escrow" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors">POST /v1/escrow/release</a>
-                    
-                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 mt-6 mb-2">Errors & Status</div>
-                    <a href="#ref-errors" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors">Error Codes Schema</a>
                 </div>
 
-                <!-- Reference Documentation Body -->
-                <div class="lg:col-span-3 space-y-10">
-                    <!-- Endpoint 1 -->
-                    <div id="ref-verify" class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                        <div class="flex items-center space-x-3">
-                            <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-950 text-emerald-400 border border-emerald-800">POST</span>
-                            <span class="text-sm font-mono text-slate-200">https://api.pesaguard.com/v1/verify</span>
+                <!-- Interactive API Key Manager Box -->
+                <div class="glass-panel p-8 rounded-2xl border border-fintech-border space-y-6">
+                    <div class="flex items-center justify-between border-b border-fintech-border pb-4">
+                        <div class="flex space-x-2">
+                            <button onclick="switchKeyEnv('sandbox')" id="btnSandbox" class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-fintech-primary text-fintech-900 transition-all">Sandbox Key</button>
+                            <button onclick="switchKeyEnv('production')" id="btnProd" class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-300 hover:bg-fintech-card transition-all">Production Key</button>
                         </div>
-                        <p class="text-slate-300 text-sm">Analyzes real-time parameters of a money movement instruction and returns a risk score profile along with compliance validation tags.</p>
-                        
-                        <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider pt-2">Request Body Payload</h4>
-                        <div class="bg-darker rounded-xl p-4 border border-slate-800 overflow-x-auto text-xs">
-                            <pre class="text-indigo-200"><code>{
-  <span class="text-blue-300">"amount"</span>: <span class="text-orange-400">12500.00</span>,          <span class="text-slate-500">// Number (Decimal)</span>
-  <span class="text-blue-300">"currency"</span>: <span class="text-emerald-300">"USD"</span>,            <span class="text-slate-500">// ISO 4217 Code</span>
-  <span class="text-blue-300">"source_account"</span>: <span class="text-emerald-300">"ACT-9021"</span>, <span class="text-slate-500">// Sender Account ID</span>
-  <span class="text-blue-300">"risk_tolerance"</span>: <span class="text-emerald-300">"strict"</span>    <span class="text-slate-500">// 'lenient' | 'standard' | 'strict'</span>
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <!-- Endpoint 2 -->
-                    <div id="ref-ledger" class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                        <div class="flex items-center space-x-3">
-                            <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-blue-950 text-blue-400 border border-blue-800">GET</span>
-                            <span class="text-sm font-mono text-slate-200">https://api.pesaguard.com/v1/ledger/{transaction_id}</span>
-                        </div>
-                        <p class="text-slate-300 text-sm">Retrieves immutable compliance log records and verification telemetry associated with a settled transaction identifier.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 3: API EXPLORER SANDBOX -->
-        <section id="tab-sandbox" class="hidden space-y-6">
-            <div class="border-b border-slate-800 pb-4">
-                <h2 class="text-2xl font-bold text-white tracking-tight">Interactive Sandbox Console</h2>
-                <p class="text-slate-400 text-sm mt-1">Simulate live REST execution queries against the PesaGuard edge network.</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Request Config Card -->
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm font-semibold text-slate-200">Request Configuration</span>
-                        <span class="text-xs text-indigo-400 font-mono bg-indigo-950 px-2.5 py-1 rounded border border-indigo-900">Environment: Sandbox</span>
+                        <span id="keyStatusBadge" class="text-[10px] font-mono bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800">Test Mode</span>
                     </div>
 
                     <div class="space-y-3">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">API Endpoint</label>
-                            <select id="sandbox-endpoint" class="w-full bg-darker border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
-                                <option value="verify">POST /v1/verify - Transaction Security Audit</option>
-                                <option value="aml">POST /v1/aml/check - Anti-Money Laundering Screen</option>
+                        <label class="block text-xs font-mono text-slate-400 uppercase">Secret API Key</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="password" id="apiKeyInput" readonly value="pg_test_live_9983749281734a9b2c3d4e" class="w-full bg-fintech-900 border border-fintech-border rounded-xl px-4 py-3 text-sm font-mono text-slate-200 focus:outline-none">
+                            <button onclick="toggleKeyReveal()" id="revealBtn" class="bg-fintech-card hover:bg-fintech-border p-3 rounded-xl border border-fintech-border text-slate-300 transition-colors">
+                                <i class="fa-solid fa-eye" id="revealIcon"></i>
+                            </button>
+                            <button onclick="copyKeyValue()" class="bg-fintech-card hover:bg-fintech-border p-3 rounded-xl border border-fintech-border text-slate-300 transition-colors" title="Copy Key">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-2">
+                        <button onclick="rotateApiKey()" class="text-xs text-fintech-primary hover:underline flex items-center space-x-1">
+                            <i class="fa-solid fa-rotate"></i>
+                            <span>Rotate Key</span>
+                        </button>
+                        <button onclick="openModal('apiKeyModal')" class="bg-gradient-to-r from-fintech-primary to-fintech-secondary text-fintech-900 font-bold text-xs px-4 py-2 rounded-xl">
+                            Generate New Key
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCUMENTATION DIRECTORY -->
+    <section id="docs" class="py-24 bg-fintech-card/20 border-y border-fintech-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div class="space-y-2">
+                    <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Comprehensive Guides</h2>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Documentation Center</h3>
+                    <p class="text-slate-400 text-base">Everything you need to integrate, test, and scale your financial operations.</p>
+                </div>
+                <!-- Search Docs -->
+                <div class="relative w-full md:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="docSearch" placeholder="Search documentation..." onkeyup="filterDocs()" class="w-full bg-fintech-900 border border-fintech-border rounded-xl pl-11 pr-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-fintech-primary">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="docsGrid">
+                <!-- Doc Card 1 -->
+                <div class="doc-card glass-panel p-6 rounded-2xl border border-fintech-border hover:border-fintech-primary/50 transition-all cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Authentication</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Learn how to authenticate requests using bearer tokens and API keys securely.</p>
+                </div>
+                <!-- Doc Card 2 -->
+                <div class="doc-card glass-panel p-6 rounded-2xl border border-fintech-border hover:border-fintech-primary/50 transition-all cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Quick Start</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Make your first successful API request in under 5 minutes with our step-by-step guide.</p>
+                </div>
+                <!-- Doc Card 3 -->
+                <div class="doc-card glass-panel p-6 rounded-2xl border border-fintech-border hover:border-fintech-primary/50 transition-all cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Errors</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Understand HTTP status codes, error payloads, and troubleshooting guidelines.</p>
+                </div>
+                <!-- Doc Card 4 -->
+                <div class="doc-card glass-panel p-6 rounded-2xl border border-fintech-border hover:border-fintech-primary/50 transition-all cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Rate Limits</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Review request quotas, burst handling, and tier-based rate-limiting policies.</p>
+                </div>
+                <!-- Doc Card 5 -->
+                <div class="doc-card glass-panel p-6 rounded-2xl border border-fintech-border hover:border-fintech-primary/50 transition-all cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-list-ol"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Pagination</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Efficiently page through large transaction ledgers and list endpoints using cursor parameters.</p>
+                </div>
+                <!-- Doc Card 6 -->
+                <div class="doc-card glass-panel p-6 rounded-2xl border border-fintech-border hover:border-fintech-primary/50 transition-all cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-webhook"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Webhooks</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Set up real-time webhook listeners with cryptographic signature verification.</p>
+                </div>
+                <!-- Doc Card 7 -->
+                <div class="doc-card glass-panel p-6 rounded-2xl border border-fintech-border hover:border-fintech-primary/50 transition-all cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">SDK Guides</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Deep dive into advanced SDK methods, exception handling, and custom configurations.</p>
+                </div>
+                <!-- Doc Card 8 -->
+                <div class="doc-card glass-panel p-6 rounded-2xl border border-fintech-border hover:border-fintech-primary/50 transition-all cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-fintech-card border border-fintech-border flex items-center justify-center text-fintech-primary mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Security</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">Explore our compliance frameworks, data residency, and encryption standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE API PLAYGROUND -->
+    <section id="playground" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Live Console</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Interactive API Playground</h3>
+                <p class="text-slate-400 text-base">Test requests live against sandbox edge nodes and inspect instant JSON responses.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Request Config Panel -->
+                <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-fintech-border space-y-6">
+                    <div class="flex items-center justify-between border-b border-fintech-border pb-4">
+                        <span class="text-sm font-bold text-white">Request Builder</span>
+                        <span class="text-xs font-mono text-fintech-primary">Sandbox Environment</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex space-x-2">
+                            <select id="apiMethod" class="bg-fintech-900 border border-fintech-border rounded-xl px-3 py-2 text-xs font-mono font-bold text-fintech-primary focus:outline-none">
+                                <option value="POST">POST</option>
+                                <option value="GET">GET</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                            <select id="apiEndpoint" onchange="updatePlaygroundTemplate()" class="w-full bg-fintech-900 border border-fintech-border rounded-xl px-4 py-2 text-xs font-mono text-slate-200 focus:outline-none">
+                                <option value="reconciliation">/v1/reconciliation</option>
+                                <option value="payments">/v1/payments/verify</option>
+                                <option value="fraud">/v1/fraud/score</option>
+                                <option value="settlements">/v1/settlements/track</option>
                             </select>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Authorization Bearer Token</label>
-                            <input type="text" id="sandbox-key" value="pg_test_live_secretkey99283" class="w-full bg-darker border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 font-mono focus:outline-none focus:border-indigo-500">
+                            <label class="block text-xs font-mono text-slate-400 mb-1 uppercase">Headers</label>
+                            <input type="text" readonly value="Authorization: Bearer pg_test_live_998374" class="w-full bg-fintech-900 border border-fintech-border rounded-xl px-4 py-2 text-xs font-mono text-slate-400">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">JSON Payload Body</label>
-                            <textarea id="sandbox-payload" rows="6" class="w-full bg-darker border border-slate-700 rounded-xl p-3 text-xs font-mono text-indigo-200 focus:outline-none focus:border-indigo-500">{
-  "amount": 250000,
+                            <label class="block text-xs font-mono text-slate-400 mb-1 uppercase">Request Body (JSON)</label>
+                            <textarea id="playgroundBody" rows="7" class="w-full bg-fintech-900 border border-fintech-border rounded-xl p-4 text-xs font-mono text-emerald-300 focus:outline-none focus:border-fintech-primary">{
+  "transaction_id": "PG992831",
+  "amount": 45000.00,
   "currency": "KES",
-  "source_account": "ACC-492019",
-  "destination_account": "ACC-883921"
+  "source_account": "ACT-88392"
 }</textarea>
                         </div>
 
-                        <button onclick="executeSandboxRequest()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-xl transition-all shadow-lg shadow-indigo-600/20 flex items-center justify-center space-x-2">
+                        <button onclick="runPlaygroundRequest()" class="w-full bg-gradient-to-r from-fintech-primary to-fintech-secondary text-fintech-900 font-bold py-3.5 rounded-xl shadow-lg shadow-fintech-primary/20 hover:opacity-95 transition-all flex items-center justify-center space-x-2">
                             <i class="fa-solid fa-play text-xs"></i>
-                            <span>Send Test Request</span>
+                            <span>Run Request</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Response Viewer Card -->
-                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-sm font-semibold text-slate-200">Response Output</span>
-                            <div id="response-status-badge" class="hidden items-center space-x-1.5 text-xs px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-900">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                <span id="status-code-text">200 OK</span>
+                <!-- Response Panel -->
+                <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-fintech-border flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between border-b border-fintech-border pb-4">
+                            <span class="text-sm font-bold text-white">Response Output</span>
+                            <div id="pgStatusBadge" class="hidden items-center space-x-1.5 text-xs font-mono px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-900">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                                <span id="pgStatusCode">200 OK</span>
                             </div>
                         </div>
-                        <div class="bg-darker rounded-xl p-4 border border-slate-800 min-h-[260px] max-h-[320px] overflow-y-auto">
-                            <pre id="sandbox-response-output" class="text-xs text-slate-400"><code>// Click "Send Test Request" to run simulation payload...</code></pre>
+
+                        <div class="bg-fintech-900 border border-fintech-border rounded-xl p-4 h-[280px] overflow-y-auto custom-scrollbar font-mono text-xs text-slate-300">
+                            <pre id="playgroundResponse">// Click "Run Request" to execute test payload...</pre>
                         </div>
                     </div>
-                    <div class="text-xs text-slate-500 mt-4 flex items-center justify-between">
-                        <span>Latency: <strong id="response-latency" class="text-slate-300">--</strong></span>
-                        <span>Engine: <strong class="text-slate-300">PesaGuard-Edge-Nairobi</strong></span>
+
+                    <div class="pt-4 border-t border-fintech-border flex items-center justify-between text-xs font-mono text-slate-400">
+                        <span>Latency: <strong id="pgLatency" class="text-slate-200">--</strong></span>
+                        <span>Gateway: <strong class="text-slate-200">Nairobi-Edge-01</strong></span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- TAB 4: WEBHOOKS -->
-        <section id="tab-webhooks" class="hidden space-y-6">
-            <div class="border-b border-slate-800 pb-4">
-                <h2 class="text-2xl font-bold text-white tracking-tight">Webhook Configuration</h2>
-                <p class="text-slate-400 text-sm mt-1">Receive cryptographically signed HTTPS payloads when transaction events or compliance audits trigger.</p>
+    <!-- LIVE DASHBOARD -->
+    <section class="py-24 bg-fintech-card/20 border-y border-fintech-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div class="space-y-2">
+                    <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Telemetry & Observability</h2>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Live Platform Dashboard</h3>
+                    <p class="text-slate-400 text-base">Real-time telemetry mimicking Datadog-style observability across our edge network.</p>
+                </div>
+                <div class="flex items-center space-x-2 text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-900 px-3 py-1.5 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>Live Updates Active</span>
+                </div>
             </div>
 
-            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-6">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div>
-                        <h4 class="text-sm font-semibold text-white">Endpoint URL Subscriptions</h4>
-                        <p class="text-xs text-slate-400 mt-0.5">Active delivery channels listening to system events.</p>
+            <!-- Dashboard Grid Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border space-y-2">
+                    <div class="text-xs text-slate-400 uppercase font-mono">API Requests / sec</div>
+                    <div class="text-3xl font-extrabold text-white font-mono" id="statReqs">4,821</div>
+                    <div class="text-xs text-emerald-400 flex items-center space-x-1">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <span>+12.4% from last hour</span>
                     </div>
-                    <button class="bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 font-medium px-4 py-2 rounded-xl border border-slate-700 transition-all">
-                        + Add Endpoint
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border space-y-2">
+                    <div class="text-xs text-slate-400 uppercase font-mono">Average Latency</div>
+                    <div class="text-3xl font-extrabold text-fintech-primary font-mono" id="statLatency">112ms</div>
+                    <div class="text-xs text-slate-400">Global edge average</div>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border space-y-2">
+                    <div class="text-xs text-slate-400 uppercase font-mono">Success Rate</div>
+                    <div class="text-3xl font-extrabold text-white font-mono" id="statSuccess">99.998%</div>
+                    <div class="text-xs text-emerald-400">Zero error spikes</div>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border space-y-2">
+                    <div class="text-xs text-slate-400 uppercase font-mono">Fraud Prevented (24h)</div>
+                    <div class="text-3xl font-extrabold text-fintech-primary font-mono" id="statFraud">$4.2M</div>
+                    <div class="text-xs text-slate-400">142 flagged payloads</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARCHITECTURE SECTION -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">System Design</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Under the Hood Architecture</h3>
+                <p class="text-slate-400 text-base">How data flows securely from developer client through AI engines to your business systems.</p>
+            </div>
+
+            <!-- Animated Architecture Flow Diagram -->
+            <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-fintech-border flex flex-col lg:flex-row items-center justify-between gap-6 overflow-x-auto">
+                <div class="flex flex-col items-center text-center p-4 bg-fintech-900 border border-fintech-border rounded-xl min-w-[140px]">
+                    <i class="fa-solid fa-code text-fintech-primary text-2xl mb-2"></i>
+                    <span class="text-xs font-bold text-white">Developer</span>
+                </div>
+                <i class="fa-solid fa-arrow-right text-fintech-primary hidden lg:block animate-pulse"></i>
+                <i class="fa-solid fa-arrow-down text-fintech-primary lg:hidden"></i>
+
+                <div class="flex flex-col items-center text-center p-4 bg-fintech-900 border border-fintech-border rounded-xl min-w-[140px]">
+                    <i class="fa-solid fa-server text-fintech-primary text-2xl mb-2"></i>
+                    <span class="text-xs font-bold text-white">API Gateway</span>
+                </div>
+                <i class="fa-solid fa-arrow-right text-fintech-primary hidden lg:block animate-pulse"></i>
+                <i class="fa-solid fa-arrow-down text-fintech-primary lg:hidden"></i>
+
+                <div class="flex flex-col items-center text-center p-4 bg-fintech-900 border border-fintech-border rounded-xl min-w-[140px]">
+                    <i class="fa-solid fa-shield-halved text-fintech-primary text-2xl mb-2"></i>
+                    <span class="text-xs font-bold text-white">Fraud Engine</span>
+                </div>
+                <i class="fa-solid fa-arrow-right text-fintech-primary hidden lg:block animate-pulse"></i>
+                <i class="fa-solid fa-arrow-down text-fintech-primary lg:hidden"></i>
+
+                <div class="flex flex-col items-center text-center p-4 bg-fintech-900 border border-fintech-border rounded-xl min-w-[140px]">
+                    <i class="fa-solid fa-brain text-fintech-primary text-2xl mb-2"></i>
+                    <span class="text-xs font-bold text-white">AI Engine</span>
+                </div>
+                <i class="fa-solid fa-arrow-right text-fintech-primary hidden lg:block animate-pulse"></i>
+                <i class="fa-solid fa-arrow-down text-fintech-primary lg:hidden"></i>
+
+                <div class="flex flex-col items-center text-center p-4 bg-fintech-900 border border-fintech-border rounded-xl min-w-[140px]">
+                    <i class="fa-solid fa-webhook text-fintech-primary text-2xl mb-2"></i>
+                    <span class="text-xs font-bold text-white">Webhooks</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USE CASES -->
+    <section class="py-24 bg-fintech-card/20 border-y border-fintech-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Industry Solutions</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Trusted Across Sectors</h3>
+                <p class="text-slate-400 text-base">Explore how different industries leverage PesaGuard to automate financial workflows.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-store text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">Retail</h4>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-building-columns text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">Banks</h4>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-bolt text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">Fintechs</h4>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-users text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">SACCOs</h4>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-graduation-cap text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">Schools</h4>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-hospital text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">Hospitals</h4>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-shield-heart text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">Insurance</h4>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-globe text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">NGOs</h4>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-landmark text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">Government</h4>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border text-center hover:border-fintech-primary transition-all">
+                    <i class="fa-solid fa-cart-shopping text-2xl text-fintech-primary mb-3"></i>
+                    <h4 class="text-sm font-bold text-white">E-Commerce</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEVELOPER DASHBOARD PREVIEW -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Control Center</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Developer Dashboard Mockup</h3>
+                <p class="text-slate-400 text-base">Manage API keys, monitor webhook deliveries, and view rate-limits in one unified console.</p>
+            </div>
+
+            <div class="glass-panel rounded-3xl border border-fintech-border p-6 sm:p-8 space-y-6 shadow-2xl">
+                <div class="flex flex-col sm:flex-row items-center justify-between border-b border-fintech-border pb-4 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+                        <span class="font-mono text-sm text-white">Project: <strong>Production-Core-v2</strong></span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <span class="text-xs font-mono bg-fintech-900 border border-fintech-border px-3 py-1.5 rounded-lg text-slate-300">API Keys: 3 Active</span>
+                        <span class="text-xs font-mono bg-fintech-900 border border-fintech-border px-3 py-1.5 rounded-lg text-slate-300">Webhooks: 5 Registered</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-fintech-900 border border-fintech-border p-6 rounded-2xl space-y-2">
+                        <div class="text-xs text-slate-400 font-mono uppercase">Rate Limit Quota</div>
+                        <div class="text-2xl font-bold text-white font-mono">92,400 / 100k</div>
+                        <div class="w-full bg-fintech-card rounded-full h-2 overflow-hidden">
+                            <div class="bg-fintech-primary h-full w-[92%]"></div>
+                        </div>
+                    </div>
+                    <div class="bg-fintech-900 border border-fintech-border p-6 rounded-2xl space-y-2">
+                        <div class="text-xs text-slate-400 font-mono uppercase">Webhook Success Rate</div>
+                        <div class="text-2xl font-bold text-emerald-400 font-mono">100%</div>
+                        <div class="text-xs text-slate-400">0 dropped packets</div>
+                    </div>
+                    <div class="bg-fintech-900 border border-fintech-border p-6 rounded-2xl space-y-2">
+                        <div class="text-xs text-slate-400 font-mono uppercase">Audit Logs</div>
+                        <div class="text-2xl font-bold text-white font-mono">1,420 entries</div>
+                        <div class="text-xs text-slate-400">Retention: 90 days</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMUNITY SECTION -->
+    <section id="community" class="py-24 bg-fintech-card/20 border-y border-fintech-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Ecosystem</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Join the Developer Community</h3>
+                <p class="text-slate-400 text-base">Connect with fellow engineers, contribute to SDKs, and get 24/7 support.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="https://github.com" target="_blank" class="glass-panel p-8 rounded-2xl border border-fintech-border hover:border-fintech-primary transition-all group">
+                    <i class="fa-brands fa-github text-3xl text-fintech-primary mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">GitHub Repositories</h4>
+                    <p class="text-slate-400 text-xs">Explore open-source SDKs, sample apps, and contribution guidelines.</p>
+                </a>
+                <a href="https://discord.com" target="_blank" class="glass-panel p-8 rounded-2xl border border-fintech-border hover:border-fintech-primary transition-all group">
+                    <i class="fa-brands fa-discord text-3xl text-fintech-primary mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Discord Channel</h4>
+                    <p class="text-slate-400 text-xs">Chat live with core PesaGuard engineers and over 5,000 developers.</p>
+                </a>
+                <a href="#docs" class="glass-panel p-8 rounded-2xl border border-fintech-border hover:border-fintech-primary transition-all group">
+                    <i class="fa-solid fa-comments text-3xl text-fintech-primary mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Developer Forum</h4>
+                    <p class="text-slate-400 text-xs">Ask questions, share use cases, and read community-vetted tutorials.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Social Proof</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Loved by Engineering Leaders</h3>
+                <p class="text-slate-400 text-base">Hear what CTOs and lead architects say about integrating PesaGuard.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border space-y-4">
+                    <p class="text-slate-300 text-sm italic">"Integrated within 15 minutes. The webhook reliability is unmatched."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-fintech-card border border-fintech-border flex items-center justify-center font-bold text-fintech-primary">JK</div>
+                        <div>
+                            <div class="text-xs font-bold text-white">Juma Kamau</div>
+                            <div class="text-[10px] text-slate-400">CTO, Apex Fintech</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border space-y-4">
+                    <p class="text-slate-300 text-sm italic">"Excellent API documentation. Cleanest SDKs I've worked with in years."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-fintech-card border border-fintech-border flex items-center justify-center font-bold text-fintech-primary">AM</div>
+                        <div>
+                            <div class="text-xs font-bold text-white">Amina Mohamed</div>
+                            <div class="text-[10px] text-slate-400">Lead Architect, PayFlow</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border space-y-4">
+                    <p class="text-slate-300 text-sm italic">"Best reconciliation API in Africa. Saved us hundreds of manual hours."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-fintech-card border border-fintech-border flex items-center justify-center font-bold text-fintech-primary">DO</div>
+                        <div>
+                            <div class="text-xs font-bold text-white">David Ochieng</div>
+                            <div class="text-[10px] text-slate-400">VP Engineering, SavaPay</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-fintech-border space-y-4">
+                    <p class="text-slate-300 text-sm italic">"Saved us hundreds of reconciliation hours every single month."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-fintech-card border border-fintech-border flex items-center justify-center font-bold text-fintech-primary">SN</div>
+                        <div>
+                            <div class="text-xs font-bold text-white">Sarah Njoroge</div>
+                            <div class="text-[10px] text-slate-400">Head of Ops, CraftPay</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="py-24 bg-fintech-card/20 border-y border-fintech-border">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Got Questions?</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Frequently Asked Questions</h3>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="glass-panel rounded-2xl border border-fintech-border overflow-hidden">
+                    <button onclick="toggleFaq(1)" class="w-full p-6 text-left flex items-center justify-between font-bold text-white hover:text-fintech-primary transition-colors">
+                        <span>How do I obtain an API Key?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform" id="faqIcon1"></i>
+                    </button>
+                    <div id="faqAns1" class="hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-fintech-border/40 pt-4">
+                        Simply click the "Get API Key" button at the top of the page, sign up for a developer account, and your sandbox keys will be generated instantly.
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="glass-panel rounded-2xl border border-fintech-border overflow-hidden">
+                    <button onclick="toggleFaq(2)" class="w-full p-6 text-left flex items-center justify-between font-bold text-white hover:text-fintech-primary transition-colors">
+                        <span>How does reconciliation work?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform" id="faqIcon2"></i>
+                    </button>
+                    <div id="faqAns2" class="hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-fintech-border/40 pt-4">
+                        Our AI engine ingests settlement reports from banks and mobile money gateways, comparing them against your internal ledger entries using probabilistic matching algorithms.
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="glass-panel rounded-2xl border border-fintech-border overflow-hidden">
+                    <button onclick="toggleFaq(3)" class="w-full p-6 text-left flex items-center justify-between font-bold text-white hover:text-fintech-primary transition-colors">
+                        <span>How do Webhooks work?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform" id="faqIcon3"></i>
+                    </button>
+                    <div id="faqAns3" class="hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-fintech-border/40 pt-4">
+                        When transactions settle or security alerts trigger, PesaGuard signs an HTTPS POST payload with a cryptographic secret and dispatches it directly to your registered webhook URL.
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="glass-panel rounded-2xl border border-fintech-border overflow-hidden">
+                    <button onclick="toggleFaq(4)" class="w-full p-6 text-left flex items-center justify-between font-bold text-white hover:text-fintech-primary transition-colors">
+                        <span>How do I move to Production?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform" id="faqIcon4"></i>
+                    </button>
+                    <div id="faqAns4" class="hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-fintech-border/40 pt-4">
+                        Complete your organization's KYC verification in your dashboard settings, and your production API keys will be provisioned immediately.
+                    </div>
+                </div>
+                <!-- FAQ Item 5 -->
+                <div class="glass-panel rounded-2xl border border-fintech-border overflow-hidden">
+                    <button onclick="toggleFaq(5)" class="w-full p-6 text-left flex items-center justify-between font-bold text-white hover:text-fintech-primary transition-colors">
+                        <span>What are Rate Limits?</span>
+                        <i class="fa-solid fa-chevron-down transition-transform" id="faqIcon5"></i>
+                    </button>
+                    <div id="faqAns5" class="hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-fintech-border/40 pt-4">
+                        Free developer tier includes 10,000 requests/month. Professional and Enterprise tiers offer 500,000 to unlimited requests with dedicated infrastructure.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-fintech-primary">Transparent Pricing</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Plans for Every Stage of Growth</h3>
+                <p class="text-slate-400 text-base">Start building for free in sandbox, then scale seamlessly into production.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Tier 1: Developer -->
+                <div class="glass-panel p-8 rounded-3xl border border-fintech-border flex flex-col justify-between space-y-8">
+                    <div class="space-y-4">
+                        <div class="text-xs font-mono uppercase text-slate-400">Developer</div>
+                        <div class="text-4xl font-extrabold text-white">FREE</div>
+                        <p class="text-slate-400 text-xs">Ideal for testing and prototyping in sandbox.</p>
+                        <ul class="space-y-3 text-xs text-slate-300 pt-4 border-t border-fintech-border">
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>10,000 Requests / month</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Sandbox Environment</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Community Support</span></li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('apiKeyModal')" class="w-full bg-fintech-card hover:bg-fintech-border text-white font-bold py-3 rounded-xl border border-fintech-border transition-colors">
+                        Get Started Free
                     </button>
                 </div>
 
-                <div class="bg-darker rounded-xl p-4 border border-slate-800 flex items-center justify-between">
-                    <div class="space-y-1">
-                        <div class="text-sm font-mono text-indigo-300">https://api.yourdomain.com/v1/webhooks/pesaguard</div>
-                        <div class="text-xs text-slate-500">Events: <span class="text-slate-400">transaction.flagged, verification.approved</span></div>
+                <!-- Tier 2: Professional -->
+                <div class="glass-panel p-8 rounded-3xl border-2 border-fintech-primary flex flex-col justify-between space-y-8 relative glow-box">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-fintech-primary text-fintech-900 font-bold text-[10px] uppercase font-mono px-3 py-1 rounded-full">Most Popular</div>
+                    <div class="space-y-4">
+                        <div class="text-xs font-mono uppercase text-fintech-primary">Professional</div>
+                        <div class="text-4xl font-extrabold text-white">KES 5,000<span class="text-sm font-normal text-slate-400">/month</span></div>
+                        <p class="text-slate-400 text-xs">For growing fintechs and production workloads.</p>
+                        <ul class="space-y-3 text-xs text-slate-300 pt-4 border-t border-fintech-border">
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>500,000 Requests / month</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Production APIs</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Priority Support</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Advanced Webhooks</span></li>
+                        </ul>
                     </div>
-                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-950 text-emerald-400 border border-emerald-900">Active</span>
+                    <button onclick="openModal('apiKeyModal')" class="w-full bg-gradient-to-r from-fintech-primary to-fintech-secondary text-fintech-900 font-bold py-3 rounded-xl shadow-lg shadow-fintech-primary/20 hover:opacity-95 transition-all">
+                        Start Professional
+                    </button>
+                </div>
+
+                <!-- Tier 3: Enterprise -->
+                <div class="glass-panel p-8 rounded-3xl border border-fintech-border flex flex-col justify-between space-y-8">
+                    <div class="space-y-4">
+                        <div class="text-xs font-mono uppercase text-slate-400">Enterprise</div>
+                        <div class="text-4xl font-extrabold text-white">Custom</div>
+                        <p class="text-slate-400 text-xs">For large banks, SACCOs, and global platforms.</p>
+                        <ul class="space-y-3 text-xs text-slate-300 pt-4 border-t border-fintech-border">
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Unlimited Requests</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Dedicated Infrastructure</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Dedicated Support Engineer</span></li>
+                            <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-fintech-primary"></i><span>Custom Integrations & SLAs</span></li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('apiKeyModal')" class="w-full bg-fintech-card hover:bg-fintech-border text-white font-bold py-3 rounded-xl border border-fintech-border transition-colors">
+                        Contact Sales
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+    <!-- FINAL CTA -->
+    <section class="py-24 relative overflow-hidden aurora-bg border-t border-fintech-border">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Ready to Build with PesaGuard?</h2>
+            <p class="text-slate-300 text-base max-w-2xl mx-auto">Join thousands of developers building the future of financial operations across Africa and beyond.</p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <button onclick="openModal('apiKeyModal')" class="bg-gradient-to-r from-fintech-primary to-fintech-secondary text-fintech-900 font-bold px-8 py-4 rounded-xl shadow-xl shadow-fintech-primary/25 hover:opacity-95 transition-all">
+                    Get API Key
+                </button>
+                <a href="#docs" class="glass-panel text-white font-semibold px-8 py-4 rounded-xl border border-fintech-border hover:bg-fintech-card transition-all">
+                    Read Documentation
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800/80 mt-12 py-6 bg-darker/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-            <div>&copy; 2026 PesaGuard Security Systems Inc. All rights reserved.</div>
+    <!-- FOOTER -->
+    <footer class="bg-fintech-900 border-t border-fintech-border pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 pb-12 border-b border-fintech-border/60">
+            <div class="col-span-2 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-fintech-primary to-fintech-secondary flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-fintech-900 font-bold"></i>
+                    </div>
+                    <span class="text-base font-extrabold text-white">PesaGuard</span>
+                </div>
+                <p class="text-slate-400 text-xs leading-relaxed">AI-Powered Financial Operations Platform for modern engineering teams.</p>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-xs font-mono uppercase text-white font-bold">Products</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li><a href="#products" class="hover:text-white">Payments API</a></li>
+                    <li><a href="#products" class="hover:text-white">Reconciliation</a></li>
+                    <li><a href="#products" class="hover:text-white">Fraud Detection</a></li>
+                    <li><a href="#products" class="hover:text-white">Settlement API</a></li>
+                </ul>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-xs font-mono uppercase text-white font-bold">Developers</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li><a href="#sdks" class="hover:text-white">SDKs</a></li>
+                    <li><a href="#playground" class="hover:text-white">Playground</a></li>
+                    <li><a href="#docs" class="hover:text-white">API Reference</a></li>
+                    <li><a href="#changelog" class="hover:text-white">Changelog</a></li>
+                </ul>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-xs font-mono uppercase text-white font-bold">Security</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li><a href="#" class="hover:text-white">SOC2 Type II</a></li>
+                    <li><a href="#" class="hover:text-white">Encryption</a></li>
+                    <li><a href="#" class="hover:text-white">Compliance</a></li>
+                </ul>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-xs font-mono uppercase text-white font-bold">Company</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li><a href="#" class="hover:text-white">About Us</a></li>
+                    <li><a href="#" class="hover:text-white">Careers</a></li>
+                    <li><a href="#" class="hover:text-white">Press Kit</a></li>
+                </ul>
+            </div>
+            <div class="space-y-3">
+                <h4 class="text-xs font-mono uppercase text-white font-bold">Legal</h4>
+                <ul class="space-y-2 text-xs text-slate-400">
+                    <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+            <div>Copyright &copy; 2026 PesaGuard. All rights reserved.</div>
             <div class="flex space-x-6">
-                <a href="#" class="hover:text-slate-300 transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-slate-300 transition-colors">Terms of Service</a>
-                <a href="#" class="hover:text-slate-300 transition-colors">System Status</a>
+                <a href="https://github.com" target="_blank" class="hover:text-white"><i class="fa-brands fa-github text-base"></i></a>
+                <a href="https://discord.com" target="_blank" class="hover:text-white"><i class="fa-brands fa-discord text-base"></i></a>
+                <a href="https://twitter.com" target="_blank" class="hover:text-white"><i class="fa-brands fa-twitter text-base"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- Interactive JavaScript Engine -->
+    <!-- MODAL POPUPS (API Key & Login) -->
+    <div id="apiKeyModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-md p-8 rounded-3xl border border-fintech-border space-y-6 relative">
+            <button onclick="closeModal('apiKeyModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-extrabold text-white">Generate API Key</h3>
+                <p class="text-slate-400 text-xs">Enter your app name to generate sandbox and production keys instantly.</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1 uppercase">Application Name</label>
+                    <input type="text" id="appNameInput" placeholder="e.g. MyFintechApp" class="w-full bg-fintech-900 border border-fintech-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-fintech-primary">
+                </div>
+                <button onclick="generateNewApiKey()" class="w-full bg-gradient-to-r from-fintech-primary to-fintech-secondary text-fintech-900 font-bold py-3 rounded-xl shadow-lg shadow-fintech-primary/20 hover:opacity-95 transition-all">
+                    Create Key
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-md p-8 rounded-3xl border border-fintech-border space-y-6 relative">
+            <button onclick="closeModal('loginModal')" class="absolute top-6 right-6 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-extrabold text-white">Developer Login</h3>
+                <p class="text-slate-400 text-xs">Access your PesaGuard developer dashboard and keys.</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1 uppercase">Work Email</label>
+                    <input type="email" placeholder="developer@company.com" class="w-full bg-fintech-900 border border-fintech-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-fintech-primary">
+                </div>
+                <button onclick="alert('Login magic link sent to email!'); closeModal('loginModal');" class="w-full bg-gradient-to-r from-fintech-primary to-fintech-secondary text-fintech-900 font-bold py-3 rounded-xl shadow-lg shadow-fintech-primary/20 hover:opacity-95 transition-all">
+                    Send Magic Link
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        function switchTab(tabId) {
-            const tabs = ['overview', 'reference', 'sandbox', 'webhooks'];
-            tabs.forEach(t => {
-                const section = document.getElementById(`tab-${t}`);
-                const navBtn = document.getElementById(`nav-${t}`);
-                if (t === tabId) {
-                    section.classList.remove('hidden');
-                    if(navBtn) {
-                        navBtn.className = "px-3 py-2 rounded-lg text-sm font-medium text-indigo-400 bg-indigo-950/50 transition-colors";
-                    }
-                } else {
-                    section.classList.add('hidden');
-                    if(navBtn) {
-                        navBtn.className = "px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors";
-                    }
-                }
-            });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hero Simulation replay
+        function replayHeroSimulation() {
+            const resp = document.getElementById('heroCodeResponse');
+            resp.style.opacity = '0';
+            setTimeout(() => {
+                resp.style.opacity = '1';
+            }, 300);
         }
 
-        function executeSandboxRequest() {
-            const outputEl = document.getElementById('sandbox-response-output');
-            const badgeEl = document.getElementById('response-status-badge');
-            const latencyEl = document.getElementById('response-latency');
-            
-            outputEl.innerHTML = `<span class="text-yellow-400">// Connecting to PesaGuard Gateway...</span>`;
-            
-            setTimeout(() => {
-                badgeEl.classList.remove('hidden');
-                badgeEl.classList.add('flex');
-                latencyEl.innerText = `${Math.floor(Math.random() * 40) + 110}ms`;
-                
-                const mockResponse = {
-                    status: "APPROVED",
-                    risk_score: 0.0142,
-                    transaction_id: "TX-992831049-PG",
-                    fraud_heuristic_match: false,
-                    timestamp: new Date().toISOString(),
-                    routing_node: "nairobi-edge-01"
-                };
-                
-                outputEl.innerHTML = `<code class="text-emerald-300">${JSON.stringify(mockResponse, null, 2)}</code>`;
-            }, 350);
+        // SDK Tabs & Code Snippets
+        const sdkData = {
+            python: {
+                install: 'pip install pesaguard',
+                code: `<span class="text-purple-400">import</span> pesaguard\n\nclient = pesaguard.<span class="text-yellow-300">Client</span>(api_key=<span class="text-emerald-300">"pg_live_..."</span>)\n\nresponse = client.reconciliation.<span class="text-yellow-300">verify</span>(\n    transaction_id=<span class="text-emerald-300">"PG123456"</span>,\n    amount=<span class="text-purple-300">2500.00</span>,\n    currency=<span class="text-emerald-300">"KES"</span>\n)\n\nprint(response.status) <span class="text-slate-500"># 'matched'</span>`
+            },
+            node: {
+                install: 'npm install pesaguard-sdk',
+                code: `<span class="text-purple-400">const</span> { PesaGuard } = <span class="text-yellow-300">require</span>(<span class="text-emerald-300">'pesaguard-sdk'</span>);\n\n<span class="text-purple-400">const</span> pguard = <span class="text-purple-400">new</span> <span class="text-yellow-300">PesaGuard</span>({ apiKey: <span class="text-emerald-300">'pg_live_...'</span> });\n\n<span class="text-purple-400">async</span> <span class="text-blue-400">function</span> <span class="text-yellow-300">verifyTx</span>() {\n  <span class="text-purple-400">const</span> res = <span class="text-purple-400">await</span> pguard.reconciliation.<span class="text-yellow-300">verify</span>({\n    transaction_id: <span class="text-emerald-300">'PG123456'</span>,\n    amount: <span class="text-purple-300">2500.00</span>,\n    currency: <span class="text-emerald-300">'KES'</span>\n  });\n  console.<span class="text-yellow-300">log</span>(res.status);\n}\n<span class="text-yellow-300">verifyTx</span>();`
+            },
+            php: {
+                install: 'composer require pesaguard/sdk',
+                code: `<span class="text-purple-400">&lt;?php</span>\n\n<span class="text-purple-400">require</span> <span class="text-emerald-300">'vendor/autoload.php'</span>;\n\n<span class="text-blue-350">$client</span> = <span class="text-purple-400">new</span> <span class="text-yellow-300">PesaGuard\\Client</span>([<span class="text-emerald-300">'api_key'</span> => <span class="text-emerald-300">'pg_live_...'</span>]);\n\n<span class="text-blue-350">$response</span> = <span class="text-blue-350">$client</span>->reconciliation->verify([\n    <span class="text-emerald-300">'transaction_id'</span> => <span class="text-emerald-300">'PG123456'</span>,\n    <span class="text-emerald-300">'amount'</span> => <span class="text-purple-300">2500.00</span>,\n    <span class="text-emerald-300">'currency'</span> => <span class="text-emerald-300">'KES'</span>\n]);\n\necho <span class="text-blue-350">$response</span>->status;`
+            },
+            go: {
+                install: 'go get github.com/pesaguard/sdk',
+                code: `<span class="text-purple-400">package</span> main\n\n<span class="text-purple-400">import</span> (\n    <span class="text-emerald-300">"github.com/pesaguard/sdk"</span>\n)\n\n<span class="text-blue-400">func</span> <span class="text-yellow-300">main</span>() {\n    client := pesaguard.<span class="text-yellow-300">NewClient</span>(<span class="text-emerald-300">"pg_live_..."</span>)\n    res, _ := client.Reconciliation.Verify(pesaguard.VerifyInput{\n        TransactionID: <span class="text-emerald-300">"PG123456"</span>,\n        Amount:        <span class="text-purple-300">2500.00</span>,\n        Currency:      <span class="text-emerald-300">"KES"</span>,\n    })\n    println(res.Status)\n}`
+            },
+            java: {
+                install: 'implementation "com.pesaguard:sdk:4.0.0"',
+                code: `<span class="text-purple-400">import</span> com.pesaguard.PesaGuard;\n\nPesaGuard client = <span class="text-purple-400">new</span> <span class="text-yellow-300">PesaGuard</span>(<span class="text-emerald-300">"pg_live_..."</span>);\n\nReconciliationResponse res = client.reconciliation().verify(\n    <span class="text-purple-400">new</span> <span class="text-yellow-300">VerifyRequest</span>(<span class="text-emerald-300">"PG123456"</span>, 2500.00, <span class="text-emerald-300">"KES"</span>)\n);\n\nSystem.out.println(res.getStatus());`
+            },
+            ruby: {
+                install: 'gem install pesaguard',
+                code: `<span class="text-purple-400">require</span> <span class="text-emerald-300">'pesaguard'</span>\n\nclient = PesaGuard::<span class="text-yellow-300">Client</span>.new(api_key: <span class="text-emerald-300">'pg_live_...'</span>)\n\nresponse = client.reconciliation.verify(\n  transaction_id: <span class="text-emerald-300">'PG123456'</span>,\n  amount: <span class="text-purple-300">2500.00</span>,\n  currency: <span class="text-emerald-300">'KES'</span>\n)\n\nputs response.status`
+            },
+            dotnet: {
+                install: 'dotnet add package PesaGuard.SDK',
+                code: `<span class="text-purple-400">using</span> PesaGuard;\n\n<span class="text-purple-400">var</span> client = <span class="text-purple-400">new</span> <span class="text-yellow-300">PesaGuardClient</span>(<span class="text-emerald-300">"pg_live_..."</span>);\n\n<span class="text-purple-400">var</span> response = <span class="text-purple-400">await</span> client.Reconciliation.VerifyAsync(<span class="text-purple-400">new</span> VerifyRequest {\n    TransactionId = <span class="text-emerald-300">"PG123456"</span>,\n    Amount = <span class="text-purple-300">2500.00</span>,\n    Currency = <span class="text-emerald-300">"KES"</span>\n});\n\nConsole.WriteLine(response.Status);`
+            }
+        };
+
+        function switchSdk(lang) {
+            document.querySelectorAll('.sdk-tab').forEach(btn => {
+                btn.className = "sdk-tab px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-fintech-card transition-all";
+            });
+            event.target.className = "sdk-tab px-4 py-2 rounded-xl text-sm font-medium bg-fintech-primary text-fintech-900 font-bold transition-all";
+            document.getElementById('installCmd').innerText = sdkData[lang].install;
+            document.getElementById('sdkCodeDisplay').innerHTML = sdkData[lang].code;
         }
+
+        function copyInstallCmd() {
+            navigator.clipboard.writeText(document.getElementById('installCmd').innerText);
+            alert('Install command copied to clipboard!');
+        }
+
+        function copySdkCode() {
+            const codeText = document.getElementById('sdkCodeDisplay').innerText;
+            navigator.clipboard.writeText(codeText);
+            alert('Code snippet copied to clipboard!');
+        }
+
+        // API Key Management
+        function switchKeyEnv(env) {
+            const btnSandbox = document.getElementById('btnSandbox');
+            const btnProd = document.getElementById('btnProd');
+            const input = document.getElementById('apiKeyInput');
+            const badge = document.getElementById('keyStatusBadge');
+
+            if (env === 'sandbox') {
+                btnSandbox.className = "px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-fintech-primary text-fintech-900 transition-all";
+                btnProd.className = "px-3 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-300 hover:bg-fintech-card transition-all";
+                input.value = "pg_test_live_9983749281734a9b2c3d4e";
+                badge.className = "text-[10px] font-mono bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-800";
+                badge.innerText = "Test Mode";
+            } else {
+                btnProd.className = "px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-fintech-primary text-fintech-900 transition-all";
+                btnSandbox.className = "px-3 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-300 hover:bg-fintech-card transition-all";
+                input.value = "pg_live_prod_5548920184736102938475";
+                badge.className = "text-[10px] font-mono bg-rose-950 text-rose-400 px-2 py-0.5 rounded border border-rose-800";
+                badge.innerText = "Live Production";
+            }
+        }
+
+        function toggleKeyReveal() {
+            const input = document.getElementById('apiKeyInput');
+            const icon = document.getElementById('revealIcon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fa-solid fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fa-solid fa-eye';
+            }
+        }
+
+        function copyKeyValue() {
+            const input = document.getElementById('apiKeyInput');
+            navigator.clipboard.writeText(input.value);
+            alert('API Key copied to clipboard!');
+        }
+
+        function rotateApiKey() {
+            if (confirm('Are you sure you want to rotate this API key? Existing requests using this key will fail immediately.')) {
+                const input = document.getElementById('apiKeyInput');
+                input.value = 'pg_live_rotated_' + Math.random().toString(36).substring(2);
+                alert('API Key rotated successfully.');
+            }
+        }
+
+        // Documentation Filter
+        function filterDocs() {
+            const query = document.getElementById('docSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.doc-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Interactive Playground
+        const playgroundTemplates = {
+            reconciliation: '{\n  "transaction_id": "PG992831",\n  "amount": 45000.00,\n  "currency": "KES",\n  "source_account": "ACT-88392"\n}',
+            payments: '{\n  "amount": 12500.00,\n  "currency": "USD",\n  "payment_method": "m-pesa",\n  "phone_number": "+254712345678"\n}',
+            fraud: '{\n  "transaction_id": "PG772619",\n  "amount": 250000.00,\n  "ip_address": "197.232.10.4",\n  "device_fingerprint": "dev_9983a"\n}',
+            settlements: '{\n  "settlement_batch_id": "BATCH-2026-07",\n  "account_id": "ACC-9921",\n  "include_splits": true\n}'
+        };
+
+        function updatePlaygroundTemplate() {
+            const endpoint = document.getElementById('apiEndpoint').value;
+            document.getElementById('playgroundBody').value = playgroundTemplates[endpoint];
+        }
+
+        function runPlaygroundRequest() {
+            const output = document.getElementById('playgroundResponse');
+            const badge = document.getElementById('pgStatusBadge');
+            const latency = document.getElementById('pgLatency');
+
+            output.innerHTML = '<span class="text-amber-400">// Connecting to edge node...</span>';
+            badge.classList.add('hidden');
+            badge.classList.remove('flex');
+
+            setTimeout(() => {
+                badge.classList.remove('hidden');
+                badge.classList.add('flex');
+                latency.innerText = (Math.floor(Math.random() * 40) + 95) + 'ms';
+
+                const mockResp = {
+                    status: "success",
+                    code: 200,
+                    data: {
+                        transaction_id: "PG992831",
+                        verified_at: new Date().toISOString(),
+                        ai_confidence: 0.998,
+                        risk_assessment: "low",
+                        routing_node: "Nairobi-Edge-01"
+                    }
+                };
+
+                output.innerHTML = `<code class="text-emerald-300">${JSON.stringify(mockResp, null, 2)}</code>`;
+            }, 400);
+        }
+
+        // FAQ Accordion
+        function toggleFaq(id) {
+            const ans = document.getElementById('faqAns' + id);
+            const icon = document.getElementById('faqIcon' + id);
+            ans.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Modal Controls
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function generateNewApiKey() {
+            const appName = document.getElementById('appNameInput').value;
+            if (!appName) {
+                alert('Please enter an application name.');
+                return;
+            }
+            alert(`API Key generated successfully for app "${appName}"!`);
+            closeModal('apiKeyModal');
+        }
+
+        // Live Dashboard Ticker Simulation
+        setInterval(() => {
+            const reqs = document.getElementById('statReqs');
+            if(reqs) {
+                const current = parseInt(reqs.innerText.replace(',', ''));
+                const delta = Math.floor(Math.random() * 50) - 20;
+                reqs.innerText = (current + delta).toLocaleString();
+            }
+        }, 3000);
     </script>
 </body>
 </html>
+
