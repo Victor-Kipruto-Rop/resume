@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaGuard Developer Platform | Secure Financial APIs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            900: '#312e81',
+                            950: '#1e1b4b',
+                        },
+                        darker: '#090d16',
+                        cardDark: '#111827',
+                        borderDark: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow-effect {
+            box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-darker text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('overview')">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center glow-effect">
+                        <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-white">PesaGuard <span class="text-indigo-400 font-medium text-xs px-2 py-0.5 rounded-full bg-indigo-950 border border-indigo-800 ml-1">Docs</span></span>
+                </div>
+                <!-- Nav Links -->
+                <nav class="hidden md:flex space-x-1">
+                    <button onclick="switchTab('overview')" id="nav-overview" class="px-3 py-2 rounded-lg text-sm font-medium text-indigo-400 bg-indigo-950/50 transition-colors">Overview</button>
+                    <button onclick="switchTab('reference')" id="nav-reference" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors">API Reference</button>
+                    <button onclick="switchTab('sandbox')" id="nav-sandbox" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors">Explorer Sandbox</button>
+                    <button onclick="switchTab('webhooks')" id="nav-webhooks" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors">Webhooks</button>
+                </nav>
+            </div>
+            <!-- Actions -->
+            <div class="flex items-center space-x-4">
+                <div class="hidden lg:flex items-center space-x-2 text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-900/50 px-3 py-1.5 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>All Systems Operational</span>
+                </div>
+                <button onclick="switchTab('sandbox')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-4 py-2 rounded-xl transition-all shadow-lg shadow-indigo-600/20">
+                    Get API Keys
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- TAB 1: OVERVIEW -->
+        <section id="tab-overview" class="space-y-12">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-3xl glass-panel p-8 sm:p-12 border border-slate-800">
+                <div class="absolute -right-20 -top-20 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="max-w-2xl relative z-10 space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-indigo-950 border border-indigo-800/60 rounded-full px-3 py-1 text-xs text-indigo-300 font-medium">
+                        <i class="fa-solid fa-bolt text-indigo-400"></i>
+                        <span>PesaGuard Core v2.4 Released</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                        Enterprise Financial Security & Compliance APIs
+                    </h1>
+                    <p class="text-slate-400 text-base sm:text-lg">
+                        Integrate enterprise-grade transaction fraud scoring, automated AML screening, and secure escrow settlement workflows directly into your platform with clean, robust REST endpoints.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchTab('sandbox')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-6 py-3 rounded-xl transition-all flex items-center space-x-2 shadow-lg shadow-indigo-600/25">
+                            <span>Try API Sandbox</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                        <button onclick="switchTab('reference')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium px-6 py-3 rounded-xl transition-all border border-slate-700">
+                            Explore Documentation
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800/80 hover:border-indigo-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-950 border border-indigo-800/80 flex items-center justify-center text-indigo-400 text-xl mb-4">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Fraud Prevention Engine</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Real-time risk assessment scoring powered by machine learning heuristics to flag abnormal transaction behaviors instantly.
+                    </p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800/80 hover:border-indigo-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-950 border border-indigo-800/80 flex items-center justify-center text-indigo-400 text-xl mb-4">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Automated Compliance</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Seamless KYC verification, PEP list checking, and automated AML ledger logging conforming to global regulatory metrics.
+                    </p>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800/80 hover:border-indigo-500/50 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-950 border border-indigo-800/80 flex items-center justify-center text-indigo-400 text-xl mb-4">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Instant Webhook Dispatch</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Event-driven payload triggers with cryptographic signature verification so your servers stay instantly synced with risk updates.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Start Code Preview Block -->
+            <div class="glass-panel rounded-2xl border border-slate-800 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Quickstart Example (Node.js)</h3>
+                    <span class="text-xs text-slate-500 font-mono">POST /v1/transactions/verify</span>
+                </div>
+                <div class="bg-darker rounded-xl p-4 border border-slate-800 overflow-x-auto">
+                    <pre class="text-xs text-indigo-200"><code><span class="text-purple-400">const</span> PesaGuard = <span class="text-yellow-300">require</span>(<span class="text-emerald-300">'pesaguard'</span>);
+<span class="text-purple-400">const</span> pguard = <span class="text-purple-400">new</span> <span class="text-yellow-300">PesaGuard</span>({ apiKey: <span class="text-emerald-300">'pg_live_98f7d6c5a4b3...'</span> });
+
+<span class="text-purple-400">async</span> <span class="text-blue-400">function</span> <span class="text-yellow-300">verifyTx</span>() {
+  <span class="text-purple-400">const</span> assessment = <span class="text-purple-400">await</span> pguard.transactions.<span class="text-yellow-300">verify</span>({
+    amount: <span class="text-orange-400">45000.00</span>,
+    currency: <span class="text-emerald-300">'KES'</span>,
+    source_account: <span class="text-emerald-300">'ACC-8839201'</span>,
+    destination_account: <span class="text-emerald-300">'ACC-9921034'</span>
+  });
+  console.<span class="text-yellow-300">log</span>(assessment.status); <span class="text-slate-500">// 'APPROVED' | 'FLAGGED'</span>
+}
+<span class="text-yellow-300">verifyTx</span>();</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: API REFERENCE -->
+        <section id="tab-reference" class="hidden space-y-8">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-white tracking-tight">API Reference Directory</h2>
+                <p class="text-slate-400 text-sm mt-1">Complete specifications for request headers, authorization tokens, and payload definitions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Sidebar Directory Index -->
+                <div class="space-y-1 text-sm">
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 mb-2">Core Endpoints</div>
+                    <a href="#ref-verify" class="block px-3 py-2 rounded-lg bg-indigo-950/40 text-indigo-400 font-medium border border-indigo-900/50">POST /v1/verify</a>
+                    <a href="#ref-ledger" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors">GET /v1/ledger/{id}</a>
+                    <a href="#ref-escrow" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors">POST /v1/escrow/release</a>
+                    
+                    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3 mt-6 mb-2">Errors & Status</div>
+                    <a href="#ref-errors" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 transition-colors">Error Codes Schema</a>
+                </div>
+
+                <!-- Reference Documentation Body -->
+                <div class="lg:col-span-3 space-y-10">
+                    <!-- Endpoint 1 -->
+                    <div id="ref-verify" class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-950 text-emerald-400 border border-emerald-800">POST</span>
+                            <span class="text-sm font-mono text-slate-200">https://api.pesaguard.com/v1/verify</span>
+                        </div>
+                        <p class="text-slate-300 text-sm">Analyzes real-time parameters of a money movement instruction and returns a risk score profile along with compliance validation tags.</p>
+                        
+                        <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider pt-2">Request Body Payload</h4>
+                        <div class="bg-darker rounded-xl p-4 border border-slate-800 overflow-x-auto text-xs">
+                            <pre class="text-indigo-200"><code>{
+  <span class="text-blue-300">"amount"</span>: <span class="text-orange-400">12500.00</span>,          <span class="text-slate-500">// Number (Decimal)</span>
+  <span class="text-blue-300">"currency"</span>: <span class="text-emerald-300">"USD"</span>,            <span class="text-slate-500">// ISO 4217 Code</span>
+  <span class="text-blue-300">"source_account"</span>: <span class="text-emerald-300">"ACT-9021"</span>, <span class="text-slate-500">// Sender Account ID</span>
+  <span class="text-blue-300">"risk_tolerance"</span>: <span class="text-emerald-300">"strict"</span>    <span class="text-slate-500">// 'lenient' | 'standard' | 'strict'</span>
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Endpoint 2 -->
+                    <div id="ref-ledger" class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-blue-950 text-blue-400 border border-blue-800">GET</span>
+                            <span class="text-sm font-mono text-slate-200">https://api.pesaguard.com/v1/ledger/{transaction_id}</span>
+                        </div>
+                        <p class="text-slate-300 text-sm">Retrieves immutable compliance log records and verification telemetry associated with a settled transaction identifier.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: API EXPLORER SANDBOX -->
+        <section id="tab-sandbox" class="hidden space-y-6">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-white tracking-tight">Interactive Sandbox Console</h2>
+                <p class="text-slate-400 text-sm mt-1">Simulate live REST execution queries against the PesaGuard edge network.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Request Config Card -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-semibold text-slate-200">Request Configuration</span>
+                        <span class="text-xs text-indigo-400 font-mono bg-indigo-950 px-2.5 py-1 rounded border border-indigo-900">Environment: Sandbox</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">API Endpoint</label>
+                            <select id="sandbox-endpoint" class="w-full bg-darker border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                                <option value="verify">POST /v1/verify - Transaction Security Audit</option>
+                                <option value="aml">POST /v1/aml/check - Anti-Money Laundering Screen</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Authorization Bearer Token</label>
+                            <input type="text" id="sandbox-key" value="pg_test_live_secretkey99283" class="w-full bg-darker border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 font-mono focus:outline-none focus:border-indigo-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">JSON Payload Body</label>
+                            <textarea id="sandbox-payload" rows="6" class="w-full bg-darker border border-slate-700 rounded-xl p-3 text-xs font-mono text-indigo-200 focus:outline-none focus:border-indigo-500">{
+  "amount": 250000,
+  "currency": "KES",
+  "source_account": "ACC-492019",
+  "destination_account": "ACC-883921"
+}</textarea>
+                        </div>
+
+                        <button onclick="executeSandboxRequest()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-xl transition-all shadow-lg shadow-indigo-600/20 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-play text-xs"></i>
+                            <span>Send Test Request</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Response Viewer Card -->
+                <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-semibold text-slate-200">Response Output</span>
+                            <div id="response-status-badge" class="hidden items-center space-x-1.5 text-xs px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-900">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                <span id="status-code-text">200 OK</span>
+                            </div>
+                        </div>
+                        <div class="bg-darker rounded-xl p-4 border border-slate-800 min-h-[260px] max-h-[320px] overflow-y-auto">
+                            <pre id="sandbox-response-output" class="text-xs text-slate-400"><code>// Click "Send Test Request" to run simulation payload...</code></pre>
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-500 mt-4 flex items-center justify-between">
+                        <span>Latency: <strong id="response-latency" class="text-slate-300">--</strong></span>
+                        <span>Engine: <strong class="text-slate-300">PesaGuard-Edge-Nairobi</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: WEBHOOKS -->
+        <section id="tab-webhooks" class="hidden space-y-6">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-white tracking-tight">Webhook Configuration</h2>
+                <p class="text-slate-400 text-sm mt-1">Receive cryptographically signed HTTPS payloads when transaction events or compliance audits trigger.</p>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="text-sm font-semibold text-white">Endpoint URL Subscriptions</h4>
+                        <p class="text-xs text-slate-400 mt-0.5">Active delivery channels listening to system events.</p>
+                    </div>
+                    <button class="bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 font-medium px-4 py-2 rounded-xl border border-slate-700 transition-all">
+                        + Add Endpoint
+                    </button>
+                </div>
+
+                <div class="bg-darker rounded-xl p-4 border border-slate-800 flex items-center justify-between">
+                    <div class="space-y-1">
+                        <div class="text-sm font-mono text-indigo-300">https://api.yourdomain.com/v1/webhooks/pesaguard</div>
+                        <div class="text-xs text-slate-500">Events: <span class="text-slate-400">transaction.flagged, verification.approved</span></div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-950 text-emerald-400 border border-emerald-900">Active</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 mt-12 py-6 bg-darker/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+            <div>&copy; 2026 PesaGuard Security Systems Inc. All rights reserved.</div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-slate-300 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-slate-300 transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-slate-300 transition-colors">System Status</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript Engine -->
+    <script>
+        function switchTab(tabId) {
+            const tabs = ['overview', 'reference', 'sandbox', 'webhooks'];
+            tabs.forEach(t => {
+                const section = document.getElementById(`tab-${t}`);
+                const navBtn = document.getElementById(`nav-${t}`);
+                if (t === tabId) {
+                    section.classList.remove('hidden');
+                    if(navBtn) {
+                        navBtn.className = "px-3 py-2 rounded-lg text-sm font-medium text-indigo-400 bg-indigo-950/50 transition-colors";
+                    }
+                } else {
+                    section.classList.add('hidden');
+                    if(navBtn) {
+                        navBtn.className = "px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-colors";
+                    }
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function executeSandboxRequest() {
+            const outputEl = document.getElementById('sandbox-response-output');
+            const badgeEl = document.getElementById('response-status-badge');
+            const latencyEl = document.getElementById('response-latency');
+            
+            outputEl.innerHTML = `<span class="text-yellow-400">// Connecting to PesaGuard Gateway...</span>`;
+            
+            setTimeout(() => {
+                badgeEl.classList.remove('hidden');
+                badgeEl.classList.add('flex');
+                latencyEl.innerText = `${Math.floor(Math.random() * 40) + 110}ms`;
+                
+                const mockResponse = {
+                    status: "APPROVED",
+                    risk_score: 0.0142,
+                    transaction_id: "TX-992831049-PG",
+                    fraud_heuristic_match: false,
+                    timestamp: new Date().toISOString(),
+                    routing_node: "nairobi-edge-01"
+                };
+                
+                outputEl.innerHTML = `<code class="text-emerald-300">${JSON.stringify(mockResponse, null, 2)}</code>`;
+            }, 350);
+        }
+    </script>
+</body>
+</html>
