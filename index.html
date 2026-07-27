@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Engineering Journal — Victor Kipruto Rop</title>
+  <title>Data Engineering & FinTech Systems — Victor Kipruto Rop</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
   
   <style>
     :root[data-theme="dark"] {
-      --bg-primary: #0b0f17;
-      --bg-surface: #131b27;
-      --bg-surface-hover: #1c2636;
+      --bg-primary: #0a0e17;
+      --bg-surface: #111827;
+      --bg-surface-hover: #1f2937;
       --border-color: rgba(255, 255, 255, 0.08);
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      --accent: #38bdf8; /* Data Cyan */
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #38bdf8;
       --accent-hover: #0284c7;
-      --accent-light: rgba(56, 189, 248, 0.12);
+      --accent-light: rgba(56, 189, 248, 0.1);
       --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-      --badge-bg: rgba(56, 189, 248, 0.1);
-      --code-bg: #070a0f;
+      --badge-bg: rgba(56, 189, 248, 0.12);
+      --code-bg: #030712;
     }
 
     :root[data-theme="light"] {
@@ -35,7 +35,7 @@
       --accent-hover: #0369a1;
       --accent-light: rgba(2, 132, 199, 0.1);
       --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
-      --badge-bg: rgba(2, 132, 199, 0.06);
+      --badge-bg: rgba(2, 132, 199, 0.08);
       --code-bg: #0f172a;
     }
 
@@ -54,12 +54,12 @@
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* Header */
+    /* Header Navigation */
     header {
       position: sticky;
       top: 0;
@@ -86,6 +86,29 @@
 
     .brand span { color: var(--accent); }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .back-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-btn:hover { border-color: var(--accent); }
+
     .theme-toggle {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
@@ -100,12 +123,12 @@
       font-size: 1.1rem;
     }
 
-    /* Hero Section */
+    /* Hero Featured Article */
     .hero-section { padding: 48px 0 24px; }
 
     .featured-card {
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: 1.1fr 1fr;
       gap: 32px;
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
@@ -113,6 +136,8 @@
       overflow: hidden;
       box-shadow: var(--card-shadow);
       cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
 
     .featured-card:hover .featured-img { transform: scale(1.03); }
@@ -120,6 +145,7 @@
     .featured-img-wrap {
       overflow: hidden;
       min-height: 360px;
+      background-color: var(--code-bg);
     }
 
     .featured-img {
@@ -166,7 +192,7 @@
       padding-top: 20px;
     }
 
-    /* Controls Bar */
+    /* Filtering Bar */
     .controls-bar {
       display: flex;
       justify-content: space-between;
@@ -176,7 +202,7 @@
       margin: 40px 0 32px;
     }
 
-    .categories { display: flex; gap: 8px; }
+    .categories { display: flex; gap: 8px; flex-wrap: wrap; }
 
     .cat-btn {
       background: transparent;
@@ -207,10 +233,10 @@
 
     .search-input:focus { border-color: var(--accent); }
 
-    /* Articles Grid */
+    /* Main Grid */
     .articles-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 32px;
       padding-bottom: 80px;
     }
@@ -224,6 +250,8 @@
       flex-direction: column;
       box-shadow: var(--card-shadow);
       cursor: pointer;
+      text-decoration: none;
+      color: inherit;
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
@@ -232,7 +260,7 @@
       border-color: var(--accent);
     }
 
-    .card-img-wrap { height: 200px; overflow: hidden; }
+    .card-img-wrap { height: 200px; overflow: hidden; background: var(--code-bg); }
 
     .card-img {
       width: 100%;
@@ -276,218 +304,288 @@
       border-top: 1px solid var(--border-color);
     }
 
-    /* Full-Screen Article Reader Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      z-index: 1000;
+    /* Dedicated Standalone Reader View */
+    #singleArticleView {
       display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
+      padding: 40px 0 80px;
+      max-width: 780px;
+      margin: 0 auto;
     }
 
-    .modal-overlay.open { display: flex; }
+    .article-header { margin-bottom: 32px; }
 
-    .modal-content {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
+    .article-hero-img {
       width: 100%;
-      max-width: 800px;
-      max-height: 90vh;
-      border-radius: 20px;
-      overflow-y: auto;
-      padding: 40px;
-      position: relative;
-      box-shadow: var(--card-shadow);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: var(--bg-primary);
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 32px;
       border: 1px solid var(--border-color);
-      color: var(--text-main);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.2rem;
     }
 
-    .article-full-body {
-      margin-top: 24px;
-      font-size: 1.05rem;
-      line-height: 1.8;
+    .article-content-body {
+      font-size: 1.1rem;
+      line-height: 1.85;
       color: var(--text-main);
     }
 
-    .article-full-body p { margin-bottom: 20px; }
+    .article-content-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin: 36px 0 16px;
+    }
 
-    .article-full-body pre {
+    .article-content-body p { margin-bottom: 20px; }
+
+    .article-content-body ul {
+      margin: 0 0 24px 24px;
+    }
+
+    .article-content-body li {
+      margin-bottom: 10px;
+    }
+
+    .article-content-body pre {
       background: var(--code-bg);
       color: #f8fafc;
-      padding: 20px;
+      padding: 24px;
       border-radius: 12px;
       font-family: 'Fira Code', monospace;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       overflow-x: auto;
-      margin: 20px 0;
+      margin: 28px 0;
       border: 1px solid var(--border-color);
     }
 
     @media (max-width: 868px) {
       .featured-card { grid-template-columns: 1fr; }
       .featured-img-wrap { min-height: 220px; }
-      .modal-content { padding: 24px; }
+      .featured-content { padding: 24px; }
+      .featured-title { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Navigation Header -->
   <header>
     <div class="container nav-inner">
-      <a href="#" class="brand">data_eng<span>.log()</span></a>
-      <button class="theme-toggle" id="themeToggle">🌙</button>
+      <a href="#" class="brand">victor_rop<span>.data()</span></a>
+      <div class="nav-right">
+        <a href="#" class="back-btn" id="backBtn">← Back to Articles</a>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <!-- Hero Article -->
-    <section class="hero-section">
-      <article class="featured-card" onclick="openArticle(1)">
-        <div class="featured-img-wrap">
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" alt="Kafka Cluster" class="featured-img">
-        </div>
-        <div class="featured-content">
-          <span class="badge">Streaming Architecture</span>
-          <h1 class="featured-title">Building Low-Latency Streaming Pipelines with Apache Kafka & Flink</h1>
-          <p class="card-excerpt">A breakdown of architecture for handling millions of financial events per second with zero data loss and exact-once processing semantics.</p>
-          <div class="meta-text">
-            <span>By Victor Kipruto Rop</span> • 
-            <span>July 2026</span> • 
-            <span>7 min read</span>
+    <!-- View 1: Main Blog Home -->
+    <div id="blogHomeView">
+      <section class="hero-section">
+        <a href="#blog-1" class="featured-card">
+          <div class="featured-img-wrap">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" alt="Streaming Architecture" class="featured-img">
           </div>
-        </div>
-      </article>
-    </section>
+          <div class="featured-content">
+            <span class="badge">Streaming Architecture</span>
+            <h1 class="featured-title">Why I'm Building PesaGuard on Event-Driven Architecture, Not Batch</h1>
+            <p class="card-excerpt">Batch processing is no longer the center of gravity in 2026 data systems. Here is why Daraja and M-Pesa fraud detection requires instant stream ingestion over overnight batch jobs.</p>
+            <div class="meta-text">
+              <span>By Victor Kipruto Rop</span> • 
+              <span>July 2026</span> • 
+              <span>6 min read</span>
+            </div>
+          </div>
+        </a>
+      </section>
 
-    <!-- Filters & Search -->
-    <div class="controls-bar">
-      <div class="categories" id="categoryContainer">
-        <button class="cat-btn active" data-category="All">All</button>
-        <button class="cat-btn" data-category="Streaming">Streaming</button>
-        <button class="cat-btn" data-category="Orchestration">Orchestration</button>
-        <button class="cat-btn" data-category="Data Warehouse">Data Warehouse</button>
+      <div class="controls-bar">
+        <div class="categories" id="categoryContainer">
+          <button class="cat-btn active" data-category="All">All Topics</button>
+          <button class="cat-btn" data-category="Streaming">Streaming</button>
+          <button class="cat-btn" data-category="Platform Engineering">Platform Engineering</button>
+          <button class="cat-btn" data-category="Governance">Governance</button>
+          <button class="cat-btn" data-category="AI Workflows">AI Workflows</button>
+        </div>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search topics, stacks...">
       </div>
-      <input type="text" id="searchInput" class="search-input" placeholder="Search architecture, tools...">
+
+      <section class="articles-grid" id="articlesGrid"></section>
     </div>
 
-    <!-- Article Cards -->
-    <section class="articles-grid" id="articlesGrid"></section>
+    <!-- View 2: Dedicated Individual Article View -->
+    <div id="singleArticleView">
+      <div id="articleTarget"></div>
+    </div>
   </main>
 
-  <!-- Full Reader Modal -->
-  <div class="modal-overlay" id="articleModal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeArticle()">✕</button>
-      <div id="modalInner"></div>
-    </div>
-  </div>
-
   <script>
-    // Data Engineering Blog Posts
+    // Full Article Repository
     const articles = [
       {
-        id: 1,
-        title: "Building Low-Latency Streaming Pipelines with Apache Kafka & Flink",
-        excerpt: "A breakdown of architecture for handling millions of financial events per second with zero data loss and exact-once processing semantics.",
+        id: "blog-1",
+        title: "Why I'm Building PesaGuard on Event-Driven Architecture, Not Batch",
         category: "Streaming",
         author: "Victor Kipruto Rop",
-        date: "Jul 24, 2026",
-        readTime: "7 min read",
-        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
-        content: `
-          <p>Processing millions of transaction streams requires an architecture built around durability and backpressure handling. In this article, we cover how Apache Kafka serves as the distributed commit log while Apache Flink powers real-time aggregations.</p>
-          <h3>Key Streaming Pillars</h3>
-          <p>When engineering high-throughput event pipelines, three core requirements dominate the system design:</p>
-          <ul>
-            <li><strong>Exact-Once Semantics (EOS):</strong> Guaranteeing no duplicate writes to downstreams during network partitions.</li>
-            <li><strong>Stateful Stream Processing:</strong> Managing RocksDB state backends inside Flink for rolling window aggregations.</li>
-            <li><strong>Schema Evolution:</strong> Enforcing Confluent Schema Registry with Avro to protect downstream data warehouses from breaking changes.</li>
-          </ul>
-          <pre><code>// Example PyFlink Window Aggregation
-DataStream&lt;Tuple2&lt;String, Double&gt;&gt; aggregatedStream = stream
-    .keyBy(value -> value.f0)
-    .window(TumblingEventTimeWindows.of(Time.seconds(5)))
-    .reduce((val1, val2) -> new Tuple2<>(val1.f0, val1.f1 + val2.f1));</code></pre>
-          <p>By decoupling consumers through partition keys, we scale throughput linearly across processing nodes.</p>
-        `
-      },
-      {
-        id: 2,
-        title: "Production Airflow DAGs: Dynamic Generation & Error Handling",
-        excerpt: "How to structure modular, fault-tolerant Airflow workflows with custom operators and SLA alert integrations.",
-        category: "Orchestration",
-        author: "Victor Kipruto Rop",
-        date: "Jul 18, 2026",
-        readTime: "5 min read",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-        content: `
-          <p>Monolithic DAGs with hardcoded task dependencies quickly turn into operational bottlenecks. Treating DAGs as dynamic code generation problems makes data orchestration manageable.</p>
-          <h3>Factory Pattern for Airflow DAGs</h3>
-          <p>Instead of manually writing 50 repetitive DAG files for ingestion, create a Python factory that reads YAML configuration files and instantiates DAGs dynamically at runtime.</p>
-          <pre><code># Dynamic DAG Generation snippet
-def create_dag(dag_id, schedule, config):
-    with DAG(dag_id, schedule_interval=schedule, default_args=default_args) as dag:
-        ExtractOperator(task_id='extract', config=config) >> LoadOperator(task_id='load')
-    return dag</code></pre>
-        `
-      },
-      {
-        id: 3,
-        title: "Optimizing Snowflake & BigQuery Costs with Smart Partitioning",
-        excerpt: "Practical strategies for data modeling, partitioning, and clustering keys that cut cloud data warehouse billing by up to 40%.",
-        category: "Data Warehouse",
-        author: "Victor Kipruto Rop",
-        date: "Jul 12, 2026",
+        date: "Jul 26, 2026",
         readTime: "6 min read",
-        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+        excerpt: "Batch processing is no longer the center of gravity in 2026 data systems. Here is why Daraja and M-Pesa fraud detection requires instant stream ingestion over overnight batch jobs.",
         content: `
-          <p>Unoptimized queries scanning petabytes of raw unpartitioned tables burn engineering budgets fast. Efficient dimensional modeling combined with strategic cluster keys prevents expensive table scans.</p>
-          <p>Always align your cluster keys with your most frequent query filter predicates (e.g., <code>event_date</code> and <code>tenant_id</code>).</p>
+          <p>Most reconciliation tools I looked at before starting PesaGuard were built the same way: pull M-Pesa statements at the end of the day, diff them against internal records, flag whatever doesn't match. It works, until it doesn't. A SACCO or small fintech running batch reconciliation finds out about a mismatched transaction 12 hours after it happened — long after the money has moved, the member has walked away, or the fraud pattern has repeated three more times.</p>
+          <p>That gap is the whole argument for event-driven architecture, and it's why PesaGuard isn't built around nightly jobs.</p>
+          
+          <h2>The batch failure mode</h2>
+          <p>Batch reconciliation has a structural problem: it treats "when did this happen" and "when did we find out" as the same thing, when they're not. A SACCO processing a few hundred M-Pesa transactions a day might only run reconciliation once — meaning every anomaly, from a genuine fraud attempt to a simple duplicate charge, sits undetected until the next batch window opens. For a small fintech handling higher volume, that delay compounds: by the time you catch the pattern, you're explaining it to a customer instead of preventing it.</p>
+          <p>The fix isn't "run batch more often." It's rethinking the transaction as an event you react to the moment it happens, not a row you inspect later.</p>
+          
+          <h2>How the pipeline actually works</h2>
+          <p>PesaGuard's core flow looks like this:</p>
+          <ul>
+            <li><strong>Daraja webhook</strong> — M-Pesa's C2B/B2B callbacks land as HTTP events the moment a transaction completes.</li>
+            <li><strong>Event bus</strong> — each callback is published onto a stream rather than written straight to a database and forgotten. This is the architectural pivot: the transaction becomes an event other consumers can subscribe to, not a static record.</li>
+            <li><strong>Anomaly detection consumer</strong> — a downstream service subscribes to the stream and runs rule-based and statistical checks (duplicate transaction IDs, amount mismatches, velocity spikes) against each event as it arrives.</li>
+            <li><strong>Alerting / reconciliation store</strong> — flagged events get written to a review queue; everything else gets reconciled against internal ledgers in near real time instead of overnight.</li>
+          </ul>
+
+          <pre><code>BATCH                                  EVENT-DRIVEN
+M-Pesa statement (EOD)                 Daraja webhook (per-transaction)
+        |                                      |
+        v                                      v
+  Nightly diff job                       Event bus / stream
+        |                                      |
+        v                                      v
+  Flagged mismatches                   Anomaly detection consumer
+  (discovered next day)                        |
+                                                v
+                                   Flagged in near real time</code></pre>
+
+          <h2>What this costs you</h2>
+          <p>Event-driven isn't free. Moving off batch means taking on:</p>
+          <ul>
+            <li><strong>Ordering and idempotency problems</strong> — Daraja can retry webhooks; your consumer has to handle duplicate events without double-flagging or double-crediting.</li>
+            <li><strong>Operational surface area</strong> — a stream and a consumer service is more to monitor than a cron job. If the consumer falls behind, you need lag visibility, not just a "did the job run" check.</li>
+            <li><strong>Harder debugging</strong> — replaying "what did the system know at 2:14pm" is a different exercise than rerunning yesterday's batch script.</li>
+          </ul>
+          <p>For a solo build, that's a real trade-off. But for a reconciliation product where the entire value proposition is Catching problems before they compound, batch was never going to hold up. The complexity tax is the cost of the product actually doing what it claims to do.</p>
         `
       },
       {
-        id: 4,
-        title: "Data Quality at Scale: Integrating dbt Tests into CI/CD Pipelines",
-        excerpt: "Automating data quality checks, anomaly detection, and schema validation before pushing models to production environments.",
-        category: "Data Warehouse",
+        id: "blog-2",
+        title: "What 'Platform Engineering' Means for a Solo Data Engineer",
+        category: "Platform Engineering",
         author: "Victor Kipruto Rop",
-        date: "Jul 05, 2026",
-        readTime: "4 min read",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+        date: "Jul 20, 2026",
+        readTime: "5 min read",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+        excerpt: "The 2026 shift is moving away from tool-hoarding toward internal data platforms. How I apply modular platform thinking across CampusHub, MyChama, and PesaGuard.",
         content: `
-          <p>Data pipelines without automated testing will eventually leak corrupted data into executive analytics dashboards. Here is how to run continuous data testing with dbt and GitHub Actions.</p>
+          <p>"Platform as a product" is one of the loudest phrases in data engineering right now. The pitch: instead of every team building its own ingestion jobs, transformation logic, and monitoring from scratch, a platform team builds standardized, reusable components — and everyone else builds on top of them instead of reinventing plumbing.</p>
+          <p>That idea is usually framed as an org-level shift — something that needs a platform team, a budget, and headcount. I don't have any of those. What I have is four separate projects (CampusHub, MyChama, PesaGuard, and a standalone streaming pipeline) that I've been building largely alone. And it turns out the discipline behind platform thinking applies just as well at that scale — it just looks like refusing to solve the same plumbing problem twice.</p>
+
+          <h2>What the trend actually says</h2>
+          <p>The core shift isn't a new tool. It's ownership and reuse: ingestion frameworks, transformation templates, and deployment patterns get built once, centrally, and maintained — so engineers spend their time on data modeling and quality instead of rebuilding the same webhook handler for the fifth time. Platform teams define the failure modes and upgrade paths once, instead of every squad discovering them independently.</p>
+          <p>Strip away the "team" and "org" language, and what's left is a personal discipline: <strong>don't let your tenth project rebuild what your third project already solved.</strong></p>
+
+          <h2>Where I've actually done this</h2>
+          <p>Across my own projects, a few patterns have shown up repeatedly enough that treating them as reusable infrastructure — rather than one-off code — has paid for itself:</p>
+          <ul>
+            <li><strong>Ingestion handling.</strong> M-Pesa/Daraja webhook validation and parsing shows up in both the streaming pipeline work and PesaGuard. The second time I touched it, it stopped being "write the handler again" and started being "pull in the pattern I already validated."</li>
+            <li><strong>Auth and access patterns.</strong> CampusHub's Django backend and MyChama's dashboard both needed role-based access control for fundamentally different user types (students vs. chama members) — but the underlying pattern of "who can see what, and how do we check it consistently" is the same shape of problem.</li>
+            <li><strong>Observability basics.</strong> The streaming pipeline's Kafka/PyFlink stack already has Prometheus and Grafana wired in. That's the template I reach for now instead of asking "how do I know if this pipeline is healthy" from zero on every new build.</li>
+          </ul>
+
+          <h2>The honest trade-off</h2>
+          <p>Solo platform thinking has a failure mode too: over-engineering a reusable abstraction for a problem you've only actually hit twice. Real platform teams justify their abstractions with dozens of consuming teams. I don't have that luxury — so the bar I use is simpler: I only pull a pattern into something reusable after it's shown up in two live projects, not because I anticipate needing it.</p>
+        `
+      },
+      {
+        id: "blog-3",
+        title: "Governance-as-Code for M-Pesa Data Pipelines",
+        category: "Governance",
+        author: "Victor Kipruto Rop",
+        date: "Jul 15, 2026",
+        readTime: "7 min read",
+        image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+        excerpt: "Automation-first compliance: enforcing automated audit trails, line-level data lineage, and Kenyan Data Protection Act requirements directly inside Git CI/CD.",
+        content: `
+          <p>Compliance in most fintech pipelines I've seen is a document, not a system: a Privacy Policy sitting in a shared drive, a Data Protection Impact Assessment done once at launch and never revisited, an audit trail that means "someone can pull the logs if asked." That approach works until it doesn't — usually right when a regulator, an auditor, or an angry customer actually asks.</p>
+          <p>Governance-as-code is the alternative: compliance procedures, audit trails, and data lineage tracking become part of the pipeline itself — automated and continuous — rather than manual oversight bolted on afterward. Building PesaGuard against the Data Protection Act, 2019 has forced me to think about what that actually looks like for a small Kenyan fintech pipeline, not a hypothetical enterprise one.</p>
+
+          <h2>Start with the actual law, not generic "compliance"</h2>
+          <p>Kenya's Data Protection Act, 2019 and the ODPC's guidance aren't abstract — they specify things like lawful basis for processing, data subject rights, and breach notification timelines. For a reconciliation platform handling M-Pesa transaction data on behalf of SACCOs and small fintechs, that translates into concrete pipeline requirements:</p>
+          <ul>
+            <li>Every field that touches personal or transaction data needs a documented lawful basis, not just a database column.</li>
+            <li>Data subject access requests need to be answerable from the pipeline itself — you need to be able to find and export everything tied to one identifier quickly, not reconstruct it manually.</li>
+            <li>Breach notification has a clock attached. If you can't tell when an unauthorized access happened, you can't meet that clock.</li>
+          </ul>
+
+          <h2>What this looks like in a Daraja pipeline</h2>
+          <p>Concretely, for a pipeline ingesting M-Pesa/Daraja callbacks:</p>
+          <ul>
+            <li><strong>Schema validation at ingestion.</strong> Every incoming event is validated against a strict schema before it's accepted — this is both a data-quality control and a governance control, since it prevents unexpected personal data fields from silently entering the pipeline unflagged.</li>
+            <li><strong>Access logging as a first-class event.</strong> Every read of transaction-level data — not just writes — gets logged with who, what, and when. This is what makes a DSAR or a breach investigation answerable in hours instead of days.</li>
+            <li><strong>Automated retention enforcement.</strong> Rather than a policy document saying "we delete data after X months," the pipeline itself expires and purges records on schedule, so retention isn't dependent on someone remembering to run a cleanup job.</li>
+          </ul>
+
+          <pre><code>Daraja callback received
+        |
+        v
+Schema validation (reject unknown/unexpected PII fields)
+        |
+        v
+Access-logged write to transaction store
+        |
+        v
+Retention clock starts (auto-purge at policy limit)</code></pre>
+        `
+      },
+      {
+        id: "blog-4",
+        title: "AI Copilots Didn't Replace My Pipeline Work — They Changed What 'Junior' Means",
+        category: "AI Workflows",
+        author: "Victor Kipruto Rop",
+        date: "Jul 08, 2026",
+        readTime: "4 min read",
+        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80",
+        excerpt: "AI tools draft SQL, write boilerplate connectors, and debug errors automatically. Where engineer judgment matters most in an AI-assisted world.",
+        content: `
+          <p>There's a version of this take that goes "AI is coming for entry-level data engineering jobs," and a version that goes "AI is just autocomplete, nothing has really changed." Neither matches what's actually happened in my own work over the past year building CampusHub, MyChama, PesaGuard, and the streaming pipeline.</p>
+          <p>What's actually changed is narrower and more specific: a set of tasks that used to eat hours now take minutes, and a different, harder set of skills has become the thing that actually separates useful work from a pile of code that technically runs.</p>
+
+          <h2>What AI tools now handle for me</h2>
+          <ul>
+            <li><strong>Boilerplate and scaffolding.</strong> Setting up a new ingestion handler, a Django model with the associated serializers, or a Kafka consumer skeleton used to be twenty minutes of typing patterns I already knew. Now it's a prompt and a review pass. The knowledge required didn't disappear — the typing did.</li>
+            <li><strong>Debugging with context.</strong> When a pipeline fails in a way that isn't obvious from the stack trace alone — a schema mismatch three steps upstream, a race condition in event ordering — describing the symptom and walking through it with an AI tool gets me to the root cause faster than manually tracing logs line by line, especially on unfamiliar parts of a stack like PyFlink.</li>
+            <li><strong>Documentation that stays current.</strong> Keeping docs in sync with a pipeline that changes weekly used to be the first thing that got skipped under deadline pressure. Now it's cheap enough to actually do.</li>
+          </ul>
+
+          <h2>What still requires judgment</h2>
+          <ul>
+            <li><strong>Architecture calls.</strong> Whether PesaGuard needed an event bus instead of batch reconciliation wasn't a question AI answered for me — it required understanding the actual failure mode I was designing against (detection delay) and weighing that against the operational cost of streaming infrastructure. That trade-off analysis is still entirely on me.</li>
+            <li><strong>Data trust decisions.</strong> Deciding what counts as an anomaly worth flagging, versus noise worth ignoring, in a reconciliation pipeline is a judgment call shaped by understanding the actual business risk — not something a model can infer without that context.</li>
+            <li><strong>Knowing when the generated code is subtly wrong.</strong> AI-scaffolded code runs. Whether it runs correctly for the specific constraints of a Daraja webhook's retry behavior, or a chama's dual-wallet accounting logic, is something I still have to verify by actually understanding the system, not by trusting the output.</li>
+          </ul>
+
+          <h2>What I'm deliberately not outsourcing</h2>
+          <p>I still write my own architecture decisions and my own anomaly-detection logic by hand before I let a tool help me refine them — not because the tool couldn't draft something plausible, but because the exercise of working through why a design choice is right is the part that actually builds the judgment I'll need on the next project, where the constraints will be different again. The typing was never the hard part. Knowing what to type, and why, still is.</p>
         `
       }
     ];
 
+    // State
     let currentCategory = 'All';
     let searchQuery = '';
 
+    // Elements
+    const blogHomeView = document.getElementById('blogHomeView');
+    const singleArticleView = document.getElementById('singleArticleView');
+    const articleTarget = document.getElementById('articleTarget');
     const articlesGrid = document.getElementById('articlesGrid');
     const categoryContainer = document.getElementById('categoryContainer');
     const searchInput = document.getElementById('searchInput');
     const themeToggle = document.getElementById('themeToggle');
-    const modal = document.getElementById('articleModal');
-    const modalInner = document.getElementById('modalInner');
+    const backBtn = document.getElementById('backBtn');
 
     // Theme Switch
     themeToggle.addEventListener('click', () => {
@@ -497,8 +595,8 @@ def create_dag(dag_id, schedule, config):
       themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
     });
 
-    // Render Cards
-    function renderArticles() {
+    // Render Cards Grid
+    function renderGrid() {
       const filtered = articles.filter(art => {
         const matchesCat = currentCategory === 'All' || art.category === currentCategory;
         const matchesSearch = art.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -507,7 +605,7 @@ def create_dag(dag_id, schedule, config):
       });
 
       articlesGrid.innerHTML = filtered.map(art => `
-        <article class="card" onclick="openArticle(${art.id})">
+        <a href="#${art.id}" class="card">
           <div class="card-img-wrap">
             <img src="${art.image}" alt="${art.title}" class="card-img">
           </div>
@@ -521,49 +619,66 @@ def create_dag(dag_id, schedule, config):
               </div>
             </div>
           </div>
-        </article>
+        </a>
       `).join('');
     }
 
-    // Modal Article Reader
-    window.openArticle = function(id) {
-      const art = articles.find(a => a.id === id);
-      if (!art) return;
+    // Single Article Render
+    function renderSingleArticle(articleId) {
+      const art = articles.find(a => a.id === articleId);
+      if (!art) {
+        window.location.hash = '';
+        return;
+      }
 
-      modalInner.innerHTML = `
-        <span class="badge">${art.category}</span>
-        <h1 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 16px 0 8px;">${art.title}</h1>
-        <div class="meta-text" style="margin-bottom: 24px;">
-          <span>By ${art.author}</span> • <span>${art.date}</span> • <span>${art.readTime}</span>
+      articleTarget.innerHTML = `
+        <div class="article-header">
+          <span class="badge">${art.category}</span>
+          <h1 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; line-height: 1.2; margin: 16px 0;">${art.title}</h1>
+          <div class="meta-text">
+            <span>By ${art.author}</span> • <span>${art.date}</span> • <span>${art.readTime}</span>
+          </div>
         </div>
-        <img src="${art.image}" style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px; margin-bottom: 24px;">
-        <div class="article-full-body">${art.content}</div>
+        <img src="${art.image}" alt="${art.title}" class="article-hero-img">
+        <div class="article-content-body">${art.content}</div>
       `;
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    };
+    }
 
-    window.closeArticle = function() {
-      modal.classList.remove('open');
-      document.body.style.overflow = 'auto';
-    };
+    // Hash Router
+    function handleRoute() {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && hash.startsWith('blog-')) {
+        blogHomeView.style.display = 'none';
+        singleArticleView.style.display = 'block';
+        backBtn.style.display = 'inline-flex';
+        renderSingleArticle(hash);
+        window.scrollTo(0, 0);
+      } else {
+        blogHomeView.style.display = 'block';
+        singleArticleView.style.display = 'none';
+        backBtn.style.display = 'none';
+        renderGrid();
+      }
+    }
 
-    // Filter Listeners
+    // Filter Events
     categoryContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('cat-btn')) {
         document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
         e.target.classList.add('active');
         currentCategory = e.target.dataset.category;
-        renderArticles();
+        renderGrid();
       }
     });
 
     searchInput.addEventListener('input', (e) => {
       searchQuery = e.target.value;
-      renderArticles();
+      renderGrid();
     });
 
-    renderArticles();
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('load', handleRoute);
   </script>
 </body>
 </html>
+
