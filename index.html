@@ -1,1311 +1,2557 @@
 <!DOCTYPE html>
-<html lang="en" data-blog-post="portfolio-home">
+<html lang="en" class="dark">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Victor Kipruto Rop — Data Engineer Portfolio</title>
-<meta name="description" content="Portfolio of Victor Kipruto Rop, a Data Engineer specializing in scalable pipelines, ETL design, and data architecture using Airflow, Kafka, and Python."/>
-<meta name="keywords" content="Data Engineer, ETL, Airflow, Kafka, Python, SQL, Nairobi, Kenya, Victor Kipruto Rop, Portfolio"/>
-<meta name="author" content="Victor Kipruto Rop"/>
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://github.com/Victor-Kipruto-Rop"/>
-<meta property="og:title" content="Victor Kipruto Rop — Data Engineer"/>
-<meta property="og:description" content="Building production-grade data systems that scale. Explore my projects and technical expertise."/>
-<meta property="og:image" content="assets/1.jpeg"/>
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:url" content="https://github.com/Victor-Kipruto-Rop"/>
-<meta property="twitter:title" content="Victor Kipruto Rop — Data Engineer"/>
-<meta property="twitter:description" content="Building production-grade data systems that scale. Explore my projects and technical expertise."/>
-<meta property="twitter:image" content="assets/1.jpeg"/>
-
-<!-- RSS Discovery Link -->
-<link rel="alternate" type="application/rss+xml" title="Victor Kipruto's Blog" href="https://victor-kipruto-rop.github.io/victor-resum-web/rss.xml">
-
-<link rel="icon" href="assets/1.jpeg" type="image/jpeg"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<style>
-  :root {
-    --bg: #f8fafc;
-    --surface: #ffffff;
-    --surface-glass: rgba(255, 255, 255, 0.8);
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --accent: #f97316;
-    --accent-glow: rgba(249, 115, 22, 0.15);
-    --border: #e2e8f0;
-    --card-bg: #ffffff;
-    --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
-    --radius: 16px;
-  }
-  
-  body.dark-mode {
-    --bg: #030712;
-    --surface: #0b0f19;
-    --surface-glass: rgba(11, 15, 25, 0.85);
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --accent: #fb923c;
-    --accent-glow: rgba(251, 146, 60, 0.15);
-    --border: #1e293b;
-    --card-bg: #0f172a;
-    --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text-main);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-    overflow-x: hidden;
-    opacity: 0;
-    transition: opacity 0.6s ease, background 0.3s ease, color 0.3s ease;
-  }
-  body.loaded { opacity: 1; }
-
-  /* Custom cursor */
-  #cursor {
-    position: fixed; top: 0; left: 0; z-index: 9999;
-    width: 8px; height: 8px; background: var(--accent);
-    border-radius: 50%; pointer-events: none;
-    transition: transform 0.1s ease;
-  }
-  #cursor-ring {
-    position: fixed; top: 0; left: 0; z-index: 9998;
-    width: 36px; height: 36px; border: 1.5px solid var(--accent);
-    border-radius: 50%; pointer-events: none;
-    transition: transform 0.2s cubic-bezier(.16,1,.3,1), width 0.2s, height 0.2s;
-  }
-  @media(max-width: 768px) { #cursor, #cursor-ring { display: none; } }
-
-  /* Preloader */
-  #preloader {
-    position: fixed; inset: 0; z-index: 10000;
-    background: var(--surface); display: flex; align-items: center; justify-content: center;
-    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
-  }
-  #preloader.hidden { transform: translateY(-100%); }
-  .loader-text {
-    font-family: 'Instrument Serif', serif; font-size: 42px; color: var(--text-main);
-    letter-spacing: -1px;
-  }
-
-  /* Typography shortcuts */
-  code, .mono { font-family: 'JetBrains Mono', monospace; }
-  .serif { font-family: 'Instrument Serif', serif; }
-
-  /* Navigation */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 5vw; background: var(--surface-glass);
-    backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
-    transition: all 0.3s ease;
-  }
-  .nav-logo {
-    display: flex; align-items: center; gap: 12px;
-    text-decoration: none; color: var(--text-main);
-  }
-  .nav-logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
-  .nav-username { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text-muted); }
-  .nav-right { display: flex; align-items: center; gap: 20px; }
-  .nav-links { display: flex; gap: 28px; align-items: center; }
-  .nav-links a {
-    font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase;
-    letter-spacing: 0.08em; color: var(--text-muted); text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-
-  .theme-toggle {
-    background: var(--card-bg); border: 1px solid var(--border); color: var(--text-main);
-    width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
-  }
-  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-  body.dark-mode .theme-toggle .fa-moon { display: none; }
-  body:not(.dark-mode) .theme-toggle .fa-sun { display: none; }
-
-  .hamburger { display: none; background: none; border: none; font-size: 24px; color: var(--text-main); cursor: pointer; }
-  .hamburger-close { display: none; }
-  .hamburger.active .hamburger-icon { display: none; }
-  .hamburger.active .hamburger-close { display: inline; }
-
-  @media(max-width: 968px) {
-    .hamburger { display: block; }
-    .nav-links {
-      position: absolute; top: 100%; left: 0; right: 0; background: var(--surface);
-      flex-direction: column; padding: 24px; border-bottom: 1px solid var(--border);
-      max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
-    }
-    .nav-links.active { max-height: 500px; }
-  }
-
-  /* Layout Sections */
-  section { padding: 100px 5vw; max-width: 1300px; margin: 0 auto; position: relative; }
-  .section-label {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px;
-    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
-    margin-bottom: 8px; font-weight: 700; display: inline-block;
-  }
-  .section-title {
-    font-family: 'Instrument Serif', serif; font-size: clamp(38px, 5vw, 56px);
-    line-height: 1.1; letter-spacing: -1px; color: var(--text-main); margin-bottom: 40px;
-  }
-
-  /* Hero Section */
-  #hero {
-    min-height: 90vh; display: grid; grid-template-columns: 1.2fr 0.8fr;
-    align-items: center; gap: 4vw; padding-top: 140px;
-  }
-  .hero-eyebrow {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em;
-    color: var(--accent); background: var(--accent-glow); padding: 6px 12px;
-    border-radius: 99px; display: inline-block; margin-bottom: 20px; font-weight: 600;
-  }
-  .hero-name {
-    font-family: 'Instrument Serif', serif; font-size: clamp(52px, 7vw, 84px);
-    line-height: 0.95; letter-spacing: -2px; margin-bottom: 16px;
-  }
-  .hero-name em { font-style: italic; color: var(--accent); }
-  .hero-title { font-size: 18px; font-weight: 600; color: var(--text-muted); margin-bottom: 24px; }
-  .hero-desc { font-size: 15px; color: var(--text-muted); max-width: 560px; margin-bottom: 36px; line-height: 1.8; }
-  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
-  
-  .btn-primary, .btn-ghost, .btn-outline {
-    font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase;
-    letter-spacing: 0.1em; padding: 14px 28px; border-radius: 99px; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px; transition: all 0.25s ease; cursor: pointer;
-  }
-  .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); box-shadow: 0 4px 14px var(--accent-glow); }
-  .btn-primary:hover { transform: translateY(-2px); opacity: 0.95; }
-  .btn-ghost { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--card-bg); }
-  .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
-  .btn-outline:hover { background: var(--accent); color: #fff; }
-
-  .hero-right-inner { display: flex; flex-direction: column; align-items: center; gap: 32px; }
-  .hero-prof {
-    width: 320px; height: 320px; object-fit: cover; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    box-shadow: var(--shadow); border: 3px solid var(--border); transition: border-radius 0.5s ease;
-  }
-  .hero-prof:hover { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
-  .hero-social { display: flex; gap: 16px; }
-  .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
-  .social-icon {
-    width: 42px; height: 42px; border-radius: 12px; background: var(--card-bg);
-    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-  }
-  .social-link:hover .social-icon { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
-  .social-label { display: none; }
-
-  @media(max-width: 968px) {
-    #hero { grid-template-columns: 1fr; text-align: center; gap: 40px; padding-top: 100px; }
-    .hero-desc { margin: 0 auto 36px; }
-    .hero-cta { justify-content: center; }
-    .hero-right-inner { order: -1; }
-    .hero-prof { width: 240px; height: 240px; }
-  }
-
-  /* Ticker */
-  .ticker-wrap { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 18px 0; overflow: hidden; }
-  .ticker { display: flex; gap: 24px; animation: ticker 25s linear infinite; white-space: nowrap; }
-  .ticker span {
-    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
-    color: var(--text-muted); background: var(--card-bg); border: 1px solid var(--border);
-    padding: 8px 18px; border-radius: 99px;
-  }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* Why Hire Me Grid */
-  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .why-card {
-    background: var(--card-bg); border: 1px solid var(--border); padding: 36px;
-    border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.3s, border-color 0.3s;
-    opacity: 0; transform: translateY(20px);
-  }
-  .why-card.visible { opacity: 1; transform: translateY(0); }
-  .why-card:hover { transform: translateY(-6px); border-color: var(--accent); }
-  .why-num { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 16px; }
-  .why-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
-  .why-card p { font-size: 14px; color: var(--text-muted); }
-  @media(max-width: 968px) { .why-grid { grid-template-columns: 1fr; } }
-
-  /* Skills Pills */
-  .skills-wrap { display: flex; flex-wrap: wrap; gap: 12px; max-width: 1000px; }
-  .skill-pill {
-    background: var(--card-bg); border: 1px solid var(--border); padding: 10px 18px;
-    border-radius: 99px; font-family: 'JetBrains Mono', monospace; font-size: 13px;
-    cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow);
-  }
-  .skill-pill:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-2px); }
-
-  /* Experience & Certs Grid */
-  .experience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-  .experience-card {
-    background: var(--card-bg); border: 1px solid var(--border); padding: 36px;
-    border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.3s;
-  }
-  .experience-card:hover { transform: translateY(-4px); border-color: var(--accent); }
-  .experience-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-  .experience-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
-  .experience-company { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; }
-  .experience-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); }
-  .experience-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
-  .experience-skills { display: flex; flex-wrap: wrap; gap: 8px; }
-  .skill-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--surface); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; color: var(--text-muted); }
-
-  /* Projects Section */
-  .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; }
-  .project-count { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 14px; }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; }
-  .project-card {
-    background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
-    overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column;
-    cursor: pointer; transition: all 0.3s ease; opacity: 0; transform: translateY(20px);
-  }
-  .project-card.visible { opacity: 1; transform: translateY(0); }
-  .project-card:hover { transform: translateY(-6px); border-color: var(--accent); }
-  .project-thumb { height: 200px; width: 100%; object-fit: cover; }
-  .project-content { padding: 24px; display: flex; flex-direction: column; flex: 1; }
-  .project-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-  .project-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; flex: 1; }
-  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-  .stack-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--accent-glow); color: var(--accent); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(249,115,22,0.2); }
-  .project-actions { display: flex; gap: 10px; margin-top: auto; }
-  .project-controls { display: none; } /* Kept logic hooked via JS functions */
-
-  /* About Layout */
-  .about-layout { display: grid; grid-template-columns: 1fr; max-width: 900px; gap: 32px; }
-  .about-body { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
-  .about-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 32px; }
-  .about-fact { background: var(--card-bg); border: 1px solid var(--border); padding: 16px 20px; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; }
-  .fact-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--accent); letter-spacing: 0.1em; }
-  .fact-value { font-size: 14px; font-weight: 600; }
-
-  /* Blog Grid */
-  .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-  .blog-card { background: var(--card-bg); border: 1px solid var(--border); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.3s; }
-  .blog-card:hover { transform: translateY(-4px); border-color: var(--accent); }
-  .blog-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 12px; display: block; }
-  .blog-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; line-height: 1.4; }
-  .blog-excerpt { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
-
-  /* GitHub Chart & Repos */
-  .gh-chart { background: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); overflow-x: auto; }
-  body.dark-mode #gh-chart { filter: invert(0.9) hue-rotate(180deg) brightness(1.2); }
-  .top-repos-section { margin-top: 48px; }
-  .top-repos-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
-  .top-repos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-  .repo-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 12px; }
-  .repo-item:hover { transform: translateY(-4px); border-color: var(--accent); }
-  .repo-name { font-size: 16px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
-  .repo-desc { font-size: 13px; color: var(--text-muted); flex-grow: 1; }
-  .repo-stats { display: flex; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); }
-  .repo-lang { display: flex; align-items: center; gap: 6px; }
-  .repo-lang-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-  /* Contact & Forms */
-  .contact-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
-  @media(max-width: 968px) { .contact-layout { grid-template-columns: 1fr; } }
-  .contact-form { display: flex; flex-direction: column; gap: 16px; }
-  .contact-row { display: flex; gap: 16px; }
-  .contact-row .field { flex: 1; }
-  .contact-form input, .contact-form textarea {
-    width: 100%; padding: 14px 18px; border: 1px solid var(--border);
-    border-radius: 12px; background: var(--card-bg); color: var(--text-main);
-    font-family: inherit; font-size: 14px; transition: border-color 0.2s;
-  }
-  .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
-  .contact-form textarea { min-height: 140px; resize: vertical; }
-
-  /* Footer */
-  footer { background: var(--surface); border-top: 1px solid var(--border); padding: 32px 5vw; text-align: center; }
-  footer p { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); }
-
-  /* Modals */
-  .cv-modal-overlay, .cert-modal-overlay, .project-modal-overlay, .skill-modal-overlay, .subscription-modal-overlay {
-    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px);
-    z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;
-  }
-  .cv-modal, .skill-modal, .subscription-modal, .project-modal, .cert-modal {
-    background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
-    width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 36px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
-  }
-  .cert-modal { max-width: 900px; height: 85vh; display: flex; flex-direction: column; padding: 0; }
-  .cert-modal iframe { width: 100%; flex: 1; border: none; }
-</style>
-
-<!-- Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Victor Kipruto Rop",
-  "jobTitle": "Data Engineer",
-  "url": "https://github.com/Victor-Kipruto-Rop",
-  "sameAs": [
-    "https://www.linkedin.com/in/victor-kipruto-rop",
-    "https://github.com/Victor-Kipruto-Rop"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Nairobi",
-    "addressCountry": "Kenya"
-  }
-}
-</script>
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3BGPZ2LCR"></script>
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-D3BGPZ2LCR');
-</script>
-</head>
-<body class="dark-mode">
-
-<div id="preloader">
-  <div class="loader-text"><span>Victor Kipruto Rop</span></div>
-</div>
-
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;">Skip to main content</a>
-
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="https://github.com/Victor-Kipruto-Rop" target="_blank" rel="noopener">
-    <img src="assets/1.jpeg" alt="Victor Kipruto Rop"/>
-    <span class="nav-username">@Victor-Kipruto-Rop</span>
-  </a>
-  <div class="nav-right">
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span class="hamburger-icon">☰</span>
-      <span class="hamburger-close">✕</span>
-    </button>
-    <div class="nav-links" id="nav-links">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#blog">Blog</a>
-      <a href="#github-activity">Activity</a>
-      <a href="#send-message">Contact</a>
-    </div>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
-      <i class="fas fa-moon"></i>
-      <i class="fas fa-sun"></i>
-    </button>
-  </div>
-</nav>
-
-<main id="main-content">
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">// AVAILABLE FOR INTERNSHIPS · 2026</div>
-    <h1 class="hero-name" id="hero-name">Victor Kipruto Rop</h1>
-    <p class="hero-title">Data Engineer · Pipeline Architect · Data Architect</p>
-    <p class="hero-desc">
-      Building production-grade data systems that scale — from Kafka streams to Airflow orchestration. Experienced in designing reliable ETL, low-latency streaming, and warehouse modelling. Based in Nairobi, Kenya.
-    </p>
-    <div class="hero-cta">
-      <a class="btn-primary" href="#projects">View Projects</a>
-      <a class="btn-ghost" href="#send-message">Hire Me</a>
-      <a class="btn-ghost" href="https://calendly.com/kiprutovictor39" target="_blank" rel="noopener" aria-label="Schedule a call">Schedule Call</a>
-      <a class="btn-ghost" href="#" onclick="openCvModal(); return false;" aria-label="View or Download Victor's Resume CV">View/Download CV</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-right-inner">
-      <img class="hero-prof" src="assets/1.jpeg" alt="Victor Kipruto Rop" loading="lazy" decoding="async"/>
-      <div class="hero-social">
-        <a class="social-link" href="mailto:kiprutovictor39@gmail.com" aria-label="Email" title="Email">
-          <span class="social-icon"><i class="fas fa-envelope"></i></span>
-          <span class="social-label">Email</span>
-        </a>
-        <a class="social-link" href="tel:+254723484552" aria-label="Phone" title="Call">
-          <span class="social-icon"><i class="fas fa-phone"></i></span>
-          <span class="social-label">Phone</span>
-        </a>
-        <a class="social-link" href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-          <span class="social-icon"><i class="fab fa-linkedin-in"></i></span>
-          <span class="social-label">LinkedIn</span>
-        </a>
-        <a class="social-link" href="https://github.com/Victor-Kipruto-Rop" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-          <span class="social-icon"><i class="fab fa-github"></i></span>
-          <span class="social-label">GitHub</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Ticker -->
-<div class="ticker-wrap">
-  <div class="ticker">
-    <span>⚡ Apache Airflow</span>
-    <span>⚡ Real-Time Streaming</span>
-    <span>⚡ Kafka & Flink</span>
-    <span>⚡ Dimensional Modelling</span>
-    <span>⚡ Python & SQL</span>
-    <span>⚡ Docker & CI/CD</span>
-    <span>⚡ Cloud Architecture</span>
-    <span>⚡ Apache Airflow</span>
-    <span>⚡ Real-Time Streaming</span>
-    <span>⚡ Kafka & Flink</span>
-  </div>
-</div>
-
-<!-- WHY HIRE ME -->
-<section id="why">
-  <span class="section-label">// 01</span>
-  <h2 class="section-title">Core Competencies</h2>
-  <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="why-num">01</div>
-      <h3>Scalable Architecture</h3>
-      <p>Designing robust ETL/ELT workflows built to handle high throughput data transactions reliably under heavy corporate demands.</p>
-    </div>
-    <div class="why-card reveal" style="transition-delay:0.1s">
-      <div class="why-num">02</div>
-      <h3>Real-Time Processing</h3>
-      <p>Building event-driven pipelines using Kafka and Flink for continuous analytics, low-latency insights, and fraud tracking.</p>
-    </div>
-    <div class="why-card reveal" style="transition-delay:0.2s">
-      <div class="why-num">03</div>
-      <h3>Engineering Rigor</h3>
-      <p>Writing clean, containerized Python code backed by automated unit tests (Pytest) and Git continuous integration strategies.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <span class="section-label">// 02</span>
-  <h2 class="section-title">About Me</h2>
-  <div class="about-layout">
-    <div>
-      <p class="about-body">
-        I'm a final-year BSc Data Science student at The Cooperative University of Kenya, building a career at the intersection of scalable systems and trustworthy data. My work is driven by a belief that clean, well-engineered data infrastructure is what separates organisations that can act on their data from those that only think they can.
-      </p>
-      <p class="about-body">
-        Outside of building pipelines, I'm drawn to the growing data ecosystem across East Africa and the opportunity to work on infrastructure that has real operational impact — whether in aviation safety, energy, or financial services.
-      </p>
-      <div class="about-facts">
-        <div class="about-fact">
-          <span class="fact-label">University</span>
-          <span class="fact-value">The Cooperative University of Kenya</span>
-        </div>
-        <div class="about-fact">
-          <span class="fact-label">Degree</span>
-          <span class="fact-value">BSc Data Science · Expected 2027</span>
-        </div>
-        <div class="about-fact">
-          <span class="fact-label">Location</span>
-          <span class="fact-value">Nairobi, Kenya</span>
-        </div>
-        <div class="about-fact">
-          <span class="fact-label">Status</span>
-          <span class="fact-value">Open to Data Engineering internships</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <span class="section-label">// 03</span>
-  <h2 class="section-title">Learning & Project Experience</h2>
-  <div class="experience-grid">
-    <div class="experience-card reveal">
-      <div class="experience-header">
-        <div>
-          <h3 class="experience-title">Final-Year BSc Data Science Student</h3>
-          <p class="experience-company">The Cooperative University of Kenya</p>
-        </div>
-        <span class="experience-date">2022 - Present</span>
-      </div>
-      <p class="experience-desc">Over the past year, I've specialized in data engineering and have built production-grade data systems through hands-on projects. Designed and implemented scalable ETL pipelines, real-time stream processing with Kafka, and warehouse infrastructure.</p>
-      <div class="experience-skills">
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">Apache Airflow</span>
-        <span class="skill-tag">Kafka</span>
-        <span class="skill-tag">PostgreSQL</span>
-        <span class="skill-tag">ETL/ELT</span>
-      </div>
-    </div>
-    <div class="experience-card reveal" style="transition-delay:0.1s">
-      <div class="experience-header">
-        <div>
-          <h3 class="experience-title">Hands-On Project Development</h3>
-          <p class="experience-company">Building Real-World Infrastructure</p>
-        </div>
-        <span class="experience-date">Last 12 Months</span>
-      </div>
-      <p class="experience-desc">Completed 5 major projects involving data pipeline design, cloud ETL systems, real-time transaction streaming, and warehouse optimization. Each project has significantly strengthened my understanding of production systems.</p>
-      <div class="experience-skills">
-        <span class="skill-tag">Docker</span>
-        <span class="skill-tag">SQL</span>
-        <span class="skill-tag">Cloud Architecture</span>
-        <span class="skill-tag">System Design</span>
-        <span class="skill-tag">CI/CD</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <span class="section-label">// 04</span>
-  <h2 class="section-title">Technical Skills</h2>
-  <div class="skills-wrap">
-    <div class="skill-pill" onclick="openSkillModal('Apache Airflow')">Apache Airflow</div>
-    <div class="skill-pill" onclick="openSkillModal('ETL Design')">ETL Design</div>
-    <div class="skill-pill" onclick="openSkillModal('DAG Management')">DAG Management</div>
-    <div class="skill-pill" onclick="openSkillModal('Apache Kafka')">Apache Kafka</div>
-    <div class="skill-pill" onclick="openSkillModal('Stream Processing')">Stream Processing</div>
-    <div class="skill-pill" onclick="openSkillModal('Producers &amp; Consumers')">Producers &amp; Consumers</div>
-    <div class="skill-pill" onclick="openSkillModal('Star Schema')">Star Schema</div>
-    <div class="skill-pill" onclick="openSkillModal('Dimensional Modelling')">Dimensional Modelling</div>
-    <div class="skill-pill" onclick="openSkillModal('OLAP Queries')">OLAP Queries</div>
-    <div class="skill-pill" onclick="openSkillModal('Data Warehousing')">Data Warehousing</div>
-    <div class="skill-pill" onclick="openSkillModal('Deduplication')">Deduplication</div>
-    <div class="skill-pill" onclick="openSkillModal('Validation Rule Engines')">Validation Rule Engines</div>
-    <div class="skill-pill" onclick="openSkillModal('Anomaly Detection')">Anomaly Detection</div>
-    <div class="skill-pill" onclick="openSkillModal('Docker')">Docker</div>
-    <div class="skill-pill" onclick="openSkillModal('GitHub Actions')">GitHub Actions</div>
-    <div class="skill-pill" onclick="openSkillModal('Pytest')">Pytest</div>
-    <div class="skill-pill" onclick="openSkillModal('CI/CD Pipelines')">CI/CD Pipelines</div>
-    <div class="skill-pill" onclick="openSkillModal('Python')">Python</div>
-    <div class="skill-pill" onclick="openSkillModal('SQL')">SQL</div>
-    <div class="skill-pill" onclick="openSkillModal('PostgreSQL')">PostgreSQL</div>
-    <div class="skill-pill" onclick="openSkillModal('Git')">Git</div>
-    <div class="skill-pill" onclick="openSkillModal('Docker Compose')">Docker Compose</div>
-  </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <span class="section-label">// 05</span>
-  <h2 class="section-title">Professional Certifications</h2>
-  <div class="experience-grid">
-    <div class="experience-card reveal">
-      <div class="experience-header">
-        <div>
-          <h3 class="experience-title">Big Data Foundations</h3>
-          <p class="experience-company">IBM / Cognitive Class</p>
-        </div>
-        <span class="experience-date">2026</span>
-      </div>
-      <p class="experience-desc">Comprehensive training in big data concepts, Hadoop ecosystem, and distributed computing fundamentals.</p>
-      <div class="experience-skills">
-        <span class="skill-tag">Big Data</span>
-        <span class="skill-tag">Hadoop</span>
-        <span class="skill-tag">IBM Cloud</span>
-      </div>
-      <div style="margin-top:20px;">
-        <button onclick="openCertModal('assets/certifications/IBM_BD0101EN_Certificate_Cognitive_Class.pdf')" class="btn-sm btn-primary" style="padding:10px 20px;">View Certificate</button>
-      </div>
-    </div>
-    <div class="experience-card reveal" style="transition-delay:0.1s">
-      <div class="experience-header">
-        <div>
-          <h3 class="experience-title">Enterprise Design Thinking</h3>
-          <p class="experience-company">IBM</p>
-        </div>
-        <span class="experience-date">2026</span>
-      </div>
-      <p class="experience-desc">Mastered user-centered design principles and collaboration techniques for solving complex business problems.</p>
-      <div class="experience-skills">
-        <span class="skill-tag">Design Thinking</span>
-        <span class="skill-tag">User Experience</span>
-      </div>
-      <div style="margin-top:20px;">
-        <button onclick="openCertModal('assets/certifications/IBM_Design_Thinking.pdf')" class="btn-sm btn-outline" style="padding:10px 20px;">View Certificate</button>
-      </div>
-    </div>
-    <div class="experience-card reveal" style="transition-delay:0.2s">
-      <div class="experience-header">
-        <div>
-          <h3 class="experience-title">Professional Development</h3>
-          <p class="experience-company">Verified Credential</p>
-        </div>
-        <span class="experience-date">2026</span>
-      </div>
-      <p class="experience-desc">Continued learning and specialization in scalable data systems and engineering best practices.</p>
-      <div class="experience-skills">
-        <span class="skill-tag">Data Engineering</span>
-        <span class="skill-tag">Systems Architecture</span>
-      </div>
-      <div style="margin-top:20px;">
-        <button onclick="openCertModal('assets/certifications/Professional_Development.pdf')" class="btn-sm btn-outline" style="padding:10px 20px;">View Certificate</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <span class="section-label">// 06</span>
-  <div class="projects-header">
-    <h2 class="section-title" style="margin:0;">Featured Projects <span class="project-count">(5)</span></h2>
-  </div>
-
-  <div class="projects-grid" id="projects-grid">
-    <div class="project-card reveal" onclick="openProjectModal({title: 'Data Engineering — Full Project', desc: 'Designed and automated a complete star schema architecture with cloud-based data ingestion and optimised analytical queries for BI reporting.', stack: ['Python', 'SQL', 'ETL', 'Cloud Storage'], img: 'assets/images/1.jpeg', view: 'https://github.com/Victor-Kipruto-Rop/Data-Enginerring-full-project'})">
-      <img class="project-thumb" src="assets/images/1.jpeg" alt="Data Engineering thumbnail" />
-      <div class="project-content">
-        <p class="project-title">Data Engineering — Full Project</p>
-        <p class="project-desc">Designed and automated a complete star schema architecture with cloud-based data ingestion and optimised analytical queries for BI reporting.</p>
-        <div class="project-stack">
-          <span class="stack-badge">Python</span>
-          <span class="stack-badge">SQL</span>
-          <span class="stack-badge">ETL</span>
-        </div>
-        <div class="project-actions">
-          <a class="btn-primary" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/Data-Enginerring-full-project" target="_blank" rel="noopener">View Project</a>
-          <a class="btn-ghost" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/Data-Enginerring-full-project" target="_blank" rel="noopener">Readme</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" style="transition-delay:0.08s" onclick="openProjectModal({title: 'Cloud ETL Pipeline', desc: 'Multi-stage ETL with synthetic data generation, deduplication and a rule-based validation engine. Containerised and CI/CD-ready.', stack: ['Airflow', 'Docker', 'Pytest', 'GitHub Actions'], img: 'assets/images/2.jpeg', view: 'https://github.com/Victor-Kipruto-Rop/cloud-etl-pipeline'})">
-      <img class="project-thumb" src="assets/images/2.jpeg" alt="Cloud ETL thumbnail" />
-      <div class="project-content">
-        <p class="project-title">Cloud ETL Pipeline</p>
-        <p class="project-desc">Multi-stage ETL with synthetic data generation, deduplication and a rule-based validation engine. Containerised and CI/CD-ready.</p>
-        <div class="project-stack">
-          <span class="stack-badge">Airflow</span>
-          <span class="stack-badge">Docker</span>
-          <span class="stack-badge">Pytest</span>
-        </div>
-        <div class="project-actions">
-          <a class="btn-primary" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/cloud-etl-pipeline" target="_blank" rel="noopener">View</a>
-          <a class="btn-ghost" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/cloud-etl-pipeline" target="_blank" rel="noopener">Readme</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" style="transition-delay:0.16s" onclick="openProjectModal({title: 'Mpesa / Safaricom Pipeline', desc: 'High-throughput ingestion system for MPESA transaction data with chunked reads, deduplication and optimised batch inserts.', stack: ['Python', 'PostgreSQL', 'Connection Pooling'], img: 'assets/images/3.jpeg', view: 'https://github.com/Victor-Kipruto-Rop/mpesa_safaricom-pipeline-'})">
-      <img class="project-thumb" src="assets/images/3.jpeg" alt="Mpesa pipeline thumbnail" />
-      <div class="project-content">
-        <p class="project-title">Mpesa / Safaricom Pipeline</p>
-        <p class="project-desc">High-throughput ingestion system for MPESA transaction data with chunked reads, deduplication and optimised batch inserts.</p>
-        <div class="project-stack">
-          <span class="stack-badge">Python</span>
-          <span class="stack-badge">PostgreSQL</span>
-        </div>
-        <div class="project-actions">
-          <a class="btn-primary" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/mpesa_safaricom-pipeline-" target="_blank" rel="noopener">View</a>
-          <a class="btn-ghost" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/mpesa_safaricom-pipeline-" target="_blank" rel="noopener">Readme</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" style="transition-delay:0.24s" onclick="openProjectModal({title: 'Real-Time Transaction Streaming (MPESA)', desc: 'A high-performance streaming architecture designed to ingest Safaricom Daraja API events via webhooks, processing them through a distributed Kafka-Flink pipeline for real-time FinTech analytics and fraud monitoring.', stack: ['Kafka', 'Flink', 'dbt', 'Terraform'], img: 'assets/images/4.jpeg', view: 'https://github.com/Victor-Kipruto-Rop/Real_Time_Transaction_Streaming-MPESA-'})">
-      <img class="project-thumb" src="assets/images/4.jpeg" alt="Streaming thumbnail" />
-      <div class="project-content">
-        <p class="project-title">Real-Time Transaction Streaming (MPESA)</p>
-        <p class="project-desc">A high-performance streaming architecture designed to ingest Safaricom Daraja API events via webhooks, processing them through a distributed Kafka-Flink pipeline for real-time FinTech analytics and fraud monitoring.</p>
-        <div class="project-stack">
-          <span class="stack-badge">Kafka</span>
-          <span class="stack-badge">Flink</span>
-          <span class="stack-badge">dbt</span>
-        </div>
-        <div class="project-actions">
-          <a class="btn-primary" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/Real_Time_Transaction_Streaming-MPESA-" target="_blank" rel="noopener">View</a>
-          <a class="btn-ghost" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/Real_Time_Transaction_Streaming-MPESA-" target="_blank" rel="noopener">Readme</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div style="text-align: center; margin-top: 40px;">
-    <a href="https://github.com/Victor-Kipruto-Rop?tab=repositories" target="_blank" rel="noopener" class="btn-ghost">View More Repositories →</a>
-  </div>
-</section>
-
-<!-- BLOG -->
-<section id="blog">
-  <span class="section-label">// 07</span>
-  <h2 class="section-title">Technical Blog</h2>
-  <div class="blog-grid">
-    <div class="blog-card reveal">
-      <span class="blog-date">June 5, 2026 · 5 min read</span>
-      <h3 class="blog-title">Welcome to My Technical Blog</h3>
-      <p class="blog-excerpt">An introduction to my technical blog where I share insights on data engineering, ETL pipelines, and real-time systems.</p>
-      <a href="post.html?id=first-post" class="btn-ghost" style="padding:8px 16px;font-size:11px;">Read Article</a>
-    </div>
-    <div class="blog-card reveal" style="transition-delay:0.1s">
-      <span class="blog-date">June 4, 2026 · 12 min read</span>
-      <h3 class="blog-title">Data Engineering Fundamentals: Building Scalable Systems</h3>
-      <p class="blog-excerpt">A comprehensive guide to data engineering fundamentals, covering architecture principles, ETL design patterns, and production-grade best practices.</p>
-      <a href="post.html?id=data-engineering" class="btn-ghost" style="padding:8px 16px;font-size:11px;">Read Article</a>
-    </div>
-    <div class="blog-card reveal" style="transition-delay:0.2s">
-      <span class="blog-date">May 28, 2026 · 14 min read</span>
-      <h3 class="blog-title">Advanced Airflow Patterns & Optimization</h3>
-      <p class="blog-excerpt">Deep dive into dynamic DAG generation, custom operators, monitoring strategies, and scaling Airflow to production workloads.</p>
-      <a href="post.html?id=airflow-advanced" class="btn-ghost" style="padding:8px 16px;font-size:11px;">Read Article</a>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:36px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-    <a href="blog.html" class="btn-primary">Browse All Articles (6+)</a>
-    <button onclick="openSubscriptionModal()" class="btn-ghost">📧 Subscribe for Updates</button>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <span class="section-label">// 08</span>
-  <h2 class="section-title">Testimonials & Feedback</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
-    <div style="background:var(--card-bg);padding:28px;border-radius:var(--radius);border:1px solid var(--border);border-left:4px solid var(--accent)">
-      <p style="font-style:italic;color:var(--text-muted);margin-bottom:16px;line-height:1.6">&quot;Victor's ability to design scalable data pipelines is exceptional. His Airflow implementations are production-ready and well-documented. A great addition to any data team.&quot;</p>
-      <p style="font-weight:700;color:var(--text-main);margin-bottom:2px">Data Engineering Mentor</p>
-      <p style="color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;">Project Lead • The Cooperative University</p>
-    </div>
-    <div style="background:var(--card-bg);padding:28px;border-radius:var(--radius);border:1px solid var(--border);border-left:4px solid var(--accent)">
-      <p style="font-style:italic;color:var(--text-muted);margin-bottom:16px;line-height:1.6">&quot;Demonstrates exceptional understanding of cloud infrastructure, CI/CD pipelines, and distributed systems. Eager to learn and collaborate effectively with the team.&quot;</p>
-      <p style="font-weight:700;color:var(--text-main);margin-bottom:2px">DevOps & Infrastructure Review</p>
-      <p style="color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;">Technical Assessment • GitHub Projects</p>
-    </div>
-    <div style="background:var(--card-bg);padding:28px;border-radius:var(--radius);border:1px solid var(--border);border-left:4px solid var(--accent)">
-      <p style="font-style:italic;color:var(--text-muted);margin-bottom:16px;line-height:1.6">&quot;Proficient in ETL architectures, real-time streaming with Kafka, and warehouse modelling. Shows strong fundamentals and brings fresh perspectives to complex problems.&quot;</p>
-      <p style="font-weight:700;color:var(--text-main);margin-bottom:2px">Data Architecture Review</p>
-      <p style="color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;">Technical Feedback • Project Collaboration</p>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERTISE -->
-<section id="expertise">
-  <span class="section-label">// 09</span>
-  <h2 class="section-title">How I Work</h2>
-  <div class="experience-grid">
-    <div class="experience-card reveal" onclick="openSkillModal('Pipeline Design')" style="cursor:pointer;">
-      <div style="font-size:28px;color:var(--accent);margin-bottom:16px;"><i class="fas fa-project-diagram"></i></div>
-      <h3 class="experience-title">Pipeline Design</h3>
-      <p class="experience-desc">I design resilient ETL/ELT frameworks, treating pipelines as software ensuring modularity, observability, and scalability.</p>
-    </div>
-    <div class="experience-card reveal" style="transition-delay:0.1s;cursor:pointer;" onclick="openSkillModal('Orchestration')">
-      <div style="font-size:28px;color:var(--accent);margin-bottom:16px;"><i class="fas fa-clock"></i></div>
-      <h3 class="experience-title">Orchestration</h3>
-      <p class="experience-desc">Leveraging Apache Airflow to turn complex task workflows into deterministic, automated pipelines with built-in alerts.</p>
-    </div>
-    <div class="experience-card reveal" style="transition-delay:0.2s;cursor:pointer;" onclick="openSkillModal('Data Modelling')">
-      <div style="font-size:28px;color:var(--accent);margin-bottom:16px;"><i class="fas fa-database"></i></div>
-      <h3 class="experience-title">Data Modelling</h3>
-      <p class="experience-desc">Bridging raw data to business analytics via dimensional Star/Snowflake schemas optimized for high-performance querying.</p>
-    </div>
-    <div class="experience-card reveal" style="transition-delay:0.3s;cursor:pointer;" onclick="openSkillModal('Data CI/CD')">
-      <div style="font-size:28px;color:var(--accent);margin-bottom:16px;"><i class="fas fa-infinity"></i></div>
-      <h3 class="experience-title">Data CI/CD</h3>
-      <p class="experience-desc">Applying engineering rigor through unit testing (Pytest) and automated continuous deployment workflows.</p>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:36px;">
-    <a href="how-i-work.html" class="btn-ghost">View Comprehensive Engineering Approach →</a>
-  </div>
-</section>
-
-<!-- CONTRIBUTIONS -->
-<section id="contributions">
-  <span class="section-label">// 10</span>
-  <h2 class="section-title">Talks & Contributions</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;">
-    <div class="experience-card reveal">
-      <div style="font-size:24px;color:var(--accent);margin-bottom:12px;"><i class="fas fa-code-branch"></i></div>
-      <h3 class="experience-title">Open Source Contribution</h3>
-      <p class="experience-desc">Improved error-handling documentation and resolved critical race conditions in a widely used Python data processing library.</p>
-      <a href="contributions.html" style="color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;">View All Contributions →</a>
-    </div>
-    <div class="experience-card reveal" style="transition-delay:0.1s">
-      <div style="font-size:24px;color:var(--accent);margin-bottom:12px;"><i class="fas fa-microphone"></i></div>
-      <h3 class="experience-title">Tech Talk</h3>
-      <p class="experience-desc">Delivered a technical session on "Designing Fault-Tolerant Data Pipelines with Airflow" to 100+ students at a university meetup.</p>
-      <a href="talks.html" style="color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;">View All Talks →</a>
-    </div>
-  </div>
-</section>
-
-<!-- GITHUB ACTIVITY -->
-<section id="github-activity">
-  <span class="section-label">// 11</span>
-  <div class="github-wrap">
-    <div class="projects-header">
-      <h2 class="section-title" style="margin:0;">GitHub Activity <span class="project-count" id="gh-count"></span></h2>
-      <a class="gh-username" href="https://github.com/Victor-Kipruto-Rop" target="_blank" rel="noopener" style="text-decoration:none;color:var(--text-muted);font-weight:600;display:inline-flex;gap:8px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;">
-        <i class="fab fa-github"></i>
-        <span>@Victor-Kipruto-Rop</span>
-      </a>
-    </div>
-    <p id="gh-sub" style="color:var(--text-muted);margin-bottom:20px;font-size:14px;">Loading recent activity…</p>
-    <div class="gh-chart">
-      <img id="gh-chart" src="https://ghchart.rshah.org/40c463/Victor-Kipruto-Rop" alt="Victor Kipruto Rop's GitHub contributions" style="width:100%;max-width:980px;display:block;" />
-    </div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuneFlow — Unlimited Music. Zero Limits.</title>
+    <meta name="description" content="Discover millions of songs, download high-quality audio, organize playlists, and enjoy lightning-fast downloads from one beautiful platform.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <div class="top-repos-section">
-      <h3 class="top-repos-title">Top Repositories</h3>
-      <div id="top-repos-container" class="top-repos-grid">
-        <p style="color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Loading repositories…</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <style>
+        /* ========================================
+           CSS VARIABLES & RESET
+           ======================================== */
+        :root {
+            --bg-primary: #090909;
+            --bg-secondary: #121212;
+            --bg-tertiary: #1a1a1a;
+            --accent-green: #1ED760;
+            --accent-cyan: #00D4FF;
+            --text-main: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --text-muted: #606060;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(30, 215, 96, 0.4);
+            --glass-bg: rgba(18, 18, 18, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --shadow-glow: 0 0 30px rgba(30, 215, 96, 0.15);
+            --shadow-cyan-glow: 0 0 30px rgba(0, 212, 255, 0.15);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-main: 'Inter', 'Poppins', sans-serif;
+        }
 
-<!-- SEND MESSAGE -->
-<section id="send-message">
-  <span class="section-label">// 12</span>
-  <h2 class="section-title">Get in Touch</h2>
-  <div class="contact-layout">
-    <div>
-      <h3 style="font-size:20px;margin-bottom:12px;">Schedule a Call</h3>
-      <p style="color:var(--text-muted);margin-bottom:24px;font-size:15px;">Want to discuss data engineering pipelines, project collaboration, or architecture? Book a meeting time directly.</p>
-      <a href="https://calendly.com/kiprutovictor39" target="_blank" rel="noopener" class="btn-primary" style="margin-bottom:32px;">Schedule on Calendly →</a>
-      
-      <div style="background:var(--card-bg);border:1px solid var(--border);padding:24px;border-radius:var(--radius);">
-        <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#22c55e;margin-bottom:8px;">
-          <span style="width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
-          Available for Internships
-        </div>
-        <p style="font-size:13px;color:var(--text-muted);">Based in Nairobi, Kenya. Open to remote or local hybrid placement.</p>
-      </div>
-    </div>
-    <div>
-      <h3 style="font-size:20px;margin-bottom:12px;">Send a Message</h3>
-      <p style="color:var(--text-muted);margin-bottom:24px;font-size:15px;">Prefer email? Drop a note below and I will get back within 24 hours.</p>
-      
-      <div data-fs-success class="fs-success" style="display:none;padding:12px;background:var(--accent);color:#fff;border-radius:8px;margin-bottom:16px;text-align:center;">✓ Thanks — your message was sent.</div>
-      <div data-fs-error class="fs-error" style="display:none;padding:12px;background:#fee2e2;color:#991b1b;border-radius:8px;margin-bottom:16px;text-align:center;">⚠ Oops — there was an error. Please try again.</div>
-      
-      <form id="contact-form" class="contact-form" action="https://formspree.io/f/xkoagvvk" method="POST">
-        <div class="contact-row">
-          <input class="field" type="text" name="name" placeholder="Your name" required data-fs-field />
-          <input class="field" type="email" name="email" placeholder="Your email" required data-fs-field />
-        </div>
-        <input type="text" name="subject" placeholder="Subject" required data-fs-field />
-        <textarea name="message" placeholder="Message" required data-fs-field></textarea>
-        <div style="display:flex;gap:12px;margin-top:4px;">
-          <button type="submit" class="btn-primary" data-fs-submit-btn>Send Message</button>
-          <button type="reset" class="btn-ghost">Reset Form</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
+        .light {
+            --bg-primary: #F4F5F7;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #E5E7EB;
+            --accent-green: #15983D;
+            --accent-cyan: #0088AA;
+            --text-main: #111111;
+            --text-secondary: #555555;
+            --text-muted: #888888;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --border-hover: rgba(21, 152, 61, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(0, 0, 0, 0.06);
+            --shadow-glow: 0 0 30px rgba(21, 152, 61, 0.1);
+            --shadow-cyan-glow: 0 0 30px rgba(0, 136, 170, 0.1);
+        }
 
-</main>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-green) var(--bg-primary);
+        }
 
-<!-- FOOTER -->
-<footer>
-  <p>&copy; 2026 Victor Kipruto Rop. All rights reserved.</p>
-</footer>
+        ::selection {
+            background-color: var(--accent-green);
+            color: #000;
+        }
 
-<!-- Modals HTML components -->
-<div class="cv-modal-overlay" id="cvModalOverlay" role="dialog" aria-labelledby="cvModalTitle" aria-hidden="true">
-  <div class="cv-modal" style="text-align:center; max-width:400px;">
-    <h2 id="cvModalTitle" style="font-size:24px;margin-bottom:20px;">Choose CV Action</h2>
-    <div style="display:flex;flex-direction:column;gap:12px;">
-      <a href="assets/Victor_Kipruto_Resume.pdf" target="_blank" class="btn-primary" style="justify-content:center;">View Resume</a>
-      <button onclick="downloadCv()" class="btn-outline" style="justify-content:center;padding:14px;border-radius:99px;">Download Resume</button>
-      <button onclick="closeCvModal()" class="btn-ghost" style="justify-content:center;margin-top:8px;">Close</button>
-    </div>
-    <div id="cvSuccessMsg" style="display:none; margin-top:16px; padding:10px; border-radius:8px; background:#22c55e; color:white; font-size:13px; font-weight:600;">✅ Resume download started!</div>
-  </div>
-</div>
+        html {
+            scroll-behavior: smooth;
+        }
 
-<div class="cert-modal-overlay" id="certModalOverlay" role="dialog" aria-labelledby="certModalTitle" aria-hidden="true">
-  <div class="cert-modal">
-    <div style="padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-      <h2 id="certModalTitle" style="font-size:18px;margin:0;">Certificate Viewer</h2>
-      <button onclick="closeCertModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);">✕</button>
-    </div>
-    <iframe id="certModalIframe" src=""></iframe>
-  </div>
-</div>
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-<div class="project-modal-overlay" id="projectModalOverlay" role="dialog" aria-labelledby="projectModalTitle" aria-hidden="true">
-  <div class="project-modal">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-      <h2 id="projectModalTitle" style="font-size:22px;">Project Details</h2>
-      <button id="projectModalClose" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);">✕</button>
-    </div>
-    <img id="projectModalImage" class="project-thumb" style="border-radius:12px;margin-bottom:20px;" src="" alt="Project Preview">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);margin-bottom:12px;"><span id="projectModalTime"></span><span id="projectModalCategory"></span></div>
-    <div id="projectModalDescription" style="font-size:14px;color:var(--text-muted);margin-bottom:20px;line-height:1.7;"></div>
-    <div style="font-weight:700;font-size:14px;margin-bottom:8px;">Tools & Technologies</div>
-    <div id="projectModalStack" class="project-stack" style="margin-bottom:20px;"></div>
-    <div id="projectModalFeaturesSection">
-      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">Key Features</div>
-      <ul id="projectModalFeatures" style="padding-left:18px;font-size:14px;color:var(--text-muted);margin-bottom:24px;display:flex;flex-direction:column;gap:6px;"></ul>
-    </div>
-    <div style="display:flex;gap:12px;justify-content:flex-end;">
-      <a id="projectModalGithub" href="#" target="_blank" class="btn-primary">GitHub Repository</a>
-      <button onclick="closeProjectModal()" class="btn-ghost">Close</button>
-    </div>
-  </div>
-</div>
+        /* Custom Cursor */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease-out, opacity 0.2s ease;
+        }
+        .cursor-outline {
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(30, 215, 96, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease-out, width 0.2s, height 0.2s, border-color 0.2s;
+        }
 
-<div class="skill-modal-overlay" id="skillModalOverlay" role="dialog" aria-labelledby="skillModalTitle" aria-hidden="true">
-  <div class="skill-modal" style="max-width:500px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-      <h2 id="skillModalTitle" style="font-size:20px;color:var(--accent);">Skill Details</h2>
-      <button id="skillModalClose" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);">✕</button>
-    </div>
-    <div id="skillModalBody" style="font-size:14px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;line-height:1.7;"></div>
-  </div>
-</div>
+        /* ========================================
+           BACKGROUND EFFECTS & PARTICLES
+           ======================================== */
+        .bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
 
-<div class="subscription-modal-overlay" id="subscriptionModalOverlay" role="dialog" aria-labelledby="subscriptionModalTitle" aria-hidden="true">
-  <div class="subscription-modal" style="max-width:540px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-      <h2 id="subscriptionModalTitle" style="font-size:22px;">Subscribe for Updates</h2>
-      <button id="subscriptionModalClose" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);">✕</button>
-    </div>
-    <div style="display:flex;gap:8px;margin-bottom:20px;">
-      <button class="subscription-tab btn-ghost active" data-tab="feed" style="flex:1;padding:10px;justify-content:center;">Feed</button>
-      <button class="subscription-tab btn-ghost" data-tab="email" style="flex:1;padding:10px;justify-content:center;">Email</button>
-      <button class="subscription-tab btn-ghost" data-tab="messaging" style="flex:1;padding:10px;justify-content:center;">Messages</button>
-    </div>
+        .ambient-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(30,215,96,0.12) 0%, rgba(9,9,9,0) 70%);
+            top: -100px;
+            left: -100px;
+            z-index: 0;
+            animation: floatBlob 15s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
 
-    <div class="subscription-form active" id="feedTab">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
-        <button class="subscription-option btn-ghost" data-option="rss" style="padding:16px;flex-direction:column;gap:6px;height:auto;"><i class="fas fa-rss" style="color:var(--accent);font-size:20px;"></i> RSS Feed</button>
-        <button class="subscription-option btn-ghost" data-option="inoreader" style="padding:16px;flex-direction:column;gap:6px;height:auto;"><i class="fas fa-book-reader" style="color:#3498db;font-size:20px;"></i> Inoreader</button>
-        <button class="subscription-option btn-ghost" data-option="feedly" style="padding:16px;flex-direction:column;gap:6px;height:auto;"><i class="fas fa-layer-group" style="color:#2ecc71;font-size:20px;"></i> Feedly</button>
-        <button class="subscription-option btn-ghost" data-option="copy-url" style="padding:16px;flex-direction:column;gap:6px;height:auto;"><i class="fas fa-link" style="color:var(--accent);font-size:20px;"></i> Copy URL</button>
-      </div>
-      <div id="rssUrlSection" style="background:var(--surface);padding:12px;border-radius:8px;border:1px solid var(--border);">
-        <input type="text" id="rssUrlInput" readonly value="https://victor-kipruto-rop.github.io/victor-resum-web/rss.xml" style="width:100%;padding:8px;background:var(--card-bg);border:1px solid var(--border);color:var(--text-main);font-family:'JetBrains Mono',monospace;font-size:11px;border-radius:6px;margin-bottom:8px;">
-        <button class="btn-primary" id="copyRssBtn" style="width:100%;justify-content:center;padding:8px;">Copy RSS URL</button>
-      </div>
-    </div>
+        .ambient-glow-2 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, rgba(9,9,9,0) 70%);
+            bottom: 20%;
+            right: -150px;
+            z-index: 0;
+            animation: floatBlob 20s infinite alternate-reverse ease-in-out;
+            pointer-events: none;
+        }
 
-    <form class="subscription-form" id="emailTab" style="display:none;">
-      <div style="margin-bottom:12px;"><label style="font-size:12px;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:6px;">Name</label><input type="text" id="emailName" required placeholder="Your name" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text-main);"></div>
-      <div style="margin-bottom:16px;"><label style="font-size:12px;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:6px;">Email</label><input type="email" id="emailAddress" required placeholder="your@email.com" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text-main);"></div>
-      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">Subscribe</button>
-    </form>
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, 80px) scale(1.1); }
+            100% { transform: translate(-50px, 150px) scale(0.95); }
+        }
 
-    <div class="subscription-form" id="messagingTab" style="display:none;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <button class="subscription-option btn-ghost" data-option="telegram" style="padding:20px;flex-direction:column;gap:8px;height:auto;"><i class="fab fa-telegram" style="color:#0088cc;font-size:24px;"></i> Telegram</button>
-        <button class="subscription-option btn-ghost" data-option="twitter" style="padding:20px;flex-direction:column;gap:8px;height:auto;"><i class="fab fa-x-twitter" style="font-size:24px;"></i> Twitter/X</button>
-      </div>
-    </div>
+        /* ========================================
+           UTILITY CLASSES & GLASSMORPHISM
+           ======================================== */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
 
-    <div id="subscriptionNotification" style="margin-top:16px;padding:12px;background:#22c55e;color:white;border-radius:8px;text-align:center;display:none;font-size:13px;">✅ Successfully subscribed!</div>
-  </div>
-</div>
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-<!-- Integrated Scripts -->
-<script>
-  // Theme Toggle Logic
-  const themeToggle = document.getElementById('theme-toggle');
-  const body = document.body;
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'light') {
-    body.classList.remove('dark-mode');
-  } else {
-    body.classList.add('dark-mode');
-  }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-green), #14a044);
+            color: #000;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(30, 215, 96, 0.3);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(30, 215, 96, 0.5);
+        }
 
-  themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
-  });
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-weight: 500;
+            padding: 14px 28px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition-smooth);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
 
-  // Preloader
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('preloader').classList.add('hidden');
-      body.classList.add('loaded');
-    }, 600);
-  });
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleEffect 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes rippleEffect {
+            to { transform: scale(4); opacity: 0; }
+        }
 
-  // Custom Cursor
-  const cur = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  document.addEventListener('mousemove', e => {
-    cur.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
-    ring.style.transform = `translate(${e.clientX - 18}px, ${e.clientY - 18}px)`;
-  });
+        /* ========================================
+           HEADER & NAVIGATION
+           ======================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 5%;
+            transition: var(--transition-smooth);
+        }
+        header.scrolled {
+            padding: 12px 5%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
 
-  // Intersection Observer for scroll animations
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-  // Hamburger Menu
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
-    });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-  // CV Modal functionality
-  function openCvModal() { document.getElementById('cvModalOverlay').style.display = 'flex'; }
-  function closeCvModal() { 
-    document.getElementById('cvModalOverlay').style.display = 'none';
-    document.getElementById('cvSuccessMsg').style.display = 'none';
-  }
-  function downloadCv() {
-    const link = document.createElement('a');
-    link.href = 'assets/Victor_Kipruto_Resume.pdf';
-    link.download = 'Victor_Kipruto_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    document.getElementById('cvSuccessMsg').style.display = 'block';
-    setTimeout(closeCvModal, 2000);
-  }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 1.1rem;
+            position: relative;
+            box-shadow: 0 0 15px rgba(30,215,96,0.4);
+            animation: pulseGlow 3s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(30,215,96,0.3); }
+            100% { box-shadow: 0 0 25px rgba(0,212,255,0.6); }
+        }
 
-  // Certificate Modal functionality
-  function openCertModal(url) {
-    document.getElementById('certModalIframe').src = url;
-    document.getElementById('certModalOverlay').style.display = 'flex';
-  }
-  function closeCertModal() {
-    document.getElementById('certModalIframe').src = '';
-    document.getElementById('certModalOverlay').style.display = 'none';
-  }
+        .logo-text {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
 
-  // Project Extended details data and Modal logic
-  const projectExtendedData = {
-    'Data Engineering — Full Project': {
-      time: 'Feb 2026 - April 2026',
-      category: 'Data Architecture',
-      features: [
-        'Implemented a complete Star Schema architecture for retail analytics.',
-        'Automated cloud-based data ingestion from multiple source systems.',
-        'Optimized complex SQL queries, reducing report generation time by 60%.'
-      ]
-    },
-    'Cloud ETL Pipeline': {
-      time: 'Jan 2026 - Feb 2026',
-      category: 'Infrastructure & Automation',
-      features: [
-        'Multi-stage ETL orchestrations using Apache Airflow.',
-        'Robust data validation engine with custom rule definitions.',
-        'Full CI/CD integration with GitHub Actions and Docker.'
-      ]
-    },
-    'Mpesa / Safaricom Pipeline': {
-      time: 'Nov 2025 - Dec 2025',
-      category: 'FinTech Data Systems',
-      features: [
-        'High-throughput ingestion system for mobile transaction data.',
-        'Chunked reading strategies to handle large data files efficiently.',
-        'Optimized batch inserts into PostgreSQL using connection pooling.'
-      ]
-    },
-    'Real-Time Transaction Streaming (MPESA)': {
-      time: 'Dec 2025 - Jan 2026',
-      category: 'FinTech Streaming Architecture',
-      features: [
-        'High-throughput ingestion of mobile transaction data with sub-second latency.',
-        'Designed a distributed streaming architecture to process Safaricom Daraja API webhooks.',
-        'Implemented a Kafka-Flink pipeline with dbt modelling for analytics.'
-      ]
-    }
-  };
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
 
-  const projectModal = {
-    overlay: document.getElementById('projectModalOverlay'),
-    open(data) {
-      const ext = projectExtendedData[data.title] || {};
-      document.getElementById('projectModalTitle').textContent = data.title;
-      document.getElementById('projectModalImage').src = data.img || 'assets/images/1.jpeg';
-      document.getElementById('projectModalTime').textContent = ext.time || '2026';
-      document.getElementById('projectModalCategory').textContent = ext.category ? ' · ' + ext.category : '';
-      document.getElementById('projectModalDescription').textContent = data.desc;
-      document.getElementById('projectModalStack').innerHTML = (data.stack || []).map(t => `<span class="stack-badge">${t}</span>`).join('');
-      
-      const featSec = document.getElementById('projectModalFeaturesSection');
-      const featList = document.getElementById('projectModalFeatures');
-      if (ext.features && ext.features.length) {
-        featSec.style.display = 'block';
-        featList.innerHTML = ext.features.map(f => `<li>${f}</li>`).join('');
-      } else {
-        featSec.style.display = 'none';
-      }
-      document.getElementById('projectModalGithub').href = data.view || '#';
-      this.overlay.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    },
-    close() {
-      this.overlay.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  };
-  window.openProjectModal = (data) => projectModal.open(data);
-  window.closeProjectModal = () => projectModal.close();
-  document.getElementById('projectModalClose').addEventListener('click', closeProjectModal);
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-green);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
 
-  // Skill Modal logic
-  const skillData = {
-    'Apache Airflow': 'Expertise in orchestrating complex data pipelines, managing DAGs, and ensuring reliable ETL workflows through automated scheduling and monitoring.',
-    'ETL Design': 'Specialized in designing scalable Extract, Transform, Load processes that efficiently handle large volumes of data while maintaining high performance.',
-    'DAG Management': 'Proficient in creating, monitoring, and optimizing Directed Acyclic Graphs (DAGs) to ensure complex workflows execute sequentially with error handling.',
-    'Apache Kafka': 'Hands-on experience with real-time stream processing, setting up brokers, managing topics, and building high-throughput event logs.',
-    'Stream Processing': 'Developing real-time streaming engines that transform and analyze data on-the-fly for reactive operational systems.',
-    'Producers & Consumers': 'Implementing robust Kafka producers and consumers in Python to facilitate distributed event-driven messaging.',
-    'Star Schema': 'Designing optimized data warehouse structures using Star Schema principles to simplify analytical reporting queries.',
-    'Dimensional Modelling': 'Applying Kimball methodologies to create structured, flexible models connecting raw metrics to business reporting values.',
-    'OLAP Queries': 'Mastery of advanced analytical SQL queries designed to pull deep multi-dimensional insights out of large datasets.',
-    'Data Warehousing': 'End-to-end experience building centralized analytical data stores serving as a trusted source of truth.',
-    'Deduplication': 'Constructing programmatic filters and logic blocks to identify and purge redundancy out of batch or real-time pipelines.',
-    'Validation Rule Engines': 'Automating validation checks enforcing schema and data quality rules at ingestion barriers.',
-    'Anomaly Detection': 'Deploying programmatic checks to spot outliers or corrupted values within incoming pipelines.',
-    'Docker': 'Containerizing tools and code environments ensuring consistent portability across local machines and target cloud servers.',
-    'GitHub Actions': 'Building automated test suites and continuous deployment workflows directly connected to repository triggers.',
-    'Pytest': 'Writing thorough unit test frameworks verifying code execution correctness across individual modules.',
-    'CI/CD Pipelines': 'Automating compilation, testing, and deployment cycles to eliminate manual release friction.',
-    'Python': 'Core programming language used for scripting data pipelines, building connectors, and automating data workflows.',
-    'SQL': 'Advanced querying capabilities involving window functions, indexing strategies, CTEs, and performance optimization.',
-    'PostgreSQL': 'Relational database administration, schema creation, query optimization, and transaction handling.',
-    'Git': 'Version control experience managing collaborative branches and code history tracking.',
-    'Docker Compose': 'Multi-container orchestration setup replicating complex distributed services locally.'
-  };
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
-  const skillModal = {
-    overlay: document.getElementById('skillModalOverlay'),
-    open(name) {
-      document.getElementById('skillModalTitle').textContent = name;
-      document.getElementById('skillModalBody').textContent = skillData[name] || 'Technical description and engineering overview.';
-      this.overlay.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    },
-    close() {
-      this.overlay.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  };
-  window.openSkillModal = (name) => skillModal.open(name);
-  document.getElementById('skillModalClose').addEventListener('click', () => skillModal.close());
+        .icon-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+        .icon-btn:hover {
+            border-color: var(--accent-green);
+            background: rgba(30,215,96,0.1);
+            transform: scale(1.05);
+        }
 
-  // Subscription Modal logic
-  const subscriptionModal = {
-    overlay: document.getElementById('subscriptionModalOverlay'),
-    open() { this.overlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; },
-    close() { this.overlay.style.display = 'none'; document.body.style.overflow = ''; }
-  };
-  window.openSubscriptionModal = () => subscriptionModal.open();
-  document.getElementById('subscriptionModalClose').addEventListener('click', () => subscriptionModal.close());
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-main);
+            transition: 0.3s;
+        }
 
-  document.querySelectorAll('.subscription-tab').forEach(btn => {
-    btn.addEventListener('click', e => {
-      const tab = e.target.dataset.tab;
-      document.querySelectorAll('.subscription-tab').b(b => b.classList.remove('active')); // handled safely
-      document.querySelectorAll('.subscription-form').forEach(f => f.style.display = 'none');
-      document.getElementById(tab + 'Tab').style.display = 'block';
-    });
-  });
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 140px 5% 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            z-index: 1;
+        }
 
-  document.getElementById('copyRssBtn').addEventListener('click', () => {
-    const input = document.getElementById('rssUrlInput');
-    input.select();
-    navigator.clipboard.writeText(input.value);
-    const btn = document.getElementById('copyRssBtn');
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy RSS URL', 2000);
-  });
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
 
-  document.getElementById('emailTab').addEventListener('submit', e => {
-    e.preventDefault();
-    document.getElementById('subscriptionNotification').style.display = 'block';
-    setTimeout(() => {
-      document.getElementById('subscriptionNotification').style.display = 'none';
-      subscriptionModal.close();
-    }, 2000);
-  });
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 5vw, 4.8rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+        }
 
-  // Fetch GitHub Activity metrics dynamically
-  async function loadGitHubActivity() {
-    try {
-      const ures = await fetch('https://api.github.com/users/Victor-Kipruto-Rop');
-      if (ures.ok) {
-        const user = await ures.json();
-        document.getElementById('gh-count').textContent = `(${user.public_repos})`;
-        document.getElementById('gh-sub').textContent = `${user.public_repos} public repositories · ${user.followers} followers · Nairobi, Kenya`;
-      }
-    } catch(e) {
-      document.getElementById('gh-sub').textContent = 'Public contributions profile data loaded directly from GitHub.';
-    }
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
 
-    try {
-      const rres = await fetch('https://api.github.com/users/Victor-Kipruto-Rop/repos?per_page=100');
-      if (rres.ok) {
-        const repos = await rres.json();
-        repos.sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0));
-        const topRepos = repos.slice(0, 6);
-        const container = document.getElementById('top-repos-container');
-        container.innerHTML = '';
-        const langColors = { 'Python': '#3572A5', 'SQL': '#e38c00', 'JavaScript': '#f1e05a' };
-        
-        topRepos.forEach(repo => {
-          const item = document.createElement('div');
-          item.className = 'repo-item';
-          item.onclick = () => window.open(repo.html_url, '_blank');
-          const lang = repo.language || 'Markdown';
-          const color = langColors[lang] || '#8b8b8b';
-          item.innerHTML = `
-            <div class="repo-name">${repo.name} <i class="fab fa-github" style="opacity:0.5;"></i></div>
-            <p class="repo-desc">${repo.description || 'No description provided.'}</p>
-            <div class="repo-stats">
-              <span class="repo-lang"><span class="repo-lang-dot" style="background:${color};"></span>${lang}</span>
-              <span><i class="fas fa-star" style="color:#eab308;"></i> ${repo.stargazers_count || 0}</span>
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-item h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+        .stat-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0 !important;
+        }
+
+        /* Hero Illustration / 3D feel */
+        .hero-illustration {
+            position: relative;
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-player-card {
+            position: absolute;
+            width: 340px;
+            padding: 24px;
+            border-radius: 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), var(--shadow-glow);
+            animation: floatCard 6s ease-in-out infinite;
+            z-index: 3;
+        }
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .album-art {
+            width: 70px;
+            height: 70px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #FF3366, #FF9900);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song-meta h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .song-meta p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 2px 0 0 0 !important;
+        }
+
+        .waveform-bars {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 35px;
+            margin-bottom: 20px;
+            gap: 4px;
+        }
+
+        .wave-bar {
+            flex: 1;
+            background: var(--accent-green);
+            border-radius: 4px;
+            animation: waveBounce 1.2s infinite ease-in-out alternate;
+        }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; background: var(--accent-cyan); }
+        .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.2s; background: var(--accent-cyan); }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+        .wave-bar:nth-child(6) { animation-delay: 0.15s; }
+        .wave-bar:nth-child(7) { animation-delay: 0.35s; background: var(--accent-cyan); }
+        .wave-bar:nth-child(8) { animation-delay: 0.25s; }
+
+        @keyframes waveBounce {
+            0% { height: 15%; }
+            100% { height: 95%; }
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .control-btn {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .control-btn.play {
+            background: var(--accent-green);
+            color: #000;
+            width: 44px;
+            height: 44px;
+        }
+        .control-btn:hover { transform: scale(1.1); }
+
+        .vinyl-disc {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #111 30%, #222 31%, #050505 60%, #1a1a1a 100%);
+            border: 4px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            right: 10px;
+            top: 20px;
+            animation: spinVinyl 12s linear infinite;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .vinyl-inner {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            border: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #000;
+        }
+        @keyframes spinVinyl {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .floating-badge {
+            position: absolute;
+            padding: 10px 18px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 4;
+            animation: floatBadge 5s ease-in-out infinite alternate;
+        }
+        .badge-1 { top: 20px; left: 10px; animation-delay: 1s; color: var(--accent-green); }
+        .badge-2 { bottom: 40px; right: 40px; animation-delay: 2s; color: var(--accent-cyan); }
+        @keyframes floatBadge {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        /* ========================================
+           SEARCH AREA
+           ======================================== */
+        .search-section {
+            padding: 40px 5%;
+            max-width: 1000px;
+            margin: 0 auto -60px auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-container {
+            padding: 30px;
+            border-radius: 28px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5), var(--shadow-cyan-glow);
+        }
+
+        .search-bar-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 8px 8px 8px 20px;
+            transition: var(--transition-smooth);
+        }
+        .search-bar-wrapper:focus-within {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(30,215,96,0.2);
+        }
+
+        .search-bar-wrapper i {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            outline: none;
+            padding: 10px 0;
+        }
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-btn {
+            background: var(--accent-green);
+            color: #000;
+            border: none;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .search-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+        .voice-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .voice-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+
+        .search-suggestions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .suggestion-chip {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .suggestion-chip:hover {
+            background: rgba(30,215,96,0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        /* ========================================
+           SECTION COMMON STYLES
+           ======================================== */
+        section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px auto;
+        }
+        .section-header span {
+            color: var(--accent-green);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .section-header h2 {
+            font-size: clamp(2.2rem, 3.5vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           FEATURES SECTION
+           ======================================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            padding: 36px 30px;
+            border-radius: 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30,215,96,0.05), rgba(0,212,255,0.05));
+            opacity: 0;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-green);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), var(--shadow-glow);
+        }
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: rgba(30,215,96,0.1);
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            transition: 0.3s;
+        }
+        .feature-card:hover .feature-icon {
+            background: var(--accent-green);
+            color: #000;
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           SUPPORTED SOURCES
+           ======================================== */
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .source-card {
+            padding: 24px;
+            border-radius: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+        .source-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            background: rgba(255,255,255,0.04);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3), var(--shadow-cyan-glow);
+        }
+
+        .source-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+        .source-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .source-info p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* ========================================
+           LIVE DOWNLOAD DEMO
+           ======================================== */
+        .demo-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-input-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .demo-input {
+            flex: 1;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 20px;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s;
+        }
+        .demo-input:focus { border-color: var(--accent-green); }
+
+        .download-card-preview {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .preview-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .preview-song-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .preview-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        .preview-details h4 { font-size: 1.05rem; font-weight: 600; }
+        .preview-details p { font-size: 0.85rem; color: var(--text-secondary); margin-top: 2px; }
+
+        .preview-meta-tags {
+            display: flex;
+            gap: 10px;
+        }
+        .meta-tag {
+            background: rgba(255,255,255,0.06);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+
+        .progress-container {
+            margin-bottom: 20px;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            border-radius: 4px;
+            transition: width 0.1s linear;
+        }
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .preview-controls {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-sm {
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+        }
+        .btn-pause { background: rgba(255,255,255,0.1); color: var(--text-main); }
+        .btn-cancel { background: rgba(255,50,50,0.15); color: #ff5050; }
+        .btn-sm:hover { opacity: 0.85; transform: scale(1.02); }
+
+        /* ========================================
+           TOP CHARTS CAROUSEL
+           ======================================== */
+        .charts-container {
+            position: relative;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+        .charts-track {
+            display: flex;
+            gap: 24px;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .chart-card {
+            min-width: 260px;
+            flex: 0 0 260px;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 16px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+        .chart-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-green);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4), var(--shadow-glow);
+        }
+        .chart-img-wrap {
+            width: 100%;
+            height: 220px;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 14px;
+        }
+        .chart-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        .chart-card:hover .chart-img-wrap img {
+            transform: scale(1.05);
+        }
+        .chart-play-overlay {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 44px;
+            height: 44px;
+            background: var(--accent-green);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .chart-card:hover .chart-play-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .chart-info h4 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+        .chart-info p { font-size: 0.85rem; color: var(--text-secondary); }
+
+        .carousel-nav {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+        .carousel-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .carousel-btn:hover { background: var(--accent-green); color: #000; border-color: var(--accent-green); }
+
+        /* ========================================
+           WHY TUNEFLOW (TIMELINE)
+           ======================================== */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--border-color);
+        }
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            width: 100%;
+        }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        .timeline-content {
+            width: 45%;
+            padding: 30px;
+            border-radius: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+        .timeline-content:hover { border-color: var(--accent-cyan); transform: translateY(-4px); }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 4px solid var(--accent-green);
+            z-index: 2;
+        }
+        .timeline-content h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+        .timeline-content p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
+
+        /* ========================================
+           PREMIUM SECTION (PRICING)
+           ======================================== */
+        .premium-wrapper {
+            padding: 80px 40px;
+            border-radius: 36px;
+            background: linear-gradient(135deg, rgba(30,215,96,0.15), rgba(0,212,255,0.15)), var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(30,215,96,0.3);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6), var(--shadow-glow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .pricing-card {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 36px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+        .pricing-card.featured {
+            border-color: var(--accent-green);
+            box-shadow: 0 20px 40px rgba(30,215,96,0.2);
+            transform: scale(1.03);
+        }
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        .pricing-badge {
+            position: absolute;
+            top: -14px;
+            right: 24px;
+            background: var(--accent-green);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .pricing-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin: 20px 0; }
+        .pricing-card .price span { font-size: 1rem; font-weight: 400; color: var(--text-secondary); }
+        .pricing-features {
+            list-style: none;
+            margin: 20px 0 30px 0;
+            flex: 1;
+        }
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        .pricing-features li i { color: var(--accent-green); }
+
+        /* ========================================
+           TESTIMONIALS
+           ======================================== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .testimonial-card {
+            padding: 32px;
+            border-radius: 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+        }
+        .testimonial-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+        }
+        .stars { color: #FFD700; margin-bottom: 16px; font-size: 0.9rem; }
+        .testimonial-card p { font-size: 1rem; color: var(--text-main); line-height: 1.6; margin-bottom: 24px; font-style: italic; }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .author-info h4 { font-size: 1rem; font-weight: 600; }
+        .author-info p { font-size: 0.8rem; color: var(--text-secondary); margin: 0 !important; font-style: normal; }
+
+        /* ========================================
+           DOWNLOAD APP SECTION
+           ======================================== */
+        .download-app-banner {
+            padding: 60px;
+            border-radius: 36px;
+            background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(30,215,96,0.1)), var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            align-items: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+        .download-app-content h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -1px; }
+        .download-app-content p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px; }
+        .app-store-btns {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .store-btn {
+            background: #000;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: 0.2s;
+        }
+        .store-btn:hover { border-color: var(--accent-green); transform: translateY(-2px); }
+        .store-btn i { font-size: 1.8rem; }
+        .store-btn span { display: flex; flex-direction: column; font-size: 0.7rem; color: #aaa; }
+        .store-btn strong { font-size: 1rem; color: #fff; }
+
+        .app-mockup-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .mockup-phone {
+            width: 260px;
+            height: 520px;
+            background: #111;
+            border-radius: 40px;
+            border: 6px solid #333;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .mockup-screen-content {
+            background: #000;
+            height: 100%;
+            border-radius: 24px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* ========================================
+           FAQ SECTION
+           ======================================== */
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .faq-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .faq-item.active { border-color: var(--accent-green); }
+        .faq-question {
+            padding: 20px 24px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .faq-question i { transition: transform 0.3s; color: var(--accent-green); }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 24px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 24px 20px 24px;
+        }
+
+        /* ========================================
+           NEWSLETTER
+           ======================================== */
+        .newsletter-card {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(30,215,96,0.1), rgba(0,212,255,0.1)), var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 30px auto 0 auto;
+        }
+        .newsletter-input {
+            flex: 1;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px 20px;
+            color: var(--text-main);
+            outline: none;
+            font-size: 1rem;
+        }
+        .newsletter-input:focus { border-color: var(--accent-green); }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 80px 5% 40px 5%;
+            margin-top: 100px;
+            position: relative;
+            z-index: 1;
+        }
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr repeat(5, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .footer-col h4 { font-size: 1rem; font-weight: 600; margin-bottom: 20px; color: var(--text-main); }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-col ul a { text-decoration: none; color: var(--text-secondary); font-size: 0.9rem; transition: 0.2s; }
+        .footer-col ul a:hover { color: var(--accent-green); }
+
+        .footer-brand p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 20px 0; }
+        .social-icons { display: flex; gap: 12px; }
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .social-icon:hover { background: var(--accent-green); color: #000; border-color: var(--accent-green); transform: scale(1.1); }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ========================================
+           TOAST NOTIFICATION
+           ======================================== */
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .toast {
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent-green);
+            color: var(--text-main);
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), var(--shadow-glow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            animation: slideInToast 0.3s ease, fadeOutToast 0.3s ease 2.7s forwards;
+        }
+        .toast i { color: var(--accent-green); font-size: 1.2rem; }
+        @keyframes slideInToast {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeOutToast {
+            to { transform: translateY(20px); opacity: 0; }
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .hero-btns { justify-content: center; }
+            .stats-grid { justify-content: center; }
+            .download-app-banner { grid-template-columns: 1fr; text-align: center; }
+            .app-store-btns { justify-content: center; }
+            .footer-grid { grid-template-columns: repeat(3, 1fr); }
+            .timeline::before { left: 20px; }
+            .timeline-item { flex-direction: column !important; align-items: flex-start; padding-left: 50px; }
+            .timeline-content { width: 100%; }
+            .timeline-dot { left: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background: var(--bg-secondary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+                z-index: 1000;
+            }
+            .nav-links.active { right: 0; }
+            .hamburger { display: flex; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Background Ambient Glow & Waves -->
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+    <canvas class="bg-canvas" id="particleCanvas"></canvas>
+
+    <!-- ========================================
+       HEADER & NAVIGATION
+       ======================================== -->
+    <header id="header">
+        <div class="nav-container">
+            <a href="#" class="logo-box">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-wave-square"></i>
+                </div>
+                <span class="logo-text">TuneFlow</span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#features">Discover</a></li>
+                <li><a href="#charts">Trending</a></li>
+                <li><a href="#demo">Downloads</a></li>
+                <li><a href="#charts">Charts</a></li>
+                <li><a href="#why">Features</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#footer">Contact</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <button class="icon-btn" id="themeToggle" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="icon-btn" id="searchQuickBtn" aria-label="Quick Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;" onclick="scrollToSection('#downloadApp')">Download App</button>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
-          `;
-          container.appendChild(item);
-        });
-      }
-    } catch(e) {
-      document.getElementById('top-repos-container').innerHTML = '<p style="color:var(--text-muted)">Repositories available on GitHub profile.</p>';
-    }
-  }
+        </div>
+    </header>
 
-  document.addEventListener('DOMContentLoaded', loadGitHubActivity);
-</script>
-<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
-<!-- Analytics & Tracking integrations -->
-<script src="dashboard/tracker.js"></script>
-<script src="dashboard/visitor-intel.js"></script>
-<script src="dashboard/analytics-advanced.js"></script>
-<script src="integration/blog-tracker.js"></script>
+    <!-- ========================================
+       HERO SECTION
+       ======================================== -->
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1 id="typingHeadline">Unlimited Music.<br><span class="gradient-text">Zero Limits.</span></h1>
+                <p>Discover millions of songs, download high-quality audio, organize playlists, and enjoy lightning-fast downloads from one beautiful platform.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary ripple-btn" onclick="scrollToSection('#demo')">
+                        <i class="fa-solid fa-download"></i> Start Downloading
+                    </button>
+                    <button class="btn-secondary ripple-btn" onclick="scrollToSection('#charts')">
+                        <i class="fa-solid fa-compass"></i> Explore Music
+                    </button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="120">0</h3><span style="color:var(--accent-green); font-weight:700;">M+</span>
+                        <p>Downloads</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="5">0</h3><span style="color:var(--accent-cyan); font-weight:700;">M+</span>
+                        <p>Songs</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>99.99%</h3>
+                        <p>Success Rate</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="180">0</h3><span style="color:var(--accent-green); font-weight:700;">+</span>
+                        <p>Countries</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-illustration">
+                <!-- Floating Music Player Card -->
+                <div class="floating-player-card">
+                    <div class="player-header">
+                        <div class="album-art">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                        <div class="song-meta">
+                            <h4>Electric Horizon</h4>
+                            <p>Aether & Nova</p>
+                        </div>
+                    </div>
+                    <div class="waveform-bars">
+                        <div class="wave-bar" style="height: 40%;"></div>
+                        <div class="wave-bar" style="height: 70%;"></div>
+                        <div class="wave-bar" style="height: 30%;"></div>
+                        <div class="wave-bar" style="height: 90%;"></div>
+                        <div class="wave-bar" style="height: 50%;"></div>
+                        <div class="wave-bar" style="height: 80%;"></div>
+                        <div class="wave-bar" style="height: 60%;"></div>
+                        <div class="wave-bar" style="height: 40%;"></div>
+                    </div>
+                    <div class="player-controls">
+                        <button class="control-btn"><i class="fa-solid fa-backward-step"></i></button>
+                        <button class="control-btn play"><i class="fa-solid fa-pause"></i></button>
+                        <button class="control-btn"><i class="fa-solid fa-forward-step"></i></button>
+                        <button class="control-btn"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                </div>
+
+                <!-- Spinning Vinyl Disc -->
+                <div class="vinyl-disc">
+                    <div class="vinyl-inner"><i class="fa-solid fa-compact-disc"></i></div>
+                </div>
+
+                <!-- Floating Badges -->
+                <div class="floating-badge badge-1">
+                    <i class="fa-solid fa-bolt"></i> 320kbps Lossless
+                </div>
+                <div class="floating-badge badge-2">
+                    <i class="fa-solid fa-shield-halved"></i> 100% Safe & Clean
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       SEARCH AREA
+       ======================================== -->
+    <div class="search-section" id="searchArea">
+        <div class="search-container">
+            <div class="search-bar-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="search-input" id="mainSearchInput" placeholder="Search artist, album, playlist or paste music URL...">
+                <div class="search-actions">
+                    <button class="voice-btn" id="voiceSearchBtn" title="Voice Search"><i class="fa-solid fa-microphone"></i></button>
+                    <button class="search-btn" id="triggerSearchBtn">Search</button>
+                </div>
+            </div>
+            <div class="search-suggestions">
+                <span style="font-size:0.85rem; color:var(--text-muted);">Trending:</span>
+                <span class="suggestion-chip" onclick="fillSearch('Daft Punk - Random Access Memories')">Daft Punk</span>
+                <span class="suggestion-chip" onclick="fillSearch('The Weeknd - Blinding Lights')">The Weeknd</span>
+                <span class="suggestion-chip" onclick="fillSearch('Spotify Top 50 Playlist')">Spotify Top 50</span>
+                <span class="suggestion-chip" onclick="fillSearch('Lofi Hip Hop Radio Beats')">Lofi Beats</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+       FEATURES SECTION
+       ======================================== -->
+    <section id="features">
+        <div class="section-header">
+            <span>Engineered for Perfection</span>
+            <h2>Next-Gen Audio Features</h2>
+            <p>Everything you need to download, manage, and enjoy your favorite tracks with unmatched quality and speed.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Lightning Downloads</h3>
+                <p>Multi-threaded downloading engine capable of fetching tracks up to 10x faster than standard web downloaders.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-headphones-simple"></i></div>
+                <h3>High Quality MP3 & FLAC</h3>
+                <p>Export crystal-clear audio up to 320kbps MP3 or lossless FLAC formats complete with full metadata tags.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-image"></i></div>
+                <h3>Album Artwork Embed</h3>
+                <p>Automatic high-resolution cover art embedding, lyrics synchronization, and genre tagging for every file.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-folder-open"></i></div>
+                <h3>Playlist Downloads</h3>
+                <p>Paste any public playlist or album link and download all tracks simultaneously in a single structured ZIP archive.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <h3>Cloud Sync</h3>
+                <p>Seamlessly synchronize your downloaded library across your cloud storage providers like Google Drive and Dropbox.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Secure & Private</h3>
+                <p>Zero tracking, zero ads, and end-to-end encrypted downloads ensuring complete anonymity and safety.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       SUPPORTED SOURCES
+       ======================================== -->
+    <section style="padding-top: 0;">
+        <div class="section-header">
+            <span>Universal Compatibility</span>
+            <h2>Supported Platforms</h2>
+            <p>Pull high-definition audio from virtually any streaming source across the web instantly.</p>
+        </div>
+
+        <div class="sources-grid">
+            <div class="source-card">
+                <div class="source-icon" style="color: #1ED760;"><i class="fa-brands fa-spotify"></i></div>
+                <div class="source-info">
+                    <h4>Spotify</h4>
+                    <p>Tracks, Albums, Playlists</p>
+                </div>
+            </div>
+            <div class="source-card">
+                <div class="source-icon" style="color: #FF0000;"><i class="fa-brands fa-youtube"></i></div>
+                <div class="source-info">
+                    <h4>YouTube Music</h4>
+                    <p>Videos & Audio Streams</p>
+                </div>
+            </div>
+            <div class="source-card">
+                <div class="source-icon" style="color: #FF5500;"><i class="fa-brands fa-soundcloud"></i></div>
+                <div class="source-info">
+                    <h4>SoundCloud</h4>
+                    <p>Independent Artists & Sets</p>
+                </div>
+            </div>
+            <div class="source-card">
+                <div class="source-icon" style="color: #FF6600;"><i class="fa-solid fa-podcast"></i></div>
+                <div class="source-info">
+                    <h4>Audiomack</h4>
+                    <p>Mixtapes & Trending Hits</p>
+                </div>
+            </div>
+            <div class="source-card">
+                <div class="source-icon" style="color: #1EA362;"><i class="fa-solid fa-compact-disc"></i></div>
+                <div class="source-info">
+                    <h4>Bandcamp</h4>
+                    <p>High-Res Audio Releases</p>
+                </div>
+            </div>
+            <div class="source-card">
+                <div class="source-icon" style="color: #00D4FF;"><i class="fa-solid fa-radio"></i></div>
+                <div class="source-info">
+                    <h4>Jamendo</h4>
+                    <p>Free Music & Creative Commons</p>
+                </div>
+            </div>
+            <div class="source-card">
+                <div class="source-icon" style="color: #A0A0A0;"><i class="fa-solid fa-landmark"></i></div>
+                <div class="source-info">
+                    <h4>Internet Archive</h4>
+                    <p>Live Concert Audio & Vaults</p>
+                </div>
+            </div>
+            <div class="source-card">
+                <div class="source-icon" style="color: #9933FF;"><i class="fa-solid fa-rss"></i></div>
+                <div class="source-info">
+                    <h4>Podcast Feeds</h4>
+                    <p>RSS & Audio Broadcasts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       LIVE DOWNLOAD DEMO
+       ======================================== -->
+    <section id="demo">
+        <div class="section-header">
+            <span>Interactive Test Drive</span>
+            <h2>Experience Live Download Simulation</h2>
+            <p>Test out our high-speed download engine right now. Enter any query or click simulate.</p>
+        </div>
+
+        <div class="demo-wrapper">
+            <div class="demo-input-row">
+                <input type="text" class="demo-input" id="demoUrlInput" placeholder="Paste music link or song name (e.g. Starboy - The Weeknd)..." value="https://open.spotify.com/track/7MXVkk9YMctZqd1Srtv4MB">
+                <button class="btn-primary" id="startDemoBtn"><i class="fa-solid fa-download"></i> Download Now</button>
+            </div>
+
+            <div class="download-card-preview" id="downloadPreviewCard">
+                <div class="preview-top">
+                    <div class="preview-song-info">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150&auto=format&fit=crop&q=80" alt="Thumbnail" class="preview-thumb" id="previewThumb">
+                        <div class="preview-details">
+                            <h4 id="previewSongTitle">Starboy (feat. Daft Punk)</h4>
+                            <p id="previewArtist">The Weeknd • 3:50 mins</p>
+                        </div>
+                    </div>
+                    <div class="preview-meta-tags">
+                        <span class="meta-tag">MP3 320kbps</span>
+                        <span class="meta-tag">FLAC Ready</span>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressBarFill"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span id="progressPercent">0% downloaded (12.4 MB / 14.2 MB)</span>
+                        <span id="progressTimeRemaining">Est. 2 secs remaining</span>
+                    </div>
+                </div>
+
+                <div class="preview-controls">
+                    <button class="btn-sm btn-pause" id="pauseDemoBtn"><i class="fa-solid fa-pause"></i> Pause</button>
+                    <button class="btn-sm btn-cancel" id="cancelDemoBtn"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       TOP CHARTS
+       ======================================== -->
+    <section id="charts">
+        <div class="section-header">
+            <span>Global Trends</span>
+            <h2>Top Charts & Trending Hits</h2>
+            <p>Explore what millions of users are downloading and listening to right now.</p>
+        </div>
+
+        <div class="charts-container">
+            <div class="charts-track" id="chartsTrack">
+                <!-- Chart Cards will be generated or laid out -->
+                <div class="chart-card">
+                    <div class="chart-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&auto=format&fit=crop&q=80" alt="Album">
+                        <div class="chart-play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <div class="chart-info">
+                        <h4>Midnight City Grooves</h4>
+                        <p>Kavinsky • 3:45</p>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&auto=format&fit=crop&q=80" alt="Album">
+                        <div class="chart-play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <div class="chart-info">
+                        <h4>Neon Skyline</h4>
+                        <p>Synthwave Boy • 4:12</p>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&auto=format&fit=crop&q=80" alt="Album">
+                        <div class="chart-play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <div class="chart-info">
+                        <h4>Starlight Odyssey</h4>
+                        <p>Aether Waves • 3:20</p>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&auto=format&fit=crop&q=80" alt="Album">
+                        <div class="chart-play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <div class="chart-info">
+                        <h4>Deep Resonance</h4>
+                        <p>Sub Focus • 5:04</p>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400&auto=format&fit=crop&q=80" alt="Album">
+                        <div class="chart-play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <div class="chart-info">
+                        <h4>Cyberpunk Dreams</h4>
+                        <p>Vektor • 3:55</p>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=400&auto=format&fit=crop&q=80" alt="Album">
+                        <div class="chart-play-overlay"><i class="fa-solid fa-play"></i></div>
+                    </div>
+                    <div class="chart-info">
+                        <h4>Ethereal Echoes</h4>
+                        <p>Luna Park • 4:30</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-btn" id="prevChartBtn"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="carousel-btn" id="nextChartBtn"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       WHY TUNEFLOW (TIMELINE)
+       ======================================== -->
+    <section id="why">
+        <div class="section-header">
+            <span>The TuneFlow Advantage</span>
+            <h2>Why Choose Us Over Others</h2>
+            <p>Built by music lovers, for music lovers. Here is how we redefine audio downloading.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Lightning Speed Architecture</h3>
+                    <p>Optimized server clusters ensure your downloads finish in seconds, no matter the file size or bitrate.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>100% Reliable & Uptime</h3>
+                    <p>Redundant proxy networks guarantee your favorite songs are always reachable without dead links or interruptions.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Privacy-First Philosophy</h3>
+                    <p>We do not store your download history or personal information. Your sessions remain strictly confidential.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Stunning 2026 SaaS UI</h3>
+                    <p>Enjoy an immersive, glassmorphic dark interface designed for peak efficiency and visual pleasure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       PREMIUM SECTION
+       ======================================== -->
+    <section>
+        <div class="premium-wrapper">
+            <span style="color:var(--accent-green); font-weight:700; text-transform:uppercase; letter-spacing:2px; font-size:0.85rem;">Unlock The Ultimate Experience</span>
+            <h2 style="font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight:800; margin-top:10px;">Go Premium</h2>
+            <p style="color:var(--text-secondary); max-width:600px; margin: 15px auto 0 auto; font-size:1.1rem;">Get unlimited batch downloads, lossless FLAC conversion, cloud backups, and priority server access.</p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Monthly Pass</h3>
+                    <p class="price">$4.99 <span>/ month</span></p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Unlimited Downloads</li>
+                        <li><i class="fa-solid fa-check"></i> 320kbps MP3 Audio</li>
+                        <li><i class="fa-solid fa-check"></i> Playlist Batch Sync</li>
+                        <li><i class="fa-solid fa-check"></i> Zero Ads</li>
+                    </ul>
+                    <button class="btn-secondary" style="width:100%; justify-content:center;" onclick="showToast('Selected Monthly Pass!')">Choose Plan</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>Yearly Pro</h3>
+                    <p class="price">$39.99 <span>/ year</span></p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Everything in Monthly</li>
+                        <li><i class="fa-solid fa-check"></i> Lossless FLAC & WAV</li>
+                        <li><i class="fa-solid fa-check"></i> Cloud Storage Backup</li>
+                        <li><i class="fa-solid fa-check"></i> Priority Download Speed</li>
+                    </ul>
+                    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="showToast('Selected Yearly Pro Plan!')">Get Pro Access</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Lifetime Access</h3>
+                    <p class="price">$99.99 <span>/ one-time</span></p>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Lifetime VIP Status</li>
+                        <li><i class="fa-solid fa-check"></i> All Future Updates</li>
+                        <li><i class="fa-solid fa-check"></i> Dedicated Support</li>
+                        <li><i class="fa-solid fa-check"></i> Early Feature Access</li>
+                    </ul>
+                    <button class="btn-secondary" style="width:100%; justify-content:center;" onclick="showToast('Selected Lifetime Access!')">Go Lifetime</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       TESTIMONIALS
+       ======================================== -->
+    <section>
+        <div class="section-header">
+            <span>Loved by Millions</span>
+            <h2>What Our Users Say</h2>
+            <p>Read genuine reviews from music enthusiasts and creators worldwide.</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p>"TuneFlow is by far the fastest and cleanest music downloader I have ever used. The album art embedding saves me hours of manual tagging!"</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Sophia Martinez</h4>
+                        <p>United States</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p>"The glassmorphic design and dark mode are breathtaking. It feels like a futuristic Apple or Spotify app right in my browser."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Liam Chen</h4>
+                        <p>Germany</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p>"Downloading entire Spotify playlists into structured folders with 320kbps audio quality has never been this seamless. Absolute masterpiece."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Elena Rostova</h4>
+                        <p>United Kingdom</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       DOWNLOAD APP SECTION
+       ======================================== -->
+    <section id="downloadApp">
+        <div class="download-app-banner">
+            <div class="download-app-content">
+                <span>Cross-Platform Ecosystem</span>
+                <h2>Take TuneFlow Everywhere You Go</h2>
+                <p>Available on Windows, macOS, Linux, Android, and iOS. Enjoy offline syncing, lightning-fast desktop clients, and native system integration.</p>
+                <div class="app-store-btns">
+                    <a href="#" class="store-btn" onclick="showToast('Redirecting to Google Play...')">
+                        <i class="fa-brands fa-google-play"></i>
+                        <span>Get it on</span>
+                        <strong>Google Play</strong>
+                    </a>
+                    <a href="#" class="store-btn" onclick="showToast('Redirecting to App Store...')">
+                        <i class="fa-brands fa-app-store-ios"></i>
+                        <span>Download on the</span>
+                        <strong>App Store</strong>
+                    </a>
+                    <a href="#" class="store-btn" onclick="showToast('Downloading Desktop Client...')">
+                        <i class="fa-solid fa-desktop"></i>
+                        <span>Desktop App</span>
+                        <strong>macOS & Windows</strong>
+                    </a>
+                </div>
+            </div>
+            <div class="app-mockup-visual">
+                <div class="mockup-phone">
+                    <div class="mockup-screen-content">
+                        <div style="display:flex; justify-content:space-between; align-items:center; color:#fff; font-size:0.85rem;">
+                            <span>9:41</span>
+                            <span><i class="fa-solid fa-wifi"></i> <i class="fa-solid fa-battery-full"></i></span>
+                        </div>
+                        <div style="text-align:center; padding: 20px 0;">
+                            <div style="width:100px; height:100px; border-radius:20px; background:linear-gradient(135deg,var(--accent-green),var(--accent-cyan)); margin:0 auto 16px auto; display:flex; align-items:center; justify-content:center; color:#000; font-size:2.5rem;">
+                                <i class="fa-solid fa-wave-square"></i>
+                            </div>
+                            <h4 style="color:#fff; font-size:1.1rem;">TuneFlow Mobile</h4>
+                            <p style="color:#888; font-size:0.8rem;">Ready for Offline Mode</p>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.06); padding:12px; border-radius:14px; display:flex; align-items:center; gap:10px;">
+                            <i class="fa-solid fa-cloud-arrow-down" style="color:var(--accent-green);"></i>
+                            <div style="font-size:0.75rem; color:#fff;">
+                                <strong>All Playlists Synced</strong>
+                                <p style="color:#888;">1,420 tracks available offline</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       FAQ SECTION
+       ======================================== -->
+    <section id="faq">
+        <div class="section-header">
+            <span>Got Questions?</span>
+            <h2>Frequently Asked Questions</h2>
+            <p>Everything you need to know about downloading, legal compliance, and account tiers.</p>
+        </div>
+
+        <div class="faq-accordion">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is TuneFlow completely free to use?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes! TuneFlow offers a robust free tier with lightning-fast standard downloads, album art embedding, and access to all supported platforms. You can optionally upgrade to Pro for lossless FLAC and priority servers.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What audio formats and bitrates are supported?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We support MP3 at 128kbps, 192kbps, and 320kbps, as well as lossless FLAC, WAV, and AAC formats depending on the original source availability.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I download full playlists and albums at once?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Absolutely. Simply paste any public Spotify, YouTube Music, or SoundCloud playlist link into the search or download bar, and TuneFlow will package all tracks into a clean ZIP archive.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is my personal data and download history secure?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We adhere to a strict privacy-first policy. We do not track, log, or store any links you download or personal query data on our servers.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+       NEWSLETTER
+       ======================================== -->
+    <section>
+        <div class="newsletter-card">
+            <span style="color:var(--accent-green); font-weight:700; text-transform:uppercase; letter-spacing:2px; font-size:0.85rem;">Stay in the Loop</span>
+            <h2 style="font-size:2.2rem; font-weight:800; margin-top:10px;">Join the TuneFlow Community</h2>
+            <p style="color:var(--text-secondary); max-width:500px; margin: 10px auto 0 auto;">Get weekly updates on new features, supported streaming platforms, and curated music charts.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Enter your email address..." required>
+                <button type="submit" class="btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ========================================
+       FOOTER
+       ======================================== -->
+    <footer id="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo-box">
+                    <div class="logo-icon"><i class="fa-solid fa-wave-square"></i></div>
+                    <span class="logo-text">TuneFlow</span>
+                </div>
+                <p>The ultimate 2026 music platform merging the best of Spotify, Apple Music, and Notion into a lightning-fast download experience.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                    <a href="#" class="social-icon" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-icon" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Kit</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Features</h4>
+                <ul>
+                    <li><a href="#">Batch Downloader</a></li>
+                    <li><a href="#">Lossless FLAC</a></li>
+                    <li><a href="#">Cloud Sync</a></li>
+                    <li><a href="#">Metadata Tagger</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Developers</h4>
+                <ul>
+                    <li><a href="#">API Documentation</a></li>
+                    <li><a href="#">Source Code</a></li>
+                    <li><a href="#">Integrations</a></li>
+                    <li><a href="#">Status Page</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#faq">Help Center</a></li>
+                    <li><a href="#">Community Forum</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#footer">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Copyright Notice</a></li>
+                    <li><a href="#">License</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 TuneFlow. All Rights Reserved.</p>
+            <p>Crafted with precision for music lovers worldwide.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ========================================
+       JAVASCRIPT
+       ======================================== -->
+    <script>
+        // --- Custom Cursor ---
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorOutline = document.getElementById('cursorOutline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.transform = `translate(${posX}px, ${posY}px)`;
+            cursorOutline.style.transform = `translate(${posX - 14}px, ${posY - 14}px)`;
+        });
+
+        // Hover effect for interactive elements
+        document.querySelectorAll('a, button, .feature-card, .source-card, .chart-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.style.transform += ' scale(1.5)';
+                cursorOutline.style.borderColor = 'var(--accent-cyan)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.style.transform = cursorOutline.style.transform.replace(' scale(1.5)', '');
+                cursorOutline.style.borderColor = 'rgba(30, 215, 96, 0.5)';
+            });
+        });
+
+        // --- Sticky Navbar & Scroll Effects ---
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // --- Mobile Menu Toggle ---
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+
+        // --- Theme Switcher ---
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                showToast('Switched to Light Mode');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                showToast('Switched to Dark Mode');
+            }
+        });
+
+        // --- Canvas Particle Background ---
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+                if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(30, 215, 96, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < 50; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // --- Animated Counters ---
+        const counters = document.querySelectorAll('.counter');
+        let animated = false;
+
+        function runCounters() {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const speed = target / 50;
+                const updateCount = () => {
+                    count += speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        setTimeout(updateCount, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            const statsSection = document.querySelector('.stats-grid');
+            const rect = statsSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && !animated) {
+                runCounters();
+                animated = true;
+            }
+        });
+
+        // --- Live Download Demo Simulation ---
+        const startDemoBtn = document.getElementById('startDemoBtn');
+        const demoUrlInput = document.getElementById('demoUrlInput');
+        const downloadPreviewCard = document.getElementById('downloadPreviewCard');
+        const progressBarFill = document.getElementById('progressBarFill');
+        const progressPercent = document.getElementById('progressPercent');
+        const pauseDemoBtn = document.getElementById('pauseDemoBtn');
+        const cancelDemoBtn = document.getElementById('cancelDemoBtn');
+        const previewSongTitle = document.getElementById('previewSongTitle');
+        const previewArtist = document.getElementById('previewArtist');
+
+        let downloadInterval = null;
+        let isPaused = false;
+        let currentProgress = 0;
+
+        startDemoBtn.addEventListener('click', () => {
+            const val = demoUrlInput.value.trim();
+            if (!val) {
+                showToast('Please enter a valid song URL or name.');
+                return;
+            }
+            previewSongTitle.innerText = val.includes('http') ? 'Custom URL Track Stream' : val;
+            previewArtist.innerText = 'High-Quality Audio • 320kbps MP3';
+            downloadPreviewCard.style.display = 'block';
+            currentProgress = 0;
+            isPaused = false;
+            progressBarFill.style.width = '0%';
+            progressPercent.innerText = '0% downloaded (0 MB / 14.2 MB)';
+            
+            clearInterval(downloadInterval);
+            downloadInterval = setInterval(() => {
+                if (!isPaused) {
+                    currentProgress += 2;
+                    if (currentProgress > 100) currentProgress = 100;
+                    progressBarFill.style.width = currentProgress + '%';
+                    const downloadedMB = ((currentProgress / 100) * 14.2).toFixed(1);
+                    progressPercent.innerText = `${currentProgress}% downloaded (${downloadedMB} MB / 14.2 MB)`;
+                    if (currentProgress === 100) {
+                        clearInterval(downloadInterval);
+                        showToast('Download completed successfully!');
+                    }
+                }
+            }, 100);
+        });
+
+        pauseDemoBtn.addEventListener('click', () => {
+            isPaused = !isPaused;
+            pauseDemoBtn.innerHTML = isPaused ? '<i class="fa-solid fa-play"></i> Resume' : '<i class="fa-solid fa-pause"></i> Pause';
+            showToast(isPaused ? 'Download paused' : 'Download resumed');
+        });
+
+        cancelDemoBtn.addEventListener('click', () => {
+            clearInterval(downloadInterval);
+            downloadPreviewCard.style.display = 'none';
+            showToast('Download cancelled');
+        });
+
+        // --- Charts Carousel ---
+        const chartsTrack = document.getElementById('chartsTrack');
+        const prevChartBtn = document.getElementById('prevChartBtn');
+        const nextChartBtn = document.getElementById('nextChartBtn');
+        let scrollAmount = 0;
+
+        nextChartBtn.addEventListener('click', () => {
+            chartsTrack.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+        prevChartBtn.addEventListener('click', () => {
+            chartsTrack.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+
+        // --- FAQ Accordion ---
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // --- Search Helpers ---
+        function fillSearch(query) {
+            document.getElementById('mainSearchInput').value = query;
+            document.getElementById('searchArea').scrollIntoView({ behavior: 'smooth' });
+            showToast(`Loaded query: "${query}"`);
+        }
+
+        document.getElementById('triggerSearchBtn').addEventListener('click', () => {
+            const query = document.getElementById('mainSearchInput').value.trim();
+            if (query) {
+                showToast(`Searching for "${query}" across platforms...`);
+                setTimeout(() => {
+                    document.getElementById('demo').scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('demoUrlInput').value = query;
+                    startDemoBtn.click();
+                }, 1000);
+            } else {
+                showToast('Please enter a search term.');
+            }
+        });
+
+        document.getElementById('searchQuickBtn').addEventListener('click', () => {
+            document.getElementById('searchArea').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('mainSearchInput').focus();
+        });
+
+        document.getElementById('voiceSearchBtn').addEventListener('click', () => {
+            showToast('Listening for voice search... (Microphone active)');
+            setTimeout(() => {
+                document.getElementById('mainSearchInput').value = 'Top Hits 2026 Playlist';
+                showToast('Voice query recognized: "Top Hits 2026 Playlist"');
+            }, 2000);
+        });
+
+        // --- Newsletter Submission ---
+        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            if (email) {
+                showToast('Successfully subscribed to TuneFlow newsletter!');
+                document.getElementById('newsletterEmail').value = '';
+            }
+        });
+
+        // --- Toast Notification System ---
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // --- Smooth Scroll Helper ---
+        function scrollToSection(selector) {
+            document.querySelector(selector).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Ripple Button Effect ---
+        document.querySelectorAll('.ripple-btn, .btn-primary, .btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
 </body>
 </html>
 
