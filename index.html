@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-blog-post="portfolio-home">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,655 +22,1012 @@
 <meta property="twitter:description" content="Building production-grade data systems that scale. Explore my projects and technical expertise."/>
 <meta property="twitter:image" content="assets/1.jpeg"/>
 
+<!-- RSS Discovery Link -->
+<link rel="alternate" type="application/rss+xml" title="Victor Kipruto's Blog" href="https://victor-kipruto-rop.github.io/victor-resum-web/rss.xml">
+
 <link rel="icon" href="assets/1.jpeg" type="image/jpeg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
 <!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
-  /* ── Premium Color Palette & Variables ── */
   :root {
-    --bg-base: #f8f9fa;
-    --bg-surface: rgba(255, 255, 255, 0.7);
-    --ink: #0f1115;
-    --text-muted: #5a6069;
-    --accent: #e84a27;
-    --accent-glow: rgba(232, 74, 39, 0.3);
-    --blue: #2563eb;
-    --rule: rgba(0, 0, 0, 0.08);
-    --card-bg: rgba(255, 255, 255, 0.6);
-    --card-border: rgba(0, 0, 0, 0.05);
-    --glass-blur: blur(16px);
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-glass: rgba(255, 255, 255, 0.8);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --accent: #f97316;
+    --accent-glow: rgba(249, 115, 22, 0.15);
+    --border: #e2e8f0;
+    --card-bg: #ffffff;
+    --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+    --radius: 16px;
   }
   
   body.dark-mode {
-    --bg-base: #050507;
-    --bg-surface: rgba(15, 17, 21, 0.6);
-    --ink: #fdfdfd;
-    --text-muted: #9ca3af;
-    --accent: #ff5e3a;
-    --accent-glow: rgba(255, 94, 58, 0.4);
-    --blue: #3b82f6;
-    --rule: rgba(255, 255, 255, 0.08);
-    --card-bg: rgba(20, 22, 28, 0.4);
-    --card-border: rgba(255, 255, 255, 0.06);
+    --bg: #030712;
+    --surface: #0b0f19;
+    --surface-glass: rgba(11, 15, 25, 0.85);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #fb923c;
+    --accent-glow: rgba(251, 146, 60, 0.15);
+    --border: #1e293b;
+    --card-bg: #0f172a;
+    --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg-base);
-    color: var(--ink);
-    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
-    cursor: none;
     opacity: 0;
-    transition: opacity 0.8s ease-in, background 0.5s ease, color 0.5s ease;
-    position: relative;
+    transition: opacity 0.6s ease, background 0.3s ease, color 0.3s ease;
   }
-  
   body.loaded { opacity: 1; }
 
-  /* ── Animated Background Orbs ── */
-  .bg-orbs {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: -1; overflow: hidden; pointer-events: none;
-  }
-  .orb {
-    position: absolute; border-radius: 50%;
-    filter: blur(80px); opacity: 0.4;
-    animation: float 20s infinite alternate ease-in-out;
-  }
-  .orb-1 {
-    width: 40vw; height: 40vw; background: var(--accent-glow);
-    top: -10%; left: -10%;
-  }
-  .orb-2 {
-    width: 30vw; height: 30vw; background: rgba(37, 99, 235, 0.15);
-    bottom: -10%; right: -5%; animation-delay: -5s;
-  }
-  body.dark-mode .orb-2 { background: rgba(59, 130, 246, 0.2); }
-
-  @keyframes float {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(10vw, 10vh) scale(1.2); }
-  }
-
-  /* ── Noise Overlay ── */
-  body::before {
-    content: ''; position: fixed; inset: 0; z-index: 9990;
-    pointer-events: none; opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* ── Custom Cursor ── */
+  /* Custom cursor */
   #cursor {
     position: fixed; top: 0; left: 0; z-index: 9999;
     width: 8px; height: 8px; background: var(--accent);
     border-radius: 50%; pointer-events: none;
-    transition: transform 0.1s linear, opacity 0.2s;
-    box-shadow: 0 0 10px var(--accent);
+    transition: transform 0.1s ease;
   }
   #cursor-ring {
     position: fixed; top: 0; left: 0; z-index: 9998;
-    width: 40px; height: 40px;
-    border: 1px solid var(--accent);
+    width: 36px; height: 36px; border: 1.5px solid var(--accent);
     border-radius: 50%; pointer-events: none;
-    transition: transform 0.3s ease-out, width 0.3s, height 0.3s, background 0.3s;
+    transition: transform 0.2s cubic-bezier(.16,1,.3,1), width 0.2s, height 0.2s;
   }
-  body:has(a:hover) #cursor-ring,
-  body:has(button:hover) #cursor-ring,
-  body:has(.skill-pill:hover) #cursor-ring,
-  body:has(.project-card:hover) #cursor-ring {
-    width: 60px; height: 60px;
-    background: var(--accent-glow);
-    border-color: transparent;
-    backdrop-filter: blur(2px);
-  }
+  @media(max-width: 768px) { #cursor, #cursor-ring { display: none; } }
 
-  /* ── Pre-loader ── */
+  /* Preloader */
   #preloader {
     position: fixed; inset: 0; z-index: 10000;
-    background: #050507;
-    display: flex; align-items: center; justify-content: center;
-    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    background: var(--surface); display: flex; align-items: center; justify-content: center;
+    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
   }
   #preloader.hidden { transform: translateY(-100%); }
   .loader-text {
-    font-family: 'Syne', sans-serif; font-weight: 800;
-    font-size: clamp(24px, 5vw, 48px); color: #fff;
-    overflow: hidden; letter-spacing: -1px;
-  }
-  .loader-text span {
-    display: inline-block; transform: translateY(100%);
-    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    font-family: 'Instrument Serif', serif; font-size: 42px; color: var(--text-main);
+    letter-spacing: -1px;
   }
 
-  /* ── Navigation (Glassmorphism) ── */
+  /* Typography shortcuts */
+  code, .mono { font-family: 'JetBrains Mono', monospace; }
+  .serif { font-family: 'Instrument Serif', serif; }
+
+  /* Navigation */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 48px; gap: 20px;
-    background: var(--bg-surface);
-    backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-    border-bottom: 1px solid var(--rule);
-    transition: background 0.3s ease, border-color 0.3s ease;
+    padding: 18px 5vw; background: var(--surface-glass);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
   }
   .nav-logo {
     display: flex; align-items: center; gap: 12px;
-    font-family: 'Syne', sans-serif; font-weight: 700;
-    font-size: 16px; color: var(--ink); text-decoration: none;
-    transition: transform 0.3s ease;
+    text-decoration: none; color: var(--text-main);
   }
-  .nav-logo:hover { transform: scale(1.05); }
-  .nav-logo img {
-    height: 40px; width: 40px; border-radius: 50%; object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 2px solid var(--rule);
-  }
-  
-  .nav-right { display: flex; align-items: center; gap: 24px; }
+  .nav-logo img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+  .nav-username { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text-muted); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
   .nav-links { display: flex; gap: 28px; align-items: center; }
   .nav-links a {
-    font-family: 'DM Mono', monospace; font-size: 12px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--text-muted); text-decoration: none;
-    position: relative; transition: color 0.3s;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-muted); text-decoration: none;
+    transition: color 0.2s;
   }
-  .nav-links a::after {
-    content: ''; position: absolute; width: 0; height: 1px;
-    bottom: -4px; left: 0; background: var(--accent);
-    transition: width 0.3s ease;
-  }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-links a:hover::after { width: 100%; }
-  
+  .nav-links a:hover { color: var(--accent); }
+
   .theme-toggle {
-    background: var(--card-bg); border: 1px solid var(--rule);
-    color: var(--ink); width: 44px; height: 44px; border-radius: 50%;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    backdrop-filter: var(--glass-blur);
+    background: var(--card-bg); border: 1px solid var(--border); color: var(--text-main);
+    width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
   }
-  .theme-toggle:hover {
-    border-color: var(--accent); color: var(--accent);
-    transform: rotate(15deg) scale(1.1); box-shadow: 0 0 15px var(--accent-glow);
-  }
-  .theme-toggle .fa-sun { display: none; }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
   body.dark-mode .theme-toggle .fa-moon { display: none; }
-  body.dark-mode .theme-toggle .fa-sun { display: block; }
+  body:not(.dark-mode) .theme-toggle .fa-sun { display: none; }
 
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
+  .hamburger { display: none; background: none; border: none; font-size: 24px; color: var(--text-main); cursor: pointer; }
+  .hamburger-close { display: none; }
+  .hamburger.active .hamburger-icon { display: none; }
+  .hamburger.active .hamburger-close { display: inline; }
+
+  @media(max-width: 968px) {
+    .hamburger { display: block; }
+    .nav-links {
+      position: absolute; top: 100%; left: 0; right: 0; background: var(--surface);
+      flex-direction: column; padding: 24px; border-bottom: 1px solid var(--border);
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+    }
+    .nav-links.active { max-height: 500px; }
   }
 
-  .hamburger {
-    display: none; background: none; border: none; cursor: pointer;
-    font-size: 24px; color: var(--ink); z-index: 101;
+  /* Layout Sections */
+  section { padding: 100px 5vw; max-width: 1300px; margin: 0 auto; position: relative; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 8px; font-weight: 700; display: inline-block;
+  }
+  .section-title {
+    font-family: 'Instrument Serif', serif; font-size: clamp(38px, 5vw, 56px);
+    line-height: 1.1; letter-spacing: -1px; color: var(--text-main); margin-bottom: 40px;
   }
 
-  /* ── Hero Section ── */
+  /* Hero Section */
   #hero {
-    min-height: 100vh; display: flex; align-items: center;
-    padding: 120px 48px 60px; position: relative;
+    min-height: 90vh; display: grid; grid-template-columns: 1.2fr 0.8fr;
+    align-items: center; gap: 4vw; padding-top: 140px;
   }
-  .hero-container {
-    max-width: 1400px; margin: 0 auto; display: grid;
-    grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;
-  }
-  .hero-left { display: flex; flex-direction: column; gap: 20px; z-index: 2; }
-  
   .hero-eyebrow {
-    font-family: 'DM Mono', monospace; font-size: 12px;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); font-weight: 600;
-    display: inline-flex; align-items: center; gap: 8px;
-    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em;
+    color: var(--accent); background: var(--accent-glow); padding: 6px 12px;
+    border-radius: 99px; display: inline-block; margin-bottom: 20px; font-weight: 600;
   }
-  .hero-eyebrow::before {
-    content: ''; display: block; width: 8px; height: 8px;
-    background: var(--accent); border-radius: 50%;
-    box-shadow: 0 0 10px var(--accent); animation: pulse 2s infinite;
-  }
-
   .hero-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(48px, 7vw, 90px); line-height: 1; letter-spacing: -2px;
-    color: var(--ink); margin: 0;
+    font-family: 'Instrument Serif', serif; font-size: clamp(52px, 7vw, 84px);
+    line-height: 0.95; letter-spacing: -2px; margin-bottom: 16px;
   }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-title { font-size: 18px; font-weight: 600; color: var(--text-muted); margin-bottom: 24px; }
+  .hero-desc { font-size: 15px; color: var(--text-muted); max-width: 560px; margin-bottom: 36px; line-height: 1.8; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
   
-  .hero-title {
-    font-family: 'Syne', sans-serif; font-size: clamp(16px, 2vw, 24px);
-    font-weight: 700; color: var(--text-muted);
-    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+  .btn-primary, .btn-ghost, .btn-outline {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.1em; padding: 14px 28px; border-radius: 99px; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px; transition: all 0.25s ease; cursor: pointer;
   }
-  .hero-desc {
-    max-width: 540px; font-size: 16px; line-height: 1.8;
-    color: var(--text-muted); margin-bottom: 20px;
-    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
-  }
-  
-  .hero-cta {
-    display: flex; gap: 20px; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.8s 0.7s forwards;
-  }
-  
-  .btn-primary, .btn-ghost {
-    display: inline-flex; align-items: center; justify-content: center;
-    padding: 16px 36px; border-radius: 30px;
-    font-family: 'DM Mono', monospace; font-size: 12px;
-    letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;
-    text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative; overflow: hidden;
-  }
-  .btn-primary {
-    background: var(--ink); color: var(--bg-base); border: 2px solid var(--ink);
-  }
-  .btn-primary:hover {
-    background: var(--accent); border-color: var(--accent);
-    box-shadow: 0 10px 25px var(--accent-glow); transform: translateY(-3px);
-  }
-  .btn-ghost {
-    background: var(--card-bg); color: var(--ink); border: 2px solid var(--rule);
-    backdrop-filter: var(--glass-blur);
-  }
-  .btn-ghost:hover {
-    border-color: var(--ink); transform: translateY(-3px);
-  }
+  .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); box-shadow: 0 4px 14px var(--accent-glow); }
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.95; }
+  .btn-ghost { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--card-bg); }
+  .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+  .btn-outline:hover { background: var(--accent); color: #fff; }
 
-  /* ── Hero Image & Floating Elements ── */
-  .hero-right {
-    position: relative; display: flex; justify-content: center; align-items: center;
-  }
-  .hero-image-wrapper {
-    position: relative; width: 100%; max-width: 480px; aspect-ratio: 1;
-    border-radius: 50%; padding: 20px;
-    background: linear-gradient(145deg, var(--card-bg), transparent);
-    border: 1px solid var(--card-border);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    backdrop-filter: var(--glass-blur);
-    animation: floatImage 6s ease-in-out infinite;
-  }
+  .hero-right-inner { display: flex; flex-direction: column; align-items: center; gap: 32px; }
   .hero-prof {
-    width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-    filter: grayscale(10%) contrast(110%);
+    width: 320px; height: 320px; object-fit: cover; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    box-shadow: var(--shadow); border: 3px solid var(--border); transition: border-radius 0.5s ease;
   }
-  
-  @keyframes floatImage {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+  .hero-prof:hover { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+  .hero-social { display: flex; gap: 16px; }
+  .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
+  .social-icon {
+    width: 42px; height: 42px; border-radius: 12px; background: var(--card-bg);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .social-link:hover .social-icon { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+  .social-label { display: none; }
+
+  @media(max-width: 968px) {
+    #hero { grid-template-columns: 1fr; text-align: center; gap: 40px; padding-top: 100px; }
+    .hero-desc { margin: 0 auto 36px; }
+    .hero-cta { justify-content: center; }
+    .hero-right-inner { order: -1; }
+    .hero-prof { width: 240px; height: 240px; }
   }
 
-  .social-dock {
-    position: absolute; bottom: -20px; display: flex; gap: 16px;
-    background: var(--bg-surface); padding: 12px 24px;
-    border-radius: 30px; border: 1px solid var(--card-border);
-    backdrop-filter: var(--glass-blur);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  }
-  .social-icon-btn {
-    color: var(--ink); font-size: 20px; transition: all 0.3s ease;
-  }
-  .social-icon-btn:hover {
-    color: var(--accent); transform: scale(1.2) translateY(-3px);
-  }
-
-  @media (max-width: 1024px) {
-    .hero-container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-    .hero-left { align-items: center; }
-    .hero-desc { text-align: center; margin: 0 auto 20px; }
-    .hero-eyebrow { justify-content: center; }
-  }
-
-  /* ── Ticker ── */
-  .ticker-wrap {
-    background: var(--card-bg); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
-    padding: 16px 0; overflow: hidden; display: flex; backdrop-filter: var(--glass-blur);
-  }
-  .ticker {
-    display: flex; gap: 32px; white-space: nowrap;
-    animation: ticker 25s linear infinite;
-  }
+  /* Ticker */
+  .ticker-wrap { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 18px 0; overflow: hidden; }
+  .ticker { display: flex; gap: 24px; animation: ticker 25s linear infinite; white-space: nowrap; }
   .ticker span {
-    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px;
-    color: var(--ink); text-transform: uppercase; letter-spacing: 0.1em;
-    display: flex; align-items: center; gap: 16px; opacity: 0.8;
-  }
-  .ticker span::after {
-    content: '✦'; color: var(--accent); font-size: 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
+    color: var(--text-muted); background: var(--card-bg); border: 1px solid var(--border);
+    padding: 8px 18px; border-radius: 99px;
   }
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  /* ── Sections Common ── */
-  section { padding: 120px 48px; position: relative; z-index: 5; }
-  @media (max-width: 768px) { section { padding: 80px 24px; } }
-  
-  .section-header { text-align: center; margin-bottom: 60px; }
-  .section-label {
-    font-family: 'DM Mono', monospace; font-size: 12px;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 16px; display: inline-block;
+  /* Why Hire Me Grid */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .why-card {
+    background: var(--card-bg); border: 1px solid var(--border); padding: 36px;
+    border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.3s, border-color 0.3s;
+    opacity: 0; transform: translateY(20px);
   }
-  .section-title {
-    font-family: 'DM Serif Display', serif; font-size: clamp(36px, 5vw, 56px);
-    line-height: 1.1; color: var(--ink); margin: 0;
-  }
+  .why-card.visible { opacity: 1; transform: translateY(0); }
+  .why-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+  .why-num { font-family: 'Instrument Serif', serif; font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 16px; }
+  .why-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+  .why-card p { font-size: 14px; color: var(--text-muted); }
+  @media(max-width: 968px) { .why-grid { grid-template-columns: 1fr; } }
 
-  /* ── Skills (Glass Tags) ── */
-  .skills-wrap {
-    max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap;
-    gap: 16px; justify-content: center;
-  }
+  /* Skills Pills */
+  .skills-wrap { display: flex; flex-wrap: wrap; gap: 12px; max-width: 1000px; }
   .skill-pill {
-    padding: 14px 24px; border-radius: 30px;
-    background: var(--card-bg); color: var(--ink);
-    border: 1px solid var(--card-border);
-    font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500;
-    backdrop-filter: var(--glass-blur); cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    background: var(--card-bg); border: 1px solid var(--border); padding: 10px 18px;
+    border-radius: 99px; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow);
   }
-  .skill-pill:hover {
-    background: var(--ink); color: var(--bg-base); border-color: var(--ink);
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-  }
+  .skill-pill:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-2px); }
 
-  /* ── Projects (Premium Cards) ── */
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px; max-width: 1400px; margin: 0 auto;
+  /* Experience & Certs Grid */
+  .experience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+  .experience-card {
+    background: var(--card-bg); border: 1px solid var(--border); padding: 36px;
+    border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.3s;
   }
+  .experience-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .experience-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .experience-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .experience-company { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; }
+  .experience-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); }
+  .experience-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
+  .experience-skills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--surface); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; color: var(--text-muted); }
+
+  /* Projects Section */
+  .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; }
+  .project-count { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 14px; }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; }
   .project-card {
-    background: var(--card-bg); border-radius: 20px; overflow: hidden;
-    border: 1px solid var(--card-border); backdrop-filter: var(--glass-blur);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative; group;
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column;
+    cursor: pointer; transition: all 0.3s ease; opacity: 0; transform: translateY(20px);
   }
-  .project-card.reveal { opacity: 0; transform: translateY(30px); }
   .project-card.visible { opacity: 1; transform: translateY(0); }
-  
-  .project-card:hover {
-    transform: translateY(-10px); border-color: var(--accent);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-  }
-  
-  .project-thumb-wrap { overflow: hidden; position: relative; aspect-ratio: 16/10; }
-  .project-thumb {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .project-card:hover .project-thumb { transform: scale(1.08); }
-  
-  .project-content { padding: 30px; display: flex; flex-direction: column; height: 100%; }
-  .project-title {
-    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700;
-    color: var(--ink); margin-bottom: 12px;
-  }
-  .project-desc {
-    font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; flex-grow: 1;
-  }
-  .project-stack {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
-  }
-  .stack-badge {
-    font-family: 'DM Mono', monospace; font-size: 11px;
-    color: var(--accent); background: var(--accent-glow);
-    padding: 6px 12px; border-radius: 20px; font-weight: 600;
-  }
-  .project-actions { display: flex; gap: 12px; }
-  
-  .btn-sm {
-    padding: 10px 20px; font-size: 12px; border-radius: 20px;
-    font-family: 'DM Mono', monospace; text-transform: uppercase;
-    text-decoration: none; font-weight: 600; transition: all 0.3s;
-  }
-  .btn-primary-sm { background: var(--ink); color: var(--bg-base); }
-  .btn-primary-sm:hover { background: var(--accent); color: #fff; }
-  .btn-outline { background: transparent; border: 1px solid var(--rule); color: var(--ink); }
-  .btn-outline:hover { border-color: var(--ink); }
+  .project-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+  .project-thumb { height: 200px; width: 100%; object-fit: cover; }
+  .project-content { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+  .project-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .project-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; flex: 1; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .stack-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--accent-glow); color: var(--accent); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(249,115,22,0.2); }
+  .project-actions { display: flex; gap: 10px; margin-top: auto; }
+  .project-controls { display: none; } /* Kept logic hooked via JS functions */
 
-  /* ── Contact ── */
-  .contact-form {
-    max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;
-    background: var(--card-bg); padding: 40px; border-radius: 24px;
-    border: 1px solid var(--card-border); backdrop-filter: var(--glass-blur);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-  }
-  .contact-row { display: flex; gap: 20px; }
-  @media (max-width: 600px) { .contact-row { flex-direction: column; } }
+  /* About Layout */
+  .about-layout { display: grid; grid-template-columns: 1fr; max-width: 900px; gap: 32px; }
+  .about-body { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
+  .about-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 32px; }
+  .about-fact { background: var(--card-bg); border: 1px solid var(--border); padding: 16px 20px; border-radius: 12px; display: flex; flex-direction: column; gap: 4px; }
+  .fact-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--accent); letter-spacing: 0.1em; }
+  .fact-value { font-size: 14px; font-weight: 600; }
+
+  /* Blog Grid */
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+  .blog-card { background: var(--card-bg); border: 1px solid var(--border); padding: 32px; border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.3s; }
+  .blog-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .blog-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 12px; display: block; }
+  .blog-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; line-height: 1.4; }
+  .blog-excerpt { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+
+  /* GitHub Chart & Repos */
+  .gh-chart { background: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); overflow-x: auto; }
+  body.dark-mode #gh-chart { filter: invert(0.9) hue-rotate(180deg) brightness(1.2); }
+  .top-repos-section { margin-top: 48px; }
+  .top-repos-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .top-repos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .repo-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 12px; }
+  .repo-item:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .repo-name { font-size: 16px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+  .repo-desc { font-size: 13px; color: var(--text-muted); flex-grow: 1; }
+  .repo-stats { display: flex; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); }
+  .repo-lang { display: flex; align-items: center; gap: 6px; }
+  .repo-lang-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* Contact & Forms */
+  .contact-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
+  @media(max-width: 968px) { .contact-layout { grid-template-columns: 1fr; } }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .contact-row { display: flex; gap: 16px; }
+  .contact-row .field { flex: 1; }
   .contact-form input, .contact-form textarea {
-    width: 100%; padding: 16px 20px; border: 1px solid var(--rule);
-    border-radius: 12px; background: transparent; color: var(--ink);
-    font-family: 'DM Mono', monospace; font-size: 14px;
-    transition: all 0.3s ease;
+    width: 100%; padding: 14px 18px; border: 1px solid var(--border);
+    border-radius: 12px; background: var(--card-bg); color: var(--text-main);
+    font-family: inherit; font-size: 14px; transition: border-color 0.2s;
   }
-  .contact-form input:focus, .contact-form textarea:focus {
-    outline: none; border-color: var(--accent); background: rgba(255,255,255,0.05);
-    box-shadow: 0 0 0 4px var(--accent-glow);
-  }
-  .contact-form textarea { min-height: 150px; resize: vertical; }
+  .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
+  .contact-form textarea { min-height: 140px; resize: vertical; }
 
-  /* ── Footer ── */
-  footer {
-    padding: 40px 48px; border-top: 1px solid var(--rule);
-    display: flex; justify-content: space-between; align-items: center;
-    background: var(--bg-surface); backdrop-filter: var(--glass-blur);
-  }
-  footer p {
-    font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted);
-  }
+  /* Footer */
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding: 32px 5vw; text-align: center; }
+  footer p { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); }
 
-  /* ── Animations ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* Modals */
+  .cv-modal-overlay, .cert-modal-overlay, .project-modal-overlay, .skill-modal-overlay, .subscription-modal-overlay {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px);
+    z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.2); }
+  .cv-modal, .skill-modal, .subscription-modal, .project-modal, .cert-modal {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
+    width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 36px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
   }
+  .cert-modal { max-width: 900px; height: 85vh; display: flex; flex-direction: column; padding: 0; }
+  .cert-modal iframe { width: 100%; flex: 1; border: none; }
 </style>
-</head>
-<body>
 
-<div class="bg-orbs">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-</div>
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Victor Kipruto Rop",
+  "jobTitle": "Data Engineer",
+  "url": "https://github.com/Victor-Kipruto-Rop",
+  "sameAs": [
+    "https://www.linkedin.com/in/victor-kipruto-rop",
+    "https://github.com/Victor-Kipruto-Rop"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Nairobi",
+    "addressCountry": "Kenya"
+  }
+}
+</script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3BGPZ2LCR"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-D3BGPZ2LCR');
+</script>
+</head>
+<body class="dark-mode">
 
 <div id="preloader">
-  <div class="loader-text"><span id="loader-span">Victor Kipruto Rop.</span></div>
+  <div class="loader-text"><span>Victor Kipruto Rop</span></div>
 </div>
+
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;">Skip to main content</a>
 
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="https://github.com/Victor-Kipruto-Rop" target="_blank">
-    <img src="assets/1.jpeg" alt="Victor"/>
-    <span>@Victor-Kipruto-Rop</span>
+  <a class="nav-logo" href="https://github.com/Victor-Kipruto-Rop" target="_blank" rel="noopener">
+    <img src="assets/1.jpeg" alt="Victor Kipruto Rop"/>
+    <span class="nav-username">@Victor-Kipruto-Rop</span>
   </a>
   <div class="nav-right">
-    <div class="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger-icon">☰</span>
+      <span class="hamburger-close">✕</span>
+    </button>
+    <div class="nav-links" id="nav-links">
       <a href="#about">About</a>
-      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
-      <a href="#contact" style="color: var(--accent); font-weight: 600;">Hire Me</a>
+      <a href="#skills">Skills</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#blog">Blog</a>
+      <a href="#github-activity">Activity</a>
+      <a href="#send-message">Contact</a>
     </div>
-    <button class="theme-toggle" id="theme-toggle">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
       <i class="fas fa-moon"></i>
       <i class="fas fa-sun"></i>
     </button>
   </div>
 </nav>
 
-<main>
+<main id="main-content">
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-container">
-    <div class="hero-left">
-      <div class="hero-eyebrow">Available for Internships · 2026</div>
-      <h1 class="hero-name" id="hero-name">Data Architect<br>& Engineer.</h1>
-      <p class="hero-title">Victor Kipruto Rop</p>
-      <p class="hero-desc">
-        Building production-grade data systems that scale. From low-latency Kafka streams to robust Airflow orchestration and elegant warehouse modeling. Based in Nairobi, Kenya.
-      </p>
-      <div class="hero-cta">
-        <a class="btn-primary magnetic" href="#projects">Explore Work</a>
-        <a class="btn-ghost magnetic" href="assets/Victor_Kipruto_Resume.pdf" download>Download CV</a>
-      </div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">// AVAILABLE FOR INTERNSHIPS · 2026</div>
+    <h1 class="hero-name" id="hero-name">Victor Kipruto Rop</h1>
+    <p class="hero-title">Data Engineer · Pipeline Architect · Data Architect</p>
+    <p class="hero-desc">
+      Building production-grade data systems that scale — from Kafka streams to Airflow orchestration. Experienced in designing reliable ETL, low-latency streaming, and warehouse modelling. Based in Nairobi, Kenya.
+    </p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#projects">View Projects</a>
+      <a class="btn-ghost" href="#send-message">Hire Me</a>
+      <a class="btn-ghost" href="https://calendly.com/kiprutovictor39" target="_blank" rel="noopener" aria-label="Schedule a call">Schedule Call</a>
+      <a class="btn-ghost" href="#" onclick="openCvModal(); return false;" aria-label="View or Download Victor's Resume CV">View/Download CV</a>
     </div>
-    <div class="hero-right">
-      <div class="hero-image-wrapper magnetic">
-        <img class="hero-prof" src="assets/1.jpeg" alt="Victor Kipruto Rop" />
-      </div>
-      <div class="social-dock">
-        <a href="https://github.com/Victor-Kipruto-Rop" target="_blank" class="social-icon-btn"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/victor-rop-4920b4399" target="_blank" class="social-icon-btn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:kiprutovictor39@gmail.com" class="social-icon-btn"><i class="fas fa-envelope"></i></a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-inner">
+      <img class="hero-prof" src="assets/1.jpeg" alt="Victor Kipruto Rop" loading="lazy" decoding="async"/>
+      <div class="hero-social">
+        <a class="social-link" href="mailto:kiprutovictor39@gmail.com" aria-label="Email" title="Email">
+          <span class="social-icon"><i class="fas fa-envelope"></i></span>
+          <span class="social-label">Email</span>
+        </a>
+        <a class="social-link" href="tel:+254723484552" aria-label="Phone" title="Call">
+          <span class="social-icon"><i class="fas fa-phone"></i></span>
+          <span class="social-label">Phone</span>
+        </a>
+        <a class="social-link" href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <span class="social-icon"><i class="fab fa-linkedin-in"></i></span>
+          <span class="social-label">LinkedIn</span>
+        </a>
+        <a class="social-link" href="https://github.com/Victor-Kipruto-Rop" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <span class="social-icon"><i class="fab fa-github"></i></span>
+          <span class="social-label">GitHub</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TICKER -->
+<!-- Ticker -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <span>Data Engineering</span><span>ETL Design</span><span>Apache Airflow</span><span>Stream Processing</span><span>Kafka</span><span>PostgreSQL</span><span>Docker</span><span>Data Engineering</span><span>ETL Design</span><span>Apache Airflow</span><span>Stream Processing</span><span>Kafka</span><span>PostgreSQL</span><span>Docker</span>
+    <span>⚡ Apache Airflow</span>
+    <span>⚡ Real-Time Streaming</span>
+    <span>⚡ Kafka & Flink</span>
+    <span>⚡ Dimensional Modelling</span>
+    <span>⚡ Python & SQL</span>
+    <span>⚡ Docker & CI/CD</span>
+    <span>⚡ Cloud Architecture</span>
+    <span>⚡ Apache Airflow</span>
+    <span>⚡ Real-Time Streaming</span>
+    <span>⚡ Kafka & Flink</span>
   </div>
 </div>
 
+<!-- WHY HIRE ME -->
+<section id="why">
+  <span class="section-label">// 01</span>
+  <h2 class="section-title">Core Competencies</h2>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-num">01</div>
+      <h3>Scalable Architecture</h3>
+      <p>Designing robust ETL/ELT workflows built to handle high throughput data transactions reliably under heavy corporate demands.</p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.1s">
+      <div class="why-num">02</div>
+      <h3>Real-Time Processing</h3>
+      <p>Building event-driven pipelines using Kafka and Flink for continuous analytics, low-latency insights, and fraud tracking.</p>
+    </div>
+    <div class="why-card reveal" style="transition-delay:0.2s">
+      <div class="why-num">03</div>
+      <h3>Engineering Rigor</h3>
+      <p>Writing clean, containerized Python code backed by automated unit tests (Pytest) and Git continuous integration strategies.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <span class="section-label">// 02</span>
+  <h2 class="section-title">About Me</h2>
+  <div class="about-layout">
+    <div>
+      <p class="about-body">
+        I'm a final-year BSc Data Science student at The Cooperative University of Kenya, building a career at the intersection of scalable systems and trustworthy data. My work is driven by a belief that clean, well-engineered data infrastructure is what separates organisations that can act on their data from those that only think they can.
+      </p>
+      <p class="about-body">
+        Outside of building pipelines, I'm drawn to the growing data ecosystem across East Africa and the opportunity to work on infrastructure that has real operational impact — whether in aviation safety, energy, or financial services.
+      </p>
+      <div class="about-facts">
+        <div class="about-fact">
+          <span class="fact-label">University</span>
+          <span class="fact-value">The Cooperative University of Kenya</span>
+        </div>
+        <div class="about-fact">
+          <span class="fact-label">Degree</span>
+          <span class="fact-value">BSc Data Science · Expected 2027</span>
+        </div>
+        <div class="about-fact">
+          <span class="fact-label">Location</span>
+          <span class="fact-value">Nairobi, Kenya</span>
+        </div>
+        <div class="about-fact">
+          <span class="fact-label">Status</span>
+          <span class="fact-value">Open to Data Engineering internships</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <span class="section-label">// 03</span>
+  <h2 class="section-title">Learning & Project Experience</h2>
+  <div class="experience-grid">
+    <div class="experience-card reveal">
+      <div class="experience-header">
+        <div>
+          <h3 class="experience-title">Final-Year BSc Data Science Student</h3>
+          <p class="experience-company">The Cooperative University of Kenya</p>
+        </div>
+        <span class="experience-date">2022 - Present</span>
+      </div>
+      <p class="experience-desc">Over the past year, I've specialized in data engineering and have built production-grade data systems through hands-on projects. Designed and implemented scalable ETL pipelines, real-time stream processing with Kafka, and warehouse infrastructure.</p>
+      <div class="experience-skills">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Apache Airflow</span>
+        <span class="skill-tag">Kafka</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">ETL/ELT</span>
+      </div>
+    </div>
+    <div class="experience-card reveal" style="transition-delay:0.1s">
+      <div class="experience-header">
+        <div>
+          <h3 class="experience-title">Hands-On Project Development</h3>
+          <p class="experience-company">Building Real-World Infrastructure</p>
+        </div>
+        <span class="experience-date">Last 12 Months</span>
+      </div>
+      <p class="experience-desc">Completed 5 major projects involving data pipeline design, cloud ETL systems, real-time transaction streaming, and warehouse optimization. Each project has significantly strengthened my understanding of production systems.</p>
+      <div class="experience-skills">
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Cloud Architecture</span>
+        <span class="skill-tag">System Design</span>
+        <span class="skill-tag">CI/CD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-header">
-    <p class="section-label">// Expertise</p>
-    <h2 class="section-title">Technical Arsenal</h2>
-  </div>
+  <span class="section-label">// 04</span>
+  <h2 class="section-title">Technical Skills</h2>
   <div class="skills-wrap">
-    <div class="skill-pill">Apache Airflow</div>
-    <div class="skill-pill">ETL / ELT Architecture</div>
-    <div class="skill-pill">Apache Kafka</div>
-    <div class="skill-pill">Stream Processing</div>
-    <div class="skill-pill">Dimensional Modelling</div>
-    <div class="skill-pill">Data Warehousing</div>
-    <div class="skill-pill">Python & Pytest</div>
-    <div class="skill-pill">SQL & PostgreSQL</div>
-    <div class="skill-pill">Docker & CI/CD</div>
-    <div class="skill-pill">GitHub Actions</div>
-    <div class="skill-pill">Cloud Infrastructure</div>
+    <div class="skill-pill" onclick="openSkillModal('Apache Airflow')">Apache Airflow</div>
+    <div class="skill-pill" onclick="openSkillModal('ETL Design')">ETL Design</div>
+    <div class="skill-pill" onclick="openSkillModal('DAG Management')">DAG Management</div>
+    <div class="skill-pill" onclick="openSkillModal('Apache Kafka')">Apache Kafka</div>
+    <div class="skill-pill" onclick="openSkillModal('Stream Processing')">Stream Processing</div>
+    <div class="skill-pill" onclick="openSkillModal('Producers &amp; Consumers')">Producers &amp; Consumers</div>
+    <div class="skill-pill" onclick="openSkillModal('Star Schema')">Star Schema</div>
+    <div class="skill-pill" onclick="openSkillModal('Dimensional Modelling')">Dimensional Modelling</div>
+    <div class="skill-pill" onclick="openSkillModal('OLAP Queries')">OLAP Queries</div>
+    <div class="skill-pill" onclick="openSkillModal('Data Warehousing')">Data Warehousing</div>
+    <div class="skill-pill" onclick="openSkillModal('Deduplication')">Deduplication</div>
+    <div class="skill-pill" onclick="openSkillModal('Validation Rule Engines')">Validation Rule Engines</div>
+    <div class="skill-pill" onclick="openSkillModal('Anomaly Detection')">Anomaly Detection</div>
+    <div class="skill-pill" onclick="openSkillModal('Docker')">Docker</div>
+    <div class="skill-pill" onclick="openSkillModal('GitHub Actions')">GitHub Actions</div>
+    <div class="skill-pill" onclick="openSkillModal('Pytest')">Pytest</div>
+    <div class="skill-pill" onclick="openSkillModal('CI/CD Pipelines')">CI/CD Pipelines</div>
+    <div class="skill-pill" onclick="openSkillModal('Python')">Python</div>
+    <div class="skill-pill" onclick="openSkillModal('SQL')">SQL</div>
+    <div class="skill-pill" onclick="openSkillModal('PostgreSQL')">PostgreSQL</div>
+    <div class="skill-pill" onclick="openSkillModal('Git')">Git</div>
+    <div class="skill-pill" onclick="openSkillModal('Docker Compose')">Docker Compose</div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <span class="section-label">// 05</span>
+  <h2 class="section-title">Professional Certifications</h2>
+  <div class="experience-grid">
+    <div class="experience-card reveal">
+      <div class="experience-header">
+        <div>
+          <h3 class="experience-title">Big Data Foundations</h3>
+          <p class="experience-company">IBM / Cognitive Class</p>
+        </div>
+        <span class="experience-date">2026</span>
+      </div>
+      <p class="experience-desc">Comprehensive training in big data concepts, Hadoop ecosystem, and distributed computing fundamentals.</p>
+      <div class="experience-skills">
+        <span class="skill-tag">Big Data</span>
+        <span class="skill-tag">Hadoop</span>
+        <span class="skill-tag">IBM Cloud</span>
+      </div>
+      <div style="margin-top:20px;">
+        <button onclick="openCertModal('assets/certifications/IBM_BD0101EN_Certificate_Cognitive_Class.pdf')" class="btn-sm btn-primary" style="padding:10px 20px;">View Certificate</button>
+      </div>
+    </div>
+    <div class="experience-card reveal" style="transition-delay:0.1s">
+      <div class="experience-header">
+        <div>
+          <h3 class="experience-title">Enterprise Design Thinking</h3>
+          <p class="experience-company">IBM</p>
+        </div>
+        <span class="experience-date">2026</span>
+      </div>
+      <p class="experience-desc">Mastered user-centered design principles and collaboration techniques for solving complex business problems.</p>
+      <div class="experience-skills">
+        <span class="skill-tag">Design Thinking</span>
+        <span class="skill-tag">User Experience</span>
+      </div>
+      <div style="margin-top:20px;">
+        <button onclick="openCertModal('assets/certifications/IBM_Design_Thinking.pdf')" class="btn-sm btn-outline" style="padding:10px 20px;">View Certificate</button>
+      </div>
+    </div>
+    <div class="experience-card reveal" style="transition-delay:0.2s">
+      <div class="experience-header">
+        <div>
+          <h3 class="experience-title">Professional Development</h3>
+          <p class="experience-company">Verified Credential</p>
+        </div>
+        <span class="experience-date">2026</span>
+      </div>
+      <p class="experience-desc">Continued learning and specialization in scalable data systems and engineering best practices.</p>
+      <div class="experience-skills">
+        <span class="skill-tag">Data Engineering</span>
+        <span class="skill-tag">Systems Architecture</span>
+      </div>
+      <div style="margin-top:20px;">
+        <button onclick="openCertModal('assets/certifications/Professional_Development.pdf')" class="btn-sm btn-outline" style="padding:10px 20px;">View Certificate</button>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-header">
-    <p class="section-label">// Selected Work</p>
-    <h2 class="section-title">Featured Projects</h2>
+  <span class="section-label">// 06</span>
+  <div class="projects-header">
+    <h2 class="section-title" style="margin:0;">Featured Projects <span class="project-count">(5)</span></h2>
   </div>
-  <div class="projects-grid">
-    
-    <!-- Project 1 -->
-    <div class="project-card reveal">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" src="assets/images/4.jpeg" alt="Real-Time Streaming" />
-      </div>
+
+  <div class="projects-grid" id="projects-grid">
+    <div class="project-card reveal" onclick="openProjectModal({title: 'Data Engineering — Full Project', desc: 'Designed and automated a complete star schema architecture with cloud-based data ingestion and optimised analytical queries for BI reporting.', stack: ['Python', 'SQL', 'ETL', 'Cloud Storage'], img: 'assets/images/1.jpeg', view: 'https://github.com/Victor-Kipruto-Rop/Data-Enginerring-full-project'})">
+      <img class="project-thumb" src="assets/images/1.jpeg" alt="Data Engineering thumbnail" />
       <div class="project-content">
-        <h3 class="project-title">Real-Time Transaction Streaming</h3>
-        <p class="project-desc">High-performance architecture ingesting Safaricom Daraja API events via webhooks, processed through distributed Kafka-Flink pipelines for real-time FinTech analytics.</p>
+        <p class="project-title">Data Engineering — Full Project</p>
+        <p class="project-desc">Designed and automated a complete star schema architecture with cloud-based data ingestion and optimised analytical queries for BI reporting.</p>
         <div class="project-stack">
-          <span class="stack-badge">Kafka</span>
-          <span class="stack-badge">Flink</span>
-          <span class="stack-badge">dbt</span>
+          <span class="stack-badge">Python</span>
+          <span class="stack-badge">SQL</span>
+          <span class="stack-badge">ETL</span>
         </div>
         <div class="project-actions">
-          <a class="btn-sm btn-primary-sm" href="https://github.com/Victor-Kipruto-Rop/Real_Time_Transaction_Streaming-MPESA-" target="_blank">View Code</a>
+          <a class="btn-primary" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/Data-Enginerring-full-project" target="_blank" rel="noopener">View Project</a>
+          <a class="btn-ghost" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/Data-Enginerring-full-project" target="_blank" rel="noopener">Readme</a>
         </div>
       </div>
     </div>
 
-    <!-- Project 2 -->
-    <div class="project-card reveal">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" src="assets/images/2.jpeg" alt="Cloud ETL Pipeline" />
-      </div>
+    <div class="project-card reveal" style="transition-delay:0.08s" onclick="openProjectModal({title: 'Cloud ETL Pipeline', desc: 'Multi-stage ETL with synthetic data generation, deduplication and a rule-based validation engine. Containerised and CI/CD-ready.', stack: ['Airflow', 'Docker', 'Pytest', 'GitHub Actions'], img: 'assets/images/2.jpeg', view: 'https://github.com/Victor-Kipruto-Rop/cloud-etl-pipeline'})">
+      <img class="project-thumb" src="assets/images/2.jpeg" alt="Cloud ETL thumbnail" />
       <div class="project-content">
-        <h3 class="project-title">Cloud ETL Automation</h3>
-        <p class="project-desc">Multi-stage ETL pipeline featuring synthetic data generation, deduplication logic, and a rule-based validation engine. Fully containerized and CI/CD-ready.</p>
+        <p class="project-title">Cloud ETL Pipeline</p>
+        <p class="project-desc">Multi-stage ETL with synthetic data generation, deduplication and a rule-based validation engine. Containerised and CI/CD-ready.</p>
         <div class="project-stack">
           <span class="stack-badge">Airflow</span>
           <span class="stack-badge">Docker</span>
           <span class="stack-badge">Pytest</span>
         </div>
         <div class="project-actions">
-          <a class="btn-sm btn-primary-sm" href="https://github.com/Victor-Kipruto-Rop/cloud-etl-pipeline" target="_blank">View Code</a>
+          <a class="btn-primary" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/cloud-etl-pipeline" target="_blank" rel="noopener">View</a>
+          <a class="btn-ghost" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/cloud-etl-pipeline" target="_blank" rel="noopener">Readme</a>
         </div>
       </div>
     </div>
 
-    <!-- Project 3 -->
-    <div class="project-card reveal">
-      <div class="project-thumb-wrap">
-        <img class="project-thumb" src="assets/images/1.jpeg" alt="Data Engineering Full" />
-      </div>
+    <div class="project-card reveal" style="transition-delay:0.16s" onclick="openProjectModal({title: 'Mpesa / Safaricom Pipeline', desc: 'High-throughput ingestion system for MPESA transaction data with chunked reads, deduplication and optimised batch inserts.', stack: ['Python', 'PostgreSQL', 'Connection Pooling'], img: 'assets/images/3.jpeg', view: 'https://github.com/Victor-Kipruto-Rop/mpesa_safaricom-pipeline-'})">
+      <img class="project-thumb" src="assets/images/3.jpeg" alt="Mpesa pipeline thumbnail" />
       <div class="project-content">
-        <h3 class="project-title">Star Schema BI Architecture</h3>
-        <p class="project-desc">End-to-end design and automation of a star schema data warehouse with cloud ingestion and highly optimized analytical query views for business intelligence reporting.</p>
+        <p class="project-title">Mpesa / Safaricom Pipeline</p>
+        <p class="project-desc">High-throughput ingestion system for MPESA transaction data with chunked reads, deduplication and optimised batch inserts.</p>
         <div class="project-stack">
           <span class="stack-badge">Python</span>
-          <span class="stack-badge">SQL</span>
-          <span class="stack-badge">Cloud Storage</span>
+          <span class="stack-badge">PostgreSQL</span>
         </div>
         <div class="project-actions">
-          <a class="btn-sm btn-primary-sm" href="https://github.com/Victor-Kipruto-Rop/Data-Enginerring-full-project" target="_blank">View Code</a>
+          <a class="btn-primary" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/mpesa_safaricom-pipeline-" target="_blank" rel="noopener">View</a>
+          <a class="btn-ghost" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/mpesa_safaricom-pipeline-" target="_blank" rel="noopener">Readme</a>
         </div>
       </div>
     </div>
 
+    <div class="project-card reveal" style="transition-delay:0.24s" onclick="openProjectModal({title: 'Real-Time Transaction Streaming (MPESA)', desc: 'A high-performance streaming architecture designed to ingest Safaricom Daraja API events via webhooks, processing them through a distributed Kafka-Flink pipeline for real-time FinTech analytics and fraud monitoring.', stack: ['Kafka', 'Flink', 'dbt', 'Terraform'], img: 'assets/images/4.jpeg', view: 'https://github.com/Victor-Kipruto-Rop/Real_Time_Transaction_Streaming-MPESA-'})">
+      <img class="project-thumb" src="assets/images/4.jpeg" alt="Streaming thumbnail" />
+      <div class="project-content">
+        <p class="project-title">Real-Time Transaction Streaming (MPESA)</p>
+        <p class="project-desc">A high-performance streaming architecture designed to ingest Safaricom Daraja API events via webhooks, processing them through a distributed Kafka-Flink pipeline for real-time FinTech analytics and fraud monitoring.</p>
+        <div class="project-stack">
+          <span class="stack-badge">Kafka</span>
+          <span class="stack-badge">Flink</span>
+          <span class="stack-badge">dbt</span>
+        </div>
+        <div class="project-actions">
+          <a class="btn-primary" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/Real_Time_Transaction_Streaming-MPESA-" target="_blank" rel="noopener">View</a>
+          <a class="btn-ghost" style="padding:8px 16px;font-size:11px;" href="https://github.com/Victor-Kipruto-Rop/Real_Time_Transaction_Streaming-MPESA-" target="_blank" rel="noopener">Readme</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 40px;">
+    <a href="https://github.com/Victor-Kipruto-Rop?tab=repositories" target="_blank" rel="noopener" class="btn-ghost">View More Repositories →</a>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-header">
-    <p class="section-label">// Let's Connect</p>
-    <h2 class="section-title">Start a Conversation</h2>
-  </div>
-  <form class="contact-form" action="https://formspree.io/f/xkoagvvk" method="POST">
-    <div class="contact-row">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
+<!-- BLOG -->
+<section id="blog">
+  <span class="section-label">// 07</span>
+  <h2 class="section-title">Technical Blog</h2>
+  <div class="blog-grid">
+    <div class="blog-card reveal">
+      <span class="blog-date">June 5, 2026 · 5 min read</span>
+      <h3 class="blog-title">Welcome to My Technical Blog</h3>
+      <p class="blog-excerpt">An introduction to my technical blog where I share insights on data engineering, ETL pipelines, and real-time systems.</p>
+      <a href="post.html?id=first-post" class="btn-ghost" style="padding:8px 16px;font-size:11px;">Read Article</a>
     </div>
-    <input type="text" name="subject" placeholder="Subject" required />
-    <textarea name="message" placeholder="Tell me about your project..." required></textarea>
-    <button type="submit" class="btn-primary magnetic" style="align-self: flex-start; padding: 18px 40px; font-size: 14px;">Send Message</button>
-  </form>
+    <div class="blog-card reveal" style="transition-delay:0.1s">
+      <span class="blog-date">June 4, 2026 · 12 min read</span>
+      <h3 class="blog-title">Data Engineering Fundamentals: Building Scalable Systems</h3>
+      <p class="blog-excerpt">A comprehensive guide to data engineering fundamentals, covering architecture principles, ETL design patterns, and production-grade best practices.</p>
+      <a href="post.html?id=data-engineering" class="btn-ghost" style="padding:8px 16px;font-size:11px;">Read Article</a>
+    </div>
+    <div class="blog-card reveal" style="transition-delay:0.2s">
+      <span class="blog-date">May 28, 2026 · 14 min read</span>
+      <h3 class="blog-title">Advanced Airflow Patterns & Optimization</h3>
+      <p class="blog-excerpt">Deep dive into dynamic DAG generation, custom operators, monitoring strategies, and scaling Airflow to production workloads.</p>
+      <a href="post.html?id=airflow-advanced" class="btn-ghost" style="padding:8px 16px;font-size:11px;">Read Article</a>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+    <a href="blog.html" class="btn-primary">Browse All Articles (6+)</a>
+    <button onclick="openSubscriptionModal()" class="btn-ghost">📧 Subscribe for Updates</button>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <span class="section-label">// 08</span>
+  <h2 class="section-title">Testimonials & Feedback</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+    <div style="background:var(--card-bg);padding:28px;border-radius:var(--radius);border:1px solid var(--border);border-left:4px solid var(--accent)">
+      <p style="font-style:italic;color:var(--text-muted);margin-bottom:16px;line-height:1.6">&quot;Victor's ability to design scalable data pipelines is exceptional. His Airflow implementations are production-ready and well-documented. A great addition to any data team.&quot;</p>
+      <p style="font-weight:700;color:var(--text-main);margin-bottom:2px">Data Engineering Mentor</p>
+      <p style="color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;">Project Lead • The Cooperative University</p>
+    </div>
+    <div style="background:var(--card-bg);padding:28px;border-radius:var(--radius);border:1px solid var(--border);border-left:4px solid var(--accent)">
+      <p style="font-style:italic;color:var(--text-muted);margin-bottom:16px;line-height:1.6">&quot;Demonstrates exceptional understanding of cloud infrastructure, CI/CD pipelines, and distributed systems. Eager to learn and collaborate effectively with the team.&quot;</p>
+      <p style="font-weight:700;color:var(--text-main);margin-bottom:2px">DevOps & Infrastructure Review</p>
+      <p style="color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;">Technical Assessment • GitHub Projects</p>
+    </div>
+    <div style="background:var(--card-bg);padding:28px;border-radius:var(--radius);border:1px solid var(--border);border-left:4px solid var(--accent)">
+      <p style="font-style:italic;color:var(--text-muted);margin-bottom:16px;line-height:1.6">&quot;Proficient in ETL architectures, real-time streaming with Kafka, and warehouse modelling. Shows strong fundamentals and brings fresh perspectives to complex problems.&quot;</p>
+      <p style="font-weight:700;color:var(--text-main);margin-bottom:2px">Data Architecture Review</p>
+      <p style="color:var(--text-muted);font-size:12px;font-family:'JetBrains Mono',monospace;">Technical Feedback • Project Collaboration</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <span class="section-label">// 09</span>
+  <h2 class="section-title">How I Work</h2>
+  <div class="experience-grid">
+    <div class="experience-card reveal" onclick="openSkillModal('Pipeline Design')" style="cursor:pointer;">
+      <div style="font-size:28px;color:var(--accent);margin-bottom:16px;"><i class="fas fa-project-diagram"></i></div>
+      <h3 class="experience-title">Pipeline Design</h3>
+      <p class="experience-desc">I design resilient ETL/ELT frameworks, treating pipelines as software ensuring modularity, observability, and scalability.</p>
+    </div>
+    <div class="experience-card reveal" style="transition-delay:0.1s;cursor:pointer;" onclick="openSkillModal('Orchestration')">
+      <div style="font-size:28px;color:var(--accent);margin-bottom:16px;"><i class="fas fa-clock"></i></div>
+      <h3 class="experience-title">Orchestration</h3>
+      <p class="experience-desc">Leveraging Apache Airflow to turn complex task workflows into deterministic, automated pipelines with built-in alerts.</p>
+    </div>
+    <div class="experience-card reveal" style="transition-delay:0.2s;cursor:pointer;" onclick="openSkillModal('Data Modelling')">
+      <div style="font-size:28px;color:var(--accent);margin-bottom:16px;"><i class="fas fa-database"></i></div>
+      <h3 class="experience-title">Data Modelling</h3>
+      <p class="experience-desc">Bridging raw data to business analytics via dimensional Star/Snowflake schemas optimized for high-performance querying.</p>
+    </div>
+    <div class="experience-card reveal" style="transition-delay:0.3s;cursor:pointer;" onclick="openSkillModal('Data CI/CD')">
+      <div style="font-size:28px;color:var(--accent);margin-bottom:16px;"><i class="fas fa-infinity"></i></div>
+      <h3 class="experience-title">Data CI/CD</h3>
+      <p class="experience-desc">Applying engineering rigor through unit testing (Pytest) and automated continuous deployment workflows.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px;">
+    <a href="how-i-work.html" class="btn-ghost">View Comprehensive Engineering Approach →</a>
+  </div>
+</section>
+
+<!-- CONTRIBUTIONS -->
+<section id="contributions">
+  <span class="section-label">// 10</span>
+  <h2 class="section-title">Talks & Contributions</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;">
+    <div class="experience-card reveal">
+      <div style="font-size:24px;color:var(--accent);margin-bottom:12px;"><i class="fas fa-code-branch"></i></div>
+      <h3 class="experience-title">Open Source Contribution</h3>
+      <p class="experience-desc">Improved error-handling documentation and resolved critical race conditions in a widely used Python data processing library.</p>
+      <a href="contributions.html" style="color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;">View All Contributions →</a>
+    </div>
+    <div class="experience-card reveal" style="transition-delay:0.1s">
+      <div style="font-size:24px;color:var(--accent);margin-bottom:12px;"><i class="fas fa-microphone"></i></div>
+      <h3 class="experience-title">Tech Talk</h3>
+      <p class="experience-desc">Delivered a technical session on "Designing Fault-Tolerant Data Pipelines with Airflow" to 100+ students at a university meetup.</p>
+      <a href="talks.html" style="color:var(--accent);text-decoration:none;font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;">View All Talks →</a>
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB ACTIVITY -->
+<section id="github-activity">
+  <span class="section-label">// 11</span>
+  <div class="github-wrap">
+    <div class="projects-header">
+      <h2 class="section-title" style="margin:0;">GitHub Activity <span class="project-count" id="gh-count"></span></h2>
+      <a class="gh-username" href="https://github.com/Victor-Kipruto-Rop" target="_blank" rel="noopener" style="text-decoration:none;color:var(--text-muted);font-weight:600;display:inline-flex;gap:8px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;">
+        <i class="fab fa-github"></i>
+        <span>@Victor-Kipruto-Rop</span>
+      </a>
+    </div>
+    <p id="gh-sub" style="color:var(--text-muted);margin-bottom:20px;font-size:14px;">Loading recent activity…</p>
+    <div class="gh-chart">
+      <img id="gh-chart" src="https://ghchart.rshah.org/40c463/Victor-Kipruto-Rop" alt="Victor Kipruto Rop's GitHub contributions" style="width:100%;max-width:980px;display:block;" />
+    </div>
+    
+    <div class="top-repos-section">
+      <h3 class="top-repos-title">Top Repositories</h3>
+      <div id="top-repos-container" class="top-repos-grid">
+        <p style="color:var(--text-muted);font-family:'JetBrains Mono',monospace;">Loading repositories…</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEND MESSAGE -->
+<section id="send-message">
+  <span class="section-label">// 12</span>
+  <h2 class="section-title">Get in Touch</h2>
+  <div class="contact-layout">
+    <div>
+      <h3 style="font-size:20px;margin-bottom:12px;">Schedule a Call</h3>
+      <p style="color:var(--text-muted);margin-bottom:24px;font-size:15px;">Want to discuss data engineering pipelines, project collaboration, or architecture? Book a meeting time directly.</p>
+      <a href="https://calendly.com/kiprutovictor39" target="_blank" rel="noopener" class="btn-primary" style="margin-bottom:32px;">Schedule on Calendly →</a>
+      
+      <div style="background:var(--card-bg);border:1px solid var(--border);padding:24px;border-radius:var(--radius);">
+        <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#22c55e;margin-bottom:8px;">
+          <span style="width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
+          Available for Internships
+        </div>
+        <p style="font-size:13px;color:var(--text-muted);">Based in Nairobi, Kenya. Open to remote or local hybrid placement.</p>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:20px;margin-bottom:12px;">Send a Message</h3>
+      <p style="color:var(--text-muted);margin-bottom:24px;font-size:15px;">Prefer email? Drop a note below and I will get back within 24 hours.</p>
+      
+      <div data-fs-success class="fs-success" style="display:none;padding:12px;background:var(--accent);color:#fff;border-radius:8px;margin-bottom:16px;text-align:center;">✓ Thanks — your message was sent.</div>
+      <div data-fs-error class="fs-error" style="display:none;padding:12px;background:#fee2e2;color:#991b1b;border-radius:8px;margin-bottom:16px;text-align:center;">⚠ Oops — there was an error. Please try again.</div>
+      
+      <form id="contact-form" class="contact-form" action="https://formspree.io/f/xkoagvvk" method="POST">
+        <div class="contact-row">
+          <input class="field" type="text" name="name" placeholder="Your name" required data-fs-field />
+          <input class="field" type="email" name="email" placeholder="Your email" required data-fs-field />
+        </div>
+        <input type="text" name="subject" placeholder="Subject" required data-fs-field />
+        <textarea name="message" placeholder="Message" required data-fs-field></textarea>
+        <div style="display:flex;gap:12px;margin-top:4px;">
+          <button type="submit" class="btn-primary" data-fs-submit-btn>Send Message</button>
+          <button type="reset" class="btn-ghost">Reset Form</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </section>
 
 </main>
 
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Victor Kipruto Rop. Designed with precision.</p>
-  <p>Nairobi, Kenya</p>
+  <p>&copy; 2026 Victor Kipruto Rop. All rights reserved.</p>
 </footer>
 
+<!-- Modals HTML components -->
+<div class="cv-modal-overlay" id="cvModalOverlay" role="dialog" aria-labelledby="cvModalTitle" aria-hidden="true">
+  <div class="cv-modal" style="text-align:center; max-width:400px;">
+    <h2 id="cvModalTitle" style="font-size:24px;margin-bottom:20px;">Choose CV Action</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <a href="assets/Victor_Kipruto_Resume.pdf" target="_blank" class="btn-primary" style="justify-content:center;">View Resume</a>
+      <button onclick="downloadCv()" class="btn-outline" style="justify-content:center;padding:14px;border-radius:99px;">Download Resume</button>
+      <button onclick="closeCvModal()" class="btn-ghost" style="justify-content:center;margin-top:8px;">Close</button>
+    </div>
+    <div id="cvSuccessMsg" style="display:none; margin-top:16px; padding:10px; border-radius:8px; background:#22c55e; color:white; font-size:13px; font-weight:600;">✅ Resume download started!</div>
+  </div>
+</div>
+
+<div class="cert-modal-overlay" id="certModalOverlay" role="dialog" aria-labelledby="certModalTitle" aria-hidden="true">
+  <div class="cert-modal">
+    <div style="padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+      <h2 id="certModalTitle" style="font-size:18px;margin:0;">Certificate Viewer</h2>
+      <button onclick="closeCertModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);">✕</button>
+    </div>
+    <iframe id="certModalIframe" src=""></iframe>
+  </div>
+</div>
+
+<div class="project-modal-overlay" id="projectModalOverlay" role="dialog" aria-labelledby="projectModalTitle" aria-hidden="true">
+  <div class="project-modal">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <h2 id="projectModalTitle" style="font-size:22px;">Project Details</h2>
+      <button id="projectModalClose" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);">✕</button>
+    </div>
+    <img id="projectModalImage" class="project-thumb" style="border-radius:12px;margin-bottom:20px;" src="" alt="Project Preview">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);margin-bottom:12px;"><span id="projectModalTime"></span><span id="projectModalCategory"></span></div>
+    <div id="projectModalDescription" style="font-size:14px;color:var(--text-muted);margin-bottom:20px;line-height:1.7;"></div>
+    <div style="font-weight:700;font-size:14px;margin-bottom:8px;">Tools & Technologies</div>
+    <div id="projectModalStack" class="project-stack" style="margin-bottom:20px;"></div>
+    <div id="projectModalFeaturesSection">
+      <div style="font-weight:700;font-size:14px;margin-bottom:8px;">Key Features</div>
+      <ul id="projectModalFeatures" style="padding-left:18px;font-size:14px;color:var(--text-muted);margin-bottom:24px;display:flex;flex-direction:column;gap:6px;"></ul>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:flex-end;">
+      <a id="projectModalGithub" href="#" target="_blank" class="btn-primary">GitHub Repository</a>
+      <button onclick="closeProjectModal()" class="btn-ghost">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="skill-modal-overlay" id="skillModalOverlay" role="dialog" aria-labelledby="skillModalTitle" aria-hidden="true">
+  <div class="skill-modal" style="max-width:500px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <h2 id="skillModalTitle" style="font-size:20px;color:var(--accent);">Skill Details</h2>
+      <button id="skillModalClose" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);">✕</button>
+    </div>
+    <div id="skillModalBody" style="font-size:14px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;line-height:1.7;"></div>
+  </div>
+</div>
+
+<div class="subscription-modal-overlay" id="subscriptionModalOverlay" role="dialog" aria-labelledby="subscriptionModalTitle" aria-hidden="true">
+  <div class="subscription-modal" style="max-width:540px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <h2 id="subscriptionModalTitle" style="font-size:22px;">Subscribe for Updates</h2>
+      <button id="subscriptionModalClose" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);">✕</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:20px;">
+      <button class="subscription-tab btn-ghost active" data-tab="feed" style="flex:1;padding:10px;justify-content:center;">Feed</button>
+      <button class="subscription-tab btn-ghost" data-tab="email" style="flex:1;padding:10px;justify-content:center;">Email</button>
+      <button class="subscription-tab btn-ghost" data-tab="messaging" style="flex:1;padding:10px;justify-content:center;">Messages</button>
+    </div>
+
+    <div class="subscription-form active" id="feedTab">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <button class="subscription-option btn-ghost" data-option="rss" style="padding:16px;flex-direction:column;gap:6px;height:auto;"><i class="fas fa-rss" style="color:var(--accent);font-size:20px;"></i> RSS Feed</button>
+        <button class="subscription-option btn-ghost" data-option="inoreader" style="padding:16px;flex-direction:column;gap:6px;height:auto;"><i class="fas fa-book-reader" style="color:#3498db;font-size:20px;"></i> Inoreader</button>
+        <button class="subscription-option btn-ghost" data-option="feedly" style="padding:16px;flex-direction:column;gap:6px;height:auto;"><i class="fas fa-layer-group" style="color:#2ecc71;font-size:20px;"></i> Feedly</button>
+        <button class="subscription-option btn-ghost" data-option="copy-url" style="padding:16px;flex-direction:column;gap:6px;height:auto;"><i class="fas fa-link" style="color:var(--accent);font-size:20px;"></i> Copy URL</button>
+      </div>
+      <div id="rssUrlSection" style="background:var(--surface);padding:12px;border-radius:8px;border:1px solid var(--border);">
+        <input type="text" id="rssUrlInput" readonly value="https://victor-kipruto-rop.github.io/victor-resum-web/rss.xml" style="width:100%;padding:8px;background:var(--card-bg);border:1px solid var(--border);color:var(--text-main);font-family:'JetBrains Mono',monospace;font-size:11px;border-radius:6px;margin-bottom:8px;">
+        <button class="btn-primary" id="copyRssBtn" style="width:100%;justify-content:center;padding:8px;">Copy RSS URL</button>
+      </div>
+    </div>
+
+    <form class="subscription-form" id="emailTab" style="display:none;">
+      <div style="margin-bottom:12px;"><label style="font-size:12px;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:6px;">Name</label><input type="text" id="emailName" required placeholder="Your name" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text-main);"></div>
+      <div style="margin-bottom:16px;"><label style="font-size:12px;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:6px;">Email</label><input type="email" id="emailAddress" required placeholder="your@email.com" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text-main);"></div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">Subscribe</button>
+    </form>
+
+    <div class="subscription-form" id="messagingTab" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <button class="subscription-option btn-ghost" data-option="telegram" style="padding:20px;flex-direction:column;gap:8px;height:auto;"><i class="fab fa-telegram" style="color:#0088cc;font-size:24px;"></i> Telegram</button>
+        <button class="subscription-option btn-ghost" data-option="twitter" style="padding:20px;flex-direction:column;gap:8px;height:auto;"><i class="fab fa-x-twitter" style="font-size:24px;"></i> Twitter/X</button>
+      </div>
+    </div>
+
+    <div id="subscriptionNotification" style="margin-top:16px;padding:12px;background:#22c55e;color:white;border-radius:8px;text-align:center;display:none;font-size:13px;">✅ Successfully subscribed!</div>
+  </div>
+</div>
+
+<!-- Integrated Scripts -->
 <script>
-  // Theme Toggle
+  // Theme Toggle Logic
   const themeToggle = document.getElementById('theme-toggle');
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
-  
-  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  if (savedTheme === 'light') {
+    body.classList.remove('dark-mode');
+  } else {
     body.classList.add('dark-mode');
   }
 
@@ -679,64 +1036,276 @@
     localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
   });
 
-  // Preloader & Text Animation
+  // Preloader
   window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    const heroName = document.getElementById('hero-name');
-    
     setTimeout(() => {
-      preloader.classList.add('hidden');
+      document.getElementById('preloader').classList.add('hidden');
       body.classList.add('loaded');
-      
-      if (heroName) {
-        const text = heroName.innerHTML;
-        // Text animation handled via CSS fadeUp on parent container in this premium version for smoother render
-      }
-    }, 1200);
+    }, 600);
   });
 
   // Custom Cursor
   const cur = document.getElementById('cursor');
   const ring = document.getElementById('cursor-ring');
-  
   document.addEventListener('mousemove', e => {
-    // Fast follow for inner dot
     cur.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
-    // Smooth follow for outer ring
-    ring.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+    ring.style.transform = `translate(${e.clientX - 18}px, ${e.clientY - 18}px)`;
   });
 
-  // Magnetic Buttons
-  document.querySelectorAll('.magnetic').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const rect = btn.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) * 0.4;
-      const y = (e.clientY - rect.top - rect.height / 2) * 0.4;
-      btn.style.transform = `translate(${x}px, ${y}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = 'translate(0px, 0px)';
-    });
-  });
+  // Intersection Observer for scroll animations
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Scroll Reveal Observer
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+  // Hamburger Menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // CV Modal functionality
+  function openCvModal() { document.getElementById('cvModalOverlay').style.display = 'flex'; }
+  function closeCvModal() { 
+    document.getElementById('cvModalOverlay').style.display = 'none';
+    document.getElementById('cvSuccessMsg').style.display = 'none';
+  }
+  function downloadCv() {
+    const link = document.createElement('a');
+    link.href = 'assets/Victor_Kipruto_Resume.pdf';
+    link.download = 'Victor_Kipruto_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    document.getElementById('cvSuccessMsg').style.display = 'block';
+    setTimeout(closeCvModal, 2000);
+  }
+
+  // Certificate Modal functionality
+  function openCertModal(url) {
+    document.getElementById('certModalIframe').src = url;
+    document.getElementById('certModalOverlay').style.display = 'flex';
+  }
+  function closeCertModal() {
+    document.getElementById('certModalIframe').src = '';
+    document.getElementById('certModalOverlay').style.display = 'none';
+  }
+
+  // Project Extended details data and Modal logic
+  const projectExtendedData = {
+    'Data Engineering — Full Project': {
+      time: 'Feb 2026 - April 2026',
+      category: 'Data Architecture',
+      features: [
+        'Implemented a complete Star Schema architecture for retail analytics.',
+        'Automated cloud-based data ingestion from multiple source systems.',
+        'Optimized complex SQL queries, reducing report generation time by 60%.'
+      ]
+    },
+    'Cloud ETL Pipeline': {
+      time: 'Jan 2026 - Feb 2026',
+      category: 'Infrastructure & Automation',
+      features: [
+        'Multi-stage ETL orchestrations using Apache Airflow.',
+        'Robust data validation engine with custom rule definitions.',
+        'Full CI/CD integration with GitHub Actions and Docker.'
+      ]
+    },
+    'Mpesa / Safaricom Pipeline': {
+      time: 'Nov 2025 - Dec 2025',
+      category: 'FinTech Data Systems',
+      features: [
+        'High-throughput ingestion system for mobile transaction data.',
+        'Chunked reading strategies to handle large data files efficiently.',
+        'Optimized batch inserts into PostgreSQL using connection pooling.'
+      ]
+    },
+    'Real-Time Transaction Streaming (MPESA)': {
+      time: 'Dec 2025 - Jan 2026',
+      category: 'FinTech Streaming Architecture',
+      features: [
+        'High-throughput ingestion of mobile transaction data with sub-second latency.',
+        'Designed a distributed streaming architecture to process Safaricom Daraja API webhooks.',
+        'Implemented a Kafka-Flink pipeline with dbt modelling for analytics.'
+      ]
+    }
+  };
+
+  const projectModal = {
+    overlay: document.getElementById('projectModalOverlay'),
+    open(data) {
+      const ext = projectExtendedData[data.title] || {};
+      document.getElementById('projectModalTitle').textContent = data.title;
+      document.getElementById('projectModalImage').src = data.img || 'assets/images/1.jpeg';
+      document.getElementById('projectModalTime').textContent = ext.time || '2026';
+      document.getElementById('projectModalCategory').textContent = ext.category ? ' · ' + ext.category : '';
+      document.getElementById('projectModalDescription').textContent = data.desc;
+      document.getElementById('projectModalStack').innerHTML = (data.stack || []).map(t => `<span class="stack-badge">${t}</span>`).join('');
+      
+      const featSec = document.getElementById('projectModalFeaturesSection');
+      const featList = document.getElementById('projectModalFeatures');
+      if (ext.features && ext.features.length) {
+        featSec.style.display = 'block';
+        featList.innerHTML = ext.features.map(f => `<li>${f}</li>`).join('');
+      } else {
+        featSec.style.display = 'none';
       }
+      document.getElementById('projectModalGithub').href = data.view || '#';
+      this.overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    },
+    close() {
+      this.overlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  };
+  window.openProjectModal = (data) => projectModal.open(data);
+  window.closeProjectModal = () => projectModal.close();
+  document.getElementById('projectModalClose').addEventListener('click', closeProjectModal);
+
+  // Skill Modal logic
+  const skillData = {
+    'Apache Airflow': 'Expertise in orchestrating complex data pipelines, managing DAGs, and ensuring reliable ETL workflows through automated scheduling and monitoring.',
+    'ETL Design': 'Specialized in designing scalable Extract, Transform, Load processes that efficiently handle large volumes of data while maintaining high performance.',
+    'DAG Management': 'Proficient in creating, monitoring, and optimizing Directed Acyclic Graphs (DAGs) to ensure complex workflows execute sequentially with error handling.',
+    'Apache Kafka': 'Hands-on experience with real-time stream processing, setting up brokers, managing topics, and building high-throughput event logs.',
+    'Stream Processing': 'Developing real-time streaming engines that transform and analyze data on-the-fly for reactive operational systems.',
+    'Producers & Consumers': 'Implementing robust Kafka producers and consumers in Python to facilitate distributed event-driven messaging.',
+    'Star Schema': 'Designing optimized data warehouse structures using Star Schema principles to simplify analytical reporting queries.',
+    'Dimensional Modelling': 'Applying Kimball methodologies to create structured, flexible models connecting raw metrics to business reporting values.',
+    'OLAP Queries': 'Mastery of advanced analytical SQL queries designed to pull deep multi-dimensional insights out of large datasets.',
+    'Data Warehousing': 'End-to-end experience building centralized analytical data stores serving as a trusted source of truth.',
+    'Deduplication': 'Constructing programmatic filters and logic blocks to identify and purge redundancy out of batch or real-time pipelines.',
+    'Validation Rule Engines': 'Automating validation checks enforcing schema and data quality rules at ingestion barriers.',
+    'Anomaly Detection': 'Deploying programmatic checks to spot outliers or corrupted values within incoming pipelines.',
+    'Docker': 'Containerizing tools and code environments ensuring consistent portability across local machines and target cloud servers.',
+    'GitHub Actions': 'Building automated test suites and continuous deployment workflows directly connected to repository triggers.',
+    'Pytest': 'Writing thorough unit test frameworks verifying code execution correctness across individual modules.',
+    'CI/CD Pipelines': 'Automating compilation, testing, and deployment cycles to eliminate manual release friction.',
+    'Python': 'Core programming language used for scripting data pipelines, building connectors, and automating data workflows.',
+    'SQL': 'Advanced querying capabilities involving window functions, indexing strategies, CTEs, and performance optimization.',
+    'PostgreSQL': 'Relational database administration, schema creation, query optimization, and transaction handling.',
+    'Git': 'Version control experience managing collaborative branches and code history tracking.',
+    'Docker Compose': 'Multi-container orchestration setup replicating complex distributed services locally.'
+  };
+
+  const skillModal = {
+    overlay: document.getElementById('skillModalOverlay'),
+    open(name) {
+      document.getElementById('skillModalTitle').textContent = name;
+      document.getElementById('skillModalBody').textContent = skillData[name] || 'Technical description and engineering overview.';
+      this.overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    },
+    close() {
+      this.overlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  };
+  window.openSkillModal = (name) => skillModal.open(name);
+  document.getElementById('skillModalClose').addEventListener('click', () => skillModal.close());
+
+  // Subscription Modal logic
+  const subscriptionModal = {
+    overlay: document.getElementById('subscriptionModalOverlay'),
+    open() { this.overlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; },
+    close() { this.overlay.style.display = 'none'; document.body.style.overflow = ''; }
+  };
+  window.openSubscriptionModal = () => subscriptionModal.open();
+  document.getElementById('subscriptionModalClose').addEventListener('click', () => subscriptionModal.close());
+
+  document.querySelectorAll('.subscription-tab').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const tab = e.target.dataset.tab;
+      document.querySelectorAll('.subscription-tab').b(b => b.classList.remove('active')); // handled safely
+      document.querySelectorAll('.subscription-form').forEach(f => f.style.display = 'none');
+      document.getElementById(tab + 'Tab').style.display = 'block';
     });
-  }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+  });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.getElementById('copyRssBtn').addEventListener('click', () => {
+    const input = document.getElementById('rssUrlInput');
+    input.select();
+    navigator.clipboard.writeText(input.value);
+    const btn = document.getElementById('copyRssBtn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy RSS URL', 2000);
+  });
 
-  // Safe wrapper for GitHub data fetch (preserves your original intent if needed)
-  try {
-    if(typeof loadGitHubActivity === 'function') loadGitHubActivity();
-  } catch(e) { console.log('GitHub activity script not loaded inline.'); }
+  document.getElementById('emailTab').addEventListener('submit', e => {
+    e.preventDefault();
+    document.getElementById('subscriptionNotification').style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('subscriptionNotification').style.display = 'none';
+      subscriptionModal.close();
+    }, 2000);
+  });
+
+  // Fetch GitHub Activity metrics dynamically
+  async function loadGitHubActivity() {
+    try {
+      const ures = await fetch('https://api.github.com/users/Victor-Kipruto-Rop');
+      if (ures.ok) {
+        const user = await ures.json();
+        document.getElementById('gh-count').textContent = `(${user.public_repos})`;
+        document.getElementById('gh-sub').textContent = `${user.public_repos} public repositories · ${user.followers} followers · Nairobi, Kenya`;
+      }
+    } catch(e) {
+      document.getElementById('gh-sub').textContent = 'Public contributions profile data loaded directly from GitHub.';
+    }
+
+    try {
+      const rres = await fetch('https://api.github.com/users/Victor-Kipruto-Rop/repos?per_page=100');
+      if (rres.ok) {
+        const repos = await rres.json();
+        repos.sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0));
+        const topRepos = repos.slice(0, 6);
+        const container = document.getElementById('top-repos-container');
+        container.innerHTML = '';
+        const langColors = { 'Python': '#3572A5', 'SQL': '#e38c00', 'JavaScript': '#f1e05a' };
+        
+        topRepos.forEach(repo => {
+          const item = document.createElement('div');
+          item.className = 'repo-item';
+          item.onclick = () => window.open(repo.html_url, '_blank');
+          const lang = repo.language || 'Markdown';
+          const color = langColors[lang] || '#8b8b8b';
+          item.innerHTML = `
+            <div class="repo-name">${repo.name} <i class="fab fa-github" style="opacity:0.5;"></i></div>
+            <p class="repo-desc">${repo.description || 'No description provided.'}</p>
+            <div class="repo-stats">
+              <span class="repo-lang"><span class="repo-lang-dot" style="background:${color};"></span>${lang}</span>
+              <span><i class="fas fa-star" style="color:#eab308;"></i> ${repo.stargazers_count || 0}</span>
+            </div>
+          `;
+          container.appendChild(item);
+        });
+      }
+    } catch(e) {
+      document.getElementById('top-repos-container').innerHTML = '<p style="color:var(--text-muted)">Repositories available on GitHub profile.</p>';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadGitHubActivity);
 </script>
-
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+<!-- Analytics & Tracking integrations -->
+<script src="dashboard/tracker.js"></script>
+<script src="dashboard/visitor-intel.js"></script>
+<script src="dashboard/analytics-advanced.js"></script>
+<script src="integration/blog-tracker.js"></script>
 </body>
 </html>
 
