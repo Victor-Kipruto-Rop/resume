@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aura — Modern Minimalist Journal</title>
+  <title>Data Engineering Journal — Victor Kipruto Rop</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
   
   <style>
     :root[data-theme="dark"] {
-      --bg-primary: #0a0c10;
-      --bg-surface: #12161f;
-      --bg-surface-hover: #1a202c;
+      --bg-primary: #0b0f17;
+      --bg-surface: #131b27;
+      --bg-surface-hover: #1c2636;
       --border-color: rgba(255, 255, 255, 0.08);
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
-      --accent: #6366f1;
-      --accent-hover: #4f46e5;
-      --accent-light: rgba(99, 102, 241, 0.15);
-      --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
-      --badge-bg: rgba(255, 255, 255, 0.06);
+      --accent: #38bdf8; /* Data Cyan */
+      --accent-hover: #0284c7;
+      --accent-light: rgba(56, 189, 248, 0.12);
+      --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      --badge-bg: rgba(56, 189, 248, 0.1);
+      --code-bg: #070a0f;
     }
 
     :root[data-theme="light"] {
@@ -30,11 +31,12 @@
       --border-color: rgba(0, 0, 0, 0.08);
       --text-main: #0f172a;
       --text-muted: #64748b;
-      --accent: #4f46e5;
-      --accent-hover: #4338ca;
-      --accent-light: rgba(79, 70, 229, 0.1);
-      --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-      --badge-bg: rgba(0, 0, 0, 0.04);
+      --accent: #0284c7;
+      --accent-hover: #0369a1;
+      --accent-light: rgba(2, 132, 199, 0.1);
+      --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+      --badge-bg: rgba(2, 132, 199, 0.06);
+      --code-bg: #0f172a;
     }
 
     * {
@@ -45,21 +47,19 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       background-color: var(--bg-primary);
       color: var(--text-main);
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
     }
 
-    /* Layout Structure */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* Navigation */
+    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -77,23 +77,14 @@
     }
 
     .brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--text-main);
       text-decoration: none;
-      letter-spacing: -0.5px;
     }
 
-    .brand span {
-      color: var(--accent);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    .brand span { color: var(--accent); }
 
     .theme-toggle {
       background: var(--bg-surface);
@@ -106,17 +97,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
-    }
-
-    .theme-toggle:hover {
-      background-color: var(--bg-surface-hover);
+      font-size: 1.1rem;
     }
 
     /* Hero Section */
-    .hero-section {
-      padding: 60px 0 40px;
-    }
+    .hero-section { padding: 48px 0 24px; }
 
     .featured-card {
       display: grid;
@@ -124,21 +109,17 @@
       gap: 32px;
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      border-radius: 24px;
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: var(--card-shadow);
       cursor: pointer;
     }
 
-    .featured-card:hover .featured-img {
-      transform: scale(1.03);
-    }
+    .featured-card:hover .featured-img { transform: scale(1.03); }
 
     .featured-img-wrap {
       overflow: hidden;
-      height: 100%;
-      min-height: 380px;
-      position: relative;
+      min-height: 360px;
     }
 
     .featured-img {
@@ -149,7 +130,7 @@
     }
 
     .featured-content {
-      padding: 48px;
+      padding: 40px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -158,34 +139,31 @@
     .badge {
       display: inline-block;
       align-self: flex-start;
-      padding: 6px 14px;
+      padding: 4px 12px;
       background: var(--badge-bg);
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--accent);
       border-radius: 100px;
       font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-family: 'Fira Code', monospace;
       color: var(--accent);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .featured-title {
       font-family: 'Playfair Display', serif;
-      font-size: 2.25rem;
+      font-size: 2rem;
       line-height: 1.25;
       margin-bottom: 16px;
-      color: var(--text-main);
     }
 
     .meta-text {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       display: flex;
       align-items: center;
       gap: 12px;
       margin-top: auto;
-      padding-top: 24px;
+      padding-top: 20px;
     }
 
     /* Controls Bar */
@@ -198,12 +176,7 @@
       margin: 40px 0 32px;
     }
 
-    .categories {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
+    .categories { display: flex; gap: 8px; }
 
     .cat-btn {
       background: transparent;
@@ -211,8 +184,7 @@
       color: var(--text-muted);
       padding: 8px 18px;
       border-radius: 100px;
-      font-size: 0.875rem;
-      font-weight: 500;
+      font-size: 0.85rem;
       cursor: pointer;
     }
 
@@ -222,34 +194,18 @@
       border-color: var(--accent);
     }
 
-    .search-box {
-      position: relative;
-      min-width: 260px;
-    }
-
     .search-input {
-      width: 100%;
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 10px 16px 10px 40px;
+      padding: 10px 18px;
       border-radius: 100px;
       font-size: 0.875rem;
       outline: none;
+      min-width: 250px;
     }
 
-    .search-input:focus {
-      border-color: var(--accent);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
+    .search-input:focus { border-color: var(--accent); }
 
     /* Articles Grid */
     .articles-grid {
@@ -262,24 +218,21 @@
     .card {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
-      border-radius: 20px;
+      border-radius: 18px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       box-shadow: var(--card-shadow);
+      cursor: pointer;
       transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
     .card:hover {
       transform: translateY(-6px);
-      border-color: var(--accent-light);
+      border-color: var(--accent);
     }
 
-    .card-img-wrap {
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-    }
+    .card-img-wrap { height: 200px; overflow: hidden; }
 
     .card-img {
       width: 100%;
@@ -288,9 +241,7 @@
       transition: transform 0.5s ease;
     }
 
-    .card:hover .card-img {
-      transform: scale(1.05);
-    }
+    .card:hover .card-img { transform: scale(1.05); }
 
     .card-body {
       padding: 24px;
@@ -304,7 +255,6 @@
       font-size: 1.35rem;
       line-height: 1.3;
       margin: 12px 0;
-      color: var(--text-main);
     }
 
     .card-excerpt {
@@ -326,160 +276,228 @@
       border-top: 1px solid var(--border-color);
     }
 
-    .bookmark-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
+    /* Full-Screen Article Reader Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-content {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      border-radius: 20px;
+      overflow-y: auto;
+      padding: 40px;
+      position: relative;
+      box-shadow: var(--card-shadow);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
 
-    .bookmark-btn.active {
-      color: var(--accent);
+    .article-full-body {
+      margin-top: 24px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-main);
     }
 
-    /* Responsive Utilities */
+    .article-full-body p { margin-bottom: 20px; }
+
+    .article-full-body pre {
+      background: var(--code-bg);
+      color: #f8fafc;
+      padding: 20px;
+      border-radius: 12px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--border-color);
+    }
+
     @media (max-width: 868px) {
-      .featured-card {
-        grid-template-columns: 1fr;
-      }
-      .featured-img-wrap {
-        min-height: 240px;
-      }
-      .featured-content {
-        padding: 28px;
-      }
-      .featured-title {
-        font-size: 1.75rem;
-      }
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-img-wrap { min-height: 220px; }
+      .modal-content { padding: 24px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
   <header>
     <div class="container nav-inner">
-      <a href="#" class="brand">Aura<span>.</span></a>
-      <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">🌙</button>
-      </div>
+      <a href="#" class="brand">data_eng<span>.log()</span></a>
+      <button class="theme-toggle" id="themeToggle">🌙</button>
     </div>
   </header>
 
   <main class="container">
-    <!-- Featured Hero Section -->
+    <!-- Hero Article -->
     <section class="hero-section">
-      <article class="featured-card">
+      <article class="featured-card" onclick="openArticle(1)">
         <div class="featured-img-wrap">
-          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="Hero Artwork" class="featured-img">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" alt="Kafka Cluster" class="featured-img">
         </div>
         <div class="featured-content">
-          <span class="badge">Architecture & Design</span>
-          <h1 class="featured-title">The Renaissance of Minimalist Digital Spaces</h1>
-          <p class="card-excerpt">Discovering how digital interfaces are shifting away from decorative clutter to prioritize essential typography, functional white space, and intentional human interaction.</p>
+          <span class="badge">Streaming Architecture</span>
+          <h1 class="featured-title">Building Low-Latency Streaming Pipelines with Apache Kafka & Flink</h1>
+          <p class="card-excerpt">A breakdown of architecture for handling millions of financial events per second with zero data loss and exact-once processing semantics.</p>
           <div class="meta-text">
-            <span>By Elena Rostova</span> • 
-            <span>Oct 24, 2026</span> • 
-            <span>6 min read</span>
+            <span>By Victor Kipruto Rop</span> • 
+            <span>July 2026</span> • 
+            <span>7 min read</span>
           </div>
         </div>
       </article>
     </section>
 
-    <!-- Interactive Filtering Bar -->
+    <!-- Filters & Search -->
     <div class="controls-bar">
       <div class="categories" id="categoryContainer">
-        <button class="cat-btn active" data-category="All">All Posts</button>
-        <button class="cat-btn" data-category="Tech">Tech</button>
-        <button class="cat-btn" data-category="Design">Design</button>
-        <button class="cat-btn" data-category="Culture">Culture</button>
+        <button class="cat-btn active" data-category="All">All</button>
+        <button class="cat-btn" data-category="Streaming">Streaming</button>
+        <button class="cat-btn" data-category="Orchestration">Orchestration</button>
+        <button class="cat-btn" data-category="Data Warehouse">Data Warehouse</button>
       </div>
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" class="search-input" placeholder="Search articles...">
-      </div>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search architecture, tools...">
     </div>
 
-    <!-- Article Cards Grid -->
+    <!-- Article Cards -->
     <section class="articles-grid" id="articlesGrid"></section>
   </main>
 
+  <!-- Full Reader Modal -->
+  <div class="modal-overlay" id="articleModal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeArticle()">✕</button>
+      <div id="modalInner"></div>
+    </div>
+  </div>
+
   <script>
-    // Blog Data Set
+    // Data Engineering Blog Posts
     const articles = [
       {
         id: 1,
-        title: "Building Fluid Web Layouts with CSS Subgrid",
-        excerpt: "Subgrid makes multi-nested layout structures effortless. Here is a deep dive into practical component patterns.",
-        category: "Tech",
-        author: "Devon Lane",
-        date: "Oct 20, 2026",
-        readTime: "4 min read",
-        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+        title: "Building Low-Latency Streaming Pipelines with Apache Kafka & Flink",
+        excerpt: "A breakdown of architecture for handling millions of financial events per second with zero data loss and exact-once processing semantics.",
+        category: "Streaming",
+        author: "Victor Kipruto Rop",
+        date: "Jul 24, 2026",
+        readTime: "7 min read",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+        content: `
+          <p>Processing millions of transaction streams requires an architecture built around durability and backpressure handling. In this article, we cover how Apache Kafka serves as the distributed commit log while Apache Flink powers real-time aggregations.</p>
+          <h3>Key Streaming Pillars</h3>
+          <p>When engineering high-throughput event pipelines, three core requirements dominate the system design:</p>
+          <ul>
+            <li><strong>Exact-Once Semantics (EOS):</strong> Guaranteeing no duplicate writes to downstreams during network partitions.</li>
+            <li><strong>Stateful Stream Processing:</strong> Managing RocksDB state backends inside Flink for rolling window aggregations.</li>
+            <li><strong>Schema Evolution:</strong> Enforcing Confluent Schema Registry with Avro to protect downstream data warehouses from breaking changes.</li>
+          </ul>
+          <pre><code>// Example PyFlink Window Aggregation
+DataStream&lt;Tuple2&lt;String, Double&gt;&gt; aggregatedStream = stream
+    .keyBy(value -> value.f0)
+    .window(TumblingEventTimeWindows.of(Time.seconds(5)))
+    .reduce((val1, val2) -> new Tuple2<>(val1.f0, val1.f1 + val2.f1));</code></pre>
+          <p>By decoupling consumers through partition keys, we scale throughput linearly across processing nodes.</p>
+        `
       },
       {
         id: 2,
-        title: "The Psychology of Color in Modern Software",
-        excerpt: "How subtle palette shifts drive user focus, influence decision-making, and decrease fatigue during high-focus tasks.",
-        category: "Design",
-        author: "Sarah Jenkins",
-        date: "Oct 18, 2026",
+        title: "Production Airflow DAGs: Dynamic Generation & Error Handling",
+        excerpt: "How to structure modular, fault-tolerant Airflow workflows with custom operators and SLA alert integrations.",
+        category: "Orchestration",
+        author: "Victor Kipruto Rop",
+        date: "Jul 18, 2026",
         readTime: "5 min read",
-        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80"
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+        content: `
+          <p>Monolithic DAGs with hardcoded task dependencies quickly turn into operational bottlenecks. Treating DAGs as dynamic code generation problems makes data orchestration manageable.</p>
+          <h3>Factory Pattern for Airflow DAGs</h3>
+          <p>Instead of manually writing 50 repetitive DAG files for ingestion, create a Python factory that reads YAML configuration files and instantiates DAGs dynamically at runtime.</p>
+          <pre><code># Dynamic DAG Generation snippet
+def create_dag(dag_id, schedule, config):
+    with DAG(dag_id, schedule_interval=schedule, default_args=default_args) as dag:
+        ExtractOperator(task_id='extract', config=config) >> LoadOperator(task_id='load')
+    return dag</code></pre>
+        `
       },
       {
         id: 3,
-        title: "Slow Tech: Embracing Digital Minimalism",
-        excerpt: "Exploring the movement toward intentional app consumption, asynchronous work, and reduced notification cycles.",
-        category: "Culture",
-        author: "Marcus Vance",
-        date: "Oct 15, 2026",
-        readTime: "7 min read",
-        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
+        title: "Optimizing Snowflake & BigQuery Costs with Smart Partitioning",
+        excerpt: "Practical strategies for data modeling, partitioning, and clustering keys that cut cloud data warehouse billing by up to 40%.",
+        category: "Data Warehouse",
+        author: "Victor Kipruto Rop",
+        date: "Jul 12, 2026",
+        readTime: "6 min read",
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+        content: `
+          <p>Unoptimized queries scanning petabytes of raw unpartitioned tables burn engineering budgets fast. Efficient dimensional modeling combined with strategic cluster keys prevents expensive table scans.</p>
+          <p>Always align your cluster keys with your most frequent query filter predicates (e.g., <code>event_date</code> and <code>tenant_id</code>).</p>
+        `
       },
       {
         id: 4,
-        title: "Type Systems That Scale Gracefully",
-        excerpt: "Setting up flexible, fluid typography structures using CSS clamming for consistent across-device hierarchy.",
-        category: "Design",
-        author: "Elena Rostova",
-        date: "Oct 11, 2026",
-        readTime: "3 min read",
-        image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&w=800&q=80"
-      },
-      {
-        id: 5,
-        title: "The Next Era of Server-Driven UI",
-        excerpt: "Decoupling design components from clients to stream interactive elements smoothly across edge networks.",
-        category: "Tech",
-        author: "Devon Lane",
-        date: "Oct 08, 2026",
-        readTime: "8 min read",
-        image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80"
+        title: "Data Quality at Scale: Integrating dbt Tests into CI/CD Pipelines",
+        excerpt: "Automating data quality checks, anomaly detection, and schema validation before pushing models to production environments.",
+        category: "Data Warehouse",
+        author: "Victor Kipruto Rop",
+        date: "Jul 05, 2026",
+        readTime: "4 min read",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+        content: `
+          <p>Data pipelines without automated testing will eventually leak corrupted data into executive analytics dashboards. Here is how to run continuous data testing with dbt and GitHub Actions.</p>
+        `
       }
     ];
 
-    // State Management
     let currentCategory = 'All';
     let searchQuery = '';
-    const bookmarkedIds = new Set();
 
-    // DOM Elements
     const articlesGrid = document.getElementById('articlesGrid');
     const categoryContainer = document.getElementById('categoryContainer');
     const searchInput = document.getElementById('searchInput');
     const themeToggle = document.getElementById('themeToggle');
+    const modal = document.getElementById('articleModal');
+    const modalInner = document.getElementById('modalInner');
 
-    // Theme Switch Logic
+    // Theme Switch
     themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
     });
 
-    // Render Function
+    // Render Cards
     function renderArticles() {
       const filtered = articles.filter(art => {
         const matchesCat = currentCategory === 'All' || art.category === currentCategory;
@@ -488,18 +506,8 @@
         return matchesCat && matchesSearch;
       });
 
-      if (filtered.length === 0) {
-        articlesGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0; color: var(--text-muted);">
-            <h3>No articles found</h3>
-            <p>Try searching for a different keyword or category.</p>
-          </div>
-        `;
-        return;
-      }
-
       articlesGrid.innerHTML = filtered.map(art => `
-        <article class="card">
+        <article class="card" onclick="openArticle(${art.id})">
           <div class="card-img-wrap">
             <img src="${art.image}" alt="${art.title}" class="card-img">
           </div>
@@ -511,30 +519,36 @@
               <div class="meta-text" style="padding-top: 0;">
                 <span>${art.date}</span> • <span>${art.readTime}</span>
               </div>
-              <button 
-                class="bookmark-btn ${bookmarkedIds.has(art.id) ? 'active' : ''}" 
-                onclick="toggleBookmark(${art.id})"
-                aria-label="Bookmark post"
-              >
-                ${bookmarkedIds.has(art.id) ? '🔖' : '🏷️'}
-              </button>
             </div>
           </div>
         </article>
       `).join('');
     }
 
-    // Interactive Bookmark Toggle
-    window.toggleBookmark = function(id) {
-      if (bookmarkedIds.has(id)) {
-        bookmarkedIds.delete(id);
-      } else {
-        bookmarkedIds.add(id);
-      }
-      renderArticles();
+    // Modal Article Reader
+    window.openArticle = function(id) {
+      const art = articles.find(a => a.id === id);
+      if (!art) return;
+
+      modalInner.innerHTML = `
+        <span class="badge">${art.category}</span>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 16px 0 8px;">${art.title}</h1>
+        <div class="meta-text" style="margin-bottom: 24px;">
+          <span>By ${art.author}</span> • <span>${art.date}</span> • <span>${art.readTime}</span>
+        </div>
+        <img src="${art.image}" style="width: 100%; height: 300px; object-fit: cover; border-radius: 12px; margin-bottom: 24px;">
+        <div class="article-full-body">${art.content}</div>
+      `;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
     };
 
-    // Category Filtering
+    window.closeArticle = function() {
+      modal.classList.remove('open');
+      document.body.style.overflow = 'auto';
+    };
+
+    // Filter Listeners
     categoryContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('cat-btn')) {
         document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
@@ -544,15 +558,12 @@
       }
     });
 
-    // Search Input Event
     searchInput.addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderArticles();
     });
 
-    // Initial Execution
     renderArticles();
   </script>
 </body>
 </html>
-
