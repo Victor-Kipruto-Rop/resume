@@ -10,10 +10,336 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* ==========================================================================
+           CSS Variables & Tokens
+           ========================================================================== */
+        :root {
+            --bg-primary: #05080D;
+            --bg-secondary: #0A1018;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --color-primary: #00D084;
+            --color-secondary: #19F0B0;
+            --color-accent: #00E5FF;
+            --text-main: #FFFFFF;
+            --text-muted: #AAB6C4;
+            
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ==========================================================================
+           Global Resets & Base
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-primary) var(--bg-primary);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: none; /* Custom cursor used */
+        }
+
+        ::selection {
+            background: rgba(0, 208, 132, 0.3);
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ==========================================================================
+           Typography & Utilities
+           ========================================================================== */
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; line-height: 1.1; }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+        a { text-decoration: none; color: inherit; cursor: none; }
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: 2rem; }
+        .w-100 { width: 100%; }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+        }
+
+        /* ==========================================================================
+           Buttons
+           ========================================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            cursor: none;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: var(--bg-primary);
+            box-shadow: 0 4px 15px rgba(0, 208, 132, 0.2);
+            font-weight: 600;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover {
+            box-shadow: 0 8px 25px rgba(0, 208, 132, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+        }
+        .btn-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--color-primary);
+        }
+
+        .btn-large { padding: 1rem 2rem; font-size: 1.1rem; }
+
+        /* ==========================================================================
+           Navigation
+           ========================================================================== */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            z-index: 100;
+            padding: 1.5rem 0;
+            transition: var(--transition-smooth);
+        }
+        .navbar.scrolled {
+            padding: 1rem 0;
+            background: rgba(5, 8, 13, 0.85);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .nav-container {
+            max-width: 1440px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { 
+            font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; 
+            display: flex; align-items: center; gap: 0.5rem; letter-spacing: -0.5px;
+        }
+        .logo svg { width: 24px; height: 24px; }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-link {
+            font-size: 0.95rem; font-weight: 500; color: var(--text-muted);
+            transition: var(--transition-fast);
+        }
+        .nav-link:hover { color: var(--text-main); text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+
+        /* ==========================================================================
+           Hero Section
+           ========================================================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+            padding-top: 5rem;
+        }
+        #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.6; }
+        .hero-fade-bottom { position: absolute; bottom: 0; width: 100%; height: 150px; background: linear-gradient(to top, var(--bg-primary), transparent); z-index: 1; }
+
+        .hero-content { text-align: center; max-width: 900px; display: flex; flex-direction: column; align-items: center; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;
+            margin-bottom: 2.5rem; border: 1px solid rgba(0, 208, 132, 0.3);
+            background: rgba(0, 208, 132, 0.05);
+        }
+        .badge-dot { width: 8px; height: 8px; background: var(--color-primary); border-radius: 50%; box-shadow: 0 0 10px var(--color-primary); }
+        .hero-title { font-size: clamp(3.5rem, 6vw, 6rem); letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+        .hero-subtitle { font-size: 1.25rem; max-width: 700px; margin: 0 auto 3rem auto; color: var(--text-muted); }
+        .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; }
+
+        /* ==========================================================================
+           Sections & Grids
+           ========================================================================== */
+        .section { padding: 8rem 0; position: relative; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 4rem auto; }
+        .section-title { font-size: 3rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
+        .section-desc { font-size: 1.1rem; }
+
+        .grid { display: grid; gap: 2rem; }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+        /* ==========================================================================
+           Cards
+           ========================================================================== */
+        .card { padding: 2.5rem; text-align: left; display: flex; flex-direction: column; height: 100%; }
+        .card-icon { font-size: 2rem; margin-bottom: 1.5rem; display: inline-flex; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--glass-border); }
+        .card h3 { font-size: 1.4rem; margin-bottom: 1rem; letter-spacing: -0.01em; }
+        .card p { margin-bottom: 2rem; flex-grow: 1; font-size: 0.95rem; }
+        .learn-more { font-weight: 600; color: var(--color-accent); font-size: 0.9rem; margin-top: auto; transition: var(--transition-fast); display: inline-flex; align-items: center; gap: 0.5rem; }
+        .learn-more:hover { color: var(--color-primary); gap: 0.8rem; }
+
+        /* ==========================================================================
+           Architecture Section
+           ========================================================================== */
+        .architecture-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .tech-list { list-style: none; margin-top: 2.5rem; }
+        .tech-list li { margin-bottom: 1.2rem; font-size: 1.1rem; display: flex; align-items: center; gap: 1rem; }
+        .check { font-weight: bold; background: rgba(0,208,132,0.1); padding: 0.2rem 0.6rem; border-radius: 50%; }
+
+        .arch-visual { padding: 4rem; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; min-height: 400px; }
+        .glow-orb { position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, transparent 60%); top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
+        .pipeline-visual { display: flex; align-items: center; gap: 1rem; position: relative; z-index: 2; width: 100%; justify-content: space-between; }
+        .node { padding: 1.2rem 1.5rem; background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: 12px; font-family: var(--font-heading); font-size: 1rem; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .node.highlight { border-color: var(--color-primary); box-shadow: 0 0 30px rgba(0, 208, 132, 0.2); }
+        .line { flex-grow: 1; height: 2px; background: linear-gradient(90deg, var(--glass-border), var(--color-primary), var(--glass-border)); position: relative; overflow: hidden; }
+        .line::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, #fff, transparent); animation: flow 2s infinite linear; }
+
+        /* ==========================================================================
+           Stats & Forms
+           ========================================================================== */
+        .stat-number { font-size: 4.5rem; font-weight: 700; background: linear-gradient(135deg, #fff, var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; letter-spacing: -0.03em; }
+        .stat-suffix { font-size: 2.5rem; color: var(--color-primary); font-family: var(--font-heading); font-weight: bold; }
+        .stat-label { font-size: 1rem; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; color: var(--text-muted); }
+
+        .cta-card { padding: 6rem 4rem; max-width: 900px; margin: 0 auto; border-radius: 32px; background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+        .input-glass { width: 100%; padding: 1.2rem 1.5rem; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 12px; color: #fff; font-family: var(--font-body); font-size: 1rem; outline: none; transition: var(--transition-fast); }
+        .input-glass:focus { border-color: var(--color-primary); box-shadow: 0 0 20px rgba(0, 208, 132, 0.15); background: rgba(0,0,0,0.5); }
+
+        /* ==========================================================================
+           Footer
+           ========================================================================== */
+        .footer { border-top: 1px solid var(--glass-border); padding: 6rem 0 3rem 0; background: var(--bg-secondary); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+        .footer-links h4 { margin-bottom: 2rem; color: #fff; font-size: 1.2rem; }
+        .footer-links a { display: block; color: var(--text-muted); margin-bottom: 1rem; transition: var(--transition-fast); font-size: 0.95rem; }
+        .footer-links a:hover { color: var(--color-primary); transform: translateX(5px); }
+        .footer-bottom { border-top: 1px solid var(--glass-border); padding-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+        /* ==========================================================================
+           Animations
+           ========================================================================== */
+        .cursor-glow {
+            position: fixed; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, transparent 60%);
+            border-radius: 50%; pointer-events: none;
+            transform: translate(-50%, -50%); z-index: 9999;
+            mix-blend-mode: screen; transition: width 0.3s, height 0.3s, background 0.3s;
+        }
+
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            width: 0%; z-index: 1000; box-shadow: 0 0 10px var(--color-primary);
+        }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.15s; }
+        .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.45s; }
+
+        .hover-lift { transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; }
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 229, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 208, 132, 0.15);
+        }
+
+        .trusted-section {
+            padding: 4rem 0; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.02), transparent);
+        }
+        .trusted-label { font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 3rem; color: var(--text-muted); font-weight: 600; }
+        .marquee-container { width: 100%; overflow: hidden; position: relative; white-space: nowrap; }
+        .marquee-container::before, .marquee-container::after { content: ""; position: absolute; top: 0; width: 200px; height: 100%; z-index: 2; }
+        .marquee-container::before { left: 0; background: linear-gradient(to right, var(--bg-primary), transparent); }
+        .marquee-container::after { right: 0; background: linear-gradient(to left, var(--bg-primary), transparent); }
+
+        .marquee { display: inline-block; animation: scroll-marquee 25s linear infinite; }
+        .marquee-item {
+            display: inline-block; margin: 0 4rem; font-family: var(--font-heading);
+            font-weight: 700; font-size: 1.8rem; color: rgba(255,255,255,0.15);
+            transition: color 0.4s, text-shadow 0.4s;
+        }
+        .marquee-item:hover { color: var(--color-primary); text-shadow: 0 0 20px rgba(0, 208, 132, 0.4); }
+
+        @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes flow { 0% { left: -100%; } 100% { left: 100%; } }
+
+        /* ==========================================================================
+           Responsive Design
+           ========================================================================== */
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 101; }
+        .hamburger span { width: 30px; height: 2px; background: var(--text-main); transition: 0.3s ease; }
+
+        @media (max-width: 1024px) {
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .hero-title { font-size: 4.5rem; }
+            .architecture-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .arch-visual { padding: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .nav-links, .nav-actions .btn { display: none; }
+            .hamburger { display: flex; }
+            .hero-title { font-size: 3rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .hero-buttons { flex-direction: column; }
+            .section { padding: 5rem 0; }
+            .form-row { grid-template-columns: 1fr; }
+            .cta-card { padding: 3rem 2rem; }
+            .pipeline-visual { flex-direction: column; }
+            .line { width: 2px; height: 50px; }
+            .line::after { animation: flow-vertical 2s infinite linear; }
+            @keyframes flow-vertical { 0% { top: -100%; left: 0; } 100% { top: 100%; left: 0; } }
+        }
+    </style>
 </head>
 <body>
     <!-- Custom Cursor & Scroll Progress -->
@@ -24,10 +350,18 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#" class="logo">
-                <span class="logo-icon">▲</span> DataForge<span class="text-gradient">Labs</span>
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 22H22L12 2Z" fill="url(#paint0_linear)"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#00D084"/>
+                            <stop offset="1" stop-color="#00E5FF"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                DataForge<span class="text-gradient">Labs</span>
             </a>
             <div class="nav-links">
-                <a href="#about" class="nav-link">About</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#solutions" class="nav-link">Solutions</a>
                 <a href="#tech" class="nav-link">Technologies</a>
@@ -67,9 +401,12 @@
                 <div class="marquee-item">AERO LOGISTICS</div>
                 <div class="marquee-item">QUANTUM RETAIL</div>
                 <div class="marquee-item">GOVTECH SYSTEMS</div>
+                <!-- Duplicate for seamless scroll -->
                 <div class="marquee-item">FINTECH GLOBAL</div>
                 <div class="marquee-item">NEXUS HEALTHCARE</div>
                 <div class="marquee-item">AERO LOGISTICS</div>
+                <div class="marquee-item">QUANTUM RETAIL</div>
+                <div class="marquee-item">GOVTECH SYSTEMS</div>
             </div>
         </div>
     </section>
@@ -79,44 +416,44 @@
         <div class="container">
             <div class="section-header reveal">
                 <h2 class="section-title">Data Infrastructure, <span class="text-gradient">Perfected.</span></h2>
-                <p class="section-desc">End-to-end data engineering solutions designed for scale, resilience, and performance.</p>
+                <p class="section-desc">End-to-end data engineering solutions designed for scale, resilience, and uncompromised performance.</p>
             </div>
             <div class="grid grid-3">
                 <div class="card glass hover-lift reveal">
                     <div class="card-icon">⚡</div>
                     <h3>Real-Time Streaming</h3>
-                    <p>Build low-latency pipelines with Apache Kafka and Spark to process millions of events per second.</p>
-                    <a href="#" class="learn-more">Learn More →</a>
+                    <p>Build ultra low-latency pipelines with Apache Kafka and Spark to process millions of events per second with zero downtime.</p>
+                    <a href="#" class="learn-more">Explore Streaming <span style="font-size: 1.2rem;">→</span></a>
                 </div>
                 <div class="card glass hover-lift reveal delay-1">
                     <div class="card-icon">🔄</div>
                     <h3>ETL / ELT Pipelines</h3>
-                    <p>Automated, resilient data workflows using Airflow, dbt, and modern orchestration tools.</p>
-                    <a href="#" class="learn-more">Learn More →</a>
+                    <p>Automated, resilient data workflows using modern orchestration tools like Airflow and dbt to maintain data fidelity.</p>
+                    <a href="#" class="learn-more">Explore Pipelines <span style="font-size: 1.2rem;">→</span></a>
                 </div>
                 <div class="card glass hover-lift reveal delay-2">
                     <div class="card-icon">☁️</div>
                     <h3>Cloud Data Warehouses</h3>
-                    <p>Architecture and implementation for Snowflake, BigQuery, and Databricks lakehouses.</p>
-                    <a href="#" class="learn-more">Learn More →</a>
+                    <p>Enterprise architecture and implementation for Snowflake, BigQuery, and Databricks lakehouses.</p>
+                    <a href="#" class="learn-more">Explore Cloud <span style="font-size: 1.2rem;">→</span></a>
                 </div>
                 <div class="card glass hover-lift reveal">
                     <div class="card-icon">🛡️</div>
                     <h3>Data Governance</h3>
-                    <p>Security, compliance, and lineage frameworks to ensure your data remains trusted and secure.</p>
-                    <a href="#" class="learn-more">Learn More →</a>
+                    <p>Strict security, compliance, and lineage frameworks to ensure your enterprise data remains trusted and secure.</p>
+                    <a href="#" class="learn-more">Explore Governance <span style="font-size: 1.2rem;">→</span></a>
                 </div>
                 <div class="card glass hover-lift reveal delay-1">
                     <div class="card-icon">🤖</div>
                     <h3>AI Infrastructure</h3>
-                    <p>Vector databases, ML feature stores, and scalable pipelines for training GenAI models.</p>
-                    <a href="#" class="learn-more">Learn More →</a>
+                    <p>Vector databases, ML feature stores, and highly scalable data pipelines optimized for training GenAI models.</p>
+                    <a href="#" class="learn-more">Explore AI <span style="font-size: 1.2rem;">→</span></a>
                 </div>
                 <div class="card glass hover-lift reveal delay-2">
                     <div class="card-icon">🔌</div>
                     <h3>API Development</h3>
-                    <p>High-performance REST and GraphQL APIs to serve your data securely to end applications.</p>
-                    <a href="#" class="learn-more">Learn More →</a>
+                    <p>High-performance REST, gRPC, and GraphQL APIs to securely serve your data to end-user applications.</p>
+                    <a href="#" class="learn-more">Explore APIs <span style="font-size: 1.2rem;">→</span></a>
                 </div>
             </div>
         </div>
@@ -127,11 +464,11 @@
         <div class="container">
             <div class="architecture-grid">
                 <div class="arch-content reveal">
-                    <h2 class="section-title">Modern <span class="text-gradient">Tech Stack</span></h2>
-                    <p class="section-desc">We leverage best-in-class open-source and enterprise technologies to build unshakeable data foundations.</p>
+                    <h2 class="section-title">Modern <br><span class="text-gradient">Tech Stack</span></h2>
+                    <p class="section-desc">We leverage best-in-class open-source and enterprise technologies to build unshakeable foundations for your data.</p>
                     <ul class="tech-list">
                         <li><span class="check text-gradient">✓</span> Python, SQL, Rust, Go</li>
-                        <li><span class="check text-gradient">✓</span> Kafka, Spark, Flink</li>
+                        <li><span class="check text-gradient">✓</span> Apache Kafka, Spark, Flink</li>
                         <li><span class="check text-gradient">✓</span> Snowflake, Databricks, BigQuery</li>
                         <li><span class="check text-gradient">✓</span> Kubernetes, Docker, Terraform</li>
                     </ul>
@@ -139,7 +476,7 @@
                 <div class="arch-visual glass reveal delay-1">
                     <div class="glow-orb"></div>
                     <div class="pipeline-visual">
-                        <div class="node">Sources</div>
+                        <div class="node">Raw Sources</div>
                         <div class="line"></div>
                         <div class="node highlight">Kafka Stream</div>
                         <div class="line"></div>
@@ -156,20 +493,22 @@
             <div class="grid grid-4 text-center">
                 <div class="stat-item reveal">
                     <h3 class="stat-number" data-target="150">0</h3>
+                    <span class="stat-suffix">+</span>
                     <p class="stat-label">Enterprise Clients</p>
                 </div>
                 <div class="stat-item reveal delay-1">
                     <h3 class="stat-number" data-target="400">0</h3>
+                    <span class="stat-suffix">+</span>
                     <p class="stat-label">Pipelines Deployed</p>
                 </div>
                 <div class="stat-item reveal delay-2">
                     <h3 class="stat-number" data-target="99">0</h3>
-                    <span class="stat-suffix">%</span>
+                    <span class="stat-suffix">.9%</span>
                     <p class="stat-label">Uptime SLA</p>
                 </div>
                 <div class="stat-item reveal delay-3">
                     <h3 class="stat-number" data-target="50">0</h3>
-                    <span class="stat-suffix">PB+</span>
+                    <span class="stat-suffix">PB</span>
                     <p class="stat-label">Data Processed</p>
                 </div>
             </div>
@@ -179,12 +518,12 @@
     <!-- Call to Action -->
     <section class="section cta-section" id="contact">
         <div class="container">
-            <div class="cta-card glass text-center reveal">
+            <div class="cta-card text-center reveal">
                 <h2 class="section-title">Ready to Forge Your Data Future?</h2>
-                <p class="section-desc">Speak with our principal engineers to architect a solution tailored to your scale.</p>
-                <form class="contact-form">
+                <p class="section-desc">Speak directly with our principal engineers to architect a solution tailored to your scale.</p>
+                <form class="contact-form" onsubmit="event.preventDefault();">
                     <div class="form-row">
-                        <input type="text" class="input-glass" placeholder="Name" required>
+                        <input type="text" class="input-glass" placeholder="Full Name" required>
                         <input type="email" class="input-glass" placeholder="Work Email" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-large w-100 mt-4 magnetic" data-strength="10">Initialize Consultation</button>
@@ -199,9 +538,18 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="#" class="logo">
-                        <span class="logo-icon">▲</span> DataForge<span class="text-gradient">Labs</span>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 22H22L12 2Z" fill="url(#paint1_linear)"/>
+                            <defs>
+                                <linearGradient id="paint1_linear" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#00D084"/>
+                                    <stop offset="1" stop-color="#00E5FF"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        DataForge<span class="text-gradient">Labs</span>
                     </a>
-                    <p class="footer-desc mt-4">Engineering Data. Powering Decisions. Building the infrastructure of tomorrow.</p>
+                    <p class="footer-desc mt-4" style="color: var(--text-muted);">Engineering Data. Powering Decisions. Building the infrastructure of tomorrow.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Platform</h4>
@@ -228,10 +576,203 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="js/particles.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/main.js"></script>
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // ==========================================
+            // UI Interactions (Navbar, Progress, Cursor)
+            // ==========================================
+            const navbar = document.getElementById('navbar');
+            const scrollProgress = document.getElementById('scroll-progress');
+            const cursor = document.querySelector('.cursor-glow');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.add('scrolled');
+                    if(window.scrollY < 10) navbar.classList.remove('scrolled');
+                }
+
+                const totalHeight = document.body.scrollHeight - window.innerHeight;
+                const progress = (window.scrollY / totalHeight) * 100;
+                scrollProgress.style.width = `${progress}%`;
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+            });
+
+            const clickables = document.querySelectorAll('a, button, .card, input');
+            clickables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.width = '600px';
+                    cursor.style.height = '600px';
+                    cursor.style.background = 'radial-gradient(circle, rgba(0, 208, 132, 0.15) 0%, transparent 60%)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.width = '400px';
+                    cursor.style.height = '400px';
+                    cursor.style.background = 'radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, transparent 60%)';
+                });
+            });
+
+            // ==========================================
+            // Scroll Reveals (Intersection Observer)
+            // ==========================================
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // ==========================================
+            // Number Counter Animation
+            // ==========================================
+            const statNumbers = document.querySelectorAll('.stat-number');
+            let counted = false;
+
+            const countUp = () => {
+                statNumbers.forEach(number => {
+                    const target = +number.getAttribute('data-target');
+                    const duration = 2000;
+                    const increment = target / (duration / 16);
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            number.innerText = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            number.innerText = target;
+                        }
+                    };
+                    updateCounter();
+                });
+            };
+
+            const statsSection = document.querySelector('.stats-section');
+            if(statsSection) {
+                const statsObserver = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting && !counted) {
+                        countUp();
+                        counted = true;
+                    }
+                }, { threshold: 0.5 });
+                statsObserver.observe(statsSection);
+            }
+
+            // ==========================================
+            // Magnetic Button Effect
+            // ==========================================
+            const magneticItems = document.querySelectorAll('.magnetic');
+            magneticItems.forEach(item => {
+                item.addEventListener('mousemove', function(e) {
+                    const position = item.getBoundingClientRect();
+                    const x = e.pageX - position.left - position.width / 2;
+                    const y = e.pageY - window.scrollY - position.top - position.height / 2;
+                    const strength = item.getAttribute('data-strength') || 20;
+                    item.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
+                });
+                item.addEventListener('mouseleave', function() {
+                    item.style.transform = 'translate(0px, 0px)';
+                    item.style.transition = 'transform 0.4s ease, box-shadow 0.4s ease';
+                    setTimeout(() => item.style.transition = '', 400);
+                });
+            });
+
+            // ==========================================
+            // HTML5 Canvas Particles
+            // ==========================================
+            const canvas = document.getElementById("particle-canvas");
+            if (canvas) {
+                const ctx = canvas.getContext("2d");
+                let particlesArray;
+
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                window.addEventListener('resize', () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    initParticles();
+                });
+
+                class Particle {
+                    constructor(x, y, directionX, directionY, size, color) {
+                        this.x = x; this.y = y; this.directionX = directionX;
+                        this.directionY = directionY; this.size = size; this.color = color;
+                    }
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                        ctx.fillStyle = this.color;
+                        ctx.fill();
+                    }
+                    update() {
+                        if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                        if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                        this.x += this.directionX;
+                        this.y += this.directionY;
+                        this.draw();
+                    }
+                }
+
+                function initParticles() {
+                    particlesArray = [];
+                    const numberOfParticles = (canvas.width * canvas.height) / 12000;
+                    for (let i = 0; i < numberOfParticles; i++) {
+                        const size = (Math.random() * 1.5) + 0.5;
+                        const x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                        const y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                        const directionX = (Math.random() * 0.8) - 0.4;
+                        const directionY = (Math.random() * 0.8) - 0.4;
+                        const color = '#00E5FF';
+                        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                    }
+                }
+
+                function connectParticles() {
+                    let opacityValue = 1;
+                    for (let a = 0; a < particlesArray.length; a++) {
+                        for (let b = a; b < particlesArray.length; b++) {
+                            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                                         + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                            if (distance < (canvas.width / 8) * (canvas.height / 8)) {
+                                opacityValue = 1 - (distance / 20000);
+                                ctx.strokeStyle = `rgba(0, 208, 132, ${opacityValue * 0.2})`;
+                                ctx.lineWidth = 1;
+                                ctx.beginPath();
+                                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+
+                function animateParticles() {
+                    requestAnimationFrame(animateParticles);
+                    ctx.clearRect(0, 0, innerWidth, innerHeight);
+                    for (let i = 0; i < particlesArray.length; i++) {
+                        particlesArray[i].update();
+                    }
+                    connectParticles();
+                }
+
+                initParticles();
+                animateParticles();
+            }
+        });
+    </script>
 </body>
 </html>
-
