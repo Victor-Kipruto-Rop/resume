@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Victor Kipruto Rop | Data Engineer & FinTech Architect</title>
-  <meta name="description" content="Portfolio of Victor Kipruto Rop - Data Engineer, Data Platform Architect, and FinTech Infrastructure Builder.">
+  <title>Victor Kipruto Rop | Data Engineer</title>
+  <meta name="description" content="Portfolio of Victor Kipruto Rop - Data Engineer specializing in ETL pipelines, real-time streaming, and dimensional warehousing.">
   
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,9 +33,7 @@
       --text-muted: #666666;
       
       --gradient-primary: linear-gradient(135deg, #FF4D1C 0%, #FF8A00 100%);
-      --gradient-dark: linear-gradient(180deg, rgba(16, 16, 16, 0.8) 0%, rgba(5, 5, 5, 0.95) 100%);
-      --gradient-glow: radial-gradient(circle, rgba(255, 77, 28, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
-
+      
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       
@@ -46,981 +44,140 @@
       --radius-lg: 20px;
     }
 
-    /* ==========================================================================
-       GLOBAL RESETS & BASE STYLES
-       ========================================================================== */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background-color: var(--bg-deep-black); color: var(--text-white); font-family: var(--font-sans); overflow-x: hidden; }
+    body { min-height: 100vh; position: relative; line-height: 1.6; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-deep-black); }
+    ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary-red-orange); }
 
-    html {
-      scroll-behavior: smooth;
-      background-color: var(--bg-deep-black);
-      color: var(--text-white);
-      font-family: var(--font-sans);
-      overflow-x: hidden;
-    }
+    #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; opacity: 0.45; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
 
-    body {
-      min-height: 100vh;
-      position: relative;
-      line-height: 1.6;
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-deep-black);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #222;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-red-orange);
-    }
-
-    /* Canvas Animation Background */
-    #bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.45;
-    }
-
-    /* Container Utility */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 10;
-    }
-
-    /* ==========================================================================
-       TYPOGRAPHY & UI COMPONENTS
-       ========================================================================== */
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .text-gradient {
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    h1, h2, h3, h4, h5, h6 { font-weight: 700; letter-spacing: -0.02em; }
+    .text-gradient { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.35rem 0.85rem;
-      border-radius: 100px;
-      background: rgba(255, 77, 28, 0.1);
-      border: 1px solid rgba(255, 77, 28, 0.25);
-      color: var(--primary-red-orange);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.85rem; border-radius: 100px;
+      background: rgba(255, 77, 28, 0.1); border: 1px solid rgba(255, 77, 28, 0.25); color: var(--primary-red-orange);
+      font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;
     }
-
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: var(--primary-red-orange);
-      box-shadow: 0 0 8px var(--primary-red-orange);
-    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background-color: var(--primary-red-orange); box-shadow: 0 0 8px var(--primary-red-orange); }
 
     .glass-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 2rem;
-      transition: var(--transition-normal);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .glass-card:hover {
-      border-color: var(--border-glow);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(255, 77, 28, 0.12);
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 0.85rem 1.75rem;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      text-decoration: none;
-      transition: var(--transition-normal);
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--gradient-primary);
-      color: var(--text-white);
-      box-shadow: 0 4px 20px rgba(255, 77, 28, 0.35);
-    }
-
-    .btn-primary:hover {
-      box-shadow: 0 6px 28px rgba(255, 138, 0, 0.5);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      color: var(--text-white);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-    }
-
-    /* Section Header */
-    .section-header {
-      margin-bottom: 3.5rem;
-      text-align: center;
-    }
-
-    .section-header h2 {
-      font-size: 2.5rem;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-header p {
-      color: var(--text-gray);
-      max-width: 650px;
-      margin: 0 auto;
-      font-size: 1.05rem;
-    }
-
-    /* ==========================================================================
-       HEADER & NAVIGATION
-       ========================================================================== */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(5, 5, 5, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 80px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--text-white);
-      font-weight: 800;
-      font-size: 1.4rem;
-      letter-spacing: -0.03em;
-    }
-
-    .logo-box {
-      width: 40px;
-      height: 40px;
-      background: var(--gradient-primary);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-white);
-      font-weight: 800;
-      box-shadow: 0 0 15px rgba(255, 77, 28, 0.4);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .nav-link {
-      color: var(--text-gray);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: var(--transition-fast);
-      cursor: pointer;
-      padding: 0.5rem 0.25rem;
-      position: relative;
-    }
-
-    .nav-link:hover, .nav-link.active {
-      color: var(--text-white);
-    }
-
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--gradient-primary);
-      box-shadow: 0 0 8px var(--primary-red-orange);
-    }
-
-    .mobile-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-white);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* ==========================================================================
-       PAGE CONTAINERS & SPA ROUTING
-       ========================================================================== */
-    .page-section {
-      display: none;
-      padding-top: 130px;
-      padding-bottom: 100px;
-      min-height: 100vh;
-      opacity: 0;
-      transition: opacity 0.4s ease-in-out;
-    }
-
-    .page-section.active {
-      display: block;
-      opacity: 1;
-    }
-
-    /* ==========================================================================
-       1. HOME PAGE
-       ========================================================================== */
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .hero-title {
-      font-size: 3.5rem;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-subtitle {
-      font-size: 1.15rem;
-      color: var(--text-gray);
-      margin-bottom: 2rem;
-      max-width: 600px;
-    }
-
-    .hero-identity {
-      margin-bottom: 2rem;
-      padding-left: 1rem;
-      border-left: 3px solid var(--primary-red-orange);
-    }
-
-    .hero-identity h3 {
-      font-size: 1.5rem;
-      color: var(--text-white);
-    }
-
-    .role-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 0.75rem;
-    }
-
-    .role-pill {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      padding: 0.25rem 0.75rem;
-      border-radius: var(--radius-sm);
-      color: var(--text-gray);
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* Status Widget / Terminal */
-    .status-widget {
-      background: #0d0d0d;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-    }
-
-    .terminal-header {
-      background: #151515;
-      padding: 0.75rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .terminal-dots {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .dot-red { background: #ff5f56; }
-    .dot-yellow { background: #ffbd2e; }
-    .dot-green { background: #27c93f; }
-
-    .terminal-title {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .terminal-body {
-      padding: 1.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-    }
-
-    .status-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.5rem 0;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
-    }
-
-    .status-key { color: var(--text-gray); }
-    .status-val { font-weight: 600; }
-    .status-val.online { color: #00FF66; }
-    .status-val.active { color: var(--accent-bright-orange); }
-
-    /* Home Stats Bar */
-    .stats-bar {
-      margin-top: 5rem;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-    }
-
-    .stat-card {
-      text-align: center;
-      padding: 1.75rem 1rem;
-    }
-
-    .stat-number {
-      font-size: 2.8rem;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 0.5rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .stat-label {
-      color: var(--text-gray);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* ==========================================================================
-       2. ABOUT PAGE
-       ========================================================================== */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-    }
-
-    .identity-cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .identity-card {
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-    }
-
-    .identity-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: var(--radius-sm);
-      background: rgba(255, 77, 28, 0.1);
-      border: 1px solid rgba(255, 77, 28, 0.3);
-      color: var(--primary-red-orange);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-
-    /* Timeline */
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-      border-left: 2px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2.5rem;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -2.4rem;
-      top: 0.25rem;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--primary-red-orange);
-      box-shadow: 0 0 10px var(--primary-red-orange);
-    }
-
-    .timeline-date {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--accent-bright-orange);
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-title {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    /* ==========================================================================
-       3. SKILLS PAGE
-       ========================================================================== */
-    .skills-category {
-      margin-bottom: 3rem;
-    }
-
-    .skills-category-title {
-      font-size: 1.3rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--text-white);
-    }
-
-    .skills-category-title i {
-      color: var(--primary-red-orange);
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .skill-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 1.25rem;
-      text-align: center;
-      transition: var(--transition-normal);
-      cursor: default;
-    }
-
-    .skill-card:hover {
-      border-color: var(--primary-red-orange);
-      box-shadow: 0 5px 20px rgba(255, 77, 28, 0.2);
-      transform: translateY(-3px);
-    }
-
-    .skill-card i {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
-      color: var(--accent-bright-orange);
-    }
-
-    .skill-card span {
-      display: block;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    /* ==========================================================================
-       4. PROJECTS PAGE
-       ========================================================================== */
-    .featured-project {
-      margin-bottom: 4rem;
-      border: 1px solid rgba(255, 77, 28, 0.4);
-      background: linear-gradient(180deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-
-    .arch-diagram-box {
-      background: #080808;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 1.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--accent-bright-orange);
-      margin: 1.5rem 0;
-      white-space: pre-wrap;
-      line-height: 1.4;
-      overflow-x: auto;
-    }
-
-    .tag-cloud {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1rem 0;
-    }
-
-    .tag {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-      color: var(--text-gray);
-    }
-
-    /* ==========================================================================
-       5. ARCHITECTURE LAB PAGE
-       ========================================================================== */
-    .architecture-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-      gap: 2rem;
-    }
-
-    .arch-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .arch-flow-visual {
-      height: 180px;
-      background: #0a0a0a;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      margin: 1.25rem 0;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 0 1rem;
-    }
-
-    .arch-node {
-      width: 70px;
-      height: 70px;
-      background: #141414;
-      border: 1px solid var(--primary-red-orange);
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      text-align: center;
-      z-index: 2;
-      box-shadow: 0 0 15px rgba(255, 77, 28, 0.2);
-    }
-
-    .arch-node i {
-      font-size: 1.2rem;
-      color: var(--accent-bright-orange);
-      margin-bottom: 0.2rem;
-    }
-
-    .arch-line {
-      position: absolute;
-      top: 50%;
-      left: 10%;
-      right: 10%;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.1);
-      z-index: 1;
-    }
-
-    .arch-pulse {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--primary-red-orange);
-      box-shadow: 0 0 8px var(--primary-red-orange);
-      animation: flow 3s infinite linear;
-    }
-
-    @keyframes flow {
-      0% { left: 15%; opacity: 1; }
-      100% { left: 85%; opacity: 0; }
-    }
-
-    /* ==========================================================================
-       6. BLOG PAGE
-       ========================================================================== */
-    .blog-controls {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
-    }
-
-    .search-input {
-      flex: 1;
-      min-width: 280px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem 1.25rem;
-      color: var(--text-white);
-      font-size: 0.95rem;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--primary-red-orange);
-    }
-
-    .filter-btn {
-      padding: 0.75rem 1.25rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      color: var(--text-gray);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: var(--transition-fast);
-    }
-
-    .filter-btn.active, .filter-btn:hover {
-      background: rgba(255, 77, 28, 0.15);
-      border-color: var(--primary-red-orange);
-      color: var(--text-white);
-    }
-
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 2rem;
-    }
-
-    .blog-meta {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-    }
-
-    /* ==========================================================================
-       7. SERVICES PAGE
-       ========================================================================== */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .service-icon {
-      font-size: 2.5rem;
-      color: var(--primary-red-orange);
-      margin-bottom: 1.25rem;
-    }
-
-    .service-list {
-      list-style: none;
-      margin-top: 1rem;
-    }
-
-    .service-list li {
-      margin-bottom: 0.5rem;
-      color: var(--text-gray);
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .service-list li::before {
-      content: '▹';
-      color: var(--accent-bright-orange);
-    }
-
-    .cta-banner {
-      margin-top: 5rem;
-      text-align: center;
-      background: linear-gradient(135deg, rgba(255,77,28,0.15) 0%, rgba(5,5,5,0.9) 100%);
-      border: 1px solid rgba(255, 77, 28, 0.3);
-      padding: 3.5rem 2rem;
-      border-radius: var(--radius-lg);
-    }
-
-    /* ==========================================================================
-       8. RESUME PAGE
-       ========================================================================== */
-    .resume-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 2rem;
-    }
-
-    .resume-layout {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 3rem;
-    }
-
-    .resume-section-title {
-      font-size: 1.25rem;
-      margin-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.5rem;
-      color: var(--primary-red-orange);
-    }
-
-    /* ==========================================================================
-       9. DEVELOPER DASHBOARD PAGE
-       ========================================================================== */
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .dash-widget {
-      padding: 1.5rem;
-    }
-
-    .dash-value {
-      font-size: 2.2rem;
-      font-weight: 700;
-      font-family: var(--font-mono);
-      margin-top: 0.5rem;
-    }
-
-    .code-block {
-      background: #080808;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 1.25rem;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: #00FF66;
-      overflow-x: auto;
-    }
-
-    /* ==========================================================================
-       10. CONTACT PAGE
-       ========================================================================== */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 3rem;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-group label {
-      font-size: 0.85rem;
-      color: var(--text-gray);
-      font-weight: 500;
-    }
-
-    .form-input, .form-textarea {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 0.85rem 1rem;
-      color: var(--text-white);
-      font-family: var(--font-sans);
-      transition: var(--transition-fast);
-    }
-
-    .form-input:focus, .form-textarea:focus {
-      outline: none;
-      border-color: var(--primary-red-orange);
-      box-shadow: 0 0 10px rgba(255, 77, 28, 0.2);
-    }
-
-    .form-textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .social-links-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .social-link-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: var(--text-white);
-      text-decoration: none;
-      padding: 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      transition: var(--transition-fast);
-    }
-
-    .social-link-item:hover {
-      border-color: var(--primary-red-orange);
-      transform: translateX(5px);
-    }
-
-    /* ==========================================================================
-       FOOTER
-       ========================================================================== */
-    footer {
-      background: #020202;
-      border-top: 1px solid var(--border-color);
-      padding: 4rem 0 2rem;
-      position: relative;
-      z-index: 10;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .footer-socials {
-      display: flex;
-      gap: 1.25rem;
-    }
-
-    .footer-socials a {
-      color: var(--text-gray);
-      font-size: 1.2rem;
-      transition: var(--transition-fast);
-    }
-
-    .footer-socials a:hover {
-      color: var(--primary-red-orange);
-    }
-
-    .footer-bottom {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 2rem;
-    }
+      background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 2rem;
+      transition: var(--transition-normal); position: relative; overflow: hidden;
+    }
+    .glass-card:hover { border-color: var(--border-glow); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(255, 77, 28, 0.12); }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.85rem 1.75rem; font-weight: 600; font-size: 0.95rem; border-radius: var(--radius-sm); cursor: pointer; text-decoration: none; transition: var(--transition-normal); border: none; }
+    .btn-primary { background: var(--gradient-primary); color: var(--text-white); box-shadow: 0 4px 20px rgba(255, 77, 28, 0.35); }
+    .btn-primary:hover { box-shadow: 0 6px 28px rgba(255, 138, 0, 0.5); transform: translateY(-2px); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--text-white); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+
+    .section-header { margin-bottom: 3.5rem; text-align: center; }
+    .section-header h2 { font-size: 2.5rem; margin-top: 0.5rem; margin-bottom: 1rem; }
+    .section-header p { color: var(--text-gray); max-width: 650px; margin: 0 auto; font-size: 1.05rem; }
+
+    /* Header */
+    header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); }
+    .nav-container { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+    .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-white); font-weight: 800; font-size: 1.4rem; letter-spacing: -0.03em; }
+    .logo-box { width: 40px; height: 40px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--text-white); font-weight: 800; box-shadow: 0 0 15px rgba(255, 77, 28, 0.4); }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+    .nav-link { color: var(--text-gray); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: var(--transition-fast); cursor: pointer; padding: 0.5rem 0.25rem; position: relative; }
+    .nav-link:hover, .nav-link.active { color: var(--text-white); }
+    .nav-link.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--gradient-primary); box-shadow: 0 0 8px var(--primary-red-orange); }
+    .mobile-toggle { display: none; background: none; border: none; color: var(--text-white); font-size: 1.5rem; cursor: pointer; }
+
+    /* SPA Sections */
+    .page-section { display: none; padding-top: 130px; padding-bottom: 100px; min-height: 100vh; opacity: 0; transition: opacity 0.4s ease-in-out; }
+    .page-section.active { display: block; opacity: 1; }
+
+    /* Home */
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+    .hero-title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+    .hero-subtitle { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 2rem; max-width: 600px; }
+    .hero-identity { margin-bottom: 2rem; padding-left: 1rem; border-left: 3px solid var(--primary-red-orange); }
+    .hero-identity h3 { font-size: 1.5rem; color: var(--text-white); }
+    .role-list { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; }
+    .role-pill { font-family: var(--font-mono); font-size: 0.85rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); padding: 0.25rem 0.75rem; border-radius: var(--radius-sm); color: var(--text-gray); }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    
+    .profile-widget { width: 100%; max-width: 400px; margin: 0 auto; position: relative; }
+    .profile-widget img { width: 100%; border-radius: var(--radius-md); border: 1px solid var(--border-glow); box-shadow: 0 20px 50px rgba(255, 77, 28, 0.15); object-fit: cover; aspect-ratio: 4/5; }
+    .profile-widget::after { content: ''; position: absolute; inset: -15px; border: 2px solid var(--border-glow); border-radius: var(--radius-md); z-index: -1; transform: translate(10px, 10px); }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .timeline { position: relative; padding-left: 2rem; border-left: 2px solid rgba(255, 255, 255, 0.1); margin-top: 1rem;}
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-dot { position: absolute; left: -2.4rem; top: 0.25rem; width: 14px; height: 14px; border-radius: 50%; background: var(--primary-red-orange); box-shadow: 0 0 10px var(--primary-red-orange); }
+    .timeline-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-bright-orange); margin-bottom: 0.25rem; }
+
+    /* Skills Redesign */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
+    .skill-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; transition: var(--transition-normal); }
+    .skill-card:hover { border-color: var(--primary-red-orange); transform: translateY(-3px); }
+    .skill-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.75rem;}
+    .skill-header i { font-size: 1.8rem; color: var(--accent-bright-orange); }
+    .skill-header h3 { font-size: 1.2rem; color: var(--text-white); }
+    .skill-list { list-style: none; margin-top: 1rem; }
+    .skill-list li { margin-bottom: 0.75rem; color: var(--text-gray); font-size: 0.95rem; display: flex; align-items: flex-start; gap: 0.75rem; }
+    .skill-list li::before { content: '▹'; color: var(--accent-bright-orange); font-weight: bold; }
+    .skill-list strong { color: var(--text-white); font-weight: 600; }
+
+    /* Projects */
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+    .tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(255, 255, 255, 0.05); border-radius: 4px; color: var(--text-gray); border: 1px solid rgba(255,255,255,0.1); }
+    
+    /* Blog */
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2rem; }
+    .blog-meta { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+
+    /* Architecture Lab */
+    .architecture-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 2rem; }
+    .arch-flow-visual { height: 180px; background: #0a0a0a; border: 1px solid var(--border-color); border-radius: var(--radius-sm); margin: 1.25rem 0; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-around; padding: 0 1rem; }
+    .arch-node { width: 70px; height: 70px; background: #141414; border: 1px solid var(--primary-red-orange); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.75rem; text-align: center; z-index: 2; box-shadow: 0 0 15px rgba(255, 77, 28, 0.2); }
+    .arch-node i { font-size: 1.2rem; color: var(--accent-bright-orange); margin-bottom: 0.2rem; }
+    .arch-line { position: absolute; top: 50%; left: 10%; right: 10%; height: 2px; background: rgba(255, 255, 255, 0.1); z-index: 1; }
+    .arch-pulse { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--primary-red-orange); box-shadow: 0 0 8px var(--primary-red-orange); animation: flow 3s infinite linear; }
+    @keyframes flow { 0% { left: 15%; opacity: 1; } 100% { left: 85%; opacity: 0; } }
+
+    /* Forms */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; }
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-size: 0.85rem; color: var(--text-gray); font-weight: 500; }
+    .form-input, .form-textarea { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.85rem 1rem; color: var(--text-white); font-family: var(--font-sans); transition: var(--transition-fast); }
+    .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--primary-red-orange); box-shadow: 0 0 10px rgba(255, 77, 28, 0.2); }
+    .form-textarea { min-height: 140px; resize: vertical; }
+
+    /* Footer */
+    footer { background: #020202; border-top: 1px solid var(--border-color); padding: 4rem 0 2rem; position: relative; z-index: 10; }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 2rem; }
+    .footer-socials { display: flex; gap: 1.25rem; }
+    .footer-socials a { color: var(--text-gray); font-size: 1.2rem; transition: var(--transition-fast); }
+    .footer-socials a:hover { color: var(--primary-red-orange); }
+    .footer-bottom { text-align: center; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 2rem; }
+    
+    .social-link-item { display: flex; align-items: center; gap: 1rem; color: var(--text-white); text-decoration: none; padding: 1rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); transition: var(--transition-fast); margin-bottom: 1rem;}
+    .social-link-item:hover { border-color: var(--primary-red-orange); transform: translateX(5px); }
 
-    /* ==========================================================================
-       RESPONSIVE BREAKPOINTS
-       ========================================================================== */
+    /* Responsive */
     @media (max-width: 1024px) {
-      .hero-grid, .about-grid, .resume-layout, .contact-grid {
-        grid-template-columns: 1fr;
-      }
-      .architecture-grid, .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-      .stats-bar {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .architecture-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 768px) {
-      .hero-title {
-        font-size: 2.5rem;
-      }
-      .mobile-toggle {
-        display: block;
-      }
-      .nav-links {
-        position: fixed;
-        top: 80px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 80px);
-        background: #080808;
-        flex-direction: column;
-        padding: 2rem;
-        transition: 0.3s ease-in-out;
-      }
-      .nav-links.mobile-open {
-        left: 0;
-      }
-      .stats-bar {
-        grid-template-columns: 1fr;
-      }
+      .hero-title { font-size: 2.5rem; }
+      .mobile-toggle { display: block; }
+      .nav-links { position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px); background: #080808; flex-direction: column; padding: 2rem; transition: 0.3s ease-in-out; }
+      .nav-links.mobile-open { left: 0; }
     }
   </style>
 </head>
@@ -1050,7 +207,6 @@
         <li><a class="nav-link" onclick="switchPage('blog')">Blog</a></li>
         <li><a class="nav-link" onclick="switchPage('services')">Services</a></li>
         <li><a class="nav-link" onclick="switchPage('resume')">Resume</a></li>
-        <li><a class="nav-link" onclick="switchPage('dashboard')">Dashboard</a></li>
         <li><a class="nav-link" onclick="switchPage('contact')">Contact</a></li>
       </ul>
     </div>
@@ -1070,20 +226,19 @@
             </div>
             
             <h1 class="hero-title">
-              Building Scalable Data Systems That <span class="text-gradient">Power The Future</span>
+              Building Scalable <span class="text-gradient">Data Systems</span>
             </h1>
             
             <p class="hero-subtitle">
-              Data Engineer specializing in real-time pipelines, cloud-native architectures, fintech infrastructure, and distributed data platforms.
+              Data Engineer specializing in ETL pipeline design, real-time streaming, and dimensional warehousing. I build data systems the way they should work in production—idempotent, tested, containerised, and monitored.
             </p>
 
             <div class="hero-identity">
               <h3>Victor Kipruto Rop</h3>
               <div class="role-list">
                 <span class="role-pill"><i class="fa-solid fa-database"></i> Data Engineer</span>
-                <span class="role-pill"><i class="fa-solid fa-network-wired"></i> Data Platform Architect</span>
-                <span class="role-pill"><i class="fa-solid fa-credit-card"></i> FinTech Infrastructure Builder</span>
-                <span class="role-pill"><i class="fa-solid fa-cloud"></i> Cloud Data Engineer</span>
+                <span class="role-pill"><i class="fa-solid fa-laptop-code"></i> Software Developer</span>
+                <span class="role-pill"><i class="fa-solid fa-network-wired"></i> FinTech Infrastructure Builder</span>
               </div>
             </div>
 
@@ -1100,64 +255,9 @@
             </div>
           </div>
 
-          <!-- Status Widget -->
-          <div class="status-widget glass-card">
-            <div class="terminal-header">
-              <div class="terminal-dots">
-                <span class="dot dot-red"></span>
-                <span class="dot dot-yellow"></span>
-                <span class="dot dot-green"></span>
-              </div>
-              <span class="terminal-title">system_status.sh</span>
-            </div>
-            <div class="terminal-body">
-              <p style="color: var(--text-muted); margin-bottom: 0.75rem;">// Real-time telemetry monitoring</p>
-              
-              <div class="status-row">
-                <span class="status-key">SYSTEM STATUS:</span>
-                <span class="status-val online">ONLINE</span>
-              </div>
-              <div class="status-row">
-                <span class="status-key">Portfolio:</span>
-                <span class="status-val online">ONLINE</span>
-              </div>
-              <div class="status-row">
-                <span class="status-key">Data Pipelines:</span>
-                <span class="status-val active">ACTIVE</span>
-              </div>
-              <div class="status-row">
-                <span class="status-key">Projects Built:</span>
-                <span class="status-val">15+</span>
-              </div>
-              <div class="status-row">
-                <span class="status-key">Architecture:</span>
-                <span class="status-val" style="color: var(--primary-red-orange)">SCALABLE</span>
-              </div>
-              
-              <div style="margin-top: 1.5rem; font-size: 0.75rem; color: var(--text-muted);">
-                <i class="fa-solid fa-signal" style="color: #00FF66;"></i> Kafka Clusters Streaming: 100% operational
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Home Statistics -->
-        <div class="stats-bar">
-          <div class="glass-card stat-card">
-            <div class="stat-number">15+</div>
-            <div class="stat-label">Projects Built</div>
-          </div>
-          <div class="glass-card stat-card">
-            <div class="stat-number">20+</div>
-            <div class="stat-label">Technologies</div>
-          </div>
-          <div class="glass-card stat-card">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">System Uptime Target</div>
-          </div>
-          <div class="glass-card stat-card">
-            <div class="stat-number">FinTech</div>
-            <div class="stat-label">Domain Focus</div>
+          <!-- Profile Image Replaces System Status -->
+          <div class="profile-widget">
+            <img src="1000117893.jpg" alt="Victor Kipruto Rop">
           </div>
         </div>
       </div>
@@ -1178,77 +278,40 @@
             <div class="glass-card" style="margin-bottom: 2rem;">
               <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);">Engineering Philosophy</h3>
               <p style="font-size: 1.1rem; color: var(--text-white); margin-bottom: 1rem;">
-                "I am a Data Engineer passionate about designing reliable data platforms, real-time processing systems, and cloud-based architectures that transform raw data into meaningful intelligence."
+                "I build data systems the way they should work in production—idempotent, tested, containerised, and monitored."
               </p>
               <p style="color: var(--text-gray);">
-                Specializing in high-throughput data integration, idempotent batch processing, and event-driven architectures for financial systems.
+                Comfortable across the full data stack from raw ingestion to Grafana dashboards, with every project backed by CI/CD automation on GitHub Actions.
               </p>
             </div>
 
-            <div class="glass-card">
-              <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);"><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+            <div class="glass-card" style="margin-bottom: 2rem;">
+              <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);"><i class="fa-solid fa-graduation-cap"></i> Formal Education</h3>
               <h4 style="font-size: 1.15rem; color: var(--text-white);">The Cooperative University of Kenya</h4>
-              <p style="color: var(--primary-red-orange); font-size: 0.9rem; margin-bottom: 1rem;">Core Focus Areas:</p>
-              <ul style="list-style: none; color: var(--text-gray);" class="service-list">
-                <li>Data Engineering & Pipeline Design</li>
-                <li>Data Science & Statistical Modeling</li>
-                <li>Software Engineering & Distributed Systems</li>
-                <li>Database Systems & Data Modeling</li>
+              <p style="color: var(--primary-red-orange); font-size: 0.9rem; margin-bottom: 1rem;">BSc Data Science (Expected Aug 2028)</p>
+              <ul style="list-style: none; color: var(--text-gray);">
+                <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Member, Data Science Club (workshops, industry lectures)</li>
               </ul>
             </div>
           </div>
 
           <div>
-            <h3 style="margin-bottom: 1.5rem;">Professional Identity</h3>
-            <div class="identity-cards">
-              <div class="glass-card identity-card">
-                <div class="identity-icon"><i class="fa-solid fa-database"></i></div>
-                <div>
-                  <h4>DATA ENGINEERING</h4>
-                  <p style="color: var(--text-gray); font-size: 0.9rem;">Building scalable, fault-tolerant pipelines and analytical storage systems.</p>
-                </div>
-              </div>
-
-              <div class="glass-card identity-card">
-                <div class="identity-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <div>
-                  <h4>FINTECH ENGINEERING</h4>
-                  <p style="color: var(--text-gray); font-size: 0.9rem;">Creating reliable transaction processing and payment reconciliation infrastructure.</p>
-                </div>
-              </div>
-
-              <div class="glass-card identity-card">
-                <div class="identity-icon"><i class="fa-solid fa-cloud"></i></div>
-                <div>
-                  <h4>CLOUD ARCHITECTURE</h4>
-                  <p style="color: var(--text-gray); font-size: 0.9rem;">Designing resilient, cloud-native data platforms on GCP and modern serverless stack.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Timeline -->
-            <h3 style="margin-top: 2.5rem; margin-bottom: 1.5rem;">Growth Timeline</h3>
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">FOUNDATION</div>
-                <div class="timeline-title">Education & Core Foundations</div>
-                <p style="color: var(--text-gray); font-size: 0.85rem;">Mastering algorithms, software engineering principles, and distributed database models at CUK.</p>
-              </div>
-
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">SPECIALIZATION</div>
-                <div class="timeline-title">Data & FinTech Infrastructure</div>
-                <p style="color: var(--text-gray); font-size: 0.85rem;">Designing real-time event streaming architectures with Kafka, Airflow, and M-Pesa API integration pipelines.</p>
-              </div>
-
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">FUTURE GOALS</div>
-                <div class="timeline-title">Global Technology Leadership</div>
-                <p style="color: var(--text-gray); font-size: 0.85rem;">Architecting enterprise-grade distributed platforms powering multi-region financial platforms.</p>
-              </div>
+            <!-- Self-Taught Developer Detail -->
+            <div class="glass-card" style="margin-bottom: 2rem; border-color: var(--border-glow);">
+              <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);"><i class="fa-solid fa-laptop-code"></i> Self-Taught Developer</h3>
+              <h4 style="font-size: 1.15rem; color: var(--text-white);">Forged in the Terminal</h4>
+              <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 1rem; margin-bottom: 1rem;">
+                Beyond the university curriculum, my core engineering capabilities were built through thousands of hours of self-directed learning. Driven by curiosity and a relentless desire to build production-grade systems, I taught myself modern data engineering from scratch.
+              </p>
+              <ul style="list-style: none; color: var(--text-gray);">
+                <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-terminal" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Mastered Python, SQL, and Bash by building real pipelines.</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-server" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Learned containerization (Docker) to guarantee reproducibility.</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-bolt" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Taught myself distributed streaming with Apache Kafka.</li>
+                <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-code-branch" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Implemented rigorous testing (Pytest) and CI/CD pipelines entirely on my own initiative.</li>
+              </ul>
+              <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 1rem;">
+                This self-taught foundation gave me a deep resilience and problem-solving mindset—traits that allow me to dive into any documentation and quickly master new architectural paradigms.
+              </p>
             </div>
           </div>
         </div>
@@ -1262,65 +325,89 @@
       <div class="container">
         <div class="section-header">
           <span class="badge">Tech Stack & Tools</span>
-          <h2>Interactive Skill Matrix</h2>
-          <p>Production-tested tools and frameworks used across data pipelines, cloud setups, and backend services.</p>
+          <h2>Detailed Engineering Toolkit</h2>
+          <p>Production-tested tools and frameworks utilized across data pipelines, cloud infrastructure, and data quality testing.</p>
         </div>
 
-        <!-- Data Engineering Category -->
-        <div class="skills-category">
-          <h3 class="skills-category-title"><i class="fa-solid fa-diagram-project"></i> DATA ENGINEERING</h3>
-          <div class="skills-grid">
-            <div class="skill-card"><i class="fa-brands fa-python"></i><span>Python</span></div>
-            <div class="skill-card"><i class="fa-solid fa-code"></i><span>SQL</span></div>
-            <div class="skill-card"><i class="fa-solid fa-database"></i><span>PostgreSQL</span></div>
-            <div class="skill-card"><i class="fa-solid fa-wind"></i><span>Apache Airflow</span></div>
-            <div class="skill-card"><i class="fa-solid fa-cubes"></i><span>dbt</span></div>
-            <div class="skill-card"><i class="fa-solid fa-bolt"></i><span>Apache Kafka</span></div>
-            <div class="skill-card"><i class="fa-solid fa-fire"></i><span>Apache Spark</span></div>
+        <div class="skills-grid">
+          <!-- Languages -->
+          <div class="skill-card">
+            <div class="skill-header">
+              <i class="fa-solid fa-code"></i>
+              <h3>Programming Languages</h3>
+            </div>
+            <ul class="skill-list">
+              <li><strong>Python:</strong> Core language for scripting, pipeline orchestration (Pandas, NumPy, SQLAlchemy), and automated testing.</li>
+              <li><strong>SQL:</strong> Advanced querying, recursive CTEs, and schema design on PostgreSQL and MySQL.</li>
+              <li><strong>Shell / Bash:</strong> System administration, Docker scripts, and environment automation.</li>
+            </ul>
           </div>
-        </div>
 
-        <!-- Cloud Platform Category -->
-        <div class="skills-category">
-          <h3 class="skills-category-title"><i class="fa-solid fa-cloud"></i> CLOUD PLATFORM</h3>
-          <div class="skills-grid">
-            <div class="skill-card"><i class="fa-brands fa-google"></i><span>GCP</span></div>
-            <div class="skill-card"><i class="fa-solid fa-server"></i><span>BigQuery</span></div>
-            <div class="skill-card"><i class="fa-solid fa-arrows-split-up-and-left"></i><span>Dataflow</span></div>
-            <div class="skill-card"><i class="fa-solid fa-box-archive"></i><span>Cloud Storage</span></div>
-            <div class="skill-card"><i class="fa-solid fa-sliders"></i><span>Cloud Composer</span></div>
+          <!-- ETL & Pipelines -->
+          <div class="skill-card">
+            <div class="skill-header">
+              <i class="fa-solid fa-network-wired"></i>
+              <h3>ETL & Pipelines</h3>
+            </div>
+            <ul class="skill-list">
+              <li><strong>Apache Airflow:</strong> Orchestrating complex DAG designs and multi-stage ETL dependencies.</li>
+              <li><strong>Apache Kafka:</strong> Building producer/consumer models for live transaction ingestion with real-time aggregation.</li>
+              <li><strong>Data Processing:</strong> Pandas, NumPy, and SQLAlchemy for high-throughput batch transformations.</li>
+              <li><strong>Faker:</strong> Generating synthetic data distributions for rigorous pipeline testing.</li>
+            </ul>
           </div>
-        </div>
 
-        <!-- Backend Category -->
-        <div class="skills-category">
-          <h3 class="skills-category-title"><i class="fa-solid fa-gears"></i> BACKEND DEVELOPMENT</h3>
-          <div class="skills-grid">
-            <div class="skill-card"><i class="fa-solid fa-bolt-lightning"></i><span>FastAPI</span></div>
-            <div class="skill-card"><i class="fa-solid fa-flask"></i><span>Flask</span></div>
-            <div class="skill-card"><i class="fa-solid fa-network-wired"></i><span>REST APIs</span></div>
-            <div class="skill-card"><i class="fa-solid fa-sitemap"></i><span>Microservices</span></div>
+          <!-- Cloud & DevOps -->
+          <div class="skill-card">
+            <div class="skill-header">
+              <i class="fa-solid fa-cloud"></i>
+              <h3>Cloud & DevOps</h3>
+            </div>
+            <ul class="skill-list">
+              <li><strong>AWS:</strong> Implementing S3 for data lake storage and EC2 for hosting infrastructure.</li>
+              <li><strong>Docker & Compose:</strong> Containerising full stacks (Airflow, Kafka, Postgres) for single-command reproducibility.</li>
+              <li><strong>GitHub Actions:</strong> Automating CI/CD pipelines, validating setups on commit, and gating pushes with Pytest, Black, isort, and mypy.</li>
+            </ul>
           </div>
-        </div>
 
-        <!-- Data Visualization Category -->
-        <div class="skills-category">
-          <h3 class="skills-category-title"><i class="fa-solid fa-chart-column"></i> DATA VISUALIZATION</h3>
-          <div class="skills-grid">
-            <div class="skill-card"><i class="fa-solid fa-chart-line"></i><span>Streamlit</span></div>
-            <div class="skill-card"><i class="fa-solid fa-chart-pie"></i><span>Metabase</span></div>
-            <div class="skill-card"><i class="fa-solid fa-chart-area"></i><span>Power BI</span></div>
+          <!-- Warehousing -->
+          <div class="skill-card">
+            <div class="skill-header">
+              <i class="fa-solid fa-database"></i>
+              <h3>Warehousing & Architecture</h3>
+            </div>
+            <ul class="skill-list">
+              <li><strong>Dimensional Modelling:</strong> Designing robust Star Schemas with Fact & Dimension tables.</li>
+              <li><strong>SCD Type 2:</strong> Implementing Slowly Changing Dimensions to preserve full historical change timelines on customer metrics.</li>
+              <li><strong>Data Lake Patterns:</strong> Multi-tier architecture transitioning from CSV staging through OLTP into warehouse schemas.</li>
+            </ul>
           </div>
-        </div>
 
-        <!-- DevOps Category -->
-        <div class="skills-category">
-          <h3 class="skills-category-title"><i class="fa-solid fa-terminal"></i> DEVOPS & INFRASTRUCTURE</h3>
-          <div class="skills-grid">
-            <div class="skill-card"><i class="fa-brands fa-docker"></i><span>Docker</span></div>
-            <div class="skill-card"><i class="fa-brands fa-linux"></i><span>Linux</span></div>
-            <div class="skill-card"><i class="fa-brands fa-github"></i><span>GitHub Actions</span></div>
-            <div class="skill-card"><i class="fa-solid fa-arrows-spin"></i><span>CI/CD</span></div>
+          <!-- Data Quality -->
+          <div class="skill-card">
+            <div class="skill-header">
+              <i class="fa-solid fa-shield-halved"></i>
+              <h3>Data Quality & Reliability</h3>
+            </div>
+            <ul class="skill-list">
+              <li><strong>Idempotent Upserts:</strong> Ensuring jobs can re-run at any point without producing duplicate rows.</li>
+              <li><strong>Deduplication Logic:</strong> Aggregating quantities on conflicting records rather than blindly dropping them.</li>
+              <li><strong>Validation Engines:</strong> Building multi-stage cleaning pipelines (null handling, type coercion) via config-driven rules.</li>
+              <li><strong>Pytest:</strong> Comprehensive unit & integration testing (null injection, coercion failures).</li>
+            </ul>
+          </div>
+
+          <!-- Visualisation -->
+          <div class="skill-card">
+            <div class="skill-header">
+              <i class="fa-solid fa-chart-line"></i>
+              <h3>Visualisation</h3>
+            </div>
+            <ul class="skill-list">
+              <li><strong>Grafana:</strong> Connecting PostgreSQL output layers for live operational dashboards on market trends.</li>
+              <li><strong>Plotly:</strong> Producing live visualization outputs directly from Kafka consumer layers.</li>
+              <li><strong>Jupyter Notebooks:</strong> Interactive data exploration and real-time streaming feedback.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -1332,121 +419,110 @@
     <section id="projects" class="page-section">
       <div class="container">
         <div class="section-header">
-          <span class="badge">Portfolio & Case Studies</span>
-          <h2>Featured Systems & Pipelines</h2>
+          <span class="badge">Portfolio</span>
+          <h2>Production Data Systems</h2>
         </div>
 
-        <!-- FEATURED PROJECT: PesaGuard -->
-        <div class="glass-card featured-project">
-          <div class="badge" style="margin-bottom: 1rem;"><i class="fa-solid fa-star"></i> FLAGSHIP PROJECT</div>
-          <h3 style="font-size: 2rem; color: var(--text-white);">PesaGuard</h3>
-          <p style="font-size: 1.2rem; color: var(--accent-bright-orange); margin-bottom: 1rem;">Real-Time M-Pesa Reconciliation Platform</p>
-          <p style="color: var(--text-gray);">
-            A fintech infrastructure platform designed to monitor, reconcile, analyze, and secure mobile money transactions in real time. Built to handle network latencies, API timeouts, and double-entry ledger audits.
-          </p>
-
-          <div class="arch-diagram-box">
-Mobile Money APIs  --->  API Gateway  --->  Kafka Streaming
-                                                 |
-Analytics Layer   <---  Data Warehouse <---  Processing Engine
-          </div>
-
-          <div class="tag-cloud">
-            <span class="tag">Apache Kafka</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Docker</span>
-            <span class="tag">dbt</span>
-            <span class="tag">FinTech</span>
-          </div>
-
-          <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem;">Key Solved Challenges:</h4>
-          <ul class="service-list" style="margin-bottom: 1.5rem;">
-            <li>Zero transaction loss during upstream provider maintenance windows via Kafka message persistence.</li>
-            <li>Real-time automated reconciliation of M-Pesa ledger logs against internal enterprise DBs.</li>
-            <li>Sub-second fraud pattern anomaly detection on high-frequency transactions.</li>
-          </ul>
-
-          <a href="https://github.com/victorkiprutorop" target="_blank" class="btn btn-primary">
-            <i class="fa-brands fa-github"></i> View Codebase
-          </a>
-        </div>
-
-        <!-- Additional Projects Grid -->
         <div class="project-grid">
+          
           <!-- Project 1 -->
           <div class="glass-card">
-            <h3>MPESA Real-Time Streaming Pipeline</h3>
-            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">
-              Event-driven pipeline ingesting webhook payload streams from payment gateways into analytical stores with schema evolution support.
+            <h3>Kenyan Market ETL Pipeline</h3>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+              Designed an idempotent upsert pipeline allowing re-runs without producing duplicate rows. Implemented custom deduplication logic preserving data fidelity, achieved a 38/38 passing unit test score (Pytest), and connected the output to Grafana for live dashboards. CI runs on GitHub Actions.
             </p>
             <div class="tag-cloud">
-              <span class="tag">Kafka</span>
               <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
               <span class="tag">PostgreSQL</span>
-              <span class="tag">Docker</span>
-              <span class="tag">Avro</span>
+              <span class="tag">SQLAlchemy</span>
+              <span class="tag">Grafana</span>
+              <span class="tag">GitHub Actions</span>
             </div>
-            <a href="https://github.com/victorkiprutorop" target="_blank" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">
-              <i class="fa-brands fa-github"></i> View Repository
-            </a>
+            <a href="https://github.com/Victor-Kipruto-Rop" target="_blank" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;"><i class="fa-brands fa-github"></i> View Repository</a>
           </div>
 
           <!-- Project 2 -->
           <div class="glass-card">
-            <h3>Banking Data Engineering Platform</h3>
-            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">
-              Enterprise analytics data pipelines supporting Equity Bank ETL workflows, KCB Data Warehouse modeling, and Absa transaction streaming modules.
+            <h3>M-Pesa Airflow Transaction Pipeline</h3>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+              Built a DAG-orchestrated ETL pipeline for M-Pesa processing using a synthetic data generator (Faker). Implemented a config-driven rule engine for multi-stage cleaning. Containerised the Airflow + PostgreSQL stack with Docker Compose for full reproducibility. CI/CD test pass rate gates all merges.
             </p>
             <div class="tag-cloud">
-              <span class="tag">Airflow</span>
-              <span class="tag">BigQuery</span>
-              <span class="tag">SQL</span>
-              <span class="tag">dbt</span>
+              <span class="tag">Apache Airflow</span>
+              <span class="tag">Python</span>
+              <span class="tag">Faker</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Docker Compose</span>
             </div>
-            <a href="https://github.com/victorkiprutorop" target="_blank" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">
-              <i class="fa-brands fa-github"></i> View Repository
-            </a>
+            <a href="https://github.com/Victor-Kipruto-Rop" target="_blank" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;"><i class="fa-brands fa-github"></i> View Repository</a>
           </div>
 
           <!-- Project 3 -->
           <div class="glass-card">
-            <h3>Government Data Analytics Platform</h3>
-            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">
-              High-throughput data ingestion framework designed for KRA (Kenya Revenue Authority) compliance analytics and automated ledger aggregation.
+            <h3>Real-Time Transaction Streaming</h3>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+              Built a Kafka producer/consumer model for live transaction ingestion with real-time aggregation. Implemented consumer group design for horizontal scalability with exactly-once semantics. Produced live Plotly visualisations directly from the consumer layer inside Jupyter.
             </p>
             <div class="tag-cloud">
-              <span class="tag">PySpark</span>
-              <span class="tag">GCP</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">Power BI</span>
+              <span class="tag">Apache Kafka</span>
+              <span class="tag">Python</span>
+              <span class="tag">Jupyter</span>
+              <span class="tag">Plotly</span>
+              <span class="tag">Docker</span>
             </div>
-            <a href="https://github.com/victorkiprutorop" target="_blank" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">
-              <i class="fa-brands fa-github"></i> View Repository
-            </a>
+            <a href="https://github.com/Victor-Kipruto-Rop" target="_blank" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;"><i class="fa-brands fa-github"></i> View Repository</a>
           </div>
+
+          <!-- Project 4 -->
+          <div class="glass-card">
+            <h3>Cloud ETL Ingestion Pipeline</h3>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+              Processed 1.6M+ rows at 70,000 rows/sec keeping peak memory under 300MB using chunked reading. Cut load time from 4 minutes to 45 seconds by tuning connection pooling. Separated Extract, Transform, and Load into independent Docker microservices with exponential-backoff retries.
+            </p>
+            <div class="tag-cloud">
+              <span class="tag">AWS S3</span>
+              <span class="tag">Python</span>
+              <span class="tag">Docker</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">SQLAlchemy</span>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="glass-card">
+            <h3>End-to-End SQL Pipeline Portfolio</h3>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+              Designed a multi-tier data lake pattern from CSV staging to OLTP into a star schema warehouse. Deployed SCD Type 2 on customer dimensions and wrote recursive CTEs to surface cross-platform revenue shifts and customer retention metrics.
+            </p>
+            <div class="tag-cloud">
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">SCD Type 2</span>
+              <span class="tag">AWS S3</span>
+              <span class="tag">SQLAlchemy</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
     <!-- ==========================================================================
-         PAGE 5: ARCHITECTURE LAB PAGE
+         PAGE 5: ARCHITECTURE LAB PAGE (Kept Generic as per previous, matching Data Eng skills)
          ========================================================================== -->
     <section id="architecture" class="page-section">
       <div class="container">
         <div class="section-header">
           <span class="badge">Interactive Systems Lab</span>
-          <h2>Engineering Architecture Laboratory</h2>
-          <p>System blueprints demonstrating streaming topologies, CDC patterns, and enterprise cloud data platforms.</p>
+          <h2>Engineering Architecture</h2>
+          <p>Visual blueprints of topologies I build and maintain.</p>
         </div>
 
         <div class="architecture-grid">
-          <!-- Architecture 1 -->
           <div class="glass-card arch-card">
             <div>
-              <h3>1. Real-Time Streaming Architecture</h3>
-              <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.25rem;">High-throughput event streaming for high-volume transactions.</p>
-              
+              <h3>Real-Time Streaming (Kafka)</h3>
+              <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.25rem;">Exactly-once semantics for financial transactions.</p>
               <div class="arch-flow-visual">
                 <div class="arch-line"></div>
                 <div class="arch-pulse"></div>
@@ -1454,85 +530,19 @@ Analytics Layer   <---  Data Warehouse <---  Processing Engine
                 <div class="arch-node"><i class="fa-solid fa-bolt"></i>Kafka</div>
                 <div class="arch-node"><i class="fa-solid fa-database"></i>Data Lake</div>
               </div>
-
-              <p><strong>Problem:</strong> High latency in traditional batch processing causing delayed transaction visibility.</p>
-              <p><strong>Solution:</strong> Sub-second streaming with Kafka & Flink / Spark Streaming engine.</p>
-            </div>
-            <div style="margin-top: 1rem;">
-              <div class="tag-cloud">
-                <span class="tag">Kafka</span><span class="tag">Python</span><span class="tag">PostgreSQL</span>
-              </div>
             </div>
           </div>
 
-          <!-- Architecture 2 -->
           <div class="glass-card arch-card">
             <div>
-              <h3>2. Modern Data Warehouse Architecture</h3>
-              <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.25rem;">Modular ELT stack for enterprise reporting.</p>
-              
+              <h3>Batch Orchestration (Airflow)</h3>
+              <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.25rem;">DAG-driven idempotent processing pipelines.</p>
               <div class="arch-flow-visual">
                 <div class="arch-line"></div>
                 <div class="arch-pulse" style="animation-delay: 1s;"></div>
                 <div class="arch-node"><i class="fa-solid fa-server"></i>Sources</div>
-                <div class="arch-node"><i class="fa-solid fa-cubes"></i>dbt Core</div>
-                <div class="arch-node"><i class="fa-solid fa-chart-column"></i>BI Dash</div>
-              </div>
-
-              <p><strong>Problem:</strong> Rigid ETL jobs breaking when upstream database schemas modify.</p>
-              <p><strong>Solution:</strong> ELT paradigm storing raw JSON and modeling via dbt SQL tests.</p>
-            </div>
-            <div style="margin-top: 1rem;">
-              <div class="tag-cloud">
-                <span class="tag">BigQuery</span><span class="tag">dbt</span><span class="tag">Airflow</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Architecture 3 -->
-          <div class="glass-card arch-card">
-            <div>
-              <h3>3. Change Data Capture (CDC) Pipeline</h3>
-              <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.25rem;">Near zero-impact database replication.</p>
-              
-              <div class="arch-flow-visual">
-                <div class="arch-line"></div>
-                <div class="arch-pulse" style="animation-delay: 1.5s;"></div>
-                <div class="arch-node"><i class="fa-solid fa-database"></i>OLTP DB</div>
-                <div class="arch-node"><i class="fa-solid fa-arrows-rotate"></i>Debezium</div>
-                <div class="arch-node"><i class="fa-solid fa-box-archive"></i>OLAP DW</div>
-              </div>
-
-              <p><strong>Problem:</strong> Heavy analytical queries slowing down primary production DBs.</p>
-              <p><strong>Solution:</strong> Reading PostgreSQL WAL logs directly without production querying.</p>
-            </div>
-            <div style="margin-top: 1rem;">
-              <div class="tag-cloud">
-                <span class="tag">PostgreSQL</span><span class="tag">Debezium</span><span class="tag">Kafka</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Architecture 4 -->
-          <div class="glass-card arch-card">
-            <div>
-              <h3>4. Cloud Data Platform Architecture</h3>
-              <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.25rem;">Serverless cloud-native platform on GCP.</p>
-              
-              <div class="arch-flow-visual">
-                <div class="arch-line"></div>
-                <div class="arch-pulse" style="animation-delay: 2s;"></div>
-                <div class="arch-node"><i class="fa-brands fa-google"></i>GCS Storage</div>
-                <div class="arch-node"><i class="fa-solid fa-sliders"></i>Composer</div>
-                <div class="arch-node"><i class="fa-solid fa-brain"></i>BigQuery ML</div>
-              </div>
-
-              <p><strong>Problem:</strong> High infrastructure overhead and server management costs.</p>
-              <p><strong>Solution:</strong> Fully managed GCP serverless pipeline components.</p>
-            </div>
-            <div style="margin-top: 1rem;">
-              <div class="tag-cloud">
-                <span class="tag">GCP</span><span class="tag">Cloud Storage</span><span class="tag">BigQuery</span>
+                <div class="arch-node"><i class="fa-solid fa-wind"></i>Airflow</div>
+                <div class="arch-node"><i class="fa-solid fa-chart-column"></i>Grafana</div>
               </div>
             </div>
           </div>
@@ -1546,62 +556,45 @@ Analytics Layer   <---  Data Warehouse <---  Processing Engine
     <section id="blog" class="page-section">
       <div class="container">
         <div class="section-header">
-          <span class="badge">Insights & Research</span>
-          <h2>Technical Articles & Writing</h2>
-        </div>
-
-        <div class="blog-controls">
-          <input type="text" id="blog-search" class="search-input" placeholder="Search technical articles (e.g. Kafka, Pipelines, Cloud)...">
-          <button class="filter-btn active" onclick="filterBlog('ALL')">All Categories</button>
-          <button class="filter-btn" onclick="filterBlog('DATA ENGINEERING')">Data Engineering</button>
-          <button class="filter-btn" onclick="filterBlog('FINTECH')">FinTech</button>
-          <button class="filter-btn" onclick="filterBlog('CLOUD')">Cloud</button>
+          <span class="badge">My Journey</span>
+          <h2>Personal Reflections & Blogs</h2>
         </div>
 
         <div class="blog-grid" id="blog-grid">
           <!-- Article 1 -->
-          <div class="glass-card blog-item" data-category="DATA ENGINEERING">
+          <div class="glass-card blog-item">
             <div class="blog-meta">
-              <span><i class="fa-regular fa-calendar"></i> June 2026</span>
-              <span><i class="fa-regular fa-clock"></i> 8 min read</span>
+              <span><i class="fa-regular fa-calendar"></i> Recent</span>
             </div>
-            <h3 style="margin-bottom: 0.75rem;">Building Production ETL Pipelines with Airflow & dbt</h3>
+            <h3 style="margin-bottom: 0.75rem;">From Curiosity to Code: My Self-Taught Journey</h3>
             <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-              A step-by-step technical guide to orchestrating idempotent dbt transformations with Apache Airflow DAGs.
+              How I started programming, late nights in the terminal, and the transition from basic Python scripts to deploying containerized Kafka clusters all on my own.
             </p>
-            <div class="tag-cloud">
-              <span class="tag">Airflow</span><span class="tag">dbt</span><span class="tag">Python</span>
-            </div>
+            <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Read More</a>
           </div>
 
           <!-- Article 2 -->
-          <div class="glass-card blog-item" data-category="FINTECH">
+          <div class="glass-card blog-item">
             <div class="blog-meta">
-              <span><i class="fa-regular fa-calendar"></i> May 2026</span>
-              <span><i class="fa-regular fa-clock"></i> 12 min read</span>
+              <span><i class="fa-regular fa-calendar"></i> Archive</span>
             </div>
-            <h3 style="margin-bottom: 0.75rem;">Designing High-Throughput Reconciliation Engines for Mobile Money</h3>
+            <h3 style="margin-bottom: 0.75rem;">Why Idempotency Changed How I Write Code</h3>
             <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-              How to handle transaction state mismatches, network retries, and ledger consistency in M-Pesa setups.
+              My lessons learned from breaking pipelines. Why deliberate constraints—like ensuring a job can rerun infinitely without duplicating data—matter more than raw speed.
             </p>
-            <div class="tag-cloud">
-              <span class="tag">FinTech</span><span class="tag">Kafka</span><span class="tag">PostgreSQL</span>
-            </div>
+            <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Read More</a>
           </div>
 
           <!-- Article 3 -->
-          <div class="glass-card blog-item" data-category="CLOUD">
+          <div class="glass-card blog-item">
             <div class="blog-meta">
-              <span><i class="fa-regular fa-calendar"></i> April 2026</span>
-              <span><i class="fa-regular fa-clock"></i> 6 min read</span>
+              <span><i class="fa-regular fa-calendar"></i> Looking Ahead</span>
             </div>
-            <h3 style="margin-bottom: 0.75rem;">Optimizing BigQuery Storage Costs and Partitioning Strategies</h3>
+            <h3 style="margin-bottom: 0.75rem;">The Road Ahead: FinTech Infrastructure</h3>
             <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-              Practical methods for clustering and partitioning daily transaction tables to cut query costs by 70%.
+              My future plans in Data Engineering. Combining my formal university education in Data Science with my self-taught infrastructure skills to build reliable African FinTech backbones.
             </p>
-            <div class="tag-cloud">
-              <span class="tag">GCP</span><span class="tag">BigQuery</span><span class="tag">SQL</span>
-            </div>
+            <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Read More</a>
           </div>
         </div>
       </div>
@@ -1615,63 +608,21 @@ Analytics Layer   <---  Data Warehouse <---  Processing Engine
         <div class="section-header">
           <span class="badge">Consulting & Services</span>
           <h2>Data Infrastructure Engineering</h2>
-          <p>Architecting custom, production-ready data setups tailored for scale, security, and performance.</p>
         </div>
 
-        <div class="services-grid">
-          <!-- Service 1 -->
+        <div class="project-grid">
           <div class="glass-card">
-            <div class="service-icon"><i class="fa-solid fa-gears"></i></div>
-            <h3>DATA PIPELINE ENGINEERING</h3>
-            <ul class="service-list">
-              <li>Custom ETL/ELT pipeline development</li>
-              <li>Data warehouse modeling & dbt setup</li>
-              <li>Legacy pipeline optimization & query tuning</li>
-              <li>Automated data quality testing</li>
-            </ul>
+            <h3 style="color: var(--accent-bright-orange); margin-bottom: 1rem;"><i class="fa-solid fa-gears"></i> ETL Pipeline Design</h3>
+            <p style="color: var(--text-gray); font-size: 0.95rem;">Building robust, idempotent Python/SQL pipelines orchestrated with Apache Airflow. Automated testing and data quality validation built-in.</p>
           </div>
-
-          <!-- Service 2 -->
           <div class="glass-card">
-            <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
-            <h3>REAL-TIME DATA SYSTEMS</h3>
-            <ul class="service-list">
-              <li>Apache Kafka setup & cluster design</li>
-              <li>Event-driven architecture implementation</li>
-              <li>Streaming data ingestion solutions</li>
-              <li>Sub-second anomaly alert pipelines</li>
-            </ul>
+            <h3 style="color: var(--accent-bright-orange); margin-bottom: 1rem;"><i class="fa-solid fa-database"></i> Data Warehousing</h3>
+            <p style="color: var(--text-gray); font-size: 0.95rem;">Designing Star Schemas, managing SCD Type 2 dimensions, and executing high-throughput batch loads into PostgreSQL environments.</p>
           </div>
-
-          <!-- Service 3 -->
           <div class="glass-card">
-            <div class="service-icon"><i class="fa-solid fa-wallet"></i></div>
-            <h3>FINTECH TECHNOLOGY</h3>
-            <ul class="service-list">
-              <li>M-Pesa & mobile payment API integration</li>
-              <li>Transaction monitoring & reconciliation engines</li>
-              <li>Financial data ledger modeling</li>
-              <li>Automated compliance reporting</li>
-            </ul>
+            <h3 style="color: var(--accent-bright-orange); margin-bottom: 1rem;"><i class="fa-solid fa-bolt"></i> Real-Time Streaming</h3>
+            <p style="color: var(--text-gray); font-size: 0.95rem;">Deploying Apache Kafka infrastructure via Docker Compose for low-latency message streaming and FinTech transaction aggregation.</p>
           </div>
-
-          <!-- Service 4 -->
-          <div class="glass-card">
-            <div class="service-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-            <h3>CLOUD DATA SOLUTIONS</h3>
-            <ul class="service-list">
-              <li>GCP cloud data platform setup</li>
-              <li>Serverless pipeline orchestration</li>
-              <li>Cost optimization & storage partitioning</li>
-              <li>CI/CD data pipeline automation</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="cta-banner">
-          <h2>Let's build reliable data systems together.</h2>
-          <p style="color: var(--text-gray); margin-top: 0.5rem; margin-bottom: 1.5rem;">Need an end-to-end data platform or fintech pipeline solution?</p>
-          <button class="btn btn-primary" onclick="switchPage('contact')">Get In Touch</button>
         </div>
       </div>
     </section>
@@ -1686,63 +637,58 @@ Analytics Layer   <---  Data Warehouse <---  Processing Engine
           <h2>Interactive Resume</h2>
         </div>
 
-        <div class="resume-actions">
-          <a href="#" onclick="alert('Resume PDF Download trigger. Link your PDF file path here!'); return false;" class="btn btn-primary">
+        <div class="resume-actions" style="display: flex; justify-content: flex-end; margin-bottom: 2rem;">
+          <a href="Victor kipruto Rop(1).PDF" download class="btn btn-primary">
             <i class="fa-solid fa-download"></i> Download PDF Resume
           </a>
         </div>
 
-        <div class="resume-layout">
+        <div class="about-grid">
           <div>
             <div class="glass-card" style="margin-bottom: 1.5rem;">
-              <h3 class="resume-section-title">Professional Summary</h3>
+              <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-red-orange); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Professional Summary</h3>
               <p style="color: var(--text-gray); font-size: 0.95rem;">
-                Data Engineer specializing in building scalable real-time processing pipelines, cloud data platforms, and transaction reconciliation systems for financial technology.
+                Data Engineering with production experience in ETL pipeline design, real-time streaming, and dimensional warehousing. I build data systems the way they should work in production—idempotent, tested, containerised, and monitored. Comfortable across the full data stack, with every project backed by CI/CD automation on GitHub Actions.
               </p>
             </div>
 
             <div class="glass-card" style="margin-bottom: 1.5rem;">
-              <h3 class="resume-section-title">Certifications</h3>
-              <ul class="service-list">
-                <li>Google Cloud Certified Professional Data Engineer (In View)</li>
-                <li>Apache Kafka Developer Certification</li>
-                <li>dbt Fundamentals Certified</li>
-              </ul>
-            </div>
-
-            <div class="glass-card">
-              <h3 class="resume-section-title">Achievements</h3>
-              <ul class="service-list">
-                <li>Engineered 15+ real-world production projects and pipelines.</li>
-                <li>Achieved sub-second message streaming processing for financial events.</li>
-              </ul>
+              <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-red-orange); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Education</h3>
+              <div style="margin-bottom: 1rem;">
+                <h4 style="color: var(--text-white);">The Cooperative University of Kenya, Nairobi</h4>
+                <p style="color: var(--accent-bright-orange); font-size: 0.85rem;">BSc Data Science (Expected August 2028)</p>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Member, Data Science Club: regional challenges, workshops, industry lectures.</p>
+              </div>
+              <div>
+                <h4 style="color: var(--text-white);">St. Patrick's High School, Iten</h4>
+                <p style="color: var(--accent-bright-orange); font-size: 0.85rem;">Kenya Certificate of Secondary Education (KCSE) 2023</p>
+                <p style="color: var(--text-gray); font-size: 0.9rem;">Volunteer Maths & Science Tutor, Community Tutoring Program.</p>
+              </div>
             </div>
           </div>
 
           <div>
-            <div class="glass-card" style="margin-bottom: 1.5rem;">
-              <h3 class="resume-section-title">Education</h3>
-              <h4 style="font-size: 1.1rem; color: var(--text-white);">The Cooperative University of Kenya</h4>
-              <p style="color: var(--primary-red-orange); font-size: 0.85rem; margin-bottom: 0.5rem;">Bachelor's / Specialized Studies in Data Engineering & Computer Science</p>
-              <p style="color: var(--text-gray); font-size: 0.9rem;">Focused on database management systems, algorithms, distributed systems, and statistics.</p>
-            </div>
-
             <div class="glass-card">
-              <h3 class="resume-section-title">Key Projects & Architectural Highlights</h3>
+              <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-red-orange); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Key Engineering Projects</h3>
               
               <div style="margin-bottom: 1.5rem;">
-                <h4 style="color: var(--text-white);">PesaGuard - Real-Time Transaction Platform</h4>
-                <p style="color: var(--text-muted); font-size: 0.8rem;">Lead Engineer & Architect</p>
+                <h4 style="color: var(--text-white);">Kenyan Market ETL Pipeline</h4>
                 <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.25rem;">
-                  Architected real-time M-Pesa streaming reconciliation platform using Kafka, FastAPI, and Docker.
+                  Achieved 38/38 passing unit tests covering null injection, type coercion failures, and empty datasets. Connected PostgreSQL layer to Grafana. CI via GitHub Actions with Black, isort, and mypy gating.
                 </p>
               </div>
 
               <div style="margin-bottom: 1.5rem;">
-                <h4 style="color: var(--text-white);">Banking Data Platform (Equity/KCB/Absa Case Studies)</h4>
-                <p style="color: var(--text-muted); font-size: 0.8rem;">Data Pipeline Architect</p>
+                <h4 style="color: var(--text-white);">M-Pesa Airflow Transaction Pipeline</h4>
                 <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.25rem;">
-                  Designed dbt models and Airflow orchestrations for automated transaction ledger aggregations.
+                  DAG-orchestrated ETL pipeline with synthetic data generation (Faker). Config-driven rule engine for multi-stage cleaning. Containerised with Docker Compose.
+                </p>
+              </div>
+
+              <div style="margin-bottom: 1.5rem;">
+                <h4 style="color: var(--text-white);">Real-Time Transaction Streaming System</h4>
+                <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.25rem;">
+                  Kafka producer/consumer model. Consumer group design for horizontal scalability and exactly-once semantics. Live visualisations using Plotly inside Jupyter.
                 </p>
               </div>
             </div>
@@ -1752,65 +698,14 @@ Analytics Layer   <---  Data Warehouse <---  Processing Engine
     </section>
 
     <!-- ==========================================================================
-         PAGE 9: DEVELOPER DASHBOARD PAGE
-         ========================================================================== -->
-    <section id="dashboard" class="page-section">
-      <div class="container">
-        <div class="section-header">
-          <span class="badge">Telemetry & Analytics</span>
-          <h2>Developer Dashboard</h2>
-          <p>Real-time analytics and telemetry parameters of systems, repositories, and build environments.</p>
-        </div>
-
-        <div class="dashboard-grid">
-          <div class="glass-card dash-widget">
-            <span style="color: var(--text-muted); font-size: 0.85rem;">GITHUB REPOSITORIES</span>
-            <div class="dash-value text-gradient">24+</div>
-            <span style="color: #00FF66; font-size: 0.75rem;"><i class="fa-solid fa-code-commit"></i> Active pushes this month</span>
-          </div>
-
-          <div class="glass-card dash-widget">
-            <span style="color: var(--text-muted); font-size: 0.85rem;">TOTAL PROJECTS BUILT</span>
-            <div class="dash-value text-gradient">15+</div>
-            <span style="color: var(--accent-bright-orange); font-size: 0.75rem;"><i class="fa-solid fa-check"></i> 100% Production Grade</span>
-          </div>
-
-          <div class="glass-card dash-widget">
-            <span style="color: var(--text-muted); font-size: 0.85rem;">SYSTEM HEALTH STATUS</span>
-            <div class="dash-value" style="color: #00FF66;">99.9%</div>
-            <span style="color: var(--text-gray); font-size: 0.75rem;">Serverless hosting active</span>
-          </div>
-        </div>
-
-        <div class="glass-card" style="margin-bottom: 2rem;">
-          <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-server"></i> System Infrastructure Telemetry</h3>
-          
-          <div class="code-block">
-$ curl -X GET https://api.victorkipruto.com/v1/telemetry/health
-
-{
-  "status": "HEALTHY",
-  "portfolio_server": "ONLINE",
-  "api_services": "ACTIVE",
-  "kafka_broker_latency": "14ms",
-  "deployment": "SUCCESS",
-  "region": "Africa/Nairobi (EAT)",
-  "version": "v2.0.26-prod"
-}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================================
-         PAGE 10: CONTACT PAGE
+         PAGE 9: CONTACT PAGE (Dashboard Removed)
          ========================================================================== -->
     <section id="contact" class="page-section">
       <div class="container">
         <div class="section-header">
           <span class="badge">Get In Touch</span>
           <h2>Contact & Collaboration</h2>
-          <p>Available for engineering opportunities, internships, consulting projects, and global technical leadership.</p>
+          <p>Available for engineering opportunities, freelance projects, and collaboration.</p>
         </div>
 
         <div class="contact-grid">
@@ -1818,53 +713,62 @@ $ curl -X GET https://api.victorkipruto.com/v1/telemetry/health
             <div class="glass-card" style="margin-bottom: 1.5rem;">
               <h3 style="margin-bottom: 0.5rem; color: var(--accent-bright-orange);">Let's Connect</h3>
               <p style="color: var(--text-gray); font-size: 0.95rem;">
-                Whether you have a question about my projects, need consulting on a data platform, or want to discuss full-time roles or internships—my inbox is open.
+                My inbox is open. Feel free to reach out via email, phone, or LinkedIn.
               </p>
             </div>
 
-            <div class="social-links-list">
-              <a href="mailto:contact@victorkipruto.com" class="social-link-item">
+            <div style="display: flex; flex-direction: column;">
+              <a href="mailto:kiprutovictor39@gmail.com" class="social-link-item">
                 <i class="fa-solid fa-envelope" style="color: var(--primary-red-orange); font-size: 1.25rem;"></i>
                 <div>
                   <div style="font-size: 0.75rem; color: var(--text-muted);">EMAIL</div>
-                  <div>contact@victorkipruto.com</div>
+                  <div>kiprutovictor39@gmail.com</div>
                 </div>
               </a>
 
-              <a href="https://github.com/victorkiprutorop" target="_blank" class="social-link-item">
+              <a href="tel:+254723484552" class="social-link-item">
+                <i class="fa-solid fa-phone" style="color: var(--primary-red-orange); font-size: 1.25rem;"></i>
+                <div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">PHONE</div>
+                  <div>+254 723 484 552</div>
+                </div>
+              </a>
+
+              <a href="https://github.com/Victor-Kipruto-Rop" target="_blank" class="social-link-item">
                 <i class="fa-brands fa-github" style="color: var(--text-white); font-size: 1.25rem;"></i>
                 <div>
                   <div style="font-size: 0.75rem; color: var(--text-muted);">GITHUB</div>
-                  <div>github.com/victorkiprutorop</div>
+                  <div>github.com/Victor-Kipruto-Rop</div>
                 </div>
               </a>
 
-              <a href="https://linkedin.com/in/victorkiprutorop" target="_blank" class="social-link-item">
+              <a href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank" class="social-link-item">
                 <i class="fa-brands fa-linkedin" style="color: #0A66C2; font-size: 1.25rem;"></i>
                 <div>
                   <div style="font-size: 0.75rem; color: var(--text-muted);">LINKEDIN</div>
-                  <div>linkedin.com/in/victorkiprutorop</div>
+                  <div>linkedin.com/in/victor-kipruto-rop</div>
                 </div>
               </a>
             </div>
           </div>
 
-          <!-- Contact Form -->
+          <!-- Contact Form using Formspree -->
           <div class="glass-card">
-            <form class="contact-form" onsubmit="handleFormSubmit(event)">
+            <!-- IMPORTANT: Replace "YOUR_FORMSPREE_ENDPOINT" with your actual endpoint string from Formspree dashboard -->
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" method="POST">
               <div class="form-group">
                 <label for="name">Your Name</label>
-                <input type="text" id="name" class="form-input" placeholder="e.g. Alex Morgan" required>
+                <input type="text" name="name" id="name" class="form-input" placeholder="e.g. Alex Morgan" required>
               </div>
 
               <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" class="form-input" placeholder="alex@company.com" required>
+                <input type="email" name="email" id="email" class="form-input" placeholder="alex@company.com" required>
               </div>
 
               <div class="form-group">
                 <label for="message">Message</label>
-                <textarea id="message" class="form-textarea" placeholder="Tell me about your project, opportunity, or collaboration idea..." required></textarea>
+                <textarea name="message" id="message" class="form-textarea" placeholder="Tell me about your project, opportunity, or collaboration idea..." required></textarea>
               </div>
 
               <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
@@ -1887,196 +791,88 @@ $ curl -X GET https://api.victorkipruto.com/v1/telemetry/health
             <span>VICTOR KIPRUTO ROP</span>
           </a>
           <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">
-            Data Engineer | Data Platform Architect | FinTech Infrastructure Builder
+            Data Engineer | Pipeline Architect
           </p>
         </div>
 
         <div class="footer-socials">
-          <a href="https://github.com/victorkiprutorop" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="https://linkedin.com/in/victorkiprutorop" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-          <a href="mailto:contact@victorkipruto.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:kiprutovictor39@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
         </div>
       </div>
 
       <div class="footer-bottom">
-        &copy; 2026 Victor Kipruto Rop (victorkipruto.com). Built for scalable global opportunities.
+        &copy; 2026 Victor Kipruto Rop. Built in Nairobi, Kenya.
       </div>
     </div>
   </footer>
 
-  <!-- ==========================================================================
-       JAVASCRIPT SPA ENGINE & ANIMATION ENGINE
-       ========================================================================== -->
   <script>
-    /* --------------------------------------------------------------------------
-     * 1. SPA ROUTING ENGINE
-     * -------------------------------------------------------------------------- */
+    /* SPA Routing */
     function switchPage(pageId) {
-      // Hide all pages
-      const pages = document.querySelectorAll('.page-section');
-      pages.forEach(page => {
-        page.classList.remove('active');
-      });
-
-      // Show selected page
+      document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
       const targetPage = document.getElementById(pageId);
       if (targetPage) {
         targetPage.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-
-      // Update Nav active link styling
-      const navLinks = document.querySelectorAll('.nav-link');
-      navLinks.forEach(link => {
+      document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(`'${pageId}'`)) {
-          link.classList.add('active');
-        }
+        if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(`'${pageId}'`)) link.classList.add('active');
       });
-
-      // Close mobile navigation drawer if open
       const navMenu = document.getElementById('nav-links');
-      if (navMenu.classList.contains('mobile-open')) {
-        navMenu.classList.remove('mobile-open');
-      }
+      if (navMenu.classList.contains('mobile-open')) navMenu.classList.remove('mobile-open');
     }
 
-    // Mobile Navigation Menu Toggle
     document.getElementById('mobile-toggle').addEventListener('click', () => {
-      const navMenu = document.getElementById('nav-links');
-      navMenu.classList.toggle('mobile-open');
+      document.getElementById('nav-links').classList.toggle('mobile-open');
     });
 
-    /* --------------------------------------------------------------------------
-     * 2. BLOG SEARCH & CATEGORY FILTERING
-     * -------------------------------------------------------------------------- */
-    function filterBlog(category) {
-      // Update Active Filter Button
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      filterBtns.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-
-      const items = document.querySelectorAll('.blog-item');
-      items.forEach(item => {
-        const itemCat = item.getAttribute('data-category');
-        if (category === 'ALL' || itemCat === category) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    }
-
-    // Search filter input listener
-    const searchInput = document.getElementById('blog-search');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const items = document.querySelectorAll('.blog-item');
-        items.forEach(item => {
-          const text = item.innerText.toLowerCase();
-          if (text.includes(query)) {
-            item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
-          }
-        });
-      });
-    }
-
-    /* --------------------------------------------------------------------------
-     * 3. CONTACT FORM HANDLER
-     * -------------------------------------------------------------------------- */
-    function handleFormSubmit(event) {
-      event.preventDefault();
-      const name = document.getElementById('name').value;
-      alert(`Thank you, ${name}! Your message has been routed to Victor's primary inbox.`);
-      event.target.reset();
-    }
-
-    /* --------------------------------------------------------------------------
-     * 4. BACKGROUND CANVAS: FUTURISTIC DATA STREAM & NETWORK ANIMATION
-     * -------------------------------------------------------------------------- */
+    /* Background Animation */
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
-
     let width, height;
     let particles = [];
-    let connections = [];
 
-    function resizeCanvas() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    }
-
+    function resizeCanvas() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     class Particle {
-      constructor() {
-        this.reset();
-      }
-
+      constructor() { this.reset(); }
       reset() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.radius = Math.random() * 2 + 1;
-        this.color = Math.random() > 0.3 ? '#FF4D1C' : '#FF8A00';
+        this.x = Math.random() * width; this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8;
+        this.radius = Math.random() * 2 + 1; this.color = Math.random() > 0.3 ? '#FF4D1C' : '#FF8A00';
       }
-
       update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
+        this.x += this.vx; this.y += this.vy;
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
       }
-
       draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = this.color;
-        ctx.fill();
-        ctx.shadowBlur = 0;
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color; ctx.fill();
       }
     }
 
-    // Initialize 60 stream nodes
-    for (let i = 0; i < 60; i++) {
-      particles.push(new Particle());
-    }
+    for (let i = 0; i < 60; i++) particles.push(new Particle());
 
     function animateCanvas() {
       ctx.clearRect(0, 0, width, height);
-
-      // Render network node lines
       for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-
+        particles[i].update(); particles[i].draw();
         for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
+          const dist = Math.sqrt((particles[i].x - particles[j].x)**2 + (particles[i].y - particles[j].y)**2);
           if (dist < 130) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(255, 77, 28, ${1 - dist / 130})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(255, 77, 28, ${1 - dist / 130})`; ctx.lineWidth = 0.5; ctx.stroke();
           }
         }
       }
-
       requestAnimationFrame(animateCanvas);
     }
-
     animateCanvas();
   </script>
 </body>
