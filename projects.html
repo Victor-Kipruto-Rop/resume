@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Victor Kipruto Rop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-box">VR</div>
+        <span>VICTOR ROP</span>
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="skills.html" class="nav-link">Skills</a></li>
+        <li><a href="projects.html" class="nav-link active">Projects</a></li>
+        <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="page-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Portfolio</span>
+        <h2>Production Data Systems</h2>
+      </div>
+
+      <div class="project-grid">
+        <div class="glass-card">
+          <h3>Kenyan Market ETL Pipeline</h3>
+          <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+            Designed an idempotent upsert pipeline allowing re-runs without producing duplicate rows. Implemented custom deduplication logic preserving data fidelity, achieved a 38/38 passing unit test score (Pytest), and connected the output to Grafana for live dashboards. CI runs on GitHub Actions.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">SQLAlchemy</span>
+            <span class="tag">Grafana</span>
+            <span class="tag">GitHub Actions</span>
+          </div>
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;"><i class="fa-brands fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="glass-card">
+          <h3>M-Pesa Airflow Transaction Pipeline</h3>
+          <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+            Built a DAG-orchestrated ETL pipeline for M-Pesa processing using a synthetic data generator (Faker). Implemented a config-driven rule engine for multi-stage cleaning. Containerised the Airflow + PostgreSQL stack with Docker Compose for full reproducibility. CI/CD test pass rate gates all merges.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Apache Airflow</span>
+            <span class="tag">Python</span>
+            <span class="tag">Faker</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Docker Compose</span>
+          </div>
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;"><i class="fa-brands fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="glass-card">
+          <h3>Real-Time Transaction Streaming</h3>
+          <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+            Built a Kafka producer/consumer model for live transaction ingestion with real-time aggregation. Implemented consumer group design for horizontal scalability with exactly-once semantics. Produced live Plotly visualisations directly from the consumer layer inside Jupyter.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Apache Kafka</span>
+            <span class="tag">Python</span>
+            <span class="tag">Jupyter</span>
+            <span class="tag">Plotly</span>
+            <span class="tag">Docker</span>
+          </div>
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank" class="btn btn-secondary" style="width: 100%; margin-top: 1rem;"><i class="fa-brands fa-github"></i> View Repository</a>
+        </div>
+
+        <div class="glass-card">
+          <h3>Cloud ETL Ingestion Pipeline</h3>
+          <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+            Processed 1.6M+ rows at 70,000 rows/sec keeping peak memory under 300MB using chunked reading. Cut load time from 4 minutes to 45 seconds by tuning connection pooling. Separated Extract, Transform, and Load into independent Docker microservices with exponential-backoff retries.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">AWS S3</span>
+            <span class="tag">Python</span>
+            <span class="tag">Docker</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">SQLAlchemy</span>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <h3>End-to-End SQL Pipeline Portfolio</h3>
+          <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 0.75rem;">
+            Designed a multi-tier data lake pattern from CSV staging to OLTP into a star schema warehouse. Deployed SCD Type 2 on customer dimensions and wrote recursive CTEs to surface cross-platform revenue shifts and customer retention metrics.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">SCD Type 2</span>
+            <span class="tag">AWS S3</span>
+            <span class="tag">SQLAlchemy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" class="logo">
+            <div class="logo-box">VR</div>
+            <span>VICTOR KIPRUTO ROP</span>
+          </a>
+          <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">Data Engineer | Pipeline Architect</p>
+        </div>
+        <div class="footer-socials">
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:kiprutovictor39@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 Victor Kipruto Rop. Built in Nairobi, Kenya.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
