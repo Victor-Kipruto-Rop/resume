@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills | Victor Kipruto Rop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-box">VR</div>
+        <span>VICTOR ROP</span>
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="skills.html" class="nav-link active">Skills</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="page-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Tech Stack & Tools</span>
+        <h2>Detailed Engineering Toolkit</h2>
+        <p>Production-tested tools and frameworks utilized across data pipelines, cloud infrastructure, and data quality testing.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-header">
+            <i class="fa-solid fa-code"></i>
+            <h3>Programming Languages</h3>
+          </div>
+          <ul class="skill-list">
+            <li><strong>Python:</strong> Core language for scripting, pipeline orchestration (Pandas, NumPy, SQLAlchemy), and automated testing.</li>
+            <li><strong>SQL:</strong> Advanced querying, recursive CTEs, and schema design on PostgreSQL and MySQL.</li>
+            <li><strong>Shell / Bash:</strong> System administration, Docker scripts, and environment automation.</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-header">
+            <i class="fa-solid fa-network-wired"></i>
+            <h3>ETL & Pipelines</h3>
+          </div>
+          <ul class="skill-list">
+            <li><strong>Apache Airflow:</strong> Orchestrating complex DAG designs and multi-stage ETL dependencies.</li>
+            <li><strong>Apache Kafka:</strong> Building producer/consumer models for live transaction ingestion with real-time aggregation.</li>
+            <li><strong>Data Processing:</strong> Pandas, NumPy, and SQLAlchemy for high-throughput batch transformations.</li>
+            <li><strong>Faker:</strong> Generating synthetic data distributions for rigorous pipeline testing.</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-header">
+            <i class="fa-solid fa-cloud"></i>
+            <h3>Cloud & DevOps</h3>
+          </div>
+          <ul class="skill-list">
+            <li><strong>AWS:</strong> Implementing S3 for data lake storage and EC2 for hosting infrastructure.</li>
+            <li><strong>Docker & Compose:</strong> Containerising full stacks (Airflow, Kafka, Postgres) for single-command reproducibility.</li>
+            <li><strong>GitHub Actions:</strong> Automating CI/CD pipelines, validating setups on commit, and gating pushes with Pytest, Black, isort, and mypy.</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-header">
+            <i class="fa-solid fa-database"></i>
+            <h3>Warehousing & Architecture</h3>
+          </div>
+          <ul class="skill-list">
+            <li><strong>Dimensional Modelling:</strong> Designing robust Star Schemas with Fact & Dimension tables.</li>
+            <li><strong>SCD Type 2:</strong> Implementing Slowly Changing Dimensions to preserve full historical change timelines on customer metrics.</li>
+            <li><strong>Data Lake Patterns:</strong> Multi-tier architecture transitioning from CSV staging through OLTP into warehouse schemas.</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-header">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Data Quality & Reliability</h3>
+          </div>
+          <ul class="skill-list">
+            <li><strong>Idempotent Upserts:</strong> Ensuring jobs can re-run at any point without producing duplicate rows.</li>
+            <li><strong>Deduplication Logic:</strong> Aggregating quantities on conflicting records rather than blindly dropping them.</li>
+            <li><strong>Validation Engines:</strong> Building multi-stage cleaning pipelines (null handling, type coercion) via config-driven rules.</li>
+            <li><strong>Pytest:</strong> Comprehensive unit & integration testing (null injection, coercion failures).</li>
+          </ul>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-header">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Visualisation</h3>
+          </div>
+          <ul class="skill-list">
+            <li><strong>Grafana:</strong> Connecting PostgreSQL output layers for live operational dashboards on market trends.</li>
+            <li><strong>Plotly:</strong> Producing live visualization outputs directly from Kafka consumer layers.</li>
+            <li><strong>Jupyter Notebooks:</strong> Interactive data exploration and real-time streaming feedback.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" class="logo">
+            <div class="logo-box">VR</div>
+            <span>VICTOR KIPRUTO ROP</span>
+          </a>
+          <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">Data Engineer | Pipeline Architect</p>
+        </div>
+        <div class="footer-socials">
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:kiprutovictor39@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 Victor Kipruto Rop. Built in Nairobi, Kenya.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
