@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Victor Kipruto Rop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-box">VR</div>
+        <span>VICTOR ROP</span>
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link active">About</a></li>
+        <li><a href="skills.html" class="nav-link">Skills</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="page-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Biography & Vision</span>
+        <h2>About Victor Kipruto Rop</h2>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <div class="glass-card" style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);">Engineering Philosophy</h3>
+            <p style="font-size: 1.1rem; color: var(--text-white); margin-bottom: 1rem;">
+              "I build data systems the way they should work in production—idempotent, tested, containerised, and monitored."
+            </p>
+            <p style="color: var(--text-gray);">
+              Comfortable across the full data stack from raw ingestion to Grafana dashboards, with every project backed by CI/CD automation on GitHub Actions.
+            </p>
+          </div>
+
+          <div class="glass-card" style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);"><i class="fa-solid fa-graduation-cap"></i> Formal Education</h3>
+            <h4 style="font-size: 1.15rem; color: var(--text-white);">The Cooperative University of Kenya</h4>
+            <p style="color: var(--primary-red-orange); font-size: 0.9rem; margin-bottom: 1rem;">BSc Data Science (Expected Aug 2028)</p>
+            <ul style="list-style: none; color: var(--text-gray);">
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Member, Data Science Club (workshops, industry lectures)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="glass-card" style="margin-bottom: 2rem; border-color: var(--border-glow);">
+            <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);"><i class="fa-solid fa-laptop-code"></i> Self-Taught Developer</h3>
+            <h4 style="font-size: 1.15rem; color: var(--text-white);">Forged in the Terminal</h4>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 1rem; margin-bottom: 1rem;">
+              Beyond the university curriculum, my core engineering capabilities were built through thousands of hours of self-directed learning. Driven by curiosity and a relentless desire to build production-grade systems, I taught myself modern data engineering from scratch.
+            </p>
+            <ul style="list-style: none; color: var(--text-gray);">
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-terminal" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Mastered Python, SQL, and Bash by building real pipelines.</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-server" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Learned containerization (Docker) to guarantee reproducibility.</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-bolt" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Taught myself distributed streaming with Apache Kafka.</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-code-branch" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Implemented rigorous testing (Pytest) and CI/CD pipelines entirely on my own initiative.</li>
+            </ul>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 1rem;">
+              This self-taught foundation gave me a deep resilience and problem-solving mindset—traits that allow me to dive into any documentation and quickly master new architectural paradigms.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" class="logo">
+            <div class="logo-box">VR</div>
+            <span>VICTOR KIPRUTO ROP</span>
+          </a>
+          <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">Data Engineer | Pipeline Architect</p>
+        </div>
+        <div class="footer-socials">
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:kiprutovictor39@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 Victor Kipruto Rop. Built in Nairobi, Kenya.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
