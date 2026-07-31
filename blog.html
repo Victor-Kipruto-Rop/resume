@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog & Journey | Victor Kipruto Rop</title>
+  <title>Engineering Blog & Publications | Victor Kipruto Rop</title>
+  <meta name="description" content="Production-ready technical articles on data engineering, real-time streaming, Apache Kafka, and FinTech infrastructure.">
+  
+  <!-- Google Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
@@ -11,13 +14,14 @@
 <body>
   <canvas id="bg-canvas"></canvas>
 
+  <!-- Navigation Header -->
   <header>
     <div class="container nav-container">
       <a href="index.html" class="logo">
         <div class="logo-box">VR</div>
         <span>VICTOR ROP</span>
       </a>
-      <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link">About</a></li>
@@ -34,48 +38,220 @@
 
   <main class="page-section">
     <div class="container">
-      <div class="section-header">
-        <span class="badge">My Journey</span>
-        <h2>Personal Reflections & Blogs</h2>
+      
+      <!-- Blog Hero Section -->
+      <div class="section-header" style="margin-bottom: 2.5rem;">
+        <span class="badge"><span class="badge-dot"></span> Engineering Publications</span>
+        <h2 style="font-size: 3rem; margin-top: 0.5rem;">Data Engineering & Architecture Insights</h2>
+        <p>Deep-dive production articles on distributed systems, event-driven streaming, and resilient FinTech pipelines.</p>
       </div>
 
-      <div class="blog-grid" id="blog-grid">
-        <div class="glass-card blog-item">
-          <div class="blog-meta">
-            <span><i class="fa-regular fa-calendar"></i> Recent</span>
-          </div>
-          <h3 style="margin-bottom: 0.75rem;">From Curiosity to Code: My Self-Taught Journey</h3>
-          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-            How I started programming, late nights in the terminal, and the transition from basic Python scripts to deploying containerized Kafka clusters all on my own.
-          </p>
-          <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Read More</a>
+      <!-- Instant Search & Category Filters -->
+      <div style="margin-bottom: 3rem;">
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+          <input type="text" id="blog-search" class="form-input" placeholder="Search articles by title, tech (Kafka, Spark, ETL), or category..." style="flex: 1; min-width: 300px;">
         </div>
-
-        <div class="glass-card blog-item">
-          <div class="blog-meta">
-            <span><i class="fa-regular fa-calendar"></i> Archive</span>
-          </div>
-          <h3 style="margin-bottom: 0.75rem;">Why Idempotency Changed How I Write Code</h3>
-          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-            My lessons learned from breaking pipelines. Why deliberate constraints—like ensuring a job can rerun infinitely without duplicating data—matter more than raw speed.
-          </p>
-          <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Read More</a>
-        </div>
-
-        <div class="glass-card blog-item">
-          <div class="blog-meta">
-            <span><i class="fa-regular fa-calendar"></i> Looking Ahead</span>
-          </div>
-          <h3 style="margin-bottom: 0.75rem;">The Road Ahead: FinTech Infrastructure</h3>
-          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
-            My future plans in Data Engineering. Combining my formal university education in Data Science with my self-taught infrastructure skills to build reliable African FinTech backbones.
-          </p>
-          <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Read More</a>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="category-filters">
+          <button class="btn btn-secondary active" onclick="filterArticles('ALL')" style="font-size: 0.8rem; padding: 0.5rem 1rem;">All Topics</button>
+          <button class="btn btn-secondary" onclick="filterArticles('Streaming')" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Streaming</button>
+          <button class="btn btn-secondary" onclick="filterArticles('Pipelines')" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Pipelines</button>
+          <button class="btn btn-secondary" onclick="filterArticles('FinTech')" style="font-size: 0.8rem; padding: 0.5rem 1rem;">FinTech</button>
+          <button class="btn btn-secondary" onclick="filterArticles('Architecture')" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Architecture</button>
+          <button class="btn btn-secondary" onclick="filterArticles('Observability')" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Observability</button>
         </div>
       </div>
+
+      <!-- Featured Article Spotlight -->
+      <div class="glass-card" style="margin-bottom: 3rem; border: 1px solid var(--border-glow);">
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center;">
+          <div>
+            <span class="badge" style="margin-bottom: 1rem;"><i class="fa-solid fa-star"></i> Featured Publication</span>
+            <h3 style="font-size: 2rem; margin-bottom: 1rem;"><a href="article.html?id=1" style="color: inherit; text-decoration: none;">Why Every Data Engineer Should Learn Event-Driven Architecture</a></h3>
+            <p style="color: var(--text-gray); margin-bottom: 1.5rem;">
+              Explore how decoupling services via Apache Kafka transforms fragile batch routines into resilient, low-latency streaming topologies capable of processing millions of records.
+            </p>
+            <div style="display: flex; gap: 1rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              <span><i class="fa-regular fa-calendar"></i> June 2026</span>
+              <span><i class="fa-regular fa-clock"></i> 10 min read</span>
+              <span><i class="fa-regular fa-eye"></i> 4.2k views</span>
+            </div>
+            <a href="article.html?id=1" class="btn btn-primary">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div style="background: #111; border-radius: var(--radius-sm); border: 1px solid var(--border-color); overflow: hidden; height: 260px; display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-network-wired" style="font-size: 5rem; color: var(--primary-red-orange); opacity: 0.8;"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Articles Grid (All 10 Complete Production Articles) -->
+      <div class="blog-grid" id="articles-grid">
+        
+        <!-- Article 1 -->
+        <div class="glass-card article-card" data-category="Streaming" data-title="Why Every Data Engineer Should Learn Event-Driven Architecture">
+          <div class="blog-meta">
+            <span>Streaming</span>
+            <span>• 10 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=1" style="color: inherit; text-decoration: none;">Why Every Data Engineer Should Learn Event-Driven Architecture</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            Moving beyond request-response patterns into reactive event streaming streams across distributed systems.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Kafka</span><span class="tag">Streaming</span><span class="tag">Architecture</span>
+          </div>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="glass-card article-card" data-category="Pipelines" data-title="Building Reliable Data Pipelines: Lessons from Production">
+          <div class="blog-meta">
+            <span>Pipelines</span>
+            <span>• 8 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=2" style="color: inherit; text-decoration: none;">Building Reliable Data Pipelines: Lessons from Production</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            Idempotent transformations, automated Airflow DAG recovery, and rigorous Pytest validation gating.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Airflow</span><span class="tag">Python</span><span class="tag">ETL</span>
+          </div>
+        </div>
+
+        <!-- Article 3 -->
+        <div class="glass-card article-card" data-category="Streaming" data-title="Batch Processing vs Real-Time Streaming">
+          <div class="blog-meta">
+            <span>Streaming</span>
+            <span>• 7 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=3" style="color: inherit; text-decoration: none;">Batch Processing vs Real-Time Streaming</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            When to choose scheduled batch ETL loads versus low-latency Kafka stream consumers.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Spark</span><span class="tag">Kafka</span><span class="tag">Architecture</span>
+          </div>
+        </div>
+
+        <!-- Article 4 -->
+        <div class="glass-card article-card" data-category="Architecture" data-title="The Modern Data Engineering Stack in 2026">
+          <div class="blog-meta">
+            <span>Architecture</span>
+            <span>• 12 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=4" style="color: inherit; text-decoration: none;">The Modern Data Engineering Stack in 2026</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            An analysis of Python, dbt, Iceberg, Kubernetes, and cloud warehouse ecosystems.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Lakehouse</span><span class="tag">dbt</span><span class="tag">Cloud</span>
+          </div>
+        </div>
+
+        <!-- Article 5 -->
+        <div class="glass-card article-card" data-category="Pipelines" data-title="Common Data Engineering Mistakes Beginners Make">
+          <div class="blog-meta">
+            <span>Pipelines</span>
+            <span>• 9 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=5" style="color: inherit; text-decoration: none;">Common Data Engineering Mistakes Beginners Make</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            Avoiding brittle schemas, missing idempotency constraints, and unmonitored dead-letter queues.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Best Practices</span>
+          </div>
+        </div>
+
+        <!-- Article 6 -->
+        <div class="glass-card article-card" data-category="FinTech" data-title="How Fraud Detection Pipelines Work in Financial Systems">
+          <div class="blog-meta">
+            <span>FinTech</span>
+            <span>• 11 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=6" style="color: inherit; text-decoration: none;">How Fraud Detection Pipelines Work in Financial Systems</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            Sub-second transaction monitoring and automated reconciliation in mobile money platforms like M-Pesa.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">FinTech</span><span class="tag">Kafka</span><span class="tag">Security</span>
+          </div>
+        </div>
+
+        <!-- Article 7 -->
+        <div class="glass-card article-card" data-category="Architecture" data-title="Data Lakes vs Data Warehouses vs Lakehouses">
+          <div class="blog-meta">
+            <span>Architecture</span>
+            <span>• 8 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=7" style="color: inherit; text-decoration: none;">Data Lakes vs Data Warehouses vs Lakehouses</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            Evaluating storage paradigms for structured reporting versus unstructured machine learning workloads.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">BigQuery</span><span class="tag">Storage</span><span class="tag">Lakehouse</span>
+          </div>
+        </div>
+
+        <!-- Article 8 -->
+        <div class="glass-card article-card" data-category="Pipelines" data-title="Designing Scalable ETL Pipelines for Millions of Records">
+          <div class="blog-meta">
+            <span>Pipelines</span>
+            <span>• 10 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=8" style="color: inherit; text-decoration: none;">Designing Scalable ETL Pipelines for Millions of Records</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            Chunked memory reads, connection pooling tuning, and microservice container isolation.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">AWS S3</span><span class="tag">Docker</span><span class="tag">PostgreSQL</span>
+          </div>
+        </div>
+
+        <!-- Article 9 -->
+        <div class="glass-card article-card" data-category="Observability" data-title="Observability for Data Engineers">
+          <div class="blog-meta">
+            <span>Observability</span>
+            <span>• 9 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=9" style="color: inherit; text-decoration: none;">Observability for Data Engineers</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            Tracing data lineage, monitoring pipeline freshness, and setting up Grafana alerting metrics.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Monitoring</span>
+          </div>
+        </div>
+
+        <!-- Article 10 -->
+        <div class="glass-card article-card" data-category="Architecture" data-title="Building Enterprise-Grade Data Platforms">
+          <div class="blog-meta">
+            <span>Architecture</span>
+            <span>• 14 min read</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;"><a href="article.html?id=10" style="color: inherit; text-decoration: none;">Building Enterprise-Grade Data Platforms</a></h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            Securing role-based access, data governance, disaster recovery, and multi-region replication.
+          </p>
+          <div class="tag-cloud">
+            <span class="tag">Kubernetes</span><span class="tag">Security</span><span class="tag">Enterprise</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Newsletter Subscription Box -->
+      <div class="glass-card" style="margin-top: 4rem; text-align: center; background: linear-gradient(135deg, rgba(255,77,28,0.15) 0%, rgba(5,5,5,0.9) 100%); border: 1px solid rgba(255, 77, 28, 0.3);">
+        <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Engineering Dispatch</h3>
+        <p style="color: var(--text-gray); max-width: 500px; margin: 0 auto 1.5rem;">Get deep-dive data engineering tutorials, architecture breakdowns, and FinTech system design insights delivered straight to your inbox.</p>
+        <form onsubmit="handleNewsletter(event)" style="display: flex; gap: 1rem; max-width: 450px; margin: 0 auto; flex-wrap: wrap;">
+          <input type="email" class="form-input" placeholder="your.email@company.com" required style="flex: 1; min-width: 250px;">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+
     </div>
   </main>
 
+  <!-- Global Footer -->
   <footer>
     <div class="container">
       <div class="footer-content">
@@ -97,6 +273,43 @@
   </footer>
 
   <script src="app.js"></script>
+  <script>
+    // Blog filtering & Instant Search
+    function filterArticles(category) {
+      document.querySelectorAll('#category-filters button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      document.querySelectorAll('.article-card').forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (category === 'ALL' || cat === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    const searchInput = document.getElementById('blog-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        document.querySelectorAll('.article-card').forEach(card => {
+          const title = card.getAttribute('data-title').toLowerCase();
+          const text = card.innerText.toLowerCase();
+          if (title.includes(query) || text.includes(query)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
+
+    function handleNewsletter(e) {
+      e.preventDefault();
+      alert('Thank you for subscribing to Engineering Dispatch!');
+      e.target.reset();
+    }
+  </script>
 </body>
 </html>
-
