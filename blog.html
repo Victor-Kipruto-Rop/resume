@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Journey | Victor Kipruto Rop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-box">VR</div>
+        <span>VICTOR ROP</span>
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="skills.html" class="nav-link">Skills</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+        <li><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="page-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">My Journey</span>
+        <h2>Personal Reflections & Blogs</h2>
+      </div>
+
+      <div class="blog-grid" id="blog-grid">
+        <div class="glass-card blog-item">
+          <div class="blog-meta">
+            <span><i class="fa-regular fa-calendar"></i> Recent</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;">From Curiosity to Code: My Self-Taught Journey</h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            How I started programming, late nights in the terminal, and the transition from basic Python scripts to deploying containerized Kafka clusters all on my own.
+          </p>
+          <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Read More</a>
+        </div>
+
+        <div class="glass-card blog-item">
+          <div class="blog-meta">
+            <span><i class="fa-regular fa-calendar"></i> Archive</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;">Why Idempotency Changed How I Write Code</h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            My lessons learned from breaking pipelines. Why deliberate constraints—like ensuring a job can rerun infinitely without duplicating data—matter more than raw speed.
+          </p>
+          <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Read More</a>
+        </div>
+
+        <div class="glass-card blog-item">
+          <div class="blog-meta">
+            <span><i class="fa-regular fa-calendar"></i> Looking Ahead</span>
+          </div>
+          <h3 style="margin-bottom: 0.75rem;">The Road Ahead: FinTech Infrastructure</h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem;">
+            My future plans in Data Engineering. Combining my formal university education in Data Science with my self-taught infrastructure skills to build reliable African FinTech backbones.
+          </p>
+          <a href="#" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">Read More</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" class="logo">
+            <div class="logo-box">VR</div>
+            <span>VICTOR KIPRUTO ROP</span>
+          </a>
+          <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">Data Engineer | Pipeline Architect</p>
+        </div>
+        <div class="footer-socials">
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:kiprutovictor39@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 Victor Kipruto Rop. Built in Nairobi, Kenya.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
