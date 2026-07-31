@@ -3,81 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About | Victor Kipruto Rop - Data Engineer & Platform Architect</title>
+  <title>About | Victor Kipruto Rop</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/jpeg" href="1000117893.jpg">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Premium About Page Custom Extensions */
-    .about-hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 4rem;
-      align-items: center;
-      margin-bottom: 5rem;
-    }
-    .about-avatar-card {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      border: 1px solid var(--border-glow);
-      box-shadow: 0 20px 50px rgba(255, 77, 28, 0.15);
-      background: var(--bg-card);
-    }
-    .about-avatar-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-    }
-    .focus-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .focus-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      padding: 1.5rem;
-      border-radius: var(--radius-md);
-      transition: var(--transition-normal);
-    }
-    .focus-item:hover {
-      border-color: var(--primary-red-orange);
-      transform: translateY(-3px);
-    }
-    .philosophy-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .philosophy-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-      transition: var(--transition-normal);
-    }
-    .philosophy-card:hover {
-      border-color: var(--border-glow);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(255, 77, 28, 0.1);
-    }
-    .philosophy-card i {
-      font-size: 2rem;
-      color: var(--accent-bright-orange);
-      margin-bottom: 1rem;
-    }
-    @media (max-width: 968px) {
-      .about-hero { grid-template-columns: 1fr; gap: 2.5rem; }
-    }
-  </style>
 </head>
 <body>
   <canvas id="bg-canvas"></canvas>
@@ -88,7 +18,7 @@
         <img src="1000117893.jpg" alt="Victor Kipruto Rop" class="logo-avatar">
         <span>VICTOR ROP</span>
       </a>
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+      <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html" class="nav-link">Home</a></li>
         <li><a href="about.html" class="nav-link active">About</a></li>
@@ -105,167 +35,52 @@
 
   <main class="page-section">
     <div class="container">
-      
-      <!-- HERO BIOGRAPHY SECTION -->
-      <div class="about-hero">
+      <div class="section-header">
+        <span class="badge">Biography & Vision</span>
+        <h2>About Victor Kipruto Rop</h2>
+      </div>
+
+      <div class="about-grid">
         <div>
-          <div class="badge" style="margin-bottom: 1.5rem;">
-            <span class="badge-dot"></span> Senior-Grade Platform Mindset
-          </div>
-          <h1 style="font-size: 3rem; line-height: 1.1; margin-bottom: 1.5rem;">
-            Architecting Resilient <span class="text-gradient">Data Ecosystems</span>
-          </h1>
-          <p style="font-size: 1.15rem; color: var(--text-gray); margin-bottom: 1.5rem; line-height: 1.7;">
-            My name is <strong>Victor Kipruto Rop</strong>. I am a Data Engineer, Data Science Student at The Cooperative University of Kenya, and FinTech Infrastructure Builder specializing in scalable data platforms, distributed systems, real-time streaming architectures, and idempotent ETL/ELT pipelines.
-          </p>
-          <p style="color: var(--text-gray); margin-bottom: 2rem; line-height: 1.7;">
-            My passion is building systems that transform raw, noisy transactional data into reliable, secure, observable, and actionable information. I enjoy solving complex engineering hurdles involving scale, performance optimization, fault tolerance, and automation.
-          </p>
-          <div class="hero-buttons">
-            <a href="resume.html" class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> View Resume</a>
-            <a href="contact.html" class="btn btn-secondary">Get In Touch</a>
-          </div>
-        </div>
-
-        <div class="about-avatar-card">
-          <img src="1000117893.jpg" alt="Victor Kipruto Rop">
-        </div>
-      </div>
-
-      <!-- VISION & LONG TERM GOAL -->
-      <div class="glass-card" style="margin-bottom: 4rem; background: linear-gradient(135deg, rgba(255,77,28,0.1) 0%, rgba(16,16,16,0.9) 100%); border: 1px solid rgba(255,77,28,0.3);">
-        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-bright-orange);"><i class="fa-solid fa-compass"></i> Long-Term Vision</h3>
-        <p style="font-size: 1.1rem; color: var(--text-white); line-height: 1.7;">
-          "My long-term vision is to become one of Africa's leading Data Engineers while building technology that significantly improves financial systems, government transparency, real-time fraud detection, and digital infrastructure across the continent."
-        </p>
-      </div>
-
-      <!-- PERSONAL STORY: FORGED IN THE TERMINAL -->
-      <div style="margin-bottom: 5rem;">
-        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
-          <span class="badge">Origin Story</span>
-          <h2 style="font-size: 2.2rem;">How I Became a Data Engineer</h2>
-        </div>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
-          <div class="glass-card">
-            <h3 style="color: var(--accent-bright-orange); margin-bottom: 1rem;"><i class="fa-solid fa-terminal"></i> The Self-Taught Catalyst</h3>
-            <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 1rem;">
-              My journey into data engineering didn't begin inside a corporate boardroom—it started with deep curiosity in front of a terminal screen. I became fascinated by how raw data silently powers modern economies, enterprise logistics, and mobile money transactions. 
+          <div class="glass-card" style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);">Engineering Philosophy</h3>
+            <p style="font-size: 1.1rem; color: var(--text-white); margin-bottom: 1rem;">
+              "I build data systems the way they should work in production—idempotent, tested, containerised, and monitored."
             </p>
-            <p style="color: var(--text-gray); line-height: 1.7;">
-              Instead of merely writing scripts that compute outputs, I fell in love with <em>building systems</em>—architectures that handle failures gracefully, process millions of rows without crashing memory bounds, and run idempotently via CI/CD pipelines.
+            <p style="color: var(--text-gray);">
+              Comfortable across the full data stack from raw ingestion to Grafana dashboards, with every project backed by CI/CD automation on GitHub Actions.
             </p>
           </div>
 
-          <div class="glass-card">
-            <h3 style="color: var(--accent-bright-orange); margin-bottom: 1rem;"><i class="fa-solid fa-graduation-cap"></i> Academic & Practical Convergence</h3>
-            <p style="color: var(--text-gray); line-height: 1.7; margin-bottom: 1rem;">
-              Coupling my self-taught mastery of Docker, Apache Kafka, Apache Airflow, and Python with formal studies in <strong>BSc Data Science at The Cooperative University of Kenya</strong> has given me a unique edge. 
+          <div class="glass-card" style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);"><i class="fa-solid fa-graduation-cap"></i> Formal Education</h3>
+            <h4 style="font-size: 1.15rem; color: var(--text-white);">The Cooperative University of Kenya</h4>
+            <p style="color: var(--primary-red-orange); font-size: 0.9rem; margin-bottom: 1rem;">BSc Data Science (Expected Aug 2028)</p>
+            <ul style="list-style: none; color: var(--text-gray);">
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Member, Data Science Club (workshops, industry lectures)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="glass-card" style="margin-bottom: 2rem; border-color: var(--border-glow);">
+            <h3 style="margin-bottom: 1rem; color: var(--accent-bright-orange);"><i class="fa-solid fa-laptop-code"></i> Self-Taught Developer</h3>
+            <h4 style="font-size: 1.15rem; color: var(--text-white);">Forged in the Terminal</h4>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 1rem; margin-bottom: 1rem;">
+              Beyond the university curriculum, my core engineering capabilities were built through thousands of hours of self-directed learning. Driven by curiosity and a relentless desire to build production-grade systems, I taught myself modern data engineering from scratch.
             </p>
-            <p style="color: var(--text-gray); line-height: 1.7;">
-              I combine rigorous statistical and data science methodologies with production-grade software engineering standards—ensuring that every data model I build is mathematically sound, computationally efficient, and robustly tested using Pytest and GitHub Actions.
+            <ul style="list-style: none; color: var(--text-gray);">
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-terminal" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Mastered Python, SQL, and Bash by building real pipelines.</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-server" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Learned containerization (Docker) to guarantee reproducibility.</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-bolt" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Taught myself distributed streaming with Apache Kafka.</li>
+              <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-code-branch" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Implemented rigorous testing (Pytest) and CI/CD pipelines entirely on my own initiative.</li>
+            </ul>
+            <p style="color: var(--text-gray); font-size: 0.95rem; margin-top: 1rem;">
+              This self-taught foundation gave me a deep resilience and problem-solving mindset—traits that allow me to dive into any documentation and quickly master new architectural paradigms.
             </p>
           </div>
         </div>
       </div>
-
-      <!-- CURRENT TECHNICAL FOCUS -->
-      <div style="margin-bottom: 5rem;">
-        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
-          <span class="badge">Domain Expertise</span>
-          <h2 style="font-size: 2.2rem;">Current Technical Focus Areas</h2>
-        </div>
-
-        <div class="focus-grid">
-          <div class="focus-item">
-            <h4 style="color: var(--text-white); margin-bottom: 0.5rem;"><i class="fa-solid fa-bolt" style="color: var(--primary-red-orange); margin-right: 8px;"></i> Real-Time Streaming</h4>
-            <p style="color: var(--text-gray); font-size: 0.9rem;">Event-driven architectures utilizing Apache Kafka for low-latency ingest.</p>
-          </div>
-          <div class="focus-item">
-            <h4 style="color: var(--text-white); margin-bottom: 0.5rem;"><i class="fa-solid fa-shield-halved" style="color: var(--primary-red-orange); margin-right: 8px;"></i> FinTech Infrastructure</h4>
-            <p style="color: var(--text-gray); font-size: 0.9rem;">Building transaction monitoring, M-Pesa APIs, and automated reconciliation engines.</p>
-          </div>
-          <div class="focus-item">
-            <h4 style="color: var(--text-white); margin-bottom: 0.5rem;"><i class="fa-solid fa-wind" style="color: var(--primary-red-orange); margin-right: 8px;"></i> ETL & ELT Pipelines</h4>
-            <p style="color: var(--text-gray); font-size: 0.9rem;">Orchestrating robust data workflows with Apache Airflow and dbt.</p>
-          </div>
-          <div class="focus-item">
-            <h4 style="color: var(--text-white); margin-bottom: 0.5rem;"><i class="fa-solid fa-database" style="color: var(--primary-red-orange); margin-right: 8px;"></i> Dimensional Warehousing</h4>
-            <p style="color: var(--text-gray); font-size: 0.9rem;">Star schemas, fact/dimension modelling, and SCD Type 2 tracking.</p>
-          </div>
-          <div class="focus-item">
-            <h4 style="color: var(--text-white); margin-bottom: 0.5rem;"><i class="fa-solid fa-cloud" style="color: var(--primary-red-orange); margin-right: 8px;"></i> Cloud Platforms & DevOps</h4>
-            <p style="color: var(--text-gray); font-size: 0.9rem;">AWS data lakes, Docker containerisation, and GitHub Actions automation.</p>
-          </div>
-          <div class="focus-item">
-            <h4 style="color: var(--text-white); margin-bottom: 0.5rem;"><i class="fa-solid fa-chart-line" style="color: var(--primary-red-orange); margin-right: 8px;"></i> Observability & Quality</h4>
-            <p style="color: var(--text-gray); font-size: 0.9rem;">Grafana operational dashboards, unit testing, and data validation assertions.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ENGINEERING PHILOSOPHY -->
-      <div style="margin-bottom: 3rem;">
-        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
-          <span class="badge">Guiding Principles</span>
-          <h2 style="font-size: 2.2rem;">Engineering Philosophy</h2>
-          <p>The core rules and mental models that govern every codebase, pipeline, and architecture I deploy.</p>
-        </div>
-
-        <div class="philosophy-grid">
-          
-          <div class="philosophy-card">
-            <i class="fa-solid fa-shield-check"></i>
-            <h3 style="font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.5rem;">Reliability First</h3>
-            <p style="color: var(--text-gray); font-size: 0.95ln; line-height: 1.6;">Pipelines must tolerate failures gracefully. Systems are built with automatic retries, exponential backoffs, and dead-letter queues.</p>
-          </div>
-
-          <div class="philosophy-card">
-            <i class="fa-solid fa-lock"></i>
-            <h3 style="font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.5rem;">Security by Design</h3>
-            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">Zero secrets in version control. Strict environment variable isolation, RBAC, and secure handling of financial data.</p>
-          </div>
-
-          <div class="philosophy-card">
-            <i class="fa-solid fa-arrows-spin"></i>
-            <h3 style="font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.5rem;">Automation Everywhere</h3>
-            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">If a deployment or test requires manual intervention, it is automated via GitHub Actions CI/CD pipelines.</p>
-          </div>
-
-          <div class="philosophy-card">
-            <i class="fa-solid fa-check-double"></i>
-            <h3 style="font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.5rem;">Data Quality Matters</h3>
-            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">Garbage in means garbage out. Every dataset undergoes strict type coercion, null checks, and validation assertions.</p>
-          </div>
-
-          <div class="philosophy-card">
-            <i class="fa-solid fa-gauge-high"></i>
-            <h3 style="font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.5rem;">Performance is a Feature</h3>
-            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">Optimizing memory consumption via chunked reading, connection pooling, and indexed database queries.</p>
-          </div>
-
-          <div class="philosophy-card">
-            <i class="fa-solid fa-code-merge"></i>
-            <h3 style="font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.5rem;">Idempotency by Default</h3>
-            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">Jobs can be re-run at any time without creating duplicate rows or corrupting downstream storage layers.</p>
-          </div>
-
-          <div class="philosophy-card">
-            <i class="fa-solid fa-binoculars"></i>
-            <h3 style="font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.5rem;">Observable Systems</h3>
-            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">If you cannot monitor it, you cannot manage it. Real-time logging, metrics tracing, and Grafana dashboards on all nodes.</p>
-          </div>
-
-          <div class="philosophy-card">
-            <i class="fa-solid fa-vial-circle-check"></i>
-            <h3 style="font-size: 1.2rem; color: var(--text-white); margin-bottom: 0.5rem;">Testing Culture</h3>
-            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">Comprehensive unit and integration testing via Pytest covering null injection, edge cases, and empty datasets.</p>
-          </div>
-
-        </div>
-      </div>
-
     </div>
   </main>
 
@@ -292,3 +107,4 @@
   <script src="app.js"></script>
 </body>
 </html>
+
