@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ops Center | Victor Kipruto Rop</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="icon" type="image/jpeg" href="1000117893.jpg">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { overflow-x: hidden; }
+  .ops-shell { display: none; min-height: 100vh; padding-top: 90px; }
+  .ops-shell.active { display: block; }
+  .ops-login { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+  .ops-login-card { max-width: 380px; width: 100%; }
+  .ops-login-card h1 { font-size: 1.5rem; margin-bottom: 0.4rem; }
+  .ops-login-card p { color: var(--text-gray); font-size: 0.85rem; margin-bottom: 1.5rem; }
+  .form-input { width: 100%; padding: 0.85rem 1rem; background: rgba(255,255,255,0.04); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-white); font-family: var(--font-sans); font-size: 0.95rem; margin-bottom: 1rem; }
+  .form-input:focus { outline: none; border-color: var(--primary-red-orange); }
+  .ops-tabs { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; }
+  .ops-tab { padding: 0.6rem 1.1rem; border-radius: 100px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-color); color: var(--text-gray); font-size: 0.85rem; cursor: pointer; font-family: var(--font-mono); }
+  .ops-tab.active { background: var(--gradient-primary); color: #fff; border-color: transparent; }
+  .ops-panel { display: none; }
+  .ops-panel.active { display: block; animation: fadeUp 0.5s ease both; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+  .stat-card { padding: 1.5rem; }
+  .stat-card .stat-value { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; }
+  .stat-card .stat-label { color: var(--text-gray); font-size: 0.8rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em; }
+  .ops-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .ops-table th { text-align: left; color: var(--text-gray); font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border-color); }
+  .ops-table td { padding: 0.7rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; font-size: 0.85rem; }
+  .bar-label { width: 130px; flex-shrink: 0; color: var(--text-gray); }
+  .bar-track { flex: 1; background: rgba(255,255,255,0.05); border-radius: 100px; height: 8px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--gradient-primary); border-radius: 100px; }
+  .bar-count { width: 30px; text-align: right; color: var(--text-white); font-family: var(--font-mono); }
+  .repo-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.88rem; }
+  .repo-row a { color: var(--text-white); text-decoration: none; font-weight: 600; }
+  .repo-row a:hover { color: var(--primary-red-orange); }
+  .repo-meta { color: var(--text-muted); font-size: 0.78rem; display: flex; gap: 0.75rem; }
+  .not-connected-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1.2rem; background: rgba(255,255,255,0.02); border: 1px dashed var(--border-color); border-radius: var(--radius-sm); margin-bottom: 0.75rem; color: var(--text-gray); font-size: 0.85rem; }
+  .not-connected-item i { color: var(--text-muted); }
+  .ops-error { padding: 1rem 1.25rem; background: rgba(255, 107, 107, 0.08); border: 1px solid rgba(255, 107, 107, 0.3); border-radius: var(--radius-sm); color: #FF9B9B; font-size: 0.85rem; margin-bottom: 1.5rem; }
+  .ops-loading { color: var(--text-gray); font-size: 0.85rem; font-family: var(--font-mono); }
+  .logout-btn { position: fixed; top: 1.1rem; right: 1.5rem; z-index: 1100; background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: var(--text-gray); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.8rem; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<!-- LOGIN SCREEN -->
+<div class="ops-login" id="ops-login">
+  <div class="glass-card ops-login-card">
+    <div class="badge" style="margin-bottom: 1.25rem;"><span class="badge-dot"></span> OPS CENTER</div>
+    <h1>Sign in</h1>
+    <p>Real GitHub, subscriber, blog, and system data for this portfolio — single-admin access.</p>
+    <form id="login-form">
+      <input type="text" id="login-username" class="form-input" placeholder="Username" required autocomplete="username">
+      <input type="password" id="login-password" class="form-input" placeholder="Password" required autocomplete="current-password">
+      <input type="text" id="login-backend" class="form-input" placeholder="Backend URL (e.g. https://your-backend.onrender.com)" required>
+      <button type="submit" class="btn btn-primary" id="login-btn" style="width: 100%;">Sign In</button>
+    </form>
+    <div id="login-status" class="subscribe-status"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="ops-shell" id="ops-shell">
+  <button class="logout-btn" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</button>
+  <div class="container">
+    <div class="badge" style="margin-bottom: 1rem;"><span class="badge-dot"></span> LIVE — REAL DATA ONLY</div>
+    <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Ops Center</h1>
+    <p style="color: var(--text-gray); margin-bottom: 2rem;">Every number below comes from a real source: the live GitHub API, the actual subscriber database, and the site's real published articles. Nothing here is fabricated — sections without a connected source say so explicitly.</p>
+
+    <div class="ops-tabs">
+      <button class="ops-tab active" data-panel="overview">Overview</button>
+      <button class="ops-tab" data-panel="github">GitHub Intelligence</button>
+      <button class="ops-tab" data-panel="subscribers">Subscribers</button>
+      <button class="ops-tab" data-panel="blog">Blog Ops</button>
+      <button class="ops-tab" data-panel="system">System Health</button>
+      <button class="ops-tab" data-panel="notconnected">Not Yet Connected</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="ops-panel active" id="panel-overview">
+      <div class="stat-grid" id="overview-stats">
+        <div class="ops-loading">Loading real stats...</div>
+      </div>
+    </div>
+
+    <!-- GITHUB -->
+    <div class="ops-panel" id="panel-github">
+      <div id="github-content"><div class="ops-loading">Fetching live data from api.github.com...</div></div>
+    </div>
+
+    <!-- SUBSCRIBERS -->
+    <div class="ops-panel" id="panel-subscribers">
+      <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Notify subscribers about a new post</h3>
+        <form id="notify-form">
+          <input type="text" id="notify-title" class="form-input" placeholder="Article title" required>
+          <input type="text" id="notify-url" class="form-input" placeholder="Article URL (e.g. https://yoursite.com/article.html?id=11)" required>
+          <input type="text" id="notify-excerpt" class="form-input" placeholder="Short excerpt (optional)">
+          <button type="submit" class="btn btn-primary" id="notify-btn">Send Notification</button>
+        </form>
+        <div id="notify-status" class="subscribe-status"></div>
+      </div>
+      <div id="subscribers-content"><div class="ops-loading">Loading subscriber list...</div></div>
+    </div>
+
+    <!-- BLOG -->
+    <div class="ops-panel" id="panel-blog">
+      <div id="blog-content"><div class="ops-loading">Reading articles-data.js...</div></div>
+    </div>
+
+    <!-- SYSTEM -->
+    <div class="ops-panel" id="panel-system">
+      <div id="system-content"><div class="ops-loading">Reading process/host metrics...</div></div>
+    </div>
+
+    <!-- NOT CONNECTED -->
+    <div class="ops-panel" id="panel-notconnected">
+      <div class="glass-card">
+        <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Not connected yet — by design, not by omission</h3>
+        <p style="color: var(--text-gray); font-size: 0.88rem; margin-bottom: 1.25rem;">These would need to fabricate numbers to display anything right now, so instead of fake widgets, here's exactly what each one needs before it can go live:</p>
+        <div class="not-connected-item"><i class="fa-brands fa-google"></i> <div><strong style="color: var(--text-white);">Google Analytics 4 / Search Console</strong> — needs a GA4 property + service account credentials on the backend.</div></div>
+        <div class="not-connected-item"><i class="fa-solid fa-bolt"></i> <div><strong style="color: var(--text-white);">Kafka / Airflow pipeline monitoring</strong> — needs an actual deployed cluster with a reachable metrics endpoint (e.g. for PesaGuard once it's running with real infrastructure).</div></div>
+        <div class="not-connected-item"><i class="fa-solid fa-database"></i> <div><strong style="color: var(--text-white);">Database replication / query monitoring</strong> — needs a real multi-node Postgres instance to introspect (pg_stat_* views).</div></div>
+        <div class="not-connected-item"><i class="fa-solid fa-shield-halved"></i> <div><strong style="color: var(--text-white);">Security audit log across sessions/devices</strong> — meaningful once there's more than one admin account; single-admin JWT auth is already real and active.</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  const OPS_TOKEN_KEY = 'opsToken';
+  const OPS_BACKEND_KEY = 'opsBackend';
+
+  function getBackend() { return sessionStorage.getItem(OPS_BACKEND_KEY) || ''; }
+  function getToken() { return sessionStorage.getItem(OPS_TOKEN_KEY) || ''; }
+
+  async function opsFetch(path, options = {}) {
+    const backend = getBackend();
+    const res = await fetch(`${backend}${path}`, {
+      ...options,
+      headers: { ...(options.headers || {}), 'Authorization': `Bearer ${getToken()}`, 'Content-Type': 'application/json' }
+    });
+    if (res.status === 401) {
+      sessionStorage.removeItem(OPS_TOKEN_KEY);
+      showLogin();
+      throw new Error('Session expired. Please log in again.');
+    }
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Request failed');
+    return data;
+  }
+
+  function showLogin() {
+    document.getElementById('ops-login').style.display = 'flex';
+    document.getElementById('ops-shell').classList.remove('active');
+  }
+  function showDashboard() {
+    document.getElementById('ops-login').style.display = 'none';
+    document.getElementById('ops-shell').classList.add('active');
+    loadAll();
+  }
+
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value;
+    const backend = document.getElementById('login-backend').value.trim().replace(/\/$/, '');
+    const statusEl = document.getElementById('login-status');
+    const btn = document.getElementById('login-btn');
+    btn.disabled = true; btn.textContent = 'Signing in...';
+    statusEl.textContent = ''; statusEl.className = 'subscribe-status';
+
+    try {
+      const res = await fetch(`${backend}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Login failed');
+      sessionStorage.setItem(OPS_TOKEN_KEY, data.token);
+      sessionStorage.setItem(OPS_BACKEND_KEY, backend);
+      showDashboard();
+    } catch (err) {
+      statusEl.textContent = err.message;
+      statusEl.className = 'subscribe-status error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Sign In';
+    }
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    sessionStorage.removeItem(OPS_TOKEN_KEY);
+    showLogin();
+  });
+
+  // Tab switching
+  document.querySelectorAll('.ops-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.ops-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.ops-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(`panel-${tab.dataset.panel}`).classList.add('active');
+    });
+  });
+
+  function barChart(counts) {
+    const max = Math.max(...Object.values(counts), 1);
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([label, count]) => `
+      <div class="bar-row">
+        <div class="bar-label">${label}</div>
+        <div class="bar-track"><div class="bar-fill" style="width: ${(count / max) * 100}%"></div></div>
+        <div class="bar-count">${count}</div>
+      </div>
+    `).join('');
+  }
+
+  async function loadGithub() {
+    const el = document.getElementById('github-content');
+    try {
+      const data = await opsFetch('/api/github/overview');
+      const staleNotice = data.stale ? `<div class="ops-error">Showing last-known-real data from ${data.fetchedAt} — live refresh failed: ${data.staleReason}</div>` : '';
+      el.innerHTML = `
+        ${staleNotice}
+        <div class="stat-grid">
+          <div class="glass-card stat-card"><div class="stat-value">${data.totals.repos}</div><div class="stat-label">Public Repos</div></div>
+          <div class="glass-card stat-card"><div class="stat-value">${data.totals.stars}</div><div class="stat-label">Total Stars</div></div>
+          <div class="glass-card stat-card"><div class="stat-value">${data.totals.forks}</div><div class="stat-label">Total Forks</div></div>
+          <div class="glass-card stat-card"><div class="stat-value">${data.totals.openIssues}</div><div class="stat-label">Open Issues</div></div>
+        </div>
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.05rem;">Language Breakdown</h3>
+          ${barChart(data.languageBreakdown)}
+        </div>
+        <div class="glass-card">
+          <h3 style="margin-bottom: 1rem; font-size: 1.05rem;">Most Recently Pushed</h3>
+          ${data.mostRecentlyPushed.map(r => `
+            <div class="repo-row">
+              <a href="${r.url}" target="_blank">${r.fullName}</a>
+              <div class="repo-meta"><span>${r.language || '—'}</span><span><i class="fa-solid fa-star"></i> ${r.stars}</span><span>${new Date(r.pushedAt).toLocaleDateString()}</span></div>
+            </div>
+          `).join('')}
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.75rem; margin-top: 1rem;">Rate limit remaining: ${data.rateLimitRemaining ?? 'unknown'}${data.tokenConfigured ? '' : ' — set GITHUB_TOKEN in your backend .env to raise this from 60/hr to 5000/hr.'}</p>
+      `;
+    } catch (err) {
+      el.innerHTML = `<div class="ops-error">${err.message}</div>`;
+    }
+  }
+
+  async function loadSubscribers() {
+    const el = document.getElementById('subscribers-content');
+    try {
+      const data = await opsFetch('/api/subscribers');
+      el.innerHTML = `
+        <div class="stat-grid">
+          <div class="glass-card stat-card"><div class="stat-value">${data.count}</div><div class="stat-label">Total Subscribers</div></div>
+        </div>
+        <div class="glass-card">
+          <table class="ops-table">
+            <thead><tr><th>Full Name</th><th>Email</th><th>Subscribed At</th></tr></thead>
+            <tbody>
+              ${data.subscribers.length ? data.subscribers.map(s => `
+                <tr><td>${s.fullName}</td><td>${s.email}</td><td>${new Date(s.subscribedAt).toLocaleString()}</td></tr>
+              `).join('') : '<tr><td colspan="3" style="color: var(--text-muted);">No subscribers yet.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      `;
+    } catch (err) {
+      el.innerHTML = `<div class="ops-error">${err.message}</div>`;
+    }
+  }
+
+  document.getElementById('notify-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('notify-title').value.trim();
+    const url = document.getElementById('notify-url').value.trim();
+    const excerpt = document.getElementById('notify-excerpt').value.trim();
+    const statusEl = document.getElementById('notify-status');
+    const btn = document.getElementById('notify-btn');
+    btn.disabled = true; btn.textContent = 'Sending...';
+    try {
+      const data = await opsFetch('/api/notify-new-post', { method: 'POST', body: JSON.stringify({ title, url, excerpt }) });
+      statusEl.textContent = `Sent to ${data.recipientCount} of ${data.totalSubscribers} subscribers.`;
+      statusEl.className = 'subscribe-status success';
+      document.getElementById('notify-form').reset();
+    } catch (err) {
+      statusEl.textContent = err.message;
+      statusEl.className = 'subscribe-status error';
+    } finally {
+      btn.disabled = false; btn.textContent = 'Send Notification';
+    }
+  });
+
+  async function loadBlog() {
+    const el = document.getElementById('blog-content');
+    try {
+      const data = await opsFetch('/api/blog/overview');
+      el.innerHTML = `
+        <div class="stat-grid">
+          <div class="glass-card stat-card"><div class="stat-value">${data.totalArticles}</div><div class="stat-label">Published Articles</div></div>
+          <div class="glass-card stat-card"><div class="stat-value">${data.averageReadTimeMinutes}m</div><div class="stat-label">Avg. Read Time</div></div>
+          <div class="glass-card stat-card"><div class="stat-value">${data.featuredCount}</div><div class="stat-label">Featured</div></div>
+        </div>
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <h3 style="margin-bottom: 1rem; font-size: 1.05rem;">Articles by Category</h3>
+          ${barChart(data.categoryCounts)}
+        </div>
+        <div class="glass-card">
+          <h3 style="margin-bottom: 1rem; font-size: 1.05rem;">Most Recent</h3>
+          ${data.mostRecent.map(a => `
+            <div class="repo-row"><span>${a.title}</span><div class="repo-meta"><span>${a.category}</span><span>${a.date}</span></div></div>
+          `).join('')}
+        </div>
+      `;
+    } catch (err) {
+      el.innerHTML = `<div class="ops-error">${err.message}</div>`;
+    }
+  }
+
+  async function loadSystem() {
+    const el = document.getElementById('system-content');
+    try {
+      const data = await opsFetch('/api/system/status');
+      el.innerHTML = `
+        <div class="stat-grid">
+          <div class="glass-card stat-card"><div class="stat-value">${Math.round(data.process.uptimeSeconds / 60)}m</div><div class="stat-label">Backend Uptime</div></div>
+          <div class="glass-card stat-card"><div class="stat-value">${data.process.memoryUsedMb}MB</div><div class="stat-label">Process Memory</div></div>
+          <div class="glass-card stat-card"><div class="stat-value">${data.host.loadAverage1m.toFixed(2)}</div><div class="stat-label">Host Load (1m)</div></div>
+          <div class="glass-card stat-card"><div class="stat-value">${data.host.freeMemoryMb}MB</div><div class="stat-label">Host Free Memory</div></div>
+        </div>
+        <div class="glass-card">
+          <h3 style="margin-bottom: 1rem; font-size: 1.05rem;">Runtime</h3>
+          <p style="color: var(--text-gray); font-size: 0.88rem;">Node ${data.process.nodeVersion} · PID ${data.process.pid} · ${data.host.platform}/${data.host.arch} · ${data.host.cpuCount} CPU(s)</p>
+        </div>
+      `;
+    } catch (err) {
+      el.innerHTML = `<div class="ops-error">${err.message}</div>`;
+    }
+  }
+
+  async function loadOverview() {
+    const el = document.getElementById('overview-stats');
+    try {
+      const [gh, subs, blogData] = await Promise.all([
+        opsFetch('/api/github/overview').catch(e => ({ error: e.message })),
+        opsFetch('/api/subscribers').catch(e => ({ error: e.message })),
+        opsFetch('/api/blog/overview').catch(e => ({ error: e.message }))
+      ]);
+      el.innerHTML = `
+        <div class="glass-card stat-card"><div class="stat-value">${gh.totals ? gh.totals.stars : '—'}</div><div class="stat-label">GitHub Stars</div></div>
+        <div class="glass-card stat-card"><div class="stat-value">${gh.totals ? gh.totals.repos : '—'}</div><div class="stat-label">Public Repos</div></div>
+        <div class="glass-card stat-card"><div class="stat-value">${subs.count ?? '—'}</div><div class="stat-label">Subscribers</div></div>
+        <div class="glass-card stat-card"><div class="stat-value">${blogData.totalArticles ?? '—'}</div><div class="stat-label">Published Articles</div></div>
+      `;
+    } catch (err) {
+      el.innerHTML = `<div class="ops-error">${err.message}</div>`;
+    }
+  }
+
+  function loadAll() {
+    loadOverview();
+    loadGithub();
+    loadSubscribers();
+    loadBlog();
+    loadSystem();
+  }
+
+  // Auto-login if a session token already exists
+  if (getToken() && getBackend()) {
+    document.getElementById('login-backend').value = getBackend();
+    showDashboard();
+  }
+</script>
+</body>
+</html>
