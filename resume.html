@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume | Victor Kipruto Rop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-box">VR</div>
+        <span>VICTOR ROP</span>
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="skills.html" class="nav-link">Skills</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="resume.html" class="nav-link active">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="page-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Curriculum Vitae</span>
+        <h2>Interactive Resume</h2>
+      </div>
+
+      <div class="resume-actions" style="display: flex; justify-content: flex-end; margin-bottom: 2rem;">
+        <a href="Victor kipruto Rop(1).PDF" download class="btn btn-primary">
+          <i class="fa-solid fa-download"></i> Download PDF Resume
+        </a>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <div class="glass-card" style="margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-red-orange); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Professional Summary</h3>
+            <p style="color: var(--text-gray); font-size: 0.95rem;">
+              Data Engineering with production experience in ETL pipeline design, real-time streaming, and dimensional warehousing. I build data systems the way they should work in production—idempotent, tested, containerised, and monitored. Comfortable across the full data stack, with every project backed by CI/CD automation on GitHub Actions.
+            </p>
+          </div>
+
+          <div class="glass-card" style="margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-red-orange); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Education</h3>
+            <div style="margin-bottom: 1rem;">
+              <h4 style="color: var(--text-white);">The Cooperative University of Kenya, Nairobi</h4>
+              <p style="color: var(--accent-bright-orange); font-size: 0.85rem;">BSc Data Science (Expected August 2028)</p>
+              <p style="color: var(--text-gray); font-size: 0.9rem;">Member, Data Science Club: regional challenges, workshops, industry lectures.</p>
+            </div>
+            <div>
+              <h4 style="color: var(--text-white);">St. Patrick's High School, Iten</h4>
+              <p style="color: var(--accent-bright-orange); font-size: 0.85rem;">Kenya Certificate of Secondary Education (KCSE) 2023</p>
+              <p style="color: var(--text-gray); font-size: 0.9rem;">Volunteer Maths & Science Tutor, Community Tutoring Program.</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="glass-card">
+            <h3 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-red-orange); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Key Engineering Projects</h3>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="color: var(--text-white);">Kenyan Market ETL Pipeline</h4>
+              <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.25rem;">
+                Achieved 38/38 passing unit tests covering null injection, type coercion failures, and empty datasets. Connected PostgreSQL layer to Grafana. CI via GitHub Actions with Black, isort, and mypy gating.
+              </p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="color: var(--text-white);">M-Pesa Airflow Transaction Pipeline</h4>
+              <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.25rem;">
+                DAG-orchestrated ETL pipeline with synthetic data generation (Faker). Config-driven rule engine for multi-stage cleaning. Containerised with Docker Compose.
+              </p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <h4 style="color: var(--text-white);">Real-Time Transaction Streaming System</h4>
+              <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.25rem;">
+                Kafka producer/consumer model. Consumer group design for horizontal scalability and exactly-once semantics. Live visualisations using Plotly inside Jupyter.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" class="logo">
+            <div class="logo-box">VR</div>
+            <span>VICTOR KIPRUTO ROP</span>
+          </a>
+          <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">Data Engineer | Pipeline Architect</p>
+        </div>
+        <div class="footer-socials">
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:kiprutovictor39@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 Victor Kipruto Rop. Built in Nairobi, Kenya.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
