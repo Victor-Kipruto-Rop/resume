@@ -1,18 +1,22 @@
 {
   "name": "dataforge-blog-subscribe-service",
-  "version": "1.0.0",
-  "description": "Subscribe + blog-update notification backend for victor-kipruto-rop's portfolio (DataForge). Stores subscribers (full name, email, timestamp) in SQLite and emails them when a new blog post is published.",
+  "version": "1.1.0",
+  "description": "Subscribe/notify + Ops Center backend for victor-kipruto-rop's portfolio (DataForge). Real subscriber storage, real GitHub intelligence, real blog stats, no mock data.",
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "hash-password": "node scripts/hash-password.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "better-sqlite3": "^11.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.14"
   }
 }

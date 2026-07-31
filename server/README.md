@@ -94,7 +94,37 @@ curl https://your-backend-url.onrender.com/api/subscribers \
 
 Admin routes require an `x-admin-token` header matching your `ADMIN_TOKEN` env variable.
 
-## Local development
+## 5. Ops Center (real GitHub, blog, subscriber & system dashboard)
+
+`ops.html` in the repo root is a login-gated dashboard showing genuinely real data — no
+mock numbers anywhere. It talks to this same backend, so once the backend is deployed:
+
+1. **Set up your login** (one admin account — this is a personal portfolio, not a SaaS):
+   ```bash
+   cd server
+   npm run hash-password -- "your-real-password"
+   ```
+   Copy the printed hash into `ADMIN_PASSWORD_HASH` in your deployed environment, along
+   with `ADMIN_USERNAME` and a `JWT_SECRET` (generate one with
+   `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`).
+
+2. **(Recommended) Add a GitHub token** so the GitHub Intelligence tab doesn't hit the
+   60-requests/hour unauthenticated limit — create a fine-grained PAT with only public
+   read access at https://github.com/settings/tokens, then set `GITHUB_TOKEN` in your
+   environment. This raises the limit to 5,000/hour.
+
+3. **Open `ops.html`** (locally, or wherever you host the static site), enter your
+   username, password, and your deployed backend URL (e.g.
+   `https://your-backend.onrender.com`), and sign in.
+
+What you'll see, all backed by real sources:
+- **GitHub Intelligence** — live repos, stars, forks, languages, most recently pushed, straight from `api.github.com`
+- **Subscribers** — the actual rows in `subscribers.db`, plus a form that calls `/api/notify-new-post` for real
+- **Blog Ops** — category/tag counts computed directly from the live `articles-data.js`
+- **System Health** — real Node process + host metrics for wherever this backend is running
+- **Not Yet Connected** — an honest list of what would need real infrastructure (GA4 property, a deployed Kafka/Airflow cluster, a multi-node database) before those panels could show anything but fabricated numbers — so they don't try to.
+
+
 
 ```bash
 cd server

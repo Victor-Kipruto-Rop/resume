@@ -1,10 +1,14 @@
-// server.js — Subscribe + Blog Notification backend for the DataForge portfolio site.
+// server.js — Ops Center backend for the DataForge portfolio site.
 //
 // Responsibilities:
 //   1. POST /api/subscribe          -> store { fullName, email, subscribedAt } in SQLite
 //   2. GET  /api/subscribers        -> (admin) list all subscribers
 //   3. POST /api/notify-new-post    -> (admin) email every subscriber about a new blog post
 //   4. GET  /api/health             -> health check
+//   5. POST /api/auth/login         -> real bcrypt+JWT login for the Ops Center UI
+//   6. GET  /api/github/overview    -> (admin) real live GitHub stats, no mock data
+//   7. GET  /api/blog/overview      -> (admin) real stats from the site's actual articles
+//   8. GET  /api/system/status      -> (admin) real process/host metrics
 //
 // This is a standalone Node service, meant to be deployed separately from the static
 // site (Render, Railway, Fly.io, a VPS, etc). GitHub Pages / static hosting cannot run
@@ -16,6 +20,10 @@ const cors = require('cors');
 const path = require('path');
 const Database = require('better-sqlite3');
 const nodemailer = require('nodemailer');
+const { login, requireAuth, loginLimiter } = require('./lib/auth');
+const github = require('./lib/github');
+const blog = require('./lib/blog');
+const system = require('./lib/system');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -66,14 +74,6 @@ function buildTransport() {
   });
 }
 
-function requireAdmin(req, res, next) {
-  const token = req.headers['x-admin-token'];
-  if (!ADMIN_TOKEN || token !== ADMIN_TOKEN) {
-    return res.status(401).json({ error: 'Unauthorized. Set x-admin-token header to match ADMIN_TOKEN.' });
-  }
-  next();
-}
-
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -85,6 +85,18 @@ function isValidEmail(email) {
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
 });
+
+// Real login for the Ops Center UI — bcrypt password check + rate-limited + JWT session.
+app.post('/api/auth/login', loginLimiter, login);
+
+// Real live GitHub Intelligence (admin only)
+app.get('/api/github/overview', requireAuth, github.getOverview);
+
+// Real blog stats sourced from the site's actual articles-data.js (admin only)
+app.get('/api/blog/overview', requireAuth, blog.getOverview);
+
+// Real process/host status for this backend (admin only)
+app.get('/api/system/status', requireAuth, system.getStatus);
 
 // Public: subscribe to the newsletter
 app.post('/api/subscribe', (req, res) => {
@@ -120,7 +132,7 @@ app.post('/api/subscribe', (req, res) => {
 });
 
 // Admin: list subscribers (full name, email, timestamp)
-app.get('/api/subscribers', requireAdmin, (req, res) => {
+app.get('/api/subscribers', requireAuth, (req, res) => {
   const rows = db.prepare(
     'SELECT id, full_name AS fullName, email, subscribed_at AS subscribedAt, active FROM subscribers ORDER BY subscribed_at DESC'
   ).all();
@@ -128,7 +140,7 @@ app.get('/api/subscribers', requireAdmin, (req, res) => {
 });
 
 // Admin: notify all active subscribers about a new blog post
-app.post('/api/notify-new-post', requireAdmin, async (req, res) => {
+app.post('/api/notify-new-post', requireAuth, async (req, res) => {
   const { title, url, excerpt } = req.body || {};
   if (!title || !url) {
     return res.status(400).json({ error: 'title and url are required.' });
