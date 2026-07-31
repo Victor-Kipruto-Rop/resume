@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="article-page-title">Article | Victor Kipruto Rop</title>
+  <meta name="description" id="article-meta-description" content="Data engineering article by Victor Kipruto Rop.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="1000117893.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <img src="1000117893.jpg" alt="Victor Kipruto Rop" class="logo-avatar">
+        <span>VICTOR ROP</span>
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="skills.html" class="nav-link">Skills</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+        <li><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="page-section">
+    <div class="container" style="max-width: 900px;">
+
+      <a href="blog.html" style="color: var(--text-gray); font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem;">
+        <i class="fa-solid fa-arrow-left"></i> Back to all articles
+      </a>
+
+      <div id="article-not-found" style="display: none; text-align: center; padding: 4rem 0;">
+        <h2>Article not found</h2>
+        <p style="color: var(--text-gray); margin: 1rem 0 2rem;">The article you're looking for doesn't exist or may have been moved.</p>
+        <a href="blog.html" class="btn btn-primary">Browse all articles</a>
+      </div>
+
+      <article id="article-content">
+        <div class="badge" id="article-category" style="margin-bottom: 1.25rem;"></div>
+        <h1 style="font-size: 2.4rem; line-height: 1.15; margin-bottom: 1rem;" id="article-title"></h1>
+        <div style="display: flex; gap: 1.25rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; flex-wrap: wrap;">
+          <span><i class="fa-regular fa-calendar"></i> <span id="article-date"></span></span>
+          <span><i class="fa-regular fa-clock"></i> <span id="article-readtime"></span></span>
+          <span><i class="fa-solid fa-user"></i> Victor Kipruto Rop</span>
+        </div>
+
+        <div class="article-hero-cover">
+          <i class="fa-solid" id="article-cover-icon"></i>
+        </div>
+
+        <div class="article-body" id="article-body"></div>
+
+        <div class="tag-cloud" id="article-tags" style="margin-top: 1.5rem;"></div>
+
+        <div class="share-bar">
+          <span class="share-label">Share this article</span>
+          <button class="share-btn whatsapp" id="share-whatsapp" title="Share on WhatsApp" aria-label="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+          <button class="share-btn telegram" id="share-telegram" title="Share on Telegram" aria-label="Share on Telegram"><i class="fa-brands fa-telegram"></i></button>
+          <button class="share-btn linkedin" id="share-linkedin" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></button>
+          <button class="share-btn copy-link" id="share-copy" title="Copy link" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+        </div>
+
+        <div style="margin-top: 3rem;">
+          <h3 style="font-size: 1.3rem; margin-bottom: 1.25rem;">More from Engineering Dispatch</h3>
+          <div class="related-articles" id="related-articles"></div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <a href="index.html" class="logo">
+            <img src="1000117893.jpg" alt="Victor Kipruto Rop" class="logo-avatar">
+            <span>VICTOR KIPRUTO ROP</span>
+          </a>
+          <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">Data Engineer | Pipeline Architect</p>
+        </div>
+        <div class="footer-socials">
+          <a href="https://github.com/Victor-Kipruto-Rop" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/victor-kipruto-rop" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:kiprutovictor39@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 Victor Kipruto Rop. Built in Nairobi, Kenya.</div>
+    </div>
+  </footer>
+
+  <script src="articles-data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'), 10);
+      const article = (typeof ARTICLES !== 'undefined') ? ARTICLES.find(a => a.id === id) : null;
+
+      if (!article) {
+        document.getElementById('article-content').style.display = 'none';
+        document.getElementById('article-not-found').style.display = 'block';
+        return;
+      }
+
+      const pageUrl = window.location.origin + window.location.pathname + '?id=' + article.id;
+
+      document.getElementById('article-page-title').textContent = article.title + ' | Victor Kipruto Rop';
+      document.getElementById('article-meta-description').setAttribute('content', article.excerpt);
+      document.getElementById('article-category').innerHTML = '<span class="badge-dot"></span> ' + article.category;
+      document.getElementById('article-title').textContent = article.title;
+      document.getElementById('article-date').textContent = article.date;
+      document.getElementById('article-readtime').textContent = article.readTime;
+      document.getElementById('article-cover-icon').classList.add(article.icon);
+      document.getElementById('article-body').innerHTML = article.body;
+
+      const tagsEl = document.getElementById('article-tags');
+      tagsEl.innerHTML = article.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+      // Wire up share buttons
+      document.getElementById('share-whatsapp').addEventListener('click', () => shareToWhatsApp(article.title, pageUrl));
+      document.getElementById('share-telegram').addEventListener('click', () => shareToTelegram(article.title, pageUrl));
+      document.getElementById('share-linkedin').addEventListener('click', () => shareToLinkedIn(pageUrl));
+      document.getElementById('share-copy').addEventListener('click', (e) => copyArticleLink(e.currentTarget, pageUrl));
+
+      // Related articles: same category first, then fill with others
+      const related = ARTICLES.filter(a => a.id !== article.id);
+      related.sort((a, b) => (b.category === article.category) - (a.category === article.category));
+      const relatedEl = document.getElementById('related-articles');
+      relatedEl.innerHTML = related.slice(0, 3).map(a => `
+        <a href="article.html?id=${a.id}" class="glass-card article-card" style="text-decoration: none; color: inherit;">
+          <div class="article-cover"><i class="fa-solid ${a.icon}"></i></div>
+          <div class="article-card-body">
+            <div class="blog-meta"><span>${a.category}</span><span>• ${a.readTime}</span></div>
+            <h3 style="font-size: 1.05rem; margin-bottom: 0;">${a.title}</h3>
+          </div>
+        </a>
+      `).join('');
+    })();
+  </script>
+</body>
+</html>

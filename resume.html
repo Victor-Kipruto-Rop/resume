@@ -6,6 +6,7 @@
   <title>Resume | Victor Kipruto Rop</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="1000117893.jpg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
   <header>
     <div class="container nav-container">
       <a href="index.html" class="logo">
-        <div class="logo-box">VR</div>
+        <img src="1000117893.jpg" alt="Victor Kipruto Rop" class="logo-avatar">
         <span>VICTOR ROP</span>
       </a>
       <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
@@ -93,6 +94,21 @@
                 Kafka producer/consumer model. Consumer group design for horizontal scalability and exactly-once semantics. Live visualisations using Plotly inside Jupyter.
               </p>
             </div>
+
+            <div style="margin-bottom: 0.5rem;">
+              <h4 style="color: var(--text-white);">PesaGuard — Real-Time M-Pesa Reconciliation & Anomaly Detection SaaS</h4>
+              <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.25rem;">
+                Production SaaS built to catch mismatched M-Pesa transactions and suspicious activity as they happen, rather than during end-of-day reconciliation. Backend on Flask/Python integrating the Safaricom Daraja API for live transaction and webhook events, with a Next.js 14 frontend for the reconciliation dashboard. Currently running as an MVP with a live pilot customer.
+              </p>
+              <ul style="list-style: none; color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">
+                <li style="margin-bottom: 0.4rem;"><i class="fa-solid fa-check" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Event-sourced reconciliation engine with an idempotent webhook layer to guarantee exactly-once processing of Daraja callbacks.</li>
+                <li style="margin-bottom: 0.4rem;"><i class="fa-solid fa-check" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Anomaly detection flagging duplicate, delayed, and mismatched transactions in real time, backed by a traceable audit trail.</li>
+                <li style="margin-bottom: 0.4rem;"><i class="fa-solid fa-check" style="color: var(--accent-bright-orange); margin-right: 8px;"></i> Deployed on Render with Supabase Postgres; input validation and alerting hardened as non-negotiable production gates.</li>
+              </ul>
+              <div class="tag-cloud" style="margin-top: 0.75rem;">
+                <span class="tag">Flask</span><span class="tag">Next.js</span><span class="tag">Daraja API</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -104,7 +120,7 @@
       <div class="footer-content">
         <div>
           <a href="index.html" class="logo">
-            <div class="logo-box">VR</div>
+            <img src="1000117893.jpg" alt="Victor Kipruto Rop" class="logo-avatar">
             <span>VICTOR KIPRUTO ROP</span>
           </a>
           <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">Data Engineer | Pipeline Architect</p>

@@ -9,6 +9,7 @@
   <!-- Google Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="1000117893.jpg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,7 +19,7 @@
   <header>
     <div class="container nav-container">
       <a href="index.html" class="logo">
-        <div class="logo-box">VR</div>
+        <img src="1000117893.jpg" alt="Victor Kipruto Rop" class="logo-avatar">
         <span>VICTOR ROP</span>
       </a>
       <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
@@ -77,8 +78,8 @@
             </div>
             <a href="article.html?id=1" class="btn btn-primary">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
           </div>
-          <div style="background: #111; border-radius: var(--radius-sm); border: 1px solid var(--border-color); overflow: hidden; height: 260px; display: flex; align-items: center; justify-content: center;">
-            <i class="fa-solid fa-network-wired" style="font-size: 5rem; color: var(--primary-red-orange); opacity: 0.8;"></i>
+          <div class="article-cover" style="height: 260px; border-radius: var(--radius-sm);">
+            <i class="fa-solid fa-network-wired" style="font-size: 5rem;"></i>
           </div>
         </div>
       </div>
@@ -88,6 +89,8 @@
         
         <!-- Article 1 -->
         <div class="glass-card article-card" data-category="Streaming" data-title="Why Every Data Engineer Should Learn Event-Driven Architecture">
+          <div class="article-cover"><i class="fa-solid fa-network-wired"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>Streaming</span>
             <span>• 10 min read</span>
@@ -99,10 +102,14 @@
           <div class="tag-cloud">
             <span class="tag">Kafka</span><span class="tag">Streaming</span><span class="tag">Architecture</span>
           </div>
+            <a href="article.html?id=1" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <!-- Article 2 -->
         <div class="glass-card article-card" data-category="Pipelines" data-title="Building Reliable Data Pipelines: Lessons from Production">
+          <div class="article-cover"><i class="fa-solid fa-diagram-project"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>Pipelines</span>
             <span>• 8 min read</span>
@@ -114,10 +121,14 @@
           <div class="tag-cloud">
             <span class="tag">Airflow</span><span class="tag">Python</span><span class="tag">ETL</span>
           </div>
+            <a href="article.html?id=2" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <!-- Article 3 -->
         <div class="glass-card article-card" data-category="Streaming" data-title="Batch Processing vs Real-Time Streaming">
+          <div class="article-cover"><i class="fa-solid fa-bolt"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>Streaming</span>
             <span>• 7 min read</span>
@@ -129,10 +140,14 @@
           <div class="tag-cloud">
             <span class="tag">Spark</span><span class="tag">Kafka</span><span class="tag">Architecture</span>
           </div>
+            <a href="article.html?id=3" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <!-- Article 4 -->
         <div class="glass-card article-card" data-category="Architecture" data-title="The Modern Data Engineering Stack in 2026">
+          <div class="article-cover"><i class="fa-solid fa-layer-group"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>Architecture</span>
             <span>• 12 min read</span>
@@ -144,10 +159,14 @@
           <div class="tag-cloud">
             <span class="tag">Lakehouse</span><span class="tag">dbt</span><span class="tag">Cloud</span>
           </div>
+            <a href="article.html?id=4" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <!-- Article 5 -->
         <div class="glass-card article-card" data-category="Pipelines" data-title="Common Data Engineering Mistakes Beginners Make">
+          <div class="article-cover"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>Pipelines</span>
             <span>• 9 min read</span>
@@ -159,10 +178,14 @@
           <div class="tag-cloud">
             <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Best Practices</span>
           </div>
+            <a href="article.html?id=5" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <!-- Article 6 -->
         <div class="glass-card article-card" data-category="FinTech" data-title="How Fraud Detection Pipelines Work in Financial Systems">
+          <div class="article-cover"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>FinTech</span>
             <span>• 11 min read</span>
@@ -174,10 +197,14 @@
           <div class="tag-cloud">
             <span class="tag">FinTech</span><span class="tag">Kafka</span><span class="tag">Security</span>
           </div>
+            <a href="article.html?id=6" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <!-- Article 7 -->
         <div class="glass-card article-card" data-category="Architecture" data-title="Data Lakes vs Data Warehouses vs Lakehouses">
+          <div class="article-cover"><i class="fa-solid fa-database"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>Architecture</span>
             <span>• 8 min read</span>
@@ -189,10 +216,14 @@
           <div class="tag-cloud">
             <span class="tag">BigQuery</span><span class="tag">Storage</span><span class="tag">Lakehouse</span>
           </div>
+            <a href="article.html?id=7" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <!-- Article 8 -->
         <div class="glass-card article-card" data-category="Pipelines" data-title="Designing Scalable ETL Pipelines for Millions of Records">
+          <div class="article-cover"><i class="fa-solid fa-server"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>Pipelines</span>
             <span>• 10 min read</span>
@@ -204,10 +235,14 @@
           <div class="tag-cloud">
             <span class="tag">AWS S3</span><span class="tag">Docker</span><span class="tag">PostgreSQL</span>
           </div>
+            <a href="article.html?id=8" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <!-- Article 9 -->
         <div class="glass-card article-card" data-category="Observability" data-title="Observability for Data Engineers">
+          <div class="article-cover"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>Observability</span>
             <span>• 9 min read</span>
@@ -219,10 +254,14 @@
           <div class="tag-cloud">
             <span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Monitoring</span>
           </div>
+            <a href="article.html?id=9" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
         <!-- Article 10 -->
         <div class="glass-card article-card" data-category="Architecture" data-title="Building Enterprise-Grade Data Platforms">
+          <div class="article-cover"><i class="fa-solid fa-building-shield"></i></div>
+          <div class="article-card-body">
           <div class="blog-meta">
             <span>Architecture</span>
             <span>• 14 min read</span>
@@ -234,6 +273,8 @@
           <div class="tag-cloud">
             <span class="tag">Kubernetes</span><span class="tag">Security</span><span class="tag">Enterprise</span>
           </div>
+            <a href="article.html?id=10" class="read-more-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
         </div>
 
       </div>
@@ -241,11 +282,13 @@
       <!-- Newsletter Subscription Box -->
       <div class="glass-card" style="margin-top: 4rem; text-align: center; background: linear-gradient(135deg, rgba(255,77,28,0.15) 0%, rgba(5,5,5,0.9) 100%); border: 1px solid rgba(255, 77, 28, 0.3);">
         <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Engineering Dispatch</h3>
-        <p style="color: var(--text-gray); max-width: 500px; margin: 0 auto 1.5rem;">Get deep-dive data engineering tutorials, architecture breakdowns, and FinTech system design insights delivered straight to your inbox.</p>
-        <form onsubmit="handleNewsletter(event)" style="display: flex; gap: 1rem; max-width: 450px; margin: 0 auto; flex-wrap: wrap;">
-          <input type="email" class="form-input" placeholder="your.email@company.com" required style="flex: 1; min-width: 250px;">
-          <button type="submit" class="btn btn-primary">Subscribe</button>
+        <p style="color: var(--text-gray); max-width: 500px; margin: 0 auto 1.5rem;">Get deep-dive data engineering tutorials, architecture breakdowns, and FinTech system design insights delivered straight to your inbox whenever a new article publishes.</p>
+        <form id="subscribe-form" onsubmit="handleNewsletter(event)" style="display: flex; gap: 1rem; max-width: 550px; margin: 0 auto; flex-wrap: wrap;">
+          <input type="text" id="subscribe-name" class="form-input" placeholder="Full name" required style="flex: 1; min-width: 180px;">
+          <input type="email" id="subscribe-email" class="form-input" placeholder="your.email@company.com" required style="flex: 1.4; min-width: 220px;">
+          <button type="submit" class="btn btn-primary" id="subscribe-btn" style="width: 100%;">Subscribe</button>
         </form>
+        <div id="subscribe-status" class="subscribe-status"></div>
       </div>
 
     </div>
@@ -257,7 +300,7 @@
       <div class="footer-content">
         <div>
           <a href="index.html" class="logo">
-            <div class="logo-box">VR</div>
+            <img src="1000117893.jpg" alt="Victor Kipruto Rop" class="logo-avatar">
             <span>VICTOR KIPRUTO ROP</span>
           </a>
           <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">Data Engineer | Pipeline Architect</p>
@@ -272,6 +315,8 @@
     </div>
   </footer>
 
+  <!-- Once your backend from /server is deployed, set its URL here (see server/README.md) -->
+  <script>window.API_BASE_URL = "";</script>
   <script src="app.js"></script>
   <script>
     // Blog filtering & Instant Search
@@ -305,11 +350,7 @@
       });
     }
 
-    function handleNewsletter(e) {
-      e.preventDefault();
-      alert('Thank you for subscribing to Engineering Dispatch!');
-      e.target.reset();
-    }
+    // handleNewsletter() is defined in app.js and shared across pages
   </script>
 </body>
 </html>

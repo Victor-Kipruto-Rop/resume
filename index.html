@@ -6,6 +6,7 @@
   <title>Victor Kipruto Rop | Data Engineer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="1000117893.jpg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
   <header>
     <div class="container nav-container">
       <a href="index.html" class="logo">
-        <div class="logo-box">VR</div>
+        <img src="1000117893.jpg" alt="Victor Kipruto Rop" class="logo-avatar">
         <span>VICTOR ROP</span>
       </a>
       <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
@@ -36,40 +37,73 @@
     <div class="container">
       <div class="hero-grid">
         <div>
-          <div class="badge" style="margin-bottom: 1.5rem;">
+          <div class="badge fade-in-up" style="margin-bottom: 1.5rem;">
             <span class="badge-dot"></span> DATA INFRASTRUCTURE & ARCHITECTURE
           </div>
-          <h1 class="hero-title">Building Scalable <span class="text-gradient">Data Systems</span></h1>
-          <p class="hero-subtitle">
+          <h1 class="hero-title fade-in-up delay-1">Building Scalable <span class="text-gradient">Data Systems</span></h1>
+          <p class="hero-subtitle fade-in-up delay-2">
             Data Engineer specializing in ETL pipeline design, real-time streaming, and dimensional warehousing. I build data systems the way they should work in production—idempotent, tested, containerised, and monitored.
           </p>
-          <div class="hero-identity">
+          <div class="hero-identity fade-in-up delay-2">
             <h3>Victor Kipruto Rop</h3>
             <div class="role-list">
               <span class="role-pill"><i class="fa-solid fa-database"></i> Data Engineer</span>
-              <span class="role-pill"><i class="fa-solid fa-laptop-code"></i> Software Developer</span>
-              <span class="role-pill"><i class="fa-solid fa-network-wired"></i> FinTech Infrastructure Builder</span>
+              <span class="role-pill"><i class="fa-solid fa-diagram-project"></i> ETL & Streaming Pipelines</span>
+              <span class="role-pill"><i class="fa-solid fa-server"></i> Data Platform Architect</span>
             </div>
           </div>
-          <div class="hero-buttons">
+          <div class="hero-buttons fade-in-up delay-3">
             <a href="projects.html" class="btn btn-primary">View Projects <i class="fa-solid fa-arrow-right"></i></a>
             <a href="resume.html" class="btn btn-secondary"><i class="fa-solid fa-file-arrow-down"></i> Resume</a>
             <a href="contact.html" class="btn btn-secondary">Contact Me</a>
           </div>
         </div>
-        <div class="profile-widget">
+        <div class="profile-widget fade-in-up delay-2">
+          <div class="profile-glow"></div>
+          <div class="orbit-ring"></div>
+          <div class="orbit-ring-2"></div>
           <img src="1000117893.jpg" alt="Victor Kipruto Rop">
+          <div class="profile-badge-float badge-top"><i class="fa-solid fa-bolt"></i> Real-time Streaming</div>
+          <div class="profile-badge-float badge-bottom"><i class="fa-solid fa-database"></i> Kafka · Airflow · dbt</div>
         </div>
       </div>
     </div>
   </main>
+
+  <!-- Highlights Strip -->
+  <section class="page-section" style="padding-top: 0;">
+    <div class="container">
+      <div class="skills-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <div class="glass-card fade-in-up" style="text-align: center;">
+          <i class="fa-solid fa-diagram-project" style="font-size: 1.8rem; color: var(--accent-bright-orange); margin-bottom: 0.75rem;"></i>
+          <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Production ETL</h3>
+          <p style="color: var(--text-gray); font-size: 0.85rem;">Idempotent, tested pipelines with CI/CD gating on every merge.</p>
+        </div>
+        <div class="glass-card fade-in-up delay-1" style="text-align: center;">
+          <i class="fa-solid fa-bolt" style="font-size: 1.8rem; color: var(--accent-bright-orange); margin-bottom: 0.75rem;"></i>
+          <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Real-Time Streaming</h3>
+          <p style="color: var(--text-gray); font-size: 0.85rem;">Kafka + PyFlink topologies built for exactly-once semantics.</p>
+        </div>
+        <div class="glass-card fade-in-up delay-2" style="text-align: center;">
+          <i class="fa-solid fa-shield-halved" style="font-size: 1.8rem; color: var(--accent-bright-orange); margin-bottom: 0.75rem;"></i>
+          <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">FinTech Reliability</h3>
+          <p style="color: var(--text-gray); font-size: 0.85rem;">M-Pesa/Daraja integrations built for reconciliation and audit trails.</p>
+        </div>
+        <div class="glass-card fade-in-up delay-3" style="text-align: center;">
+          <i class="fa-solid fa-cubes-stacked" style="font-size: 1.8rem; color: var(--accent-bright-orange); margin-bottom: 0.75rem;"></i>
+          <h3 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Cloud-Native Delivery</h3>
+          <p style="color: var(--text-gray); font-size: 0.85rem;">Docker, Kubernetes and Terraform behind every deployed system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="container">
       <div class="footer-content">
         <div>
           <a href="index.html" class="logo">
-            <div class="logo-box">VR</div>
+            <img src="1000117893.jpg" alt="Victor Kipruto Rop" class="logo-avatar">
             <span>VICTOR KIPRUTO ROP</span>
           </a>
           <p style="color: var(--text-gray); font-size: 0.85rem; margin-top: 0.5rem;">Data Engineer | Pipeline Architect</p>
